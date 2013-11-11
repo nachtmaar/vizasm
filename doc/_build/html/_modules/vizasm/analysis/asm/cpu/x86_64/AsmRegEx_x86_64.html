@@ -1,0 +1,269 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm.analysis.asm.cpu.x86_64.AsmRegEx_x86_64 &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="../../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vizasm.analysis.asm.cpu.x86_64.AsmRegEx_x86_64</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Created on 23.08.2013</span>
+
+<span class="sd">@author: nils</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.AsmRegEx</span> <span class="kn">import</span> <span class="n">AsmRegEx</span>
+
+
+<div class="viewcode-block" id="AsmRegEx_x86_64"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.x86_64.html#vizasm.analysis.asm.cpu.x86_64.AsmRegEx_x86_64.AsmRegEx_x86_64">[docs]</a><span class="k">class</span> <span class="nc">AsmRegEx_x86_64</span><span class="p">(</span><span class="n">AsmRegEx</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    Contains regular expressions (mostly in verbose mode) used for analyzing the assembler file on the x86_64 architecture  </span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    RE_STACKVAR</span>
+<span class="sd">        match e.g. &quot;[ss:rbp-0x30+var_40]&quot; or &quot;qword [ss:rbp-0x0+var_m8]&quot;</span>
+<span class="sd">         </span>
+<span class="sd">    RE_VAR_ASSIGNMENT</span>
+<span class="sd">        match e.g. &quot;[ds:rdx+rsi]&quot;</span>
+<span class="sd">         </span>
+<span class="sd">    RE_IVAR</span>
+<span class="sd">        match e.g. &quot;[ds:_OBJC_IVAR_$_AppDelegate.obj3]&quot;</span>
+<span class="sd">         </span>
+<span class="sd">    RE_CLASSREF</span>
+<span class="sd">        match e.g. &quot;[ds:objc_classref_Object1]&quot;</span>
+<span class="sd">         </span>
+<span class="sd">    RE_FRAMEWORKCLASS</span>
+<span class="sd">        match e.g. &quot;[ds:bind__OBJC_CLASS_$_NSUserDefaults]&quot;</span>
+<span class="sd">         </span>
+<span class="sd">    __RE_IMP</span>
+<span class="sd">        Used for RE_IMP_STUBS and RE_IMP_GOT. DO NOT USE DIRECTLY !</span>
+<span class="sd">        </span>
+<span class="sd">    RE_IMP_STUBS</span>
+<span class="sd">        match e.g &quot;imp___stubs__NSApplicationMain&quot;, &quot;imp___stubs__objc_retain&quot;, &quot;imp___stubs__objc_msgSend&quot; ... </span>
+<span class="sd">        </span>
+<span class="sd">    RE_IMP_GOT</span>
+<span class="sd">        match e.g &quot;imp___got__NSStreamSocketSecurityLevelKey&quot;, &quot;imp___got___NSConcreteStackBlock&quot;, &quot;imp___got____gxx_personality_v0&quot; </span>
+<span class="sd">         </span>
+<span class="sd">    RE_ASSINGMENT_SPLIT</span>
+<span class="sd">        match e.g.  &quot;mov        rax, qword [ss:rbp-0x70+var_88]&quot; or </span>
+<span class="sd">                    &quot;lea        rax, qword [ds:objc_msg_alloc] ; @selector(alloc)&quot; or</span>
+<span class="sd">                    &quot;cvtss2sd   xmm2, xmm2&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    RE_CALL_INSTRUCTION</span>
+<span class="sd">        match e.g. &quot;call       imp___stubs__objc_msgSend&quot; or &quot;jmp        qword [ds:imp___got__objc_msgSend]&quot;</span>
+<span class="sd">         </span>
+<span class="sd">    RE_REGISTER</span>
+<span class="sd">        match e.g. &quot;ds:[rdi]&quot;, &quot;rdi&quot;, &quot;qword [ds:rdi]&quot;</span>
+<span class="sd">        </span>
+<span class="sd">    RE_ADD_METHOD_ARG_STACK</span>
+<span class="sd">        match e.g. &quot;arg_0&quot;</span>
+<span class="sd">    &#39;&#39;&#39;</span>    
+
+    <span class="n">RE_CLASSREF_GR_CLASSREF</span> <span class="o">=</span> <span class="s">&#39;classref&#39;</span>
+    <span class="n">RE_CLASSREF</span> <span class="o">=</span> <span class="s">r&#39;&#39;&#39;</span>
+<span class="s"> \[ds\:                 # [ds:</span>
+<span class="s"> objc[_]classref[_]     # objc_classref_</span>
+<span class="s"> (?P&lt;</span><span class="si">%s</span><span class="s">&gt;\w+)            # Object1</span>
+<span class="s"> \]                     # ]</span>
+<span class="s">&#39;&#39;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">RE_CLASSREF_GR_CLASSREF</span><span class="p">)</span>
+
+    <span class="n">RE_FRAMEWORKCLASS_GR_FCLASS</span> <span class="o">=</span> <span class="s">&#39;frameworkclass&#39;</span>
+    <span class="n">RE_FRAMEWORKCLASS</span> <span class="o">=</span> <span class="s">r&#39;&#39;&#39;</span>
+<span class="s"> \[ds\:                         # [ds:</span>
+<span class="s"> bind[_]{2}OBJC[_]CLASS[_]\$[_] # bind__OBJC_CLASS_$_</span>
+<span class="s"> (?P&lt;</span><span class="si">%s</span><span class="s">&gt;\w+)                    # NSUserDefaults</span>
+<span class="s"> \]                             # ]</span>
+<span class="s">&#39;&#39;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">RE_FRAMEWORKCLASS_GR_FCLASS</span><span class="p">)</span>
+
+    <span class="n">RE_IVAR_GR_CLASS</span> <span class="o">=</span> <span class="s">&#39;class&#39;</span>
+    <span class="n">RE_IVAR_GR_IVAR</span> <span class="o">=</span> <span class="s">&#39;ivar&#39;</span>
+    <span class="n">RE_IVAR</span> <span class="o">=</span> <span class="s">r&#39;&#39;&#39;</span>
+<span class="s"> \[ds\:                 # [ds:</span>
+<span class="s"> [_]OBJC[_]IVAR[_]\$[_] # _OBJC_IVAR_$_</span>
+<span class="s"> (?P&lt;</span><span class="si">%s</span><span class="s">&gt;\w+)            # AppDelegate</span>
+<span class="s"> \.                     # .</span>
+<span class="s"> (?P&lt;</span><span class="si">%s</span><span class="s">&gt;\w+)            # obj3</span>
+<span class="s"> \]                     # ]</span>
+<span class="s">&#39;&#39;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">RE_IVAR_GR_CLASS</span><span class="p">,</span> <span class="n">RE_IVAR_GR_IVAR</span><span class="p">)</span>
+
+    <span class="n">RE_VAR_ASSIGNMENT_GR_SELF_REGISTER</span> <span class="o">=</span> <span class="s">&#39;class&#39;</span>
+    <span class="n">RE_VAR_ASSIGNMENT_GR_IVAR_REG</span> <span class="o">=</span> <span class="s">&#39;var&#39;</span>
+    <span class="n">RE_VAR_ASSIGNMENT</span> <span class="o">=</span> <span class="s">r&#39;&#39;&#39;</span>
+<span class="s"> \[ds\:                 # [ds:</span>
+<span class="s"> (?P&lt;</span><span class="si">%s</span><span class="s">&gt;\w+)            # rdx</span>
+<span class="s"> \+                     # +</span>
+<span class="s"> (?P&lt;</span><span class="si">%s</span><span class="s">&gt;\w+)            # rsi</span>
+<span class="s"> \]                     # ]</span>
+<span class="s">&#39;&#39;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">RE_VAR_ASSIGNMENT_GR_SELF_REGISTER</span><span class="p">,</span> <span class="n">RE_VAR_ASSIGNMENT_GR_IVAR_REG</span><span class="p">)</span>
+
+    <span class="n">RE_ASSINGMENT_SPLIT_GR_VAL1</span> <span class="o">=</span> <span class="s">&#39;val1&#39;</span>
+    <span class="n">RE_ASSINGMENT_SPLIT_GR_VAL2</span> <span class="o">=</span> <span class="s">&#39;val2&#39;</span>
+    <span class="c"># mov        rax, qword [ss:rbp-0x70+var_88]</span>
+    <span class="n">RE_ASSINGMENT_SPLIT</span> <span class="o">=</span> <span class="s">r&#39;&#39;&#39;</span>
+<span class="s"> (mov[a-z]*|lea|cvt.*)\s+  # mov</span>
+<span class="s"> (?P&lt;</span><span class="si">%s</span><span class="s">&gt;.*?)              # rax</span>
+<span class="s"> ,\s*                     # ,</span>
+<span class="s"> (?P&lt;</span><span class="si">%s</span><span class="s">&gt;.*)               # qword [ss:rbp-0x70+var_88]</span>
+<span class="s"> &#39;&#39;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">RE_ASSINGMENT_SPLIT_GR_VAL1</span><span class="p">,</span> <span class="n">RE_ASSINGMENT_SPLIT_GR_VAL2</span><span class="p">)</span> 
+ 
+    <span class="n">RE_CALL_INSTRUCTION_GR_CALLED</span> <span class="o">=</span> <span class="s">&#39;called&#39;</span>
+    <span class="n">RE_CALL_INSTRUCTION</span> <span class="o">=</span> <span class="s">r&#39;&#39;&#39;</span>
+<span class="s"> (call|jmp)\s+            # call  </span>
+<span class="s"> (?P&lt;</span><span class="si">%s</span><span class="s">&gt;.*)               # imp___stubs__objc_msgSend</span>
+<span class="s">&#39;&#39;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">RE_CALL_INSTRUCTION_GR_CALLED</span><span class="p">)</span>
+
+    <span class="n">RE_STACKVAR_GR_STACKVAR</span> <span class="o">=</span> <span class="s">&#39;stackvar&#39;</span>       
+    <span class="n">RE_STACKVAR</span> <span class="o">=</span> <span class="s">r&#39;&#39;&#39;</span>
+<span class="s"> \[ss\:                 # [ss:</span>
+<span class="s"> [\w\-]+\+              # rbp-0x30+ </span>
+<span class="s"> (?P&lt;</span><span class="si">%s</span><span class="s">&gt;\w+)            # var_40</span>
+<span class="s"> &#39;&#39;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">RE_STACKVAR_GR_STACKVAR</span><span class="p">)</span>
+        
+    <span class="n">__RE_IMP</span> <span class="o">=</span> <span class="s">r&#39;&#39;&#39;</span>
+<span class="s"> (\[(ds|ss)[:])?                  # [ds: &lt;- optional    </span>
+<span class="s"> (?:imp[_]{3}</span><span class="si">%s</span><span class="s">[_]{2,})           # imp___stubs__ or imp___got__ &lt;- this seems to be the 64 bit version</span>
+<span class="s"> (?P&lt;</span><span class="si">%s</span><span class="s">&gt;\w+)                      # NSLog</span>
+<span class="s"> (\])?                            # ] &lt;- optional</span>
+<span class="s"> &#39;&#39;&#39;</span> 
+
+    <span class="n">RE_IMP_STUBS_GR_IMP_STUBS</span> <span class="o">=</span> <span class="s">&#39;imp_stubs&#39;</span>
+    <span class="n">RE_IMP_STUBS</span> <span class="o">=</span> <span class="n">__RE_IMP</span> <span class="o">%</span> <span class="p">(</span><span class="s">&#39;stubs&#39;</span><span class="p">,</span> <span class="n">RE_IMP_STUBS_GR_IMP_STUBS</span><span class="p">)</span>
+
+    <span class="n">RE_IMP_GOT_GR_IMP_GOT</span> <span class="o">=</span> <span class="s">&#39;imp_got&#39;</span>
+    <span class="n">RE_IMP_GOT</span> <span class="o">=</span> <span class="n">__RE_IMP</span> <span class="o">%</span> <span class="p">(</span><span class="s">&#39;got&#39;</span><span class="p">,</span> <span class="n">RE_IMP_GOT_GR_IMP_GOT</span><span class="p">)</span>
+
+    <span class="n">RE_REGISTER_GR_QWORD_REG</span> <span class="o">=</span> <span class="s">&#39;qword_reg&#39;</span>
+    <span class="n">RE_REGISTER_GR_DS_REG</span> <span class="o">=</span> <span class="s">&#39;ds_reg&#39;</span>
+    <span class="n">RE_REGISTER_GR_REG</span> <span class="o">=</span> <span class="s">&#39;reg&#39;</span>
+    <span class="n">RE_REGISTER_REG</span> <span class="o">=</span> <span class="s">&#39;^[a-z]+[a-z0-9A-Z]{,3}$&#39;</span>
+    <span class="n">RE_REGISTER_DS_REG</span> <span class="o">=</span> <span class="s">&#39;[a-z]+[a-z0-9A-Z]{,3}&#39;</span>
+    <span class="n">RE_REGISTER</span> <span class="o">=</span> <span class="s">r&#39;&#39;&#39;</span>
+<span class="s">(?:^(ds|ss)[:]\[)(?P&lt;ds_reg&gt;</span><span class="si">%s</span><span class="s">)(?:\]$)                # ds:[rdi] or</span>
+<span class="s">|</span>
+<span class="s">(?P&lt;reg&gt;</span><span class="si">%s</span><span class="s">)                                           # rdi or</span>
+<span class="s">|</span>
+<span class="s">(?:(byte|word)\ \[(ds|ss)[:])(?P&lt;qword_reg&gt;</span><span class="si">%s</span><span class="s">)(?:\])  # qword [ds:rdi]</span>
+<span class="s">&#39;&#39;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">RE_REGISTER_DS_REG</span><span class="p">,</span> <span class="n">RE_REGISTER_REG</span><span class="p">,</span> <span class="n">RE_REGISTER_DS_REG</span><span class="p">)</span>
+
+    <span class="n">RE_STACK_GR_ADDRESS</span> <span class="o">=</span> <span class="s">&#39;stack_adress&#39;</span>
+    <span class="n">RE_STACK_GR_REG</span> <span class="o">=</span> <span class="s">&#39;stack_register&#39;</span>
+    
+    <span class="c"># arg_0</span>
+    <span class="n">RE_ADD_METHOD_ARG_STACK_GR_ARG_NR</span> <span class="o">=</span> <span class="s">&#39;arg_nr&#39;</span>
+    <span class="n">RE_ADD_METHOD_ARG_STACK</span> <span class="o">=</span> <span class="s">&#39;&#39;&#39;</span>
+<span class="s">    arg[_]</span>
+<span class="s">    (?P&lt;</span><span class="si">%s</span><span class="s">&gt;\w+)</span>
+<span class="s">    &#39;&#39;&#39;</span> <span class="o">%</span> <span class="n">RE_ADD_METHOD_ARG_STACK_GR_ARG_NR</span>
+     
+    <span class="nd">@staticmethod</span> 
+<div class="viewcode-block" id="AsmRegEx_x86_64.compiled_re_stack"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.x86_64.html#vizasm.analysis.asm.cpu.x86_64.AsmRegEx_x86_64.AsmRegEx_x86_64.compiled_re_stack">[docs]</a>    <span class="k">def</span> <span class="nf">compiled_re_stack</span><span class="p">(</span><span class="n">stack_pointer_name</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        Return a compiled regular expression that matches  e.g. &quot;qword [ss:rsp+0x8]&quot;</span>
+<span class="sd">        Use `RE_STACK_GR_ADDRESS` group key to get the stack address.</span>
+<span class="sd">            </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        stack_pointer_name: string</span>
+<span class="sd">            the name of stack pointer register (e.g. &quot;rsp&quot;)</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">RE_STACK</span> <span class="o">=</span> <span class="s">r&#39;&#39;&#39;</span>
+<span class="s">         \[ss:                           # [ss:</span>
+<span class="s">         (?P&lt;</span><span class="si">%s</span><span class="s">&gt;</span><span class="si">%s</span><span class="s">)                      # stack pointer name</span>
+<span class="s">         (\+                             # + </span>
+<span class="s">         (?P&lt;</span><span class="si">%s</span><span class="s">&gt;0x\w+))*                 # 0x8 or empty -&gt; 0x0</span>
+<span class="s">         \]                              # ]</span>
+<span class="s">        &#39;&#39;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">AsmRegEx_x86_64</span><span class="o">.</span><span class="n">RE_STACK_GR_REG</span><span class="p">,</span> <span class="n">stack_pointer_name</span><span class="p">,</span> <span class="n">AsmRegEx_x86_64</span><span class="o">.</span><span class="n">RE_STACK_GR_ADDRESS</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">AsmRegEx</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">RE_STACK</span><span class="p">)</span>        </div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

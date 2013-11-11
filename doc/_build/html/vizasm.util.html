@@ -1,0 +1,541 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>util Package &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">util Package</a><ul>
+<li><a class="reference internal" href="#module-vizasm.util.Log"><tt class="docutils literal"><span class="pre">Log</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vizasm.util.ModuleClassNameException"><tt class="docutils literal"><span class="pre">ModuleClassNameException</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vizasm.util.Util"><tt class="docutils literal"><span class="pre">Util</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vizasm.util.WrapperException"><tt class="docutils literal"><span class="pre">WrapperException</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/vizasm.util.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="util-package">
+<h1>util Package<a class="headerlink" href="#util-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-vizasm.util.Log">
+<span id="log-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">Log</span></tt> Module<a class="headerlink" href="#module-vizasm.util.Log" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 04.04.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="function">
+<dt id="vizasm.util.Log.clilog_set_level">
+<tt class="descclassname">vizasm.util.Log.</tt><tt class="descname">clilog_set_level</tt><big>(</big><em>log_level</em><big>)</big><a class="reference internal" href="_modules/vizasm/util/Log.html#clilog_set_level"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.util.Log.clilog_set_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="vizasm.util.Log.disable_logger">
+<tt class="descclassname">vizasm.util.Log.</tt><tt class="descname">disable_logger</tt><big>(</big><em>logger</em><big>)</big><a class="reference internal" href="_modules/vizasm/util/Log.html#disable_logger"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.util.Log.disable_logger" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="vizasm.util.Log.disable_std_loggers">
+<tt class="descclassname">vizasm.util.Log.</tt><tt class="descname">disable_std_loggers</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/util/Log.html#disable_std_loggers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.util.Log.disable_std_loggers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="vizasm.util.Log.get_cli_streamhandler">
+<tt class="descclassname">vizasm.util.Log.</tt><tt class="descname">get_cli_streamhandler</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/util/Log.html#get_cli_streamhandler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.util.Log.get_cli_streamhandler" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="vizasm.util.Log.log_critical">
+<tt class="descclassname">vizasm.util.Log.</tt><tt class="descname">log_critical</tt><big>(</big><em>msg</em><big>)</big><a class="reference internal" href="_modules/vizasm/util/Log.html#log_critical"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.util.Log.log_critical" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log with <cite>clilog</cite> and <cite>log</cite> (critical level)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.util.Log.log_exception">
+<tt class="descclassname">vizasm.util.Log.</tt><tt class="descname">log_exception</tt><big>(</big><em>exception</em><big>)</big><a class="reference internal" href="_modules/vizasm/util/Log.html#log_exception"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.util.Log.log_exception" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log exception with <cite>clilog</cite> and <cite>log</cite></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.util.Log.log_info">
+<tt class="descclassname">vizasm.util.Log.</tt><tt class="descname">log_info</tt><big>(</big><em>msg</em><big>)</big><a class="reference internal" href="_modules/vizasm/util/Log.html#log_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.util.Log.log_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log with <cite>clilog</cite> and <cite>log</cite> (info level)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.util.Log.log_set_level">
+<tt class="descclassname">vizasm.util.Log.</tt><tt class="descname">log_set_level</tt><big>(</big><em>log_level</em><big>)</big><a class="headerlink" href="#vizasm.util.Log.log_set_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="vizasm.util.Log.vizasm_add_file_handler">
+<tt class="descclassname">vizasm.util.Log.</tt><tt class="descname">vizasm_add_file_handler</tt><big>(</big><em>filename</em>, <em>loglevel</em><big>)</big><a class="reference internal" href="_modules/vizasm/util/Log.html#vizasm_add_file_handler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.util.Log.vizasm_add_file_handler" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.util.ModuleClassNameException">
+<span id="moduleclassnameexception-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">ModuleClassNameException</span></tt> Module<a class="headerlink" href="#module-vizasm.util.ModuleClassNameException" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 01.08.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="exception">
+<dt id="vizasm.util.ModuleClassNameException.ModuleClassNameException">
+<em class="property">exception </em><tt class="descclassname">vizasm.util.ModuleClassNameException.</tt><tt class="descname">ModuleClassNameException</tt><big>(</big><em>module_name</em>, <em>class_name</em><big>)</big><a class="reference internal" href="_modules/vizasm/util/ModuleClassNameException.html#ModuleClassNameException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.util.ModuleClassNameException.ModuleClassNameException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></p>
+<p>Exception for the case that the module does not have the specified class</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="vizasm.util.ModuleClassNameException.ModuleNotSameClassNameException">
+<em class="property">exception </em><tt class="descclassname">vizasm.util.ModuleClassNameException.</tt><tt class="descname">ModuleNotSameClassNameException</tt><big>(</big><em>module_name</em><big>)</big><a class="reference internal" href="_modules/vizasm/util/ModuleClassNameException.html#ModuleNotSameClassNameException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.util.ModuleClassNameException.ModuleNotSameClassNameException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></p>
+<p>Exception for the case that the module has a different name than the class</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.util.Util">
+<span id="util-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">Util</span></tt> Module<a class="headerlink" href="#module-vizasm.util.Util" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 30.03.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="function">
+<dt id="vizasm.util.Util.append_syspath">
+<tt class="descclassname">vizasm.util.Util.</tt><tt class="descname">append_syspath</tt><big>(</big><em>file_str</em><big>)</big><a class="reference internal" href="_modules/vizasm/util/Util.html#append_syspath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.util.Util.append_syspath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Append file to system path.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><strong>file_str: str</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.util.Util.class_for_filepath">
+<tt class="descclassname">vizasm.util.Util.</tt><tt class="descname">class_for_filepath</tt><big>(</big><em>fqn</em>, <em>class_name</em><big>)</big><a class="reference internal" href="_modules/vizasm/util/Util.html#class_for_filepath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.util.Util.class_for_filepath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the class reference (not instantiated yet)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>fqn: string</strong> :</p>
+<blockquote>
+<div><p>fully qualified name</p>
+</div></blockquote>
+<p><strong>class_name: str</strong> :</p>
+<blockquote>
+<div><p>the name of the class to be loaded</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><strong>ModuleClassNameException</strong> :</p>
+<blockquote>
+<div><p>if the module does not have the specified class</p>
+</div></blockquote>
+<p><strong>ImportError:</strong> :</p>
+<blockquote class="last">
+<div><p>if the fqn could not be imported</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.util.Util.class_for_fqn_mod_eq_class">
+<tt class="descclassname">vizasm.util.Util.</tt><tt class="descname">class_for_fqn_mod_eq_class</tt><big>(</big><em>fqn</em><big>)</big><a class="reference internal" href="_modules/vizasm/util/Util.html#class_for_fqn_mod_eq_class"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.util.Util.class_for_fqn_mod_eq_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the class for the specified fully qualified name.
+The classname is assumed to be the same like the module name from the fqn.</p>
+<p>class: class</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><strong>ModuleNotSameClassNameException</strong> :</p>
+<blockquote>
+<div><p>if the module does not have the same name like the class</p>
+</div></blockquote>
+<p><strong>ImportError:</strong> :</p>
+<blockquote class="last">
+<div><p>if the fqn could not be imported</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.util.Util.filter_not_none">
+<tt class="descclassname">vizasm.util.Util.</tt><tt class="descname">filter_not_none</tt><big>(</big><em>sequence</em><big>)</big><a class="reference internal" href="_modules/vizasm/util/Util.html#filter_not_none"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.util.Util.filter_not_none" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="vizasm.util.Util.format_dict_as_table">
+<tt class="descclassname">vizasm.util.Util.</tt><tt class="descname">format_dict_as_table</tt><big>(</big><em>dictionary</em>, <em>columnname1=None</em>, <em>columnname2=None</em>, <em>v_delimiter='-'</em>, <em>h_delimiter='|'</em>, <em>column_delimiter='+'</em><big>)</big><a class="reference internal" href="_modules/vizasm/util/Util.html#format_dict_as_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.util.Util.format_dict_as_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format a dictionary as table.
+If all of the column names are None, no header will be printed!</p>
+<dl class="docutils">
+<dt>dictionary: dict</dt>
+<dd>the dictionary to print as table</dd>
+<dt>columnname1: string, optional (default is &#8216;&#8217;) </dt>
+<dd>name of the first column (will be printed in the header)</dd>
+<dt>columnname2: string, optional (default is &#8216;&#8217;) </dt>
+<dd>name of the first column (will be printed in the header)</dd>
+<dt>h_delimiter: string, optional (default is &#8216;-&#8216;)</dt>
+<dd>the horizontal delimiter char</dd>
+<dt>v_delimiter: string, optional (default is &#8216;|&#8217;)</dt>
+<dd>the vertical delimiter char</dd>
+<dt>column_delimiter: string, optional (default is &#8216;+&#8217;)</dt>
+<dd>the column delimiter char</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.util.Util.get_fst_not_none">
+<tt class="descclassname">vizasm.util.Util.</tt><tt class="descname">get_fst_not_none</tt><big>(</big><em>sequence</em><big>)</big><a class="reference internal" href="_modules/vizasm/util/Util.html#get_fst_not_none"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.util.Util.get_fst_not_none" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the first object that is not None.
+Returns None if nothing found</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.util.Util.hex2int">
+<tt class="descclassname">vizasm.util.Util.</tt><tt class="descname">hex2int</tt><big>(</big><em>hex_str</em><big>)</big><a class="reference internal" href="_modules/vizasm/util/Util.html#hex2int"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.util.Util.hex2int" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the string (with or without 0x prefix) to hex.
+If not possible, return none</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.util.Util.hex_string_without_0x">
+<tt class="descclassname">vizasm.util.Util.</tt><tt class="descname">hex_string_without_0x</tt><big>(</big><em>number</em><big>)</big><a class="reference internal" href="_modules/vizasm/util/Util.html#hex_string_without_0x"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.util.Util.hex_string_without_0x" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a string representation of the number and cut off the &#8220;0x&#8221; prefix.
+Returns None if something went wrong.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><strong>number: number</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.util.Util.ignore_case_find">
+<tt class="descclassname">vizasm.util.Util.</tt><tt class="descname">ignore_case_find</tt><big>(</big><em>name</em>, <em>search_str</em><big>)</big><a class="reference internal" href="_modules/vizasm/util/Util.html#ignore_case_find"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.util.Util.ignore_case_find" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if <cite>name</cite> contains <cite>search_str</cite> by ignoring case</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.util.Util.is_iterable">
+<tt class="descclassname">vizasm.util.Util.</tt><tt class="descname">is_iterable</tt><big>(</big><em>iterable</em><big>)</big><a class="reference internal" href="_modules/vizasm/util/Util.html#is_iterable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.util.Util.is_iterable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if <cite>iterable</cite> is iterable</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.util.Util.is_iterable_no_string">
+<tt class="descclassname">vizasm.util.Util.</tt><tt class="descname">is_iterable_no_string</tt><big>(</big><em>iterable</em><big>)</big><a class="reference internal" href="_modules/vizasm/util/Util.html#is_iterable_no_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.util.Util.is_iterable_no_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if <cite>iterable</cite> is iterable and no python string</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.util.Util.modulename_from_fqn">
+<tt class="descclassname">vizasm.util.Util.</tt><tt class="descname">modulename_from_fqn</tt><big>(</big><em>fqn</em><big>)</big><a class="reference internal" href="_modules/vizasm/util/Util.html#modulename_from_fqn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.util.Util.modulename_from_fqn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the module name from the fully qualified name.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><strong>fqn: str</strong> :</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><strong>module_name: str</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.util.Util.pretty_format_dict">
+<tt class="descclassname">vizasm.util.Util.</tt><tt class="descname">pretty_format_dict</tt><big>(</big><em>dictionary</em>, <em>use_repr_for_value=False</em><big>)</big><a class="reference internal" href="_modules/vizasm/util/Util.html#pretty_format_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.util.Util.pretty_format_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pretty print dictionary into multiple lines, each one containing one key and value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>dictionary: dict</strong> :</p>
+<p><strong>use_repr_for_value: bool, optional (default is False)</strong> :</p>
+<blockquote class="last">
+<div><p>if enabled use repr() instead of str() for formatting of dict values</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.util.Util.random_rgb_val">
+<tt class="descclassname">vizasm.util.Util.</tt><tt class="descname">random_rgb_val</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/util/Util.html#random_rgb_val"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.util.Util.random_rgb_val" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a random int in {0,...,255}</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.util.Util.remove_file_extension">
+<tt class="descclassname">vizasm.util.Util.</tt><tt class="descname">remove_file_extension</tt><big>(</big><em>file_path</em>, <em>file_extension</em><big>)</big><a class="reference internal" href="_modules/vizasm/util/Util.html#remove_file_extension"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.util.Util.remove_file_extension" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove the file extension from the file_path or filename.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>file_path: str</strong> :</p>
+<blockquote>
+<div><p>the filename or file_path</p>
+</div></blockquote>
+<p><strong>file_extension: str</strong> :</p>
+<blockquote class="last">
+<div><p>file extension, not starting with a &#8221;.&#8221;</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.util.Util.remove_py_extension">
+<tt class="descclassname">vizasm.util.Util.</tt><tt class="descname">remove_py_extension</tt><big>(</big><em>file_path</em><big>)</big><a class="reference internal" href="_modules/vizasm/util/Util.html#remove_py_extension"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.util.Util.remove_py_extension" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove the &#8221;.py&#8221; extension from the file path or filename.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>file_path: str</strong> :</p>
+<blockquote class="last">
+<div><p>the filename or file_path</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.util.Util.sorted_dict_values_it">
+<tt class="descclassname">vizasm.util.Util.</tt><tt class="descname">sorted_dict_values_it</tt><big>(</big><em>dictionary</em><big>)</big><a class="reference internal" href="_modules/vizasm/util/Util.html#sorted_dict_values_it"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.util.Util.sorted_dict_values_it" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of sorted dict values</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.util.Util.str2int">
+<tt class="descclassname">vizasm.util.Util.</tt><tt class="descname">str2int</tt><big>(</big><em>int_str</em><big>)</big><a class="reference internal" href="_modules/vizasm/util/Util.html#str2int"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.util.Util.str2int" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the string to an int.
+If not possible, return none</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.util.Util.strlist_to_str">
+<tt class="descclassname">vizasm.util.Util.</tt><tt class="descname">strlist_to_str</tt><big>(</big><em>strlist</em><big>)</big><a class="reference internal" href="_modules/vizasm/util/Util.html#strlist_to_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.util.Util.strlist_to_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a string out of a list of strings and add newlines.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.util.Util.surrounding_elements_from_list">
+<tt class="descclassname">vizasm.util.Util.</tt><tt class="descname">surrounding_elements_from_list</tt><big>(</big><em>l</em>, <em>split_idx</em>, <em>cnt_sur_lines</em><big>)</big><a class="reference internal" href="_modules/vizasm/util/Util.html#surrounding_elements_from_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.util.Util.surrounding_elements_from_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the surrounding lists (before and after) the given index.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>l: list</strong> :</p>
+<p><strong>split_idx: int</strong> :</p>
+<blockquote>
+<div><p>the index at which to split in lines before and lines after</p>
+</div></blockquote>
+<p><strong>cnt_sur_lines: int</strong> :</p>
+<blockquote>
+<div><p>the number of lines before and after</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>surrounding lines: (list, list)</strong> :</p>
+<blockquote class="last">
+<div><p>tuple of surrounding lists</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.util.WrapperException">
+<span id="wrapperexception-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">WrapperException</span></tt> Module<a class="headerlink" href="#module-vizasm.util.WrapperException" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 10.04.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="exception">
+<dt id="vizasm.util.WrapperException.WrapperException">
+<em class="property">exception </em><tt class="descclassname">vizasm.util.WrapperException.</tt><tt class="descname">WrapperException</tt><big>(</big><em>caused_by</em><big>)</big><a class="reference internal" href="_modules/vizasm/util/WrapperException.html#WrapperException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.util.WrapperException.WrapperException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></p>
+<p>Exception for wrapping up exceptions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>_caused_by: Exception</strong> :</p>
+<blockquote class="last">
+<div><p>exception that caused this one to raise</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

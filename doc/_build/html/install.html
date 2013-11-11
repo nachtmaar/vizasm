@@ -1,0 +1,240 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Installation &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="index.html" />
+    <link rel="next" title="Usage" href="usage.html" />
+    <link rel="prev" title="See VizAsm in action" href="action.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="usage.html" title="Usage"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="action.html" title="See VizAsm in action"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Installation</a><ul>
+<li><a class="reference internal" href="#get-a-copy">Get a copy</a><ul>
+<li><a class="reference internal" href="#git">Git</a></li>
+<li><a class="reference internal" href="#direct-download">Direct Download</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#general-steps">General steps</a></li>
+<li><a class="reference internal" href="#which-python-version-do-i-need">Which Python version do I need?</a></li>
+<li><a class="reference internal" href="#hopper-scripts-location">Hopper Scripts location</a></li>
+<li><a class="reference internal" href="#specific-installation">Specific installation</a><ul>
+<li><a class="reference internal" href="#windows">Windows</a></li>
+<li><a class="reference internal" href="#mac">Mac</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="action.html"
+                        title="previous chapter">See VizAsm in action</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="usage.html"
+                        title="next chapter">Usage</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/install.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="get-a-copy">
+<h2>Get a copy<a class="headerlink" href="#get-a-copy" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="git">
+<h3>Git<a class="headerlink" href="#git" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-sh"><div class="highlight"><pre>git clone https://nachtmaar@bitbucket.org/nachtmaar/vizasm.git
+</pre></div>
+</div>
+</div>
+<div class="section" id="direct-download">
+<h3>Direct Download<a class="headerlink" href="#direct-download" title="Permalink to this headline">¶</a></h3>
+<p>Download file directly: <a class="reference external" href="https://bitbucket.org/nachtmaar/vizasm/downloads">https://bitbucket.org/nachtmaar/vizasm/downloads</a></p>
+</div>
+</div>
+<div class="section" id="general-steps">
+<h2>General steps<a class="headerlink" href="#general-steps" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Install python (check below which version you need)</p>
+</li>
+<li><p class="first">Install libraries</p>
+<blockquote>
+<div><div class="highlight-sh"><div class="highlight"><pre><span class="c"># be sure to use the correct easy_install because easy_install will install the lib for the default python version only!</span>
+<span class="c"># use e.g. easy_install-2.6 for python 2.6 !</span>
+easy_install networkx
+easy_install argparse
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Copy the scripts from vizasm/hopper/scripts/ into the Hopper scripts folder (see below for the default location)</p>
+</li>
+</ul>
+</div>
+<div class="section" id="which-python-version-do-i-need">
+<h2>Which Python version do I need?<a class="headerlink" href="#which-python-version-do-i-need" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><dl class="first docutils">
+<dt>Mac: 2.6</dt>
+<dd><ul class="first last simple">
+<li>Hopper uses Python 2.6, so if you plan to run VizAsm from Hopper you need 2.6!</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">others &gt;= 2.6</p>
+</li>
+</ul>
+</div>
+<div class="section" id="hopper-scripts-location">
+<h2>Hopper Scripts location<a class="headerlink" href="#hopper-scripts-location" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Mac: ~/Library/ApplicationSupport/Hopper/Scripts/</li>
+<li>Ubuntu: ~/.local/share/data/Hopper/scripts/</li>
+<li>Windows: C:\Users\&lt;username&gt;\AppData\Local\Hopper\scripts</li>
+</ul>
+</div>
+<div class="section" id="specific-installation">
+<h2>Specific installation<a class="headerlink" href="#specific-installation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="windows">
+<h3>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">Download Python 2.7 from <a class="reference external" href="http://www.python.org/download/releases/2.7/">http://www.python.org/download/releases/2.7/</a></p>
+</li>
+<li><p class="first">Get Hopper from <a class="reference external" href="http://hopperapp.com/download.html">http://hopperapp.com/download.html</a></p>
+</li>
+<li><p class="first">use git (<a class="reference external" href="http://msysgit.github.io/">http://msysgit.github.io/</a>) go get a copy of VizAsm</p>
+</li>
+<li><dl class="first docutils">
+<dt>Use the setuptools to install needed libs:</dt>
+<dd><ul class="first simple">
+<li>get it from here: <a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#setuptools">http://www.lfd.uci.edu/~gohlke/pythonlibs/#setuptools</a></li>
+<li>use the easy_install-2.7.py from the Scripts folder</li>
+</ul>
+<div class="last highlight-sh"><div class="highlight"><pre>easy_install-2.7.exe networkx
+easy_install-2.7.exe argparse
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><p class="first">Copy the scripts from vizasm/hopper/scripts/ into C:\Users\&lt;username&gt;\AppData\Local\Hopper\scripts</p>
+</li>
+</ul>
+</div>
+<div class="section" id="mac">
+<h3>Mac<a class="headerlink" href="#mac" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-sh"><div class="highlight"><pre>easy_install-2.6 networkx
+easy_install-2.6 argparse
+
+ <span class="c"># from the vizasm src folder, where VizAsm.py is located</span>
+ cp -r vizasm/hopper/scripts/*.py ~/Library/Application<span class="se">\ </span>Support/Hopper/Scripts/vizasm
+- ~/Library/Application<span class="se">\ </span>Support/Hopper/Scripts/
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="usage.html" title="Usage"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="action.html" title="See VizAsm in action"
+             >previous</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

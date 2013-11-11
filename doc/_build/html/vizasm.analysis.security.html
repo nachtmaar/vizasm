@@ -1,0 +1,471 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>security Package &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">security Package</a><ul>
+<li><a class="reference internal" href="#module-vizasm.analysis.security.SecurityAnalyzer"><tt class="docutils literal"><span class="pre">SecurityAnalyzer</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.analysis.security.SecurityFilters"><tt class="docutils literal"><span class="pre">SecurityFilters</span></tt> Module</a></li>
+<li><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/vizasm.analysis.security.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="security-package">
+<h1>security Package<a class="headerlink" href="#security-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-vizasm.analysis.security.SecurityAnalyzer">
+<span id="securityanalyzer-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">SecurityAnalyzer</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.security.SecurityAnalyzer" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 19.04.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.security.SecurityAnalyzer.</tt><tt class="descname">SecurityAnalyzer</tt><big>(</big><em>methodcall</em>, <em>filters=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/SecurityAnalyzer.html#SecurityAnalyzer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt>, <a class="reference internal" href="vizasm.vizasm_networkx.html#vizasm.vizasm_networkx.AddMethodCallToGraphInterface.AddMethodCallToGraphInterface" title="vizasm.vizasm_networkx.AddMethodCallToGraphInterface.AddMethodCallToGraphInterface"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.vizasm_networkx.AddMethodCallToGraphInterface.AddMethodCallToGraphInterface</span></tt></a></p>
+<p>Analyze a MethodCall with <a href="#id1"><span class="problematic" id="id2">`</span></a>SecurityFilter`s.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>_methodcall: MethodCall</strong> :</p>
+<blockquote>
+<div><p>the MethodCall that shall be analyzed
+_filters: list&lt;SecurityFilter&gt;, optional</p>
+<blockquote>
+<div><p>list of filters to use</p>
+</div></blockquote>
+</div></blockquote>
+<p><strong>_filter_results: dict&lt;SecurityFilter, list&lt;MethodCall&gt;&gt;</strong> :</p>
+<blockquote class="last">
+<div><p>dict holding the results for each filter</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="80%" />
+<col width="20%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>AVAILABLE_FILTERS: list&lt;classobj&lt;Filter&gt;&gt;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.add_filter" title="vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.add_filter"><tt class="xref py py-obj docutils literal"><span class="pre">add_filter</span></tt></a>(security_filter)</td>
+<td>Add a filter.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.add_filters" title="vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.add_filters"><tt class="xref py py-obj docutils literal"><span class="pre">add_filters</span></tt></a>(security_filter_list)</td>
+<td>Add a list of filters.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.add_to_graph" title="vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.add_to_graph"><tt class="xref py py-obj docutils literal"><span class="pre">add_to_graph</span></tt></a>(graph[,&nbsp;...])</td>
+<td>Add the <cite>SecurityFilter</cite> and all its filtered content to the graph</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.apply_filters" title="vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.apply_filters"><tt class="xref py py-obj docutils literal"><span class="pre">apply_filters</span></tt></a>([graph,&nbsp;...])</td>
+<td>Apply all <cite>SecurityFilter</cite> and add all to the graph if not None.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.format_filter_results" title="vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.format_filter_results"><tt class="xref py py-obj docutils literal"><span class="pre">format_filter_results</span></tt></a>()</td>
+<td>If filtering enabled, format the results of each <cite>SecurityFilter</cite> and return it as string</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.get_filter_results" title="vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.get_filter_results"><tt class="xref py py-obj docutils literal"><span class="pre">get_filter_results</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.get_filters" title="vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.get_filters"><tt class="xref py py-obj docutils literal"><span class="pre">get_filters</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.get_methodcall" title="vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.get_methodcall"><tt class="xref py py-obj docutils literal"><span class="pre">get_methodcall</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.set_filter_results" title="vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.set_filter_results"><tt class="xref py py-obj docutils literal"><span class="pre">set_filter_results</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.set_filters" title="vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.set_filters"><tt class="xref py py-obj docutils literal"><span class="pre">set_filters</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.set_methodcall" title="vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.set_methodcall"><tt class="xref py py-obj docutils literal"><span class="pre">set_methodcall</span></tt></a>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.add_filter">
+<tt class="descname">add_filter</tt><big>(</big><em>security_filter</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/SecurityAnalyzer.html#SecurityAnalyzer.add_filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.add_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a filter.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>security_filter: SecurityFilter</strong> :</p>
+<blockquote class="last">
+<div><p>the filter to add</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.add_filters">
+<tt class="descname">add_filters</tt><big>(</big><em>security_filter_list</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/SecurityAnalyzer.html#SecurityAnalyzer.add_filters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.add_filters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a list of filters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>security_filter_list: list&lt;SecurityFilter&gt;</strong> :</p>
+<blockquote class="last">
+<div><p>the filters to add</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.add_to_graph">
+<tt class="descname">add_to_graph</tt><big>(</big><em>graph</em>, <em>methodcall_sender_attr_dict=None</em>, <em>methodcall_calls_attr_list_dict=None</em>, <em>sender_methodcall_edge_attr_dict=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/SecurityAnalyzer.html#SecurityAnalyzer.add_to_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.add_to_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add the <cite>SecurityFilter</cite> and all its filtered content to the graph</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.apply_filters">
+<tt class="descname">apply_filters</tt><big>(</big><em>graph=None</em>, <em>methodcall_sender_attr_dict=None</em>, <em>methodcall_calls_attr_list_dict=None</em>, <em>sender_methodcall_edge_attr_dict=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/SecurityAnalyzer.html#SecurityAnalyzer.apply_filters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.apply_filters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply all <cite>SecurityFilter</cite> and add all to the graph if not None.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>graph: Graph</strong> :</p>
+<blockquote>
+<div><p>the graph to which the <cite>SecurityFilter</cite> and its filtered content shall be added.
+if None, nothing will be added.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>methodcall: MethodCall</strong> :</p>
+<blockquote class="last">
+<div><p>The filtered MethodCall after applying all filters.
+A new one will be constructed!</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.filter_results">
+<tt class="descname">filter_results</tt><a class="headerlink" href="#vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.filter_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>_filter_results(dict&lt;SecurityFilter, list&lt;MethodCall&gt;&gt;) &#8211; dict holding the results for each filter</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.filters">
+<tt class="descname">filters</tt><a class="headerlink" href="#vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.filters" title="Permalink to this definition">¶</a></dt>
+<dd><p>_filters: list&lt;SecurityFilter&gt;, optional &#8211; list of filters to use</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.format_filter_results">
+<tt class="descname">format_filter_results</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/SecurityAnalyzer.html#SecurityAnalyzer.format_filter_results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.format_filter_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>If filtering enabled, format the results of each <cite>SecurityFilter</cite> and return it as string</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.get_filter_results">
+<tt class="descname">get_filter_results</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/SecurityAnalyzer.html#SecurityAnalyzer.get_filter_results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.get_filter_results" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.get_filters">
+<tt class="descname">get_filters</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/SecurityAnalyzer.html#SecurityAnalyzer.get_filters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.get_filters" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.get_methodcall">
+<tt class="descname">get_methodcall</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/SecurityAnalyzer.html#SecurityAnalyzer.get_methodcall"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.get_methodcall" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.methodcall">
+<tt class="descname">methodcall</tt><a class="headerlink" href="#vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.methodcall" title="Permalink to this definition">¶</a></dt>
+<dd><p>_methodcall: MethodCall &#8211; the MethodCall that shall be analyzed</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.set_filter_results">
+<tt class="descname">set_filter_results</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/SecurityAnalyzer.html#SecurityAnalyzer.set_filter_results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.set_filter_results" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.set_filters">
+<tt class="descname">set_filters</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/SecurityAnalyzer.html#SecurityAnalyzer.set_filters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.set_filters" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.set_methodcall">
+<tt class="descname">set_methodcall</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/SecurityAnalyzer.html#SecurityAnalyzer.set_methodcall"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.SecurityAnalyzer.SecurityAnalyzer.set_methodcall" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.security.SecurityFilters">
+<span id="securityfilters-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">SecurityFilters</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.security.SecurityFilters" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 08.10.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<p>Helper module for <a href="#id3"><span class="problematic" id="id4">`</span></a>SecurityFilter`s</p>
+<dl class="function">
+<dt id="vizasm.analysis.security.SecurityFilters.format_available_filters">
+<tt class="descclassname">vizasm.analysis.security.SecurityFilters.</tt><tt class="descname">format_available_filters</tt><big>(</big><em>arch</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/SecurityFilters.html#format_available_filters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.SecurityFilters.format_available_filters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a description of available filters.
+Available filters are currently those which are in the static field <cite>SECURITY_FILTERS</cite></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.analysis.security.SecurityFilters.get_all_std_security_filters">
+<tt class="descclassname">vizasm.analysis.security.SecurityFilters.</tt><tt class="descname">get_all_std_security_filters</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/SecurityFilters.html#get_all_std_security_filters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.SecurityFilters.get_all_std_security_filters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all available standard <a href="#id5"><span class="problematic" id="id6">`</span></a>SecurityFilter`s independent of the platform</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.analysis.security.SecurityFilters.get_filters">
+<tt class="descclassname">vizasm.analysis.security.SecurityFilters.</tt><tt class="descname">get_filters</tt><big>(</big><em>func</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/SecurityFilters.html#get_filters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.SecurityFilters.get_filters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all available standard filters (filtered by <cite>func</cite>)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.analysis.security.SecurityFilters.get_ios_filters">
+<tt class="descclassname">vizasm.analysis.security.SecurityFilters.</tt><tt class="descname">get_ios_filters</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/SecurityFilters.html#get_ios_filters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.SecurityFilters.get_ios_filters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all available standard iOS filters</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.analysis.security.SecurityFilters.get_mac_filters">
+<tt class="descclassname">vizasm.analysis.security.SecurityFilters.</tt><tt class="descname">get_mac_filters</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/SecurityFilters.html#get_mac_filters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.SecurityFilters.get_mac_filters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all available standard mac filters</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.analysis.security.SecurityFilters.security_filters">
+<tt class="descclassname">vizasm.analysis.security.SecurityFilters.</tt><tt class="descname">security_filters</tt><big>(</big><em>arch</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/SecurityFilters.html#security_filters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.SecurityFilters.security_filters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the available <a href="#id7"><span class="problematic" id="id8">`</span></a>SecurityFilter`s for the specified architecture</p>
+</dd></dl>
+
+</div>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="vizasm.analysis.security.filter.html">filter Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#id1"><tt class="docutils literal"><span class="pre">filter</span></tt> Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.BackgroundTasksFilter"><tt class="docutils literal"><span class="pre">BackgroundTasksFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.CFStreamSSLLevelFilter"><tt class="docutils literal"><span class="pre">CFStreamSSLLevelFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.CookiePolicyFilter"><tt class="docutils literal"><span class="pre">CookiePolicyFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.CustomFilter"><tt class="docutils literal"><span class="pre">CustomFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.DataProtectionFilter"><tt class="docutils literal"><span class="pre">DataProtectionFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.FormatStringFilter"><tt class="docutils literal"><span class="pre">FormatStringFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.FrameworkClassFilter"><tt class="docutils literal"><span class="pre">FrameworkClassFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.GeoLocationFilter"><tt class="docutils literal"><span class="pre">GeoLocationFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.IPCFilter"><tt class="docutils literal"><span class="pre">IPCFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.KeyChainFilter"><tt class="docutils literal"><span class="pre">KeyChainFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.NSStreamSSLLevelFilter"><tt class="docutils literal"><span class="pre">NSStreamSSLLevelFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.NSUserDefaultsFilter"><tt class="docutils literal"><span class="pre">NSUserDefaultsFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.RandomFuncFilter"><tt class="docutils literal"><span class="pre">RandomFuncFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.SQLiteFilter"><tt class="docutils literal"><span class="pre">SQLiteFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.SeatBeltFilter"><tt class="docutils literal"><span class="pre">SeatBeltFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.SecurityFilter"><tt class="docutils literal"><span class="pre">SecurityFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.UIPasteBoardFilter"><tt class="docutils literal"><span class="pre">UIPasteBoardFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.UntrustedSSLCertsFilter"><tt class="docutils literal"><span class="pre">UntrustedSSLCertsFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="vizasm.analysis.security.filter.util.html">util Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.analysis.security.filter.util.html#id1"><tt class="docutils literal"><span class="pre">util</span></tt> Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.analysis.security.filter.util.html#module-vizasm.analysis.security.filter.util.MethodCallFilterUtil"><tt class="docutils literal"><span class="pre">MethodCallFilterUtil</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.analysis.security.filter.util.html#module-vizasm.analysis.security.filter.util.MethodDefFilterUtil"><tt class="docutils literal"><span class="pre">MethodDefFilterUtil</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.analysis.security.filter.util.html#module-vizasm.analysis.security.filter.util.Util"><tt class="docutils literal"><span class="pre">Util</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

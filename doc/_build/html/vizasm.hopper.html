@@ -1,0 +1,709 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>hopper Package &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">hopper Package</a><ul>
+<li><a class="reference internal" href="#module-vizasm.hopper.HopperAnnotationInterface"><tt class="docutils literal"><span class="pre">HopperAnnotationInterface</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.hopper.HopperLoggingHandler"><tt class="docutils literal"><span class="pre">HopperLoggingHandler</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.hopper.hopannotate"><tt class="docutils literal"><span class="pre">hopannotate</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/vizasm.hopper.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="hopper-package">
+<h1>hopper Package<a class="headerlink" href="#hopper-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-vizasm.hopper.HopperAnnotationInterface">
+<span id="hopperannotationinterface-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">HopperAnnotationInterface</span></tt> Module<a class="headerlink" href="#module-vizasm.hopper.HopperAnnotationInterface" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 21.08.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.hopper.HopperAnnotationInterface.HopperAnnotationInterface">
+<em class="property">class </em><tt class="descclassname">vizasm.hopper.HopperAnnotationInterface.</tt><tt class="descname">HopperAnnotationInterface</tt><a class="reference internal" href="_modules/vizasm/hopper/HopperAnnotationInterface.html#HopperAnnotationInterface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.hopper.HopperAnnotationInterface.HopperAnnotationInterface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this interface for classes that define a custom string representation for annotation in Hopper</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.hopper.HopperAnnotationInterface.HopperAnnotationInterface.hopper_str" title="vizasm.hopper.HopperAnnotationInterface.HopperAnnotationInterface.hopper_str"><tt class="xref py py-obj docutils literal"><span class="pre">hopper_str</span></tt></a>()</td>
+<td>Get the string representation annotating hopper</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.hopper.HopperAnnotationInterface.HopperAnnotationInterface.try_get_hopper_string" title="vizasm.hopper.HopperAnnotationInterface.HopperAnnotationInterface.try_get_hopper_string"><tt class="xref py py-obj docutils literal"><span class="pre">try_get_hopper_string</span></tt></a>(obj)</td>
+<td>Use the <cite>hopper_str()</cite> representation if available.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.hopper.HopperAnnotationInterface.HopperAnnotationInterface.hopper_str">
+<tt class="descname">hopper_str</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/hopper/HopperAnnotationInterface.html#HopperAnnotationInterface.hopper_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.hopper.HopperAnnotationInterface.HopperAnnotationInterface.hopper_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the string representation annotating hopper</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="vizasm.hopper.HopperAnnotationInterface.HopperAnnotationInterface.try_get_hopper_string">
+<em class="property">static </em><tt class="descname">try_get_hopper_string</tt><big>(</big><em>obj</em><big>)</big><a class="reference internal" href="_modules/vizasm/hopper/HopperAnnotationInterface.html#HopperAnnotationInterface.try_get_hopper_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.hopper.HopperAnnotationInterface.HopperAnnotationInterface.try_get_hopper_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use the <cite>hopper_str()</cite> representation if available.
+Otherwise take str() representation.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.hopper.HopperLoggingHandler">
+<span id="hopperlogginghandler-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">HopperLoggingHandler</span></tt> Module<a class="headerlink" href="#module-vizasm.hopper.HopperLoggingHandler" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 23.10.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.hopper.HopperLoggingHandler.HopperLoggingHandler">
+<em class="property">class </em><tt class="descclassname">vizasm.hopper.HopperLoggingHandler.</tt><tt class="descname">HopperLoggingHandler</tt><big>(</big><em>stream=None</em>, <em>doc=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/hopper/HopperLoggingHandler.html#HopperLoggingHandler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.hopper.HopperLoggingHandler.HopperLoggingHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">logging.StreamHandler</span></tt></p>
+<p>Logging handler for Hopper. Redirects the output to the log function of <cite>Document</cite></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><strong>doc: Document (see Hopper api)</strong> :</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">acquire</span></tt>()</td>
+<td>Acquire the I/O thread lock.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">addFilter</span></tt>(filter)</td>
+<td>Add the specified filter to this handler.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">close</span></tt>()</td>
+<td>Tidy up any resources used by the handler.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">createLock</span></tt>()</td>
+<td>Acquire a thread lock for serializing access to the underlying I/O.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.hopper.HopperLoggingHandler.HopperLoggingHandler.emit" title="vizasm.hopper.HopperLoggingHandler.HopperLoggingHandler.emit"><tt class="xref py py-obj docutils literal"><span class="pre">emit</span></tt></a>(record)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">filter</span></tt>(record)</td>
+<td>Determine if a record is loggable by consulting all the filters.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">flush</span></tt>()</td>
+<td>Flushes the stream.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">format</span></tt>(record)</td>
+<td>Format the specified record.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.hopper.HopperLoggingHandler.HopperLoggingHandler.get_doc" title="vizasm.hopper.HopperLoggingHandler.HopperLoggingHandler.get_doc"><tt class="xref py py-obj docutils literal"><span class="pre">get_doc</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">handle</span></tt>(record)</td>
+<td>Conditionally emit the specified logging record.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">handleError</span></tt>(record)</td>
+<td>Handle errors which occur during an emit() call.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">release</span></tt>()</td>
+<td>Release the I/O thread lock.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">removeFilter</span></tt>(filter)</td>
+<td>Remove the specified filter from this handler.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">setFormatter</span></tt>(fmt)</td>
+<td>Set the formatter for this handler.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">setLevel</span></tt>(level)</td>
+<td>Set the logging level of this handler.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.hopper.HopperLoggingHandler.HopperLoggingHandler.set_doc" title="vizasm.hopper.HopperLoggingHandler.HopperLoggingHandler.set_doc"><tt class="xref py py-obj docutils literal"><span class="pre">set_doc</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_name</span></tt>(name)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="vizasm.hopper.HopperLoggingHandler.HopperLoggingHandler.doc">
+<tt class="descname">doc</tt><a class="headerlink" href="#vizasm.hopper.HopperLoggingHandler.HopperLoggingHandler.doc" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.hopper.HopperLoggingHandler.HopperLoggingHandler.emit">
+<tt class="descname">emit</tt><big>(</big><em>record</em><big>)</big><a class="reference internal" href="_modules/vizasm/hopper/HopperLoggingHandler.html#HopperLoggingHandler.emit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.hopper.HopperLoggingHandler.HopperLoggingHandler.emit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.hopper.HopperLoggingHandler.HopperLoggingHandler.get_doc">
+<tt class="descname">get_doc</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/hopper/HopperLoggingHandler.html#HopperLoggingHandler.get_doc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.hopper.HopperLoggingHandler.HopperLoggingHandler.get_doc" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.hopper.HopperLoggingHandler.HopperLoggingHandler.set_doc">
+<tt class="descname">set_doc</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/hopper/HopperLoggingHandler.html#HopperLoggingHandler.set_doc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.hopper.HopperLoggingHandler.HopperLoggingHandler.set_doc" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.hopper.hopannotate">
+<span id="hopannotate-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">hopannotate</span></tt> Module<a class="headerlink" href="#module-vizasm.hopper.hopannotate" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 19.08.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.hopper.hopannotate.HopperAnnotater">
+<em class="property">class </em><tt class="descclassname">vizasm.hopper.hopannotate.</tt><tt class="descname">HopperAnnotater</tt><big>(</big><em>seg=None</em>, <em>annotate_calls=False</em>, <em>ann_method_head=False</em>, <em>annotate_assignments=False</em><big>)</big><a class="reference internal" href="_modules/vizasm/hopper/hopannotate.html#HopperAnnotater"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.hopper.hopannotate.HopperAnnotater" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>This class is used for annotating Hopper.
+Be sure to set <cite>seg</cite>. This is the bridge to Hopper needed for annotation.
+Set it before you annotate anything.</p>
+<p>The first time this module gets imported, an instance of <cite>HopperAnnotater</cite> will be created and stored in <cite>hopanno</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>__cur_meth_impl_start: int</strong> :</p>
+<blockquote>
+<div><p>The address of the method implementation. Has to be set externally.</p>
+</div></blockquote>
+<p><strong>__seg: Segment (see Hopper scripting api)</strong> :</p>
+<blockquote>
+<div><p>object of Hopper which holds the function for annotation</p>
+</div></blockquote>
+<p><strong>__not_annotated_registers_list: list&lt;tuple&lt;str, int&gt;&gt;</strong> :</p>
+<blockquote>
+<div><p>if the annotation of registers is enabled, 
+all registers that will be annotated are stored in this list and annotated if <cite>clear()</cite> gets called. 
+Messages with None address, will be annotated at the method head.</p>
+</div></blockquote>
+<p><strong>__annotate_calls: bool, optional (default is False)</strong> :</p>
+<blockquote>
+<div><p>enable annotation of calls</p>
+</div></blockquote>
+<p><strong>__annotate_assignments: bool, optional (default is False)</strong> :</p>
+<blockquote>
+<div><p>enable annotation of registers</p>
+</div></blockquote>
+<p><strong>__ann_method_head: bool, optional (default is False)</strong> :</p>
+<blockquote class="last">
+<div><p>write a summary to the beginning of the method implementation.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.hopper.hopannotate.HopperAnnotater.annotate" title="vizasm.hopper.hopannotate.HopperAnnotater.annotate"><tt class="xref py py-obj docutils literal"><span class="pre">annotate</span></tt></a>(address,&nbsp;msg)</td>
+<td>Annotate the specified message at given address if not None.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.hopper.hopannotate.HopperAnnotater.annotate_assignment" title="vizasm.hopper.hopannotate.HopperAnnotater.annotate_assignment"><tt class="xref py py-obj docutils literal"><span class="pre">annotate_assignment</span></tt></a>(lval,&nbsp;rval,&nbsp;address)</td>
+<td>Annotate the current assignments (if enabled)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.hopper.hopannotate.HopperAnnotater.annotate_assignment_method_head" title="vizasm.hopper.hopannotate.HopperAnnotater.annotate_assignment_method_head"><tt class="xref py py-obj docutils literal"><span class="pre">annotate_assignment_method_head</span></tt></a>(msg)</td>
+<td>Annotate the current assignment at the method head.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.hopper.hopannotate.HopperAnnotater.annotate_from_methodcall" title="vizasm.hopper.hopannotate.HopperAnnotater.annotate_from_methodcall"><tt class="xref py py-obj docutils literal"><span class="pre">annotate_from_methodcall</span></tt></a>(methodcall)</td>
+<td>Annotate the calls stored in the <cite>MethodCall</cite>.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.hopper.hopannotate.HopperAnnotater.annotate_inline" title="vizasm.hopper.hopannotate.HopperAnnotater.annotate_inline"><tt class="xref py py-obj docutils literal"><span class="pre">annotate_inline</span></tt></a>(address,&nbsp;msg[,&nbsp;keep_orig_msg])</td>
+<td>Annotate the specified message inline at given address if not None.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.hopper.hopannotate.HopperAnnotater.annotate_method_head_beginning" title="vizasm.hopper.hopannotate.HopperAnnotater.annotate_method_head_beginning"><tt class="xref py py-obj docutils literal"><span class="pre">annotate_method_head_beginning</span></tt></a>(msg)</td>
+<td>Annotate at beginning of the meth_impl head.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.hopper.hopannotate.HopperAnnotater.annotate_method_head_end" title="vizasm.hopper.hopannotate.HopperAnnotater.annotate_method_head_end"><tt class="xref py py-obj docutils literal"><span class="pre">annotate_method_head_end</span></tt></a>(msg)</td>
+<td>Annotate at end of the meth_impl head.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.hopper.hopannotate.HopperAnnotater.annotate_other_assignment" title="vizasm.hopper.hopannotate.HopperAnnotater.annotate_other_assignment"><tt class="xref py py-obj docutils literal"><span class="pre">annotate_other_assignment</span></tt></a>(msg,&nbsp;address)</td>
+<td>Annotate the current assignment (if enabled).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.hopper.hopannotate.HopperAnnotater.clear" title="vizasm.hopper.hopannotate.HopperAnnotater.clear"><tt class="xref py py-obj docutils literal"><span class="pre">clear</span></tt></a>()</td>
+<td>Clear the system</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.hopper.hopannotate.HopperAnnotater.get_ann_method_head" title="vizasm.hopper.hopannotate.HopperAnnotater.get_ann_method_head"><tt class="xref py py-obj docutils literal"><span class="pre">get_ann_method_head</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.hopper.hopannotate.HopperAnnotater.get_annotate_calls" title="vizasm.hopper.hopannotate.HopperAnnotater.get_annotate_calls"><tt class="xref py py-obj docutils literal"><span class="pre">get_annotate_calls</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.hopper.hopannotate.HopperAnnotater.get_annotate_registers" title="vizasm.hopper.hopannotate.HopperAnnotater.get_annotate_registers"><tt class="xref py py-obj docutils literal"><span class="pre">get_annotate_registers</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.hopper.hopannotate.HopperAnnotater.get_cur_meth_impl_start" title="vizasm.hopper.hopannotate.HopperAnnotater.get_cur_meth_impl_start"><tt class="xref py py-obj docutils literal"><span class="pre">get_cur_meth_impl_start</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.hopper.hopannotate.HopperAnnotater.get_not_annotated_registers_list" title="vizasm.hopper.hopannotate.HopperAnnotater.get_not_annotated_registers_list"><tt class="xref py py-obj docutils literal"><span class="pre">get_not_annotated_registers_list</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.hopper.hopannotate.HopperAnnotater.get_seg" title="vizasm.hopper.hopannotate.HopperAnnotater.get_seg"><tt class="xref py py-obj docutils literal"><span class="pre">get_seg</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.hopper.hopannotate.HopperAnnotater.is_hopper_annotation_enabled" title="vizasm.hopper.hopannotate.HopperAnnotater.is_hopper_annotation_enabled"><tt class="xref py py-obj docutils literal"><span class="pre">is_hopper_annotation_enabled</span></tt></a>()</td>
+<td>Check if annotation is enabled.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.hopper.hopannotate.HopperAnnotater.reset" title="vizasm.hopper.hopannotate.HopperAnnotater.reset"><tt class="xref py py-obj docutils literal"><span class="pre">reset</span></tt></a>()</td>
+<td>Reset and annotate all messages which have not been annotated</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.hopper.hopannotate.HopperAnnotater.set_ann_method_head" title="vizasm.hopper.hopannotate.HopperAnnotater.set_ann_method_head"><tt class="xref py py-obj docutils literal"><span class="pre">set_ann_method_head</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.hopper.hopannotate.HopperAnnotater.set_annotate_calls" title="vizasm.hopper.hopannotate.HopperAnnotater.set_annotate_calls"><tt class="xref py py-obj docutils literal"><span class="pre">set_annotate_calls</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.hopper.hopannotate.HopperAnnotater.set_annotate_registers" title="vizasm.hopper.hopannotate.HopperAnnotater.set_annotate_registers"><tt class="xref py py-obj docutils literal"><span class="pre">set_annotate_registers</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.hopper.hopannotate.HopperAnnotater.set_cur_meth_impl_start" title="vizasm.hopper.hopannotate.HopperAnnotater.set_cur_meth_impl_start"><tt class="xref py py-obj docutils literal"><span class="pre">set_cur_meth_impl_start</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.hopper.hopannotate.HopperAnnotater.set_not_annotated_registers_list" title="vizasm.hopper.hopannotate.HopperAnnotater.set_not_annotated_registers_list"><tt class="xref py py-obj docutils literal"><span class="pre">set_not_annotated_registers_list</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.hopper.hopannotate.HopperAnnotater.set_seg" title="vizasm.hopper.hopannotate.HopperAnnotater.set_seg"><tt class="xref py py-obj docutils literal"><span class="pre">set_seg</span></tt></a>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="vizasm.hopper.hopannotate.HopperAnnotater.ann_method_head">
+<tt class="descname">ann_method_head</tt><a class="headerlink" href="#vizasm.hopper.hopannotate.HopperAnnotater.ann_method_head" title="Permalink to this definition">¶</a></dt>
+<dd><p>__ann_method_head(bool, optional (default is False)) &#8211; write a summary of the calls to the beginning of the method implementation.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.hopper.hopannotate.HopperAnnotater.annotate">
+<tt class="descname">annotate</tt><big>(</big><em>address</em>, <em>msg</em><big>)</big><a class="reference internal" href="_modules/vizasm/hopper/hopannotate.html#HopperAnnotater.annotate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.hopper.hopannotate.HopperAnnotater.annotate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annotate the specified message at given address if not None.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>msg: str</strong> :</p>
+<p class="last"><strong>address: int</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.hopper.hopannotate.HopperAnnotater.annotate_assignment">
+<tt class="descname">annotate_assignment</tt><big>(</big><em>lval</em>, <em>rval</em>, <em>address</em><big>)</big><a class="reference internal" href="_modules/vizasm/hopper/hopannotate.html#HopperAnnotater.annotate_assignment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.hopper.hopannotate.HopperAnnotater.annotate_assignment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annotate the current assignments (if enabled)
+E.g. annotate the current register value.</p>
+<p>The messages will not get annotated instantly.
+They will be collected and annotated at once if <cite>clear()</cite> gets called.
+Seems to improve performance.</p>
+<p>The hopper representation will be used if available (see <cite>HopperAnnotationInterface</cite>)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>lval: object</strong> :</p>
+<blockquote>
+<div><p>left value of the assignment</p>
+</div></blockquote>
+<p><strong>rval: object</strong> :</p>
+<blockquote>
+<div><p>right value of the assignment</p>
+</div></blockquote>
+<p class="last"><strong>address: int</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.hopper.hopannotate.HopperAnnotater.annotate_assignment_method_head">
+<tt class="descname">annotate_assignment_method_head</tt><big>(</big><em>msg</em><big>)</big><a class="reference internal" href="_modules/vizasm/hopper/hopannotate.html#HopperAnnotater.annotate_assignment_method_head"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.hopper.hopannotate.HopperAnnotater.annotate_assignment_method_head" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annotate the current assignment at the method head.</p>
+<p>The messages will not get annotated instantly.
+They will be collected and annotated at once if <cite>clear()</cite> gets called.
+Seems to improve performance.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><strong>msg: string</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.hopper.hopannotate.HopperAnnotater.annotate_calls">
+<tt class="descname">annotate_calls</tt><a class="headerlink" href="#vizasm.hopper.hopannotate.HopperAnnotater.annotate_calls" title="Permalink to this definition">¶</a></dt>
+<dd><p>__annotate_calls(bool, optional (default is False)) &#8211; enable annotation of calls</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.hopper.hopannotate.HopperAnnotater.annotate_from_methodcall">
+<tt class="descname">annotate_from_methodcall</tt><big>(</big><em>methodcall</em><big>)</big><a class="reference internal" href="_modules/vizasm/hopper/hopannotate.html#HopperAnnotater.annotate_from_methodcall"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.hopper.hopannotate.HopperAnnotater.annotate_from_methodcall" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annotate the calls stored in the <cite>MethodCall</cite>.
+If <cite>ann_method_head</cite> write a summary of the calls to the beginning of the method implementation.</p>
+<p>The hopper representation will be used if available (see <cite>HopperAnnotationInterface</cite>)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>methodcall: MethodCall</strong> :</p>
+<blockquote class="last">
+<div><p>the <cite>MethodCall</cite> to annotate</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.hopper.hopannotate.HopperAnnotater.annotate_inline">
+<tt class="descname">annotate_inline</tt><big>(</big><em>address</em>, <em>msg</em>, <em>keep_orig_msg=False</em><big>)</big><a class="reference internal" href="_modules/vizasm/hopper/hopannotate.html#HopperAnnotater.annotate_inline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.hopper.hopannotate.HopperAnnotater.annotate_inline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annotate the specified message inline at given address if not None.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>msg: str</strong> :</p>
+<p><strong>address: int</strong> :</p>
+<p><strong>keep_orig_msg: bool, optional (default is False)</strong> :</p>
+<blockquote class="last">
+<div><p>if True keep the original message in new comment</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.hopper.hopannotate.HopperAnnotater.annotate_method_head_beginning">
+<tt class="descname">annotate_method_head_beginning</tt><big>(</big><em>msg</em><big>)</big><a class="reference internal" href="_modules/vizasm/hopper/hopannotate.html#HopperAnnotater.annotate_method_head_beginning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.hopper.hopannotate.HopperAnnotater.annotate_method_head_beginning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annotate at beginning of the meth_impl head.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><strong>msg: str</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.hopper.hopannotate.HopperAnnotater.annotate_method_head_end">
+<tt class="descname">annotate_method_head_end</tt><big>(</big><em>msg</em><big>)</big><a class="reference internal" href="_modules/vizasm/hopper/hopannotate.html#HopperAnnotater.annotate_method_head_end"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.hopper.hopannotate.HopperAnnotater.annotate_method_head_end" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annotate at end of the meth_impl head.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><strong>msg: str</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.hopper.hopannotate.HopperAnnotater.annotate_other_assignment">
+<tt class="descname">annotate_other_assignment</tt><big>(</big><em>msg</em>, <em>address</em><big>)</big><a class="reference internal" href="_modules/vizasm/hopper/hopannotate.html#HopperAnnotater.annotate_other_assignment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.hopper.hopannotate.HopperAnnotater.annotate_other_assignment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annotate the current assignment (if enabled).
+E.g. annotate the current register value.</p>
+<p>The messages will not get annotated instantly.
+They will be collected and annotated at once if <cite>clear()</cite> gets called.
+Seems to improve performance.</p>
+<p>The hopper representation will be used if available (see <cite>HopperAnnotationInterface</cite>)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>address: int</strong> :</p>
+<p class="last"><strong>msg: string</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.hopper.hopannotate.HopperAnnotater.annotate_registers">
+<tt class="descname">annotate_registers</tt><a class="headerlink" href="#vizasm.hopper.hopannotate.HopperAnnotater.annotate_registers" title="Permalink to this definition">¶</a></dt>
+<dd><p>__annotate_assignments(bool, optional (default is False)) &#8211; enable annotation of registers</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.hopper.hopannotate.HopperAnnotater.clear">
+<tt class="descname">clear</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/hopper/hopannotate.html#HopperAnnotater.clear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.hopper.hopannotate.HopperAnnotater.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clear the system</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.hopper.hopannotate.HopperAnnotater.cur_meth_impl_start">
+<tt class="descname">cur_meth_impl_start</tt><a class="headerlink" href="#vizasm.hopper.hopannotate.HopperAnnotater.cur_meth_impl_start" title="Permalink to this definition">¶</a></dt>
+<dd><p>__cur_meth_impl_start(int) &#8211; The address of the method implementation. Has to be set externally.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.hopper.hopannotate.HopperAnnotater.get_ann_method_head">
+<tt class="descname">get_ann_method_head</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/hopper/hopannotate.html#HopperAnnotater.get_ann_method_head"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.hopper.hopannotate.HopperAnnotater.get_ann_method_head" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.hopper.hopannotate.HopperAnnotater.get_annotate_calls">
+<tt class="descname">get_annotate_calls</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/hopper/hopannotate.html#HopperAnnotater.get_annotate_calls"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.hopper.hopannotate.HopperAnnotater.get_annotate_calls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.hopper.hopannotate.HopperAnnotater.get_annotate_registers">
+<tt class="descname">get_annotate_registers</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/hopper/hopannotate.html#HopperAnnotater.get_annotate_registers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.hopper.hopannotate.HopperAnnotater.get_annotate_registers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.hopper.hopannotate.HopperAnnotater.get_cur_meth_impl_start">
+<tt class="descname">get_cur_meth_impl_start</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/hopper/hopannotate.html#HopperAnnotater.get_cur_meth_impl_start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.hopper.hopannotate.HopperAnnotater.get_cur_meth_impl_start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.hopper.hopannotate.HopperAnnotater.get_not_annotated_registers_list">
+<tt class="descname">get_not_annotated_registers_list</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/hopper/hopannotate.html#HopperAnnotater.get_not_annotated_registers_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.hopper.hopannotate.HopperAnnotater.get_not_annotated_registers_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.hopper.hopannotate.HopperAnnotater.get_seg">
+<tt class="descname">get_seg</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/hopper/hopannotate.html#HopperAnnotater.get_seg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.hopper.hopannotate.HopperAnnotater.get_seg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.hopper.hopannotate.HopperAnnotater.is_hopper_annotation_enabled">
+<tt class="descname">is_hopper_annotation_enabled</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/hopper/hopannotate.html#HopperAnnotater.is_hopper_annotation_enabled"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.hopper.hopannotate.HopperAnnotater.is_hopper_annotation_enabled" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if annotation is enabled.
+To enable it, set the <cite>seg</cite> value.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.hopper.hopannotate.HopperAnnotater.not_annotated_registers_list">
+<tt class="descname">not_annotated_registers_list</tt><a class="headerlink" href="#vizasm.hopper.hopannotate.HopperAnnotater.not_annotated_registers_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>__not_annotated_registers_list(list&lt;tuple&lt;str, int&gt;&gt;) &#8211; if the annotation of registers is enabled, all registers that will be annotated are stored in this list and annotated if <cite>clear()</cite> gets called.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.hopper.hopannotate.HopperAnnotater.reset">
+<tt class="descname">reset</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/hopper/hopannotate.html#HopperAnnotater.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.hopper.hopannotate.HopperAnnotater.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset and annotate all messages which have not been annotated</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.hopper.hopannotate.HopperAnnotater.seg">
+<tt class="descname">seg</tt><a class="headerlink" href="#vizasm.hopper.hopannotate.HopperAnnotater.seg" title="Permalink to this definition">¶</a></dt>
+<dd><p>__seg(Segment see Hopper scripting api) &#8211; object of Hopper which holds the function for annotation</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.hopper.hopannotate.HopperAnnotater.set_ann_method_head">
+<tt class="descname">set_ann_method_head</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/hopper/hopannotate.html#HopperAnnotater.set_ann_method_head"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.hopper.hopannotate.HopperAnnotater.set_ann_method_head" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.hopper.hopannotate.HopperAnnotater.set_annotate_calls">
+<tt class="descname">set_annotate_calls</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/hopper/hopannotate.html#HopperAnnotater.set_annotate_calls"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.hopper.hopannotate.HopperAnnotater.set_annotate_calls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.hopper.hopannotate.HopperAnnotater.set_annotate_registers">
+<tt class="descname">set_annotate_registers</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/hopper/hopannotate.html#HopperAnnotater.set_annotate_registers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.hopper.hopannotate.HopperAnnotater.set_annotate_registers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.hopper.hopannotate.HopperAnnotater.set_cur_meth_impl_start">
+<tt class="descname">set_cur_meth_impl_start</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/hopper/hopannotate.html#HopperAnnotater.set_cur_meth_impl_start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.hopper.hopannotate.HopperAnnotater.set_cur_meth_impl_start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.hopper.hopannotate.HopperAnnotater.set_not_annotated_registers_list">
+<tt class="descname">set_not_annotated_registers_list</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/hopper/hopannotate.html#HopperAnnotater.set_not_annotated_registers_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.hopper.hopannotate.HopperAnnotater.set_not_annotated_registers_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.hopper.hopannotate.HopperAnnotater.set_seg">
+<tt class="descname">set_seg</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/hopper/hopannotate.html#HopperAnnotater.set_seg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.hopper.hopannotate.HopperAnnotater.set_seg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="vizasm.hopper.scripts.html">scripts Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.hopper.scripts.html#vizasm-arm-helper-module"><tt class="docutils literal"><span class="pre">vizasm_arm_helper</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.hopper.scripts.html#vizasm-hopper-module"><tt class="docutils literal"><span class="pre">vizasm_hopper</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

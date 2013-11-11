@@ -1,0 +1,265 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm.model.asm.ivar.IVar &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vizasm.model.asm.ivar.IVar</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 10.04.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.asm.ivar.IvarRefCouldNotBeResolved</span> <span class="kn">import</span> \
+    <span class="n">IvarRefCouldNotBeResolvedException</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.asm.ivar.IvarRefWrongTypeException</span> <span class="kn">import</span> \
+    <span class="n">IvarRefWrongTypeException</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.function.MsgSend</span> <span class="kn">import</span> <span class="n">MsgSend</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.function.MsgSendInterface</span> <span class="kn">import</span> <span class="n">MsgSendInterface</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.object.nsobject.NSObjectInterface</span> <span class="kn">import</span> \
+    <span class="n">NSObjectInterface</span>
+<span class="kn">from</span> <span class="nn">vizasm.util.Log</span> <span class="kn">import</span> <span class="n">log</span>
+
+<div class="viewcode-block" id="IVar"><a class="viewcode-back" href="../../../../../vizasm.model.asm.ivar.html#vizasm.model.asm.ivar.IVar.IVar">[docs]</a><span class="k">class</span> <span class="nc">IVar</span><span class="p">(</span><span class="nb">object</span><span class="p">,</span> <span class="n">NSObjectInterface</span><span class="p">,</span> <span class="n">MsgSendInterface</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    Represents an ivar (instance variable) e.g. created out of this asmline: &quot;[ds:_OBJC_IVAR_$_AppDelegate.obj3]&quot;</span>
+<span class="sd">     </span>
+<span class="sd">    where obj3 is the variable of the ObjcClass AppDelegate</span>
+<span class="sd">     </span>
+<span class="sd">    which points to a MsgSend like [[Object3 alloc] init]</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    __ivar_class: ObjcClass</span>
+<span class="sd">        ObjcClass e.g. created from &quot;[ds:_OBJC_IVAR_$_AppDelegate.obj3]&quot;</span>
+<span class="sd">    __ivar_ref: MsgSend, optional (default is None)</span>
+<span class="sd">        the MsgSend where the ivar points to</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ivar_class</span><span class="p">,</span> <span class="n">ivar_ref</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__ivar_class</span> <span class="o">=</span> <span class="n">ivar_class</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__ivar_ref</span> <span class="o">=</span> <span class="n">ivar_ref</span>
+    
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">ivar_ref</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_ivar_ref</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">ivar_ref</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_ivar_class</span><span class="p">()</span><span class="o">.</span><span class="n">__str__</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">ivar_ref</span><span class="o">.</span><span class="n">__str__</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">(</span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ivar_class</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ivar_ref</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">get_ivar_class</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_ivar_ref</span><span class="p">()))</span>
+    
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">IVar</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span> <span class="ow">is</span> <span class="n">other</span> <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_ivar_class</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_ivar_ref</span><span class="p">())</span> <span class="o">==</span> <span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">get_ivar_class</span><span class="p">(),</span> <span class="n">other</span><span class="o">.</span><span class="n">get_ivar_ref</span><span class="p">())</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    
+    <span class="k">def</span> <span class="nf">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span> <span class="o">==</span> <span class="n">other</span>
+    
+<div class="viewcode-block" id="IVar.get_ivar_class"><a class="viewcode-back" href="../../../../../vizasm.model.asm.ivar.html#vizasm.model.asm.ivar.IVar.IVar.get_ivar_class">[docs]</a>    <span class="k">def</span> <span class="nf">get_ivar_class</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ivar_class</span>
+</div>
+<div class="viewcode-block" id="IVar.get_ivar_ref"><a class="viewcode-back" href="../../../../../vizasm.model.asm.ivar.html#vizasm.model.asm.ivar.IVar.IVar.get_ivar_ref">[docs]</a>    <span class="k">def</span> <span class="nf">get_ivar_ref</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Get the `ivar_ref`.</span>
+<span class="sd">        You might want to call resolve_ivar_ref() before to resolve it.&#39;&#39;&#39;</span> 
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ivar_ref</span>
+</div>
+<div class="viewcode-block" id="IVar.set_ivar_class"><a class="viewcode-back" href="../../../../../vizasm.model.asm.ivar.html#vizasm.model.asm.ivar.IVar.IVar.set_ivar_class">[docs]</a>    <span class="k">def</span> <span class="nf">set_ivar_class</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__ivar_class</span> <span class="o">=</span> <span class="n">value</span>
+</div>
+<div class="viewcode-block" id="IVar.set_ivar_ref"><a class="viewcode-back" href="../../../../../vizasm.model.asm.ivar.html#vizasm.model.asm.ivar.IVar.IVar.set_ivar_ref">[docs]</a>    <span class="k">def</span> <span class="nf">set_ivar_ref</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__ivar_ref</span> <span class="o">=</span> <span class="n">value</span>
+    </div>
+    <span class="n">ivar_class</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_ivar_class</span><span class="p">,</span> <span class="n">set_ivar_class</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&#39;__ivar_class(ObjcClass) -- ObjcClass e.g. create from &quot;[ds:_OBJC_IVAR_$_AppDelegate.obj3]&quot;&#39;</span><span class="p">)</span>
+    <span class="n">ivar_ref</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_ivar_ref</span><span class="p">,</span> <span class="n">set_ivar_ref</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;__ivar_ref(MsgSend) -- the MsgSend where the ivar points to&quot;</span><span class="p">)</span>
+    
+<div class="viewcode-block" id="IVar.create_ivar_lookup_entry"><a class="viewcode-back" href="../../../../../vizasm.model.asm.ivar.html#vizasm.model.asm.ivar.IVar.IVar.create_ivar_lookup_entry">[docs]</a>    <span class="k">def</span> <span class="nf">create_ivar_lookup_entry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ivar_ref_lookup</span><span class="p">):</span>
+        <span class="sd">r&quot;&quot;&quot;</span>
+<span class="sd">        Create a lookup entry in the `IVarLookup` using ivar_class as key and ivar_ref as value.</span>
+<span class="sd">        If `ivar_ref` is None, no entry will be created. </span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ivar_ref_lookup: IVarRefLookup</span>
+<span class="sd">            the class where the `ivar_ref` will be stored</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        True</span>
+<span class="sd">            if the entry could be created</span>
+<span class="sd">        False</span>
+<span class="sd">            if the entry could not be created because the ivar_ref was not available</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ivar_ref</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_ivar_ref</span><span class="p">()</span> 
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ivar_ref</span><span class="p">,</span> <span class="n">MsgSend</span><span class="p">):</span>
+            <span class="n">ivar_ref_lookup</span><span class="o">.</span><span class="n">set_ivar_ref</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_ivar_class</span><span class="p">(),</span> <span class="n">ivar_ref</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="bp">False</span>    
+    </div>
+<div class="viewcode-block" id="IVar.resolve_ivar_ref"><a class="viewcode-back" href="../../../../../vizasm.model.asm.ivar.html#vizasm.model.asm.ivar.IVar.IVar.resolve_ivar_ref">[docs]</a>    <span class="k">def</span> <span class="nf">resolve_ivar_ref</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ivar_ref_lookup</span><span class="p">):</span>
+        <span class="sd">r&quot;&quot;&quot;</span>
+<span class="sd">        Resolve the ivar_ref from `ivar_ref_look` and set it.</span>
+<span class="sd">        The value can be obtained via get_ivar_ref() if no exception occurred.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ivar_ref_lookup: IVarRefLookup</span>
+<span class="sd">            the class where the ivar_ref is stored</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        IvarRefWrongTypeException</span>
+<span class="sd">            if the ivar_ref could not be resolved to the correct type (should be MsgSend)</span>
+<span class="sd">        IvarRefCouldNotBeResolvedException</span>
+<span class="sd">            if the ivar_ref could not be resolved at all</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ivar_ref</span> <span class="o">=</span> <span class="n">ivar_ref_lookup</span><span class="o">.</span><span class="n">get_ivar_ref</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_ivar_class</span><span class="p">())</span> 
+        <span class="k">if</span> <span class="n">ivar_ref</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ivar_ref</span><span class="p">,</span> <span class="n">MsgSend</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_ivar_ref</span><span class="p">(</span><span class="n">ivar_ref</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">IvarRefWrongTypeException</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ivar_ref</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">IvarRefCouldNotBeResolvedException</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ivar_ref_lookup</span><span class="p">)</span>
+        
+<span class="c">#####################################################################################</span>
+<span class="c"># NSObjectInterface                                                                 #</span>
+<span class="c">#####################################################################################</span></div>
+<div class="viewcode-block" id="IVar.get_nsobject"><a class="viewcode-back" href="../../../../../vizasm.model.asm.ivar.html#vizasm.model.asm.ivar.IVar.IVar.get_nsobject">[docs]</a>    <span class="k">def</span> <span class="nf">get_nsobject</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">ivar_ref</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_ivar_ref</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">ivar_ref</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">ivar_ref</span><span class="o">.</span><span class="n">get_nsobject</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_ivar_class</span><span class="p">()</span>
+        
+<span class="c">#####################################################################################</span>
+<span class="c"># MsgSendInterface                                                                  #</span>
+<span class="c">#####################################################################################    </span></div>
+<div class="viewcode-block" id="IVar.create_msg_send"><a class="viewcode-back" href="../../../../../vizasm.model.asm.ivar.html#vizasm.model.asm.ivar.IVar.IVar.create_msg_send">[docs]</a>    <span class="k">def</span> <span class="nf">create_msg_send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">,</span> <span class="n">ivar_ref_lookup</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Create a `MsgSend` with the specified `selector`.</span>
+<span class="sd">        If the `ivar_ref` is not None, this will be used for the `MsgSend`.</span>
+<span class="sd">        Otherwise the `ivar_class` is used.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        selector: Selector</span>
+<span class="sd">            the `Selector` with which the `MsgSend` shall be created.</span>
+<span class="sd">        ivar_ref_lookup: IVarRefLookup, optional</span>
+<span class="sd">            if given, the ivar_ref will be resolved</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        MsgSend</span>
+<span class="sd">            the created `MsgSend` with `ivar_ref`  or `ivar_class`  </span>
+<span class="sd">        &#39;&#39;&#39;</span> 
+        <span class="c"># ivar_ref_lookup = kwargs.get(&#39;ivar_ref_lookup&#39;)</span>
+        <span class="k">if</span> <span class="n">ivar_ref_lookup</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">resolve_ivar_ref</span><span class="p">(</span><span class="n">ivar_ref_lookup</span><span class="p">)</span>
+            <span class="k">except</span> <span class="p">(</span><span class="n">IvarRefCouldNotBeResolvedException</span><span class="p">,</span> <span class="n">IvarRefWrongTypeException</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="n">ivar_ref</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_ivar_ref</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">ivar_ref</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">MsgSend</span><span class="o">.</span><span class="n">create_from_msgsend</span><span class="p">(</span><span class="n">ivar_ref</span><span class="p">,</span> <span class="n">selector</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">MsgSend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_ivar_class</span><span class="p">(),</span> <span class="p">[</span><span class="n">selector</span><span class="p">])</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

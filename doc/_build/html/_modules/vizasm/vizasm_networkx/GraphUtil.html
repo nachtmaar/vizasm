@@ -1,0 +1,246 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm.vizasm_networkx.GraphUtil &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vizasm.vizasm_networkx.GraphUtil</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 28.07.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">vizasm.util.Log</span> <span class="kn">import</span> <span class="n">log_exception</span><span class="p">,</span> <span class="n">log_critical</span>
+<span class="kn">from</span> <span class="nn">vizasm.vizasm_networkx.GexfConstants</span> <span class="kn">import</span> <span class="n">TAG_VIZ</span><span class="p">,</span> <span class="n">TAG_COLOR</span><span class="p">,</span> \
+    <span class="n">TAG_COLOR_TRANSPARENCY</span><span class="p">,</span> <span class="n">TAG_COLOR_RED</span><span class="p">,</span> <span class="n">TAG_COLOR_BLUE</span><span class="p">,</span> <span class="n">TAG_COLOR_GREEN</span><span class="p">,</span> <span class="n">TAG_SIZE</span><span class="p">,</span> \
+    <span class="n">TAG_EDGE_WEIGHT</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="kn">as</span> <span class="nn">nx</span>
+
+<div class="viewcode-block" id="GraphUtil"><a class="viewcode-back" href="../../../vizasm.vizasm_networkx.html#vizasm.vizasm_networkx.GraphUtil.GraphUtil">[docs]</a><span class="k">class</span> <span class="nc">GraphUtil</span><span class="p">:</span>
+    <span class="sd">&#39;&#39;&#39; Utility for a graph &#39;&#39;&#39;</span> 
+    
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="GraphUtil.viz_dict"><a class="viewcode-back" href="../../../vizasm.vizasm_networkx.html#vizasm.vizasm_networkx.GraphUtil.GraphUtil.viz_dict">[docs]</a>    <span class="k">def</span> <span class="nf">viz_dict</span><span class="p">(</span><span class="n">transparency</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">red</span> <span class="o">=</span> <span class="mi">255</span><span class="p">,</span> <span class="n">green</span> <span class="o">=</span> <span class="mi">219</span><span class="p">,</span> <span class="n">blue</span> <span class="o">=</span> <span class="mi">73</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns an attribute dictionary that can be directly used for a node in networkx.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        transparency: double</span>
+<span class="sd">            value in [0, 1]</span>
+<span class="sd">        red, green, blue: int, optional (default is yellow)</span>
+<span class="sd">            value in {0, ..., 255}</span>
+<span class="sd">            </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict: dict</span>
+<span class="sd">            dictionary of attributes according to the gexf extension Visualization </span>
+<span class="sd">            Example: {&#39;viz&#39;: {&#39;color&#39;: {&#39;a&#39;: 1.0, &#39;r&#39;: 0, &#39;b&#39;: 0, &#39;g&#39;: 0}, &#39;size&#39;: 1.0}}</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">TAG_VIZ</span> <span class="p">:</span> 
+                    <span class="p">{</span><span class="n">TAG_COLOR</span> <span class="p">:</span> <span class="p">{</span><span class="n">TAG_COLOR_TRANSPARENCY</span> <span class="p">:</span> <span class="n">transparency</span><span class="p">,</span>
+                                  <span class="n">TAG_COLOR_RED</span> <span class="p">:</span> <span class="n">red</span><span class="p">,</span>
+                                  <span class="n">TAG_COLOR_BLUE</span> <span class="p">:</span> <span class="n">blue</span><span class="p">,</span>
+                                  <span class="n">TAG_COLOR_GREEN</span> <span class="p">:</span> <span class="n">green</span><span class="p">},</span>
+                    <span class="n">TAG_SIZE</span> <span class="p">:</span> <span class="n">size</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+        </div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="GraphUtil.edge_weight_attr_dict"><a class="viewcode-back" href="../../../vizasm.vizasm_networkx.html#vizasm.vizasm_networkx.GraphUtil.GraphUtil.edge_weight_attr_dict">[docs]</a>    <span class="k">def</span> <span class="nf">edge_weight_attr_dict</span><span class="p">(</span><span class="n">weight</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns a dictionary specifying the weight of an edge.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        weight: float</span>
+<span class="sd">            weight of the edge</span>
+<span class="sd">            </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        edge_attr_dict: dict</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">TAG_EDGE_WEIGHT</span> <span class="p">:</span> <span class="n">weight</span><span class="p">}</span>        
+</div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="GraphUtil.subdict_kstruct_with_key"><a class="viewcode-back" href="../../../vizasm.vizasm_networkx.html#vizasm.vizasm_networkx.GraphUtil.GraphUtil.subdict_kstruct_with_key">[docs]</a>    <span class="k">def</span> <span class="nf">subdict_kstruct_with_key</span><span class="p">(</span><span class="n">attr_dict</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return a dictionary only containing the entry with the specified key,</span>
+<span class="sd">        but keeping the structure. </span>
+<span class="sd">        Meaning that structure above the key will be still present in the returned subdict.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        attr_dict: dict</span>
+<span class="sd">        key: hashable</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">key</span> <span class="p">:</span> <span class="n">attr_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]}</span>
+    </div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="GraphUtil.subdict_kstruct_with_keys"><a class="viewcode-back" href="../../../vizasm.vizasm_networkx.html#vizasm.vizasm_networkx.GraphUtil.GraphUtil.subdict_kstruct_with_keys">[docs]</a>    <span class="k">def</span> <span class="nf">subdict_kstruct_with_keys</span><span class="p">(</span><span class="n">attr_dict</span><span class="p">,</span> <span class="n">key_list</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return a dictionary only containing the entry with the specified keys,</span>
+<span class="sd">        but keeping the structure. </span>
+<span class="sd">        Meaning that structure above the keys will be still present in the returned subdict.</span>
+<span class="sd">        </span>
+<span class="sd">        If no keys are given, an empty dict will be returned.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        attr_dict: dict</span>
+<span class="sd">        key_list: list</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="n">attr_dict</span>
+        <span class="n">sub_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">struct_dict</span> <span class="o">=</span> <span class="n">sub_dict</span>
+        <span class="n">cnt_keys</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">key_list</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">key_list</span><span class="p">:</span>
+            <span class="n">last_key</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">key_list</span><span class="p">):</span>    
+                <span class="n">val</span> <span class="o">=</span> <span class="n">val</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                <span class="n">sub_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="c"># go in front of the dict with the last key </span>
+                <span class="k">if</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="n">cnt_keys</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">sub_dict</span> <span class="o">=</span> <span class="n">sub_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                <span class="n">last_key</span> <span class="o">=</span> <span class="n">key</span>
+            <span class="n">sub_dict</span><span class="p">[</span><span class="n">last_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="k">return</span> <span class="n">struct_dict</span>
+        </div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="GraphUtil.get_viz_color_dict"><a class="viewcode-back" href="../../../vizasm.vizasm_networkx.html#vizasm.vizasm_networkx.GraphUtil.GraphUtil.get_viz_color_dict">[docs]</a>    <span class="k">def</span> <span class="nf">get_viz_color_dict</span><span class="p">(</span><span class="n">viz_dict</span><span class="p">):</span>    
+        <span class="sd">&#39;&#39;&#39; Returns the subdictionary with the color key keeping structure of the dictionary &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">GraphUtil</span><span class="o">.</span><span class="n">subdict_kstruct_with_keys</span><span class="p">(</span><span class="n">viz_dict</span><span class="p">,</span> <span class="p">[</span><span class="n">TAG_VIZ</span><span class="p">,</span> <span class="n">TAG_COLOR</span><span class="p">])</span>
+    </div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="GraphUtil.get_size"><a class="viewcode-back" href="../../../vizasm.vizasm_networkx.html#vizasm.vizasm_networkx.GraphUtil.GraphUtil.get_size">[docs]</a>    <span class="k">def</span> <span class="nf">get_size</span><span class="p">(</span><span class="n">viz_dict</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Returns the subdictionary with the size key keeping structure of the dictionary &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">GraphUtil</span><span class="o">.</span><span class="n">subdict_kstruct_with_keys</span><span class="p">(</span><span class="n">viz_dict</span><span class="p">,</span> <span class="p">[</span><span class="n">TAG_VIZ</span><span class="p">,</span> <span class="n">TAG_SIZE</span><span class="p">])</span>
+    </div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="GraphUtil.update_color"><a class="viewcode-back" href="../../../vizasm.vizasm_networkx.html#vizasm.vizasm_networkx.GraphUtil.GraphUtil.update_color">[docs]</a>    <span class="k">def</span> <span class="nf">update_color</span><span class="p">(</span><span class="n">viz_dict</span><span class="p">,</span> <span class="n">update_dict</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Update the color without overwriting/erasing the size attribute &#39;&#39;&#39;</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="n">TAG_VIZ</span> <span class="ow">in</span> <span class="n">update_dict</span> <span class="ow">and</span> <span class="n">TAG_SIZE</span> <span class="ow">in</span> <span class="n">update_dict</span><span class="p">[</span><span class="n">TAG_VIZ</span><span class="p">]:</span> 
+            <span class="n">size</span> <span class="o">=</span> <span class="n">update_dict</span><span class="p">[</span><span class="n">TAG_VIZ</span><span class="p">][</span><span class="n">TAG_SIZE</span><span class="p">]</span>
+            
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">TAG_VIZ</span> <span class="ow">in</span> <span class="n">viz_dict</span><span class="p">:</span>
+            <span class="n">viz_dict</span><span class="p">[</span><span class="n">TAG_VIZ</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            
+        <span class="n">viz_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">update_dict</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">viz_dict</span><span class="p">[</span><span class="n">TAG_VIZ</span><span class="p">][</span><span class="n">TAG_SIZE</span><span class="p">]</span> <span class="o">=</span> <span class="n">size</span>
+            
+        <span class="k">return</span> <span class="n">viz_dict</span>
+        </div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="GraphUtil.write_gexf"><a class="viewcode-back" href="../../../vizasm.vizasm_networkx.html#vizasm.vizasm_networkx.GraphUtil.GraphUtil.write_gexf">[docs]</a>    <span class="k">def</span> <span class="nf">write_gexf</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">graph_filepath</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Write the graph to the specified file &#39;&#39;&#39;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">graph_filepath</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">nx</span><span class="o">.</span><span class="n">write_gexf</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">graph_filepath</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">log_critical</span><span class="p">(</span><span class="s">&#39;Gexf file not completely written !</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+            <span class="n">log_exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+            </div></div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">attr_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;viz&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;color&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;a&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&#39;g&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span> <span class="s">&#39;size&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">}}</span>
+    <span class="k">print</span> <span class="n">GraphUtil</span><span class="o">.</span><span class="n">subdict_kstruct_with_keys</span><span class="p">(</span><span class="n">attr_dict</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;viz&#39;</span><span class="p">,</span> <span class="s">&#39;color&#39;</span><span class="p">])</span>
+    <span class="k">print</span> <span class="n">GraphUtil</span><span class="o">.</span><span class="n">subdict_kstruct_with_keys</span><span class="p">(</span><span class="n">attr_dict</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="k">print</span> <span class="n">GraphUtil</span><span class="o">.</span><span class="n">get_viz_color_dict</span><span class="p">(</span><span class="n">attr_dict</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">GraphUtil</span><span class="o">.</span><span class="n">get_size</span><span class="p">(</span><span class="n">attr_dict</span><span class="p">)</span>
+         
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

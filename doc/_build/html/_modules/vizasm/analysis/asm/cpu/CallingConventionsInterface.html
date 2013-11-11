@@ -1,0 +1,252 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm.analysis.asm.cpu.CallingConventionsInterface &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vizasm.analysis.asm.cpu.CallingConventionsInterface</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 28.08.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">vizasm.util</span> <span class="kn">import</span> <span class="n">Util</span>
+
+<div class="viewcode-block" id="CallingConventionsInterface"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface">[docs]</a><span class="k">class</span> <span class="nc">CallingConventionsInterface</span><span class="p">:</span>
+    <span class="sd">&#39;&#39;&#39; Defines the calling conventions of the `Cpu` &#39;&#39;&#39;</span>
+     
+<div class="viewcode-block" id="CallingConventionsInterface.destination_register"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.destination_register">[docs]</a>    <span class="k">def</span> <span class="nf">destination_register</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Returns the `Register` in which the destination for the selector is stored &#39;&#39;&#39;</span> 
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    </div>
+<div class="viewcode-block" id="CallingConventionsInterface.selector_register"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.selector_register">[docs]</a>    <span class="k">def</span> <span class="nf">selector_register</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Returns the `Register` in which the selector is stored &#39;&#39;&#39;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    </div>
+<div class="viewcode-block" id="CallingConventionsInterface.fetches_all_arguments_from_stack"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.fetches_all_arguments_from_stack">[docs]</a>    <span class="k">def</span> <span class="nf">fetches_all_arguments_from_stack</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return True if all arguments are popped from the stack rather than taking them from registers &#39;&#39;&#39;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    </div>
+<div class="viewcode-block" id="CallingConventionsInterface.arguments_registers"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.arguments_registers">[docs]</a>    <span class="k">def</span> <span class="nf">arguments_registers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; List of `Register` which specifies where the arguments are being stored.</span>
+<span class="sd">        If the `Cpu` fetches its arguments from stack an empty list will be returned. &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetches_all_arguments_from_stack</span><span class="p">():</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">destination_register</span><span class="p">()]</span> <span class="o">+</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">selector_register</span><span class="p">()]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">selector_arg_registers</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="CallingConventionsInterface.arguments_registers_in_sequence"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.arguments_registers_in_sequence">[docs]</a>    <span class="k">def</span> <span class="nf">arguments_registers_in_sequence</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return True if the `destination_register`, `selector_register`,</span>
+<span class="sd">            and the `selector_arg_registers` are specified one behind the other in `arguments_registers`.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    </div>
+<div class="viewcode-block" id="CallingConventionsInterface.exclude_argument_regs"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.exclude_argument_regs">[docs]</a>    <span class="k">def</span> <span class="nf">exclude_argument_regs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return a list&lt;Register&gt; from which you know, </span>
+<span class="sd">        that they will not be used to hold arguments for a function call &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">stack_pointer_register</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">frame_pointer_register</span><span class="p">()]</span>
+    </div>
+<div class="viewcode-block" id="CallingConventionsInterface.next_reg_for_spret"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.next_reg_for_spret">[docs]</a>    <span class="k">def</span> <span class="nf">next_reg_for_spret</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">register</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        If an objc_msgSend_stret is detected, the specified `Register` for the destination and selector do not match anymore</span>
+<span class="sd">        due to the fact that the first argument register is needed for the return address of the structure.</span>
+<span class="sd">        This means that all `Register` get shifted right.</span>
+<span class="sd">        At least if `arguments_registers_in_sequence`. Otherwise you have to implement this yourself!</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        register: Register</span>
+<span class="sd">        &#39;&#39;&#39;</span>    
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">arguments_registers_in_sequence</span><span class="p">():</span>
+            <span class="n">arg_regs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">arguments_registers</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">arg_regs</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">cur_idx</span> <span class="o">=</span> <span class="n">arg_regs</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">register</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="n">arg_regs</span><span class="p">[</span><span class="n">cur_idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+                <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">None</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s">&#39;`CallingConventions.arguments_registers_in_sequence` returns False, implement this method yourself!&#39;</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="CallingConventionsInterface.next_regs_for_spret"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.next_regs_for_spret">[docs]</a>    <span class="k">def</span> <span class="nf">next_regs_for_spret</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reg_list</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Same as `next_reg_for_spret`, but do it for the whole list of `Register` &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">Util</span><span class="o">.</span><span class="n">filter_not_none</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">next_reg_for_spret</span><span class="p">(</span><span class="n">reg</span><span class="p">)</span> <span class="k">for</span> <span class="n">reg</span> <span class="ow">in</span> <span class="n">reg_list</span><span class="p">))</span>
+    </div>
+<div class="viewcode-block" id="CallingConventionsInterface.selector_arg_registers"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.selector_arg_registers">[docs]</a>    <span class="k">def</span> <span class="nf">selector_arg_registers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; The registers(list&lt;Register&gt;) where the arguments for the selector are stored. </span>
+<span class="sd">            If the selector needs more arguments, the remaining ones are taken from the stack &#39;&#39;&#39;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    </div>
+<div class="viewcode-block" id="CallingConventionsInterface.stret_selector_arg_registers"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.stret_selector_arg_registers">[docs]</a>    <span class="k">def</span> <span class="nf">stret_selector_arg_registers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; The registers (list&lt;Register&gt;) where the arguments for the selector are stored. </span>
+<span class="sd">            They are only used for a objc_msgSend_stret(). A message with a structure as return value.</span>
+<span class="sd">            The first parameters will be used as an address where the structure is returned.</span>
+<span class="sd">            So the first `Register` of `selector_arg_registers` will be cut off.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">regs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">selector_arg_registers</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">regs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">regs</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    </div>
+<div class="viewcode-block" id="CallingConventionsInterface.return_register"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.return_register">[docs]</a>    <span class="k">def</span> <span class="nf">return_register</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; The register which holds the return value &#39;&#39;&#39;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    </div>
+<div class="viewcode-block" id="CallingConventionsInterface.return_reg_is_fst_arg_reg"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.return_reg_is_fst_arg_reg">[docs]</a>    <span class="k">def</span> <span class="nf">return_reg_is_fst_arg_reg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Check if the return register is also the first argument register &#39;&#39;&#39;</span>
+        <span class="n">arg_regs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">arguments_registers</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">arg_regs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_register</span><span class="p">()</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">arguments_registers</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">False</span>
+        </div>
+<div class="viewcode-block" id="CallingConventionsInterface.nslog_arg_registers"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.nslog_arg_registers">[docs]</a>    <span class="k">def</span> <span class="nf">nslog_arg_registers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; List of registers which hold the arguments for NSLog &#39;&#39;&#39;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    </div>
+<div class="viewcode-block" id="CallingConventionsInterface.stack_pointer_register"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.stack_pointer_register">[docs]</a>    <span class="k">def</span> <span class="nf">stack_pointer_register</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return the stack pointer as instance of Register. E.g. &quot;rsp&quot; on x86_64. &#39;&#39;&#39;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    </div>
+<div class="viewcode-block" id="CallingConventionsInterface.frame_pointer_register"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.frame_pointer_register">[docs]</a>    <span class="k">def</span> <span class="nf">frame_pointer_register</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return the frame pointer register &#39;&#39;&#39;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    </div>
+<div class="viewcode-block" id="CallingConventionsInterface.floating_arg_registers"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.floating_arg_registers">[docs]</a>    <span class="k">def</span> <span class="nf">floating_arg_registers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; The registers which hold the floating-point-numbers &#39;&#39;&#39;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    </div>
+    <span class="k">def</span> <span class="nf">_reg_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">regs</span><span class="p">,</span> <span class="n">reg_type</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Wrap the specified register names into the corresponding `Register` class</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        regs: list&lt;string&gt;</span>
+<span class="sd">            list of register names</span>
+<span class="sd">        reg_type: Register</span>
+<span class="sd">            The register type, the reference cannot be an initialized class !</span>
+<span class="sd">            Use the import reference !</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list&lt;reg_type&gt;</span>
+<span class="sd">        &#39;&#39;&#39;</span> 
+        <span class="k">return</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">reg_type</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">regs</span><span class="p">)</span>
+    
+<div class="viewcode-block" id="CallingConventionsInterface.reg_list"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.reg_list">[docs]</a>    <span class="k">def</span> <span class="nf">reg_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">regs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        Implement this method by calling `_reg_list` with the register type (`reg_typereg_type`).</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        regs: list&lt;string&gt;</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list&lt;reg_type&gt;</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+</div></div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.arm.Register_Arm</span> <span class="kn">import</span> <span class="n">Register_arm</span> <span class="k">as</span> <span class="n">reg</span>
+    <span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.arm.Cpu_arm</span> <span class="kn">import</span> <span class="n">Cpu_arm</span>
+    <span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.arm.ParseUtil_arm</span> <span class="kn">import</span> <span class="n">ParseUtil_arm</span>
+    <span class="n">cpu</span> <span class="o">=</span> <span class="n">Cpu_arm</span><span class="p">(</span><span class="n">superclasses_dict</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="n">pu</span> <span class="o">=</span> <span class="n">ParseUtil_arm</span><span class="p">(</span><span class="n">cpu</span><span class="p">,</span> <span class="n">reg</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&#39;objc_msgSend_spret destination register: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cpu</span><span class="o">.</span><span class="n">next_reg_for_spret</span><span class="p">(</span><span class="n">cpu</span><span class="o">.</span><span class="n">destination_register</span><span class="p">()))</span>
+    <span class="k">print</span> <span class="s">&#39;objc_msgSend_spret selector register: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cpu</span><span class="o">.</span><span class="n">next_reg_for_spret</span><span class="p">(</span><span class="n">cpu</span><span class="o">.</span><span class="n">selector_register</span><span class="p">()))</span>
+    <span class="k">print</span> <span class="s">&#39;objc_msgSend_spret selector arg registers: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cpu</span><span class="o">.</span><span class="n">next_regs_for_spret</span><span class="p">(</span><span class="n">cpu</span><span class="o">.</span><span class="n">selector_arg_registers</span><span class="p">()))</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

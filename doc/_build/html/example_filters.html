@@ -1,0 +1,370 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Example Filters &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="index.html" />
+    <link rel="up" title="Custom Filters" href="custom_filters.html" />
+    <link rel="prev" title="Filter Api" href="filter_api.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="filter_api.html" title="Filter Api"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="custom_filters.html" accesskey="U">Custom Filters</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Example Filters</a><ul>
+<li><a class="reference internal" href="#backgroundtasksfilter">BackgroundTasksFilter</a></li>
+<li><a class="reference internal" href="#keychainfilter">KeyChainFilter</a></li>
+<li><a class="reference internal" href="#nsuserdefaultsfilter">NSUserDefaultsFilter</a></li>
+<li><a class="reference internal" href="#untrustedsslcertsfilter">UntrustedSSLCertsFilter</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="filter_api.html"
+                        title="previous chapter">Filter Api</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/example_filters.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="example-filters">
+<h1>Example Filters<a class="headerlink" href="#example-filters" title="Permalink to this headline">¶</a></h1>
+<p>This sections shows a few of the standard filters.</p>
+<div class="section" id="backgroundtasksfilter">
+<h2>BackgroundTasksFilter<a class="headerlink" href="#backgroundtasksfilter" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 16.09.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+
+<span class="sd">Copyright 2013 Nils Schmidt</span>
+
+<span class="sd">This file is part of VizAsm.</span>
+
+<span class="sd">VizAsm is free software: you can redistribute it and/or modify</span>
+<span class="sd">it under the terms of the GNU General Public License as published by</span>
+<span class="sd">the Free Software Foundation, either version 3 of the License, or</span>
+<span class="sd">(at your option) any later version.</span>
+
+<span class="sd">VizAsm is distributed in the hope that it will be useful,</span>
+<span class="sd">but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="sd">MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="sd">GNU General Public License for more details.</span>
+
+<span class="sd">You should have received a copy of the GNU General Public License</span>
+<span class="sd">along with VizAsm.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">from</span> <span class="nn">vizasm.analysis.security.filter.SecurityFilter</span> <span class="kn">import</span> <span class="n">SecurityFilter</span>
+<span class="kn">import</span> <span class="nn">util</span>
+
+<span class="k">class</span> <span class="nc">BackgroundTasksFilter</span><span class="p">(</span><span class="n">SecurityFilter</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Check for background tasks.</span>
+<span class="sd">    </span>
+<span class="sd">    See</span>
+<span class="sd">    ---</span>
+<span class="sd">    https://developer.apple.com/library/ios/DOCUMENTATION/UIKit/Reference/UIApplication_Class/Reference/Reference.html#//apple_ref/occ/instm/UIApplication/beginBackgroundTaskWithExpirationHandler:</span>
+<span class="sd">    https://developer.apple.com/library/ios/DOCUMENTATION/UIKit/Reference/UIApplication_Class/Reference/Reference.html#//apple_ref/occ/instm/UIApplication/endBackgroundTask:</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">config_mac_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    
+    <span class="k">def</span> <span class="nf">filter_method_call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">):</span>
+        <span class="n">sels</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;beginBackgroundTaskWithExpirationHandler:&#39;</span><span class="p">,</span> <span class="s">&#39;endBackgroundTask:&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">util</span><span class="o">.</span><span class="n">mc_has_any_selector</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">sels</span><span class="p">,</span> <span class="n">search_substring</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;Check for background tasks&#39;</span>
+    
+    
+</pre></div>
+</div>
+</div>
+<div class="section" id="keychainfilter">
+<h2>KeyChainFilter<a class="headerlink" href="#keychainfilter" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 16.09.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+
+<span class="sd">Copyright 2013 Nils Schmidt</span>
+
+<span class="sd">This file is part of VizAsm.</span>
+
+<span class="sd">VizAsm is free software: you can redistribute it and/or modify</span>
+<span class="sd">it under the terms of the GNU General Public License as published by</span>
+<span class="sd">the Free Software Foundation, either version 3 of the License, or</span>
+<span class="sd">(at your option) any later version.</span>
+
+<span class="sd">VizAsm is distributed in the hope that it will be useful,</span>
+<span class="sd">but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="sd">MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="sd">GNU General Public License for more details.</span>
+
+<span class="sd">You should have received a copy of the GNU General Public License</span>
+<span class="sd">along with VizAsm.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">from</span> <span class="nn">vizasm.analysis.security.filter.SecurityFilter</span> <span class="kn">import</span> <span class="n">SecurityFilter</span>
+<span class="kn">import</span> <span class="nn">util</span>
+
+<span class="k">class</span> <span class="nc">KeyChainFilter</span><span class="p">(</span><span class="n">SecurityFilter</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Check for Keychain usage.</span>
+<span class="sd">    </span>
+<span class="sd">    See</span>
+<span class="sd">    ---</span>
+<span class="sd">    https://developer.apple.com/library/mac/documentation/Security/Conceptual/keychainServConcepts/01introduction/introduction.html#//apple_ref/doc/uid/TP30000897-CH203-TP1</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">filter_method_call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">):</span>
+        <span class="n">keychain_methods</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;SecItem&#39;</span><span class="p">,</span>  <span class="c"># iOS</span>
+                           <span class="s">&#39;SecKeychain&#39;</span><span class="p">]</span>  <span class="c"># Mac</span>
+        <span class="n">keychain_wrapper</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">mc_objc_class_with_any_name</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;KeychainItemWrapper&#39;</span><span class="p">],</span> <span class="n">search_substring</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="n">keychain_method</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">mc_c_function_has_any_name</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">keychain_methods</span><span class="p">,</span> <span class="n">search_substring</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">keychain_wrapper</span> <span class="ow">or</span> <span class="n">keychain_method</span>
+        
+    <span class="k">def</span> <span class="nf">_description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;Check for Keychain usage&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="nsuserdefaultsfilter">
+<h2>NSUserDefaultsFilter<a class="headerlink" href="#nsuserdefaultsfilter" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 29.07.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+
+<span class="sd">Copyright 2013 Nils Schmidt</span>
+
+<span class="sd">This file is part of VizAsm.</span>
+
+<span class="sd">VizAsm is free software: you can redistribute it and/or modify</span>
+<span class="sd">it under the terms of the GNU General Public License as published by</span>
+<span class="sd">the Free Software Foundation, either version 3 of the License, or</span>
+<span class="sd">(at your option) any later version.</span>
+
+<span class="sd">VizAsm is distributed in the hope that it will be useful,</span>
+<span class="sd">but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="sd">MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="sd">GNU General Public License for more details.</span>
+
+<span class="sd">You should have received a copy of the GNU General Public License</span>
+<span class="sd">along with VizAsm.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">from</span> <span class="nn">vizasm.analysis.security.filter.SecurityFilter</span> <span class="kn">import</span> <span class="n">SecurityFilter</span>
+<span class="kn">import</span> <span class="nn">util</span>
+
+<span class="k">class</span> <span class="nc">NSUserDefaultsFilter</span><span class="p">(</span><span class="n">SecurityFilter</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Filter all NSUserDefault access &#39;&#39;&#39;</span>
+    
+    <span class="k">def</span> <span class="nf">filter_method_call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filter_me</span><span class="p">):</span>
+        <span class="n">cls_found</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">mc_objc_class_with_any_name</span><span class="p">(</span><span class="n">filter_me</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;NSUserDefaults&#39;</span><span class="p">],</span> <span class="n">search_substring</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cls_found</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="n">util</span><span class="o">.</span><span class="n">mc_has_any_selector</span><span class="p">(</span><span class="n">filter_me</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;standardUserDefaults&#39;</span><span class="p">],</span> <span class="n">search_substring</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">_description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;Filters all NSUserDefault access&#39;</span>
+    
+<span class="c">#####################################################################################</span>
+<span class="c"># AttributeNodeInterface                                                            #</span>
+<span class="c">#####################################################################################</span>
+
+    <span class="c"># yellow</span>
+    
+    <span class="k">def</span> <span class="nf">node_color_red</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">255</span>
+
+    <span class="k">def</span> <span class="nf">node_color_green</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">219</span>
+
+    <span class="k">def</span> <span class="nf">node_color_blue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">73</span>
+    
+        
+</pre></div>
+</div>
+</div>
+<div class="section" id="untrustedsslcertsfilter">
+<h2>UntrustedSSLCertsFilter<a class="headerlink" href="#untrustedsslcertsfilter" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 20.04.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+
+<span class="sd">Copyright 2013 Nils Schmidt</span>
+
+<span class="sd">This file is part of VizAsm.</span>
+
+<span class="sd">VizAsm is free software: you can redistribute it and/or modify</span>
+<span class="sd">it under the terms of the GNU General Public License as published by</span>
+<span class="sd">the Free Software Foundation, either version 3 of the License, or</span>
+<span class="sd">(at your option) any later version.</span>
+
+<span class="sd">VizAsm is distributed in the hope that it will be useful,</span>
+<span class="sd">but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="sd">MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="sd">GNU General Public License for more details.</span>
+
+<span class="sd">You should have received a copy of the GNU General Public License</span>
+<span class="sd">along with VizAsm.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">from</span> <span class="nn">vizasm.analysis.security.filter.SecurityFilter</span> <span class="kn">import</span> <span class="n">SecurityFilter</span>
+<span class="kn">import</span> <span class="nn">util</span>
+
+<span class="k">class</span> <span class="nc">UntrustedSSLCertsFilter</span><span class="p">(</span><span class="n">SecurityFilter</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Check if invalid SSL certificates are being accepted.</span>
+<span class="sd">    </span>
+<span class="sd">    See</span>
+<span class="sd">    ---</span>
+<span class="sd">    http://stackoverflow.com/questions/933331/how-to-use-nsurlconnection-to-connect-with-ssl-for-an-untrusted-cert/#comment13096647_2033823</span>
+<span class="sd">    http://stackoverflow.com/questions/2001565/alternative-method-for-nsurlrequests-private-setallowsanyhttpscertificateforh</span>
+<span class="sd">    https://github.com/pokeb/asi-http-request</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">config_filter_method_definition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    
+    <span class="k">def</span> <span class="nf">config_filter_method_call</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    
+    <span class="k">def</span> <span class="nf">filter_method_call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filter_me</span><span class="p">):</span>
+        <span class="c"># check for ASIHTTPRequest (wrapper around CFNetwork API) setValidatesSecureCertificate:</span>
+        <span class="c"># and continueWithoutCredentialForAuthenticationChallenge (NSURLConnectionDelegate)</span>
+        <span class="c"># as well as setAllowsAnyHTTPSCertificate:forHost (NSURLRequest)</span>
+        <span class="n">selector_list</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;continueWithoutCredentialForAuthenticationChallenge&#39;</span><span class="p">,</span> <span class="s">&#39;setValidatesSecureCertificate:&#39;</span><span class="p">,</span> <span class="s">&#39;setAllowsAnyHTTPSCertificate:forHost:&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">util</span><span class="o">.</span><span class="n">mc_has_any_selector</span><span class="p">(</span><span class="n">filter_me</span><span class="p">,</span> <span class="n">selector_list</span><span class="p">,</span> <span class="n">search_substring</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">filter_method_definition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">):</span>
+        <span class="c"># category on NSURLRequest overwrites allowsAnyHTTPSCertificateForHost method</span>
+        <span class="k">return</span> <span class="n">util</span><span class="o">.</span><span class="n">md_filter_category</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="s">&#39;allowsAnyHTTPSCertificateForHost:&#39;</span><span class="p">,</span> <span class="n">category_on</span> <span class="o">=</span> <span class="s">&#39;NSURLRequest&#39;</span><span class="p">,</span> <span class="n">category_name</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">search_substring</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span> 
+    
+    <span class="k">def</span> <span class="nf">_description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;Check if invalid SSL certificates are being accepted&#39;</span>
+    
+<span class="c">#####################################################################################</span>
+<span class="c"># AttributeNodeInterface                                                            #</span>
+<span class="c">#####################################################################################</span>
+
+    <span class="k">def</span> <span class="nf">node_color_red</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">255</span>
+
+    <span class="k">def</span> <span class="nf">node_color_green</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">node_color_blue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="filter_api.html" title="Filter Api"
+             >previous</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="custom_filters.html" >Custom Filters</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

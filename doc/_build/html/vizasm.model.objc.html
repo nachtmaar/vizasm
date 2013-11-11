@@ -1,0 +1,247 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>objc Package &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">objc Package</a><ul>
+<li><a class="reference internal" href="#module-vizasm.model.objc.AsmParserInterface"><tt class="docutils literal"><span class="pre">AsmParserInterface</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/vizasm.model.objc.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="objc-package">
+<h1>objc Package<a class="headerlink" href="#objc-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-vizasm.model.objc.AsmParserInterface">
+<span id="asmparserinterface-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">AsmParserInterface</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.AsmParserInterface" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 31.03.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.model.objc.AsmParserInterface.AsmParserInterface">
+<em class="property">class </em><tt class="descclassname">vizasm.model.objc.AsmParserInterface.</tt><tt class="descname">AsmParserInterface</tt><a class="reference internal" href="_modules/vizasm/model/objc/AsmParserInterface.html#AsmParserInterface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.AsmParserInterface.AsmParserInterface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interface for creating an object from a line of assembler code.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.AsmParserInterface.AsmParserInterface.create_from_asm_line" title="vizasm.model.objc.AsmParserInterface.AsmParserInterface.create_from_asm_line"><tt class="xref py py-obj docutils literal"><span class="pre">create_from_asm_line</span></tt></a>(asmline,&nbsp;cpu)</td>
+<td>Parse a line of asm code and try to create an instance of the object from which the method has been called.</td>
+</tr>
+</tbody>
+</table>
+<dl class="staticmethod">
+<dt id="vizasm.model.objc.AsmParserInterface.AsmParserInterface.create_from_asm_line">
+<em class="property">static </em><tt class="descname">create_from_asm_line</tt><big>(</big><em>asmline</em>, <em>cpu</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/AsmParserInterface.html#AsmParserInterface.create_from_asm_line"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.AsmParserInterface.AsmParserInterface.create_from_asm_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse a line of asm code and try to create an instance of the object from which the method has been called.
+Return None if not possible.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>asmline: string</strong> :</p>
+<p><strong>cpu: Cpu</strong> :</p>
+<blockquote class="last">
+<div><p>the cpu/architecture to use</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="vizasm.model.objc.arguments.html">arguments Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.objc.arguments.html#module-vizasm.model.objc.arguments.Arguments"><tt class="docutils literal"><span class="pre">Arguments</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.objc.arguments.html#module-vizasm.model.objc.arguments.ArgumentsException"><tt class="docutils literal"><span class="pre">ArgumentsException</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.objc.arguments.html#module-vizasm.model.objc.arguments.ArgumentsOverloadedException"><tt class="docutils literal"><span class="pre">ArgumentsOverloadedException</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.objc.arguments.html#module-vizasm.model.objc.arguments.ArgumentsUnderloadedException"><tt class="docutils literal"><span class="pre">ArgumentsUnderloadedException</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.objc.arguments.html#module-vizasm.model.objc.arguments.CFormatString"><tt class="docutils literal"><span class="pre">CFormatString</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.objc.arguments.html#module-vizasm.model.objc.arguments.FillFromCpuInterface"><tt class="docutils literal"><span class="pre">FillFromCpuInterface</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.objc.arguments.html#module-vizasm.model.objc.arguments.FormatString"><tt class="docutils literal"><span class="pre">FormatString</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.objc.arguments.html#module-vizasm.model.objc.arguments.Selector"><tt class="docutils literal"><span class="pre">Selector</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vizasm.model.objc.methodcall.html">methodcall Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.objc.methodcall.html#module-vizasm.model.objc.methodcall.MethodCall"><tt class="docutils literal"><span class="pre">MethodCall</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.objc.methodcall.html#module-vizasm.model.objc.methodcall.MethodCallItem"><tt class="docutils literal"><span class="pre">MethodCallItem</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vizasm.model.objc.object.html">object Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.objc.object.html#module-vizasm.model.objc.object.Object"><tt class="docutils literal"><span class="pre">Object</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.objc.object.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="vizasm.model.objc.object.nsobject.html">nsobject Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.objc.object.nsobject.html#module-vizasm.model.objc.object.nsobject.NSObject"><tt class="docutils literal"><span class="pre">NSObject</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.objc.object.nsobject.html#module-vizasm.model.objc.object.nsobject.NSObjectInterface"><tt class="docutils literal"><span class="pre">NSObjectInterface</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.objc.object.nsobject.html#module-vizasm.model.objc.object.nsobject.NSString"><tt class="docutils literal"><span class="pre">NSString</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.objc.object.nsobject.html#module-vizasm.model.objc.object.nsobject.Variable"><tt class="docutils literal"><span class="pre">Variable</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.objc.object.nsobject.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="vizasm.model.objc.object.nsobject.objcclass.html">objcclass Package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.model.objc.object.nsobject.objcclass.html#module-vizasm.model.objc.object.nsobject.objcclass.CategoryClass"><tt class="docutils literal"><span class="pre">CategoryClass</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.model.objc.object.nsobject.objcclass.html#module-vizasm.model.objc.object.nsobject.objcclass.ObjcClass"><tt class="docutils literal"><span class="pre">ObjcClass</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

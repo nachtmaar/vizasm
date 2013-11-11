@@ -1,0 +1,442 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm.analysis.security.filter.util.MethodCallFilterUtil &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="../../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vizasm.analysis.security.filter.util.MethodCallFilterUtil</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 07.08.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">imap</span>
+
+<span class="kn">from</span> <span class="nn">vizasm.analysis.security.filter.FormatStringFilter</span> <span class="kn">import</span> \
+    <span class="n">FormatStringFilter</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.security.filter.util.Util</span> <span class="kn">import</span> <span class="n">ut_search_string</span>
+<span class="kn">from</span> <span class="nn">vizasm.model</span> <span class="kn">import</span> <span class="n">ModelUtil</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.ModelUtil</span> <span class="kn">import</span> <span class="n">is_stackvar</span><span class="p">,</span> \
+    <span class="n">is_method_implementation_argument</span><span class="p">,</span> <span class="n">is_memcpy</span><span class="p">,</span> <span class="n">destination_not_initialized</span><span class="p">,</span> \
+    <span class="n">is_format_string</span><span class="p">,</span> <span class="n">is_c_function</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.function.FunctionInterface</span> <span class="kn">import</span> <span class="n">FunctionInterface</span>
+<span class="kn">from</span> <span class="nn">vizasm.util</span> <span class="kn">import</span> <span class="n">Util</span>
+
+
+<span class="c">#####################################################################################</span>
+<span class="c"># C Stuff                                                                           #                                                                                                                                                    #</span>
+<span class="c">#####################################################################################</span>
+<div class="viewcode-block" id="mc_is_c_function"><a class="viewcode-back" href="../../../../../../vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_is_c_function">[docs]</a><span class="k">def</span> <span class="nf">mc_is_c_function</span><span class="p">(</span><span class="n">function</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Check if the function is a c function &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">ModelUtil</span><span class="o">.</span><span class="n">is_c_function</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="mc_get_c_function_name"><a class="viewcode-back" href="../../../../../../vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_get_c_function_name">[docs]</a><span class="k">def</span> <span class="nf">mc_get_c_function_name</span><span class="p">(</span><span class="n">c_function</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Get the function name of the c function </span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    c_function: Function</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">mc_is_c_function</span><span class="p">(</span><span class="n">c_function</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">c_function</span><span class="o">.</span><span class="n">get_function_name</span><span class="p">()</span>
+    <span class="k">return</span> <span class="bp">None</span>
+</div>
+<div class="viewcode-block" id="mc_c_function_has_any_name"><a class="viewcode-back" href="../../../../../../vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_c_function_has_any_name">[docs]</a><span class="k">def</span> <span class="nf">mc_c_function_has_any_name</span><span class="p">(</span><span class="n">c_function</span><span class="p">,</span> <span class="n">names</span><span class="p">,</span> <span class="n">search_substring</span> <span class="o">=</span> <span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Check if the given c function has any of the names specified by `names`.</span>
+<span class="sd">    This means that the names are equal (character for character).</span>
+<span class="sd">     </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    names: list&lt;string&gt;</span>
+<span class="sd">        possible names the function can have</span>
+<span class="sd">    search_substring: bool (default is False)</span>
+<span class="sd">        If True match even if just substring found (`find`).</span>
+<span class="sd">        Otherwise check for exact equality via `==`.        </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">mc_is_c_function</span><span class="p">(</span><span class="n">c_function</span><span class="p">):</span>
+        <span class="n">c_func_name</span> <span class="o">=</span> <span class="n">mc_get_c_function_name</span><span class="p">(</span><span class="n">c_function</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">ut_search_string</span><span class="p">(</span><span class="n">c_func_name</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">search_substring</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">return</span> <span class="bp">False</span>
+
+<span class="c">#####################################################################################</span>
+<span class="c"># Objective-C Stuff                                                                 #                                                                                                                                                    #</span>
+<span class="c">#####################################################################################</span>
+</div>
+<div class="viewcode-block" id="mc_is_objectivec_function"><a class="viewcode-back" href="../../../../../../vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_is_objectivec_function">[docs]</a><span class="k">def</span> <span class="nf">mc_is_objectivec_function</span><span class="p">(</span><span class="n">function</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Check if the function is an objective c function &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">ModelUtil</span><span class="o">.</span><span class="n">is_msg_send</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="mc_has_objc_class"><a class="viewcode-back" href="../../../../../../vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_has_objc_class">[docs]</a><span class="k">def</span> <span class="nf">mc_has_objc_class</span><span class="p">(</span><span class="n">function</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    Check if the receiver of a message is an objective c class.</span>
+<span class="sd">    E.g. &quot;[[NSString alloc] init]&quot; is an objective c function and NSString is the objective c class.</span>
+<span class="sd">    </span>
+<span class="sd">    But sending a message to the return result of a c function (e.g. &quot;[c_func() anyThing]&quot;)</span>
+<span class="sd">    means that the objective c function does not an objective c class. </span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    function: FunctionInterface</span>
+<span class="sd">    &#39;&#39;&#39;</span> 
+    <span class="k">if</span> <span class="n">mc_is_objectivec_function</span><span class="p">(</span><span class="n">function</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">ModelUtil</span><span class="o">.</span><span class="n">is_objc_class</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">get_msg_receiver</span><span class="p">())</span>
+    <span class="k">return</span> <span class="bp">False</span>
+</div>
+<div class="viewcode-block" id="mc_get_objc_class"><a class="viewcode-back" href="../../../../../../vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_get_objc_class">[docs]</a><span class="k">def</span> <span class="nf">mc_get_objc_class</span><span class="p">(</span><span class="n">objc_function</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Same as `mc_has_objc_class` but returns the objective c class.</span>
+<span class="sd">    E.g. &quot;[[NSString alloc] init]&quot; returns objective c class &quot;NSString&quot;.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    objc_function: MsgSend</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    objc_class: ObjcClass</span>
+<span class="sd">        the objective c class of the objective c function</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="k">if</span> <span class="n">mc_has_objc_class</span><span class="p">(</span><span class="n">objc_function</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">objc_function</span><span class="o">.</span><span class="n">get_msg_receiver</span><span class="p">()</span> 
+    <span class="k">return</span> <span class="bp">None</span>
+</div>
+<div class="viewcode-block" id="mc_has_any_selector"><a class="viewcode-back" href="../../../../../../vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_has_any_selector">[docs]</a><span class="k">def</span> <span class="nf">mc_has_any_selector</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">selector_names</span><span class="p">,</span> <span class="n">search_substring</span> <span class="o">=</span> <span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Check if the `function` has a `Selector` with one of the specified names or will be loaded via NSSelectorFromString(...). </span>
+<span class="sd">    Can also be a c function (e.g. [c_func_res() someSelector]).</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    function: FunctionInterface</span>
+<span class="sd">    selectorname: list&lt;string&gt;</span>
+<span class="sd">        name of the `Selector` (without arguments filled, e.g: &quot;setProperty:forKey:&quot;) </span>
+<span class="sd">    search_substring: bool</span>
+<span class="sd">        If True match even if just substring found (`find`).</span>
+<span class="sd">        Otherwise check for exact equality via `==`.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">mc_is_function</span><span class="p">(</span><span class="n">function</span><span class="p">):</span>
+        <span class="c"># check if selector will be loaded via NSSelectorFromString(selectorname)</span>
+        <span class="k">if</span> <span class="n">is_c_function</span><span class="p">(</span><span class="n">function</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">sel_name</span> <span class="ow">in</span> <span class="n">selector_names</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">mc_sel_via_nsselector_from_string</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">sel_name</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="bp">True</span>
+        
+        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">function</span><span class="p">:</span>
+            <span class="c"># check if selector found</span>
+            <span class="k">if</span> <span class="n">ModelUtil</span><span class="o">.</span><span class="n">is_selector</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">selname</span> <span class="ow">in</span> <span class="n">selector_names</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">ut_search_string</span><span class="p">(</span><span class="n">arg</span><span class="o">.</span><span class="n">selector_name</span><span class="p">,</span> <span class="n">selname</span><span class="p">,</span> <span class="n">search_substring</span> <span class="o">=</span> <span class="n">search_substring</span><span class="p">):</span>
+                        <span class="k">return</span> <span class="bp">True</span>
+        
+            <span class="c"># go deeper into structure</span>
+            <span class="k">if</span> <span class="n">mc_is_function</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">mc_has_any_selector</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">selector_names</span><span class="p">,</span> <span class="n">search_substring</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">return</span> <span class="bp">False</span>
+</div>
+<div class="viewcode-block" id="mc_sel_via_nsselector_from_string"><a class="viewcode-back" href="../../../../../../vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_sel_via_nsselector_from_string">[docs]</a><span class="k">def</span> <span class="nf">mc_sel_via_nsselector_from_string</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">sel_name</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Check if a `Selector` is loaded via the NSSelectorFromString function &#39;&#39;&#39;</span> 
+    <span class="k">if</span> <span class="n">ModelUtil</span><span class="o">.</span><span class="n">is_c_function</span><span class="p">(</span><span class="n">function</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">function</span><span class="o">.</span><span class="n">function</span> <span class="o">==</span> <span class="s">&#39;NSSelectorFromString&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">function</span><span class="o">.</span><span class="n">cnt_has_arguments</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">arg</span> <span class="o">=</span> <span class="n">function</span><span class="o">.</span><span class="n">func_arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">return</span> <span class="n">ut_search_string</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">arg</span><span class="p">),</span> <span class="n">sel_name</span><span class="p">,</span> <span class="n">search_substring</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">ignore_case</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">False</span>
+</div>
+<div class="viewcode-block" id="mc_objc_class_with_any_name"><a class="viewcode-back" href="../../../../../../vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_objc_class_with_any_name">[docs]</a><span class="k">def</span> <span class="nf">mc_objc_class_with_any_name</span><span class="p">(</span><span class="n">objc_function</span><span class="p">,</span> <span class="n">names</span><span class="p">,</span> <span class="n">search_substring</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">modelutil_func</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    Check if the name of the objective c class equals any name of `names`.</span>
+<span class="sd">    For definition of equality see `search_substring` parameter.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    objc_function: MsgSend</span>
+<span class="sd">    names: list&lt;string&gt;</span>
+<span class="sd">        the names to search for</span>
+<span class="sd">    search_substring: bool (default is True)</span>
+<span class="sd">        If True match even if just substring found (`find`).</span>
+<span class="sd">        Otherwise check for exact equality via `==`.</span>
+<span class="sd">    modelutil_func: function from `ModelUtil`</span>
+<span class="sd">        use this to check if the argument is a certain class</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">mc_has_objc_class</span><span class="p">(</span><span class="n">objc_function</span><span class="p">):</span>
+        <span class="n">objc_class</span> <span class="o">=</span> <span class="n">mc_get_objc_class</span><span class="p">(</span><span class="n">objc_function</span><span class="p">)</span>
+        <span class="n">class_match</span> <span class="o">=</span> <span class="bp">True</span> <span class="k">if</span> <span class="n">modelutil_func</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">modelutil_func</span><span class="p">(</span><span class="n">objc_class</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">ut_search_string</span><span class="p">(</span><span class="n">objc_class</span><span class="o">.</span><span class="n">get_obj_name</span><span class="p">(),</span> <span class="n">name</span><span class="p">,</span> <span class="n">search_substring</span><span class="p">)</span> <span class="ow">and</span> <span class="n">class_match</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">return</span> <span class="bp">False</span>
+
+<span class="c">#####################################################################################</span>
+<span class="c"># FunctionInterface stuff                                                           #</span>
+<span class="c">#####################################################################################</span>
+</div>
+<div class="viewcode-block" id="mc_has_format_string"><a class="viewcode-back" href="../../../../../../vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_has_format_string">[docs]</a><span class="k">def</span> <span class="nf">mc_has_format_string</span><span class="p">(</span><span class="n">function</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    Check if the function has a `FormatString` as any of its arguments.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    function: FunctionInterface</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">mc_filter_method_call</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="p">[</span><span class="n">ModelUtil</span><span class="o">.</span><span class="n">is_format_string</span><span class="p">])</span>
+</div>
+<div class="viewcode-block" id="mc_filter_method_call"><a class="viewcode-back" href="../../../../../../vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_filter_method_call">[docs]</a><span class="k">def</span> <span class="nf">mc_filter_method_call</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">func_list</span><span class="p">,</span> <span class="n">steps</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Run over the iterable structure and check if one of the specified function matches on any argument.</span>
+<span class="sd">    </span>
+<span class="sd">    [SomeClass someSelector:@&quot;SomeString&quot; 2ndarg:@&quot;foo&quot; 3rdarg:@&quot;bar&quot;]</span>
+<span class="sd">    Be careful, this does not apply the function on the class of the MsgSend! Because it does not belong to the iterable part.</span>
+<span class="sd">    </span>
+<span class="sd">    steps:     1            2</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    iterable: iterable</span>
+<span class="sd">    func_list: list&lt;object -&gt; bool&gt;</span>
+<span class="sd">        list of functions to apply on every argument</span>
+<span class="sd">    steps: int, optional (default is None)</span>
+<span class="sd">        Maximum number of steps to go into iterable structure.</span>
+<span class="sd">        None means take as much steps as available.</span>
+<span class="sd">        </span>
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; func = lambda x: str(x) == &#39;@&quot;foo&quot;&#39;</span>
+<span class="sd">    &gt;&gt;&gt; c_func = MsgSend(ObjcClass(&#39;Bla&#39;), [Selector(&#39;foo:&#39;, [NSString(&#39;foo&#39;)])]) </span>
+<span class="sd">    &gt;&gt;&gt; msgsend = MsgSend(ObjcClass(&#39;SomeClass&#39;), [Selector(&#39;someSelector:2dnarg:3rdarg:&#39;, [c_func, NSString(&#39;SomeString&#39;), NSString(&#39;bar&#39;)])])</span>
+<span class="sd">    &gt;&gt;&gt; print mc_filter_method_call(msgsend, func, steps = 3)</span>
+<span class="sd">    True</span>
+<span class="sd">    </span>
+<span class="sd">    [SomeClass someSelector:[Bla foo:@&quot;foo&quot;] 2dnarg:@&quot;SomeString&quot; 3rdarg:@&quot;bar&quot;]</span>
+<span class="sd">                ^            ^   ^   ^ </span>
+<span class="sd">                |            |   |   | </span>
+<span class="sd">    steps:      0            1   2   3 </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">one_func_matches</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">arg</span><span class="p">:</span> <span class="nb">any</span><span class="p">(</span><span class="n">imap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">f</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">arg</span><span class="p">),</span> <span class="n">func_list</span><span class="p">))</span>
+    
+    <span class="k">def</span> <span class="nf">_check</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">steps</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">cur_steps</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="c"># TODO: CORRECT ?</span>
+        <span class="k">if</span> <span class="n">one_func_matches</span><span class="p">(</span><span class="n">iterable</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">True</span> 
+        <span class="k">if</span> <span class="n">Util</span><span class="o">.</span><span class="n">is_iterable_no_string</span><span class="p">(</span><span class="n">iterable</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">iterable</span><span class="p">:</span>
+                <span class="c"># got given number of steps into iterable structure </span>
+                <span class="k">if</span> <span class="n">steps</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="p">(</span><span class="n">steps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">cur_steps</span> <span class="o">&lt;</span> <span class="n">steps</span><span class="p">):</span> 
+                    <span class="k">if</span> <span class="n">_check</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">steps</span><span class="p">,</span> <span class="n">cur_steps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                        <span class="k">return</span> <span class="bp">True</span>
+                <span class="k">if</span> <span class="n">one_func_matches</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="n">one_func_matches</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">_check</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">func_list</span><span class="p">,</span> <span class="n">steps</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="mc_is_function"><a class="viewcode-back" href="../../../../../../vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_is_function">[docs]</a><span class="k">def</span> <span class="nf">mc_is_function</span><span class="p">(</span><span class="n">function</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Check if the `function` is a `Function` at all &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">FunctionInterface</span><span class="o">.</span><span class="n">is_function</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="mc_contains_imp_got"><a class="viewcode-back" href="../../../../../../vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_contains_imp_got">[docs]</a><span class="k">def</span> <span class="nf">mc_contains_imp_got</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">imp_got_name</span><span class="p">,</span> <span class="n">search_substring</span> <span class="o">=</span> <span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Check if function has the `imp_got_name` as an any argument and is a subclass of `ImpGot`.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    function: FunctionInterface</span>
+<span class="sd">    imp_got_name: string</span>
+<span class="sd">        the name of the `ImpGot`</span>
+<span class="sd">    search_substring: bool (default is False)</span>
+<span class="sd">        If True match even if just substring found (`find`).</span>
+<span class="sd">        Otherwise check for exact equality via `==`.        </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">mc_function_has_arg_with_name</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">imp_got_name</span><span class="p">,</span> <span class="n">search_substring</span> <span class="o">=</span> <span class="n">search_substring</span><span class="p">,</span> <span class="n">modelutil_func</span> <span class="o">=</span> <span class="n">ModelUtil</span><span class="o">.</span><span class="n">is_imp_got</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="mc_function_has_arg_with_name"><a class="viewcode-back" href="../../../../../../vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_function_has_arg_with_name">[docs]</a><span class="k">def</span> <span class="nf">mc_function_has_arg_with_name</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">search_substring</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span> <span class="n">modelutil_func</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>            
+    <span class="sd">&#39;&#39;&#39; Check if the `function` contains an argument with the specified `name`.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    function: FunctionInterface</span>
+<span class="sd">    name: string</span>
+<span class="sd">        the name to look for</span>
+<span class="sd">    search_substring: bool</span>
+<span class="sd">        If True match even if just substring found (`find`).</span>
+<span class="sd">        Otherwise check for exact equality via `==`.</span>
+<span class="sd">    modelutil_func: function from `ModelUtil`</span>
+<span class="sd">        use this to check if the function argument is a certain class</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__check</span><span class="p">(</span><span class="n">func_arg</span><span class="p">):</span>
+        <span class="n">is_class</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">if</span> <span class="n">modelutil_func</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="c"># check if `func_arg` is specified class (through `modelutil_func`)</span>
+            <span class="n">is_class</span> <span class="o">=</span> <span class="n">modelutil_func</span><span class="p">(</span><span class="n">func_arg</span><span class="p">)</span>
+        <span class="c"># check for match</span>
+        <span class="n">match</span> <span class="o">=</span> <span class="n">ut_search_string</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">func_arg</span><span class="p">),</span> <span class="n">name</span><span class="p">,</span> <span class="n">search_substring</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">is_class</span> <span class="ow">and</span> <span class="n">match</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>        
+    
+    <span class="k">return</span> <span class="n">mc_filter_method_call</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="p">[</span><span class="n">__check</span><span class="p">])</span>
+</div>
+<div class="viewcode-block" id="mc_function_has_arg_with_exact_name"><a class="viewcode-back" href="../../../../../../vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_function_has_arg_with_exact_name">[docs]</a><span class="k">def</span> <span class="nf">mc_function_has_arg_with_exact_name</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">exact_name</span><span class="p">,</span> <span class="n">modelutil_func</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>            
+    <span class="sd">&#39;&#39;&#39; Check if the `function` contains an argument with the specified `exact_name`.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    function: FunctionInterface</span>
+<span class="sd">    exact_name: string</span>
+<span class="sd">        the name to look for</span>
+<span class="sd">    modelutil_func: function from `ModelUtil`</span>
+<span class="sd">        use this to check if the argument is a certain class</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">mc_function_has_arg_with_name</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">exact_name</span><span class="p">,</span> <span class="n">search_substring</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span> <span class="n">modelutil_func</span> <span class="o">=</span> <span class="n">modelutil_func</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="mc_function_has_arg_with_subname"><a class="viewcode-back" href="../../../../../../vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_function_has_arg_with_subname">[docs]</a><span class="k">def</span> <span class="nf">mc_function_has_arg_with_subname</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">subname</span><span class="p">,</span> <span class="n">modelutil_func</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>            
+    <span class="sd">&#39;&#39;&#39; Check if the `function` contains an argument with the specified `subname`.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    function: FunctionInterface</span>
+<span class="sd">    subname: string</span>
+<span class="sd">        the name to look for</span>
+<span class="sd">    modelutil_func: function from `ModelUtil`</span>
+<span class="sd">        use this to check if the argument is a certain class</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">mc_function_has_arg_with_name</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">subname</span><span class="p">,</span> <span class="n">search_substring</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">modelutil_func</span> <span class="o">=</span> <span class="n">modelutil_func</span><span class="p">)</span>
+
+<span class="c">#####################################################################################</span>
+<span class="c"># Other stuff                                                                       #</span>
+<span class="c">#####################################################################################</span>
+</div>
+<div class="viewcode-block" id="mc_is_exploitable_log_func"><a class="viewcode-back" href="../../../../../../vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_is_exploitable_log_func">[docs]</a><span class="k">def</span> <span class="nf">mc_is_exploitable_log_func</span><span class="p">(</span><span class="n">function</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">mc_is_function</span><span class="p">(</span><span class="n">function</span><span class="p">):</span>
+        <span class="c"># check if is log function at all</span>
+        <span class="n">is_log_func</span> <span class="o">=</span> <span class="n">mc_c_function_has_any_name</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;NSLog&#39;</span><span class="p">,</span> <span class="s">&#39;printf&#39;</span><span class="p">],</span> <span class="n">search_substring</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+        
+        <span class="c"># no log function</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_log_func</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        
+        <span class="c"># check if log function contains uninitialized data</span>
+        <span class="n">uninitialized_checks</span> <span class="o">=</span> <span class="p">[</span><span class="n">is_stackvar</span><span class="p">,</span> <span class="n">is_method_implementation_argument</span><span class="p">,</span> <span class="n">is_memcpy</span><span class="p">,</span> <span class="n">destination_not_initialized</span><span class="p">]</span>
+        <span class="n">unintialized</span> <span class="o">=</span> <span class="n">mc_filter_method_call</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">uninitialized_checks</span><span class="p">)</span>
+        
+        <span class="c"># not uninitialized</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">unintialized</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        
+        <span class="c"># check if the format string of the log function is set</span>
+        <span class="n">format_string_set</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">func_name</span> <span class="o">=</span> <span class="n">mc_get_c_function_name</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+        <span class="c"># check if log function is known</span>
+        <span class="k">if</span> <span class="n">FormatStringFilter</span><span class="o">.</span><span class="n">FORMAT_STRING_ARG_IDX</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">func_name</span><span class="p">):</span>
+            <span class="c"># get the idx of the format stirng</span>
+            <span class="n">format_string_idx</span> <span class="o">=</span> <span class="n">FormatStringFilter</span><span class="o">.</span><span class="n">FORMAT_STRING_ARG_IDX</span><span class="p">[</span><span class="n">func_name</span><span class="p">]</span>
+            <span class="n">func_args</span> <span class="o">=</span> <span class="n">function</span><span class="o">.</span><span class="n">get_arguments</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">func_args</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">format_string_idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">format_string_set</span> <span class="o">=</span> <span class="n">is_format_string</span><span class="p">(</span><span class="n">func_args</span><span class="p">[</span><span class="n">format_string_idx</span><span class="p">])</span>
+        
+        <span class="c"># format string is set    </span>
+        <span class="k">if</span> <span class="n">format_string_set</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        
+        <span class="k">return</span> <span class="bp">True</span>
+        
+    <span class="c"># no c function at all</span>
+    <span class="k">return</span> <span class="bp">False</span>    </div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

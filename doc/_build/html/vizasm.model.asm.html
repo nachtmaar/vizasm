@@ -1,0 +1,514 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>asm Package &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">asm Package</a><ul>
+<li><a class="reference internal" href="#module-vizasm.model.asm.CString"><tt class="docutils literal"><span class="pre">CString</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.model.asm.Register"><tt class="docutils literal"><span class="pre">Register</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.model.asm.Segments"><tt class="docutils literal"><span class="pre">Segments</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.asm.StackVar"><tt class="docutils literal"><span class="pre">StackVar</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.model.asm.Value"><tt class="docutils literal"><span class="pre">Value</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/vizasm.model.asm.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="asm-package">
+<h1>asm Package<a class="headerlink" href="#asm-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-vizasm.model.asm.CString">
+<span id="cstring-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">CString</span></tt> Module<a class="headerlink" href="#module-vizasm.model.asm.CString" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 12.10.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.model.asm.CString.CString">
+<em class="property">class </em><tt class="descclassname">vizasm.model.asm.CString.</tt><tt class="descname">CString</tt><big>(</big><em>string</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/CString.html#CString"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.CString.CString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.model.asm.Value.Value" title="vizasm.model.asm.Value.Value"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.model.asm.Value.Value</span></tt></a></p>
+<p>Models a cstring like e.g. &#8220;foo&#8221;</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_obj_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_value</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_obj_name</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_value</span></tt>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.model.asm.Register">
+<span id="register-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">Register</span></tt> Module<a class="headerlink" href="#module-vizasm.model.asm.Register" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 09.06.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.model.asm.Register.Register">
+<em class="property">class </em><tt class="descclassname">vizasm.model.asm.Register.</tt><tt class="descname">Register</tt><big>(</big><em>register</em>, <em>register_dict=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/Register.html#Register"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.Register.Register" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>This class represents an register of the cpu.
+It implements a fallback support for a register if the <cite>register_dict</cite> variable is set.</p>
+<p>Fallback support means e.g. that &#8220;eax&#8221; presents the lower 32 bits of &#8220;rax&#8221; and 
+if the value of &#8220;eax&#8221; cannot be looked up in the Registers class, all of the fallback registers can be tried.</p>
+<p>A Register is equal to another, if they have the same fallback list.
+If the fallback list is None, the register is used for equality.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>register: string</strong> :</p>
+<p><strong>fallback_list: list&lt;string&gt;</strong> :</p>
+<blockquote class="last">
+<div><p>list of equivalent registers used for fallback support. E.g. on x86_64 &#8216;rsp&#8217; and &#8216;esp&#8217; are equal.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.asm.Register.Register.fallback_support" title="vizasm.model.asm.Register.Register.fallback_support"><tt class="xref py py-obj docutils literal"><span class="pre">fallback_support</span></tt></a>(register,&nbsp;register_dict)</td>
+<td>Returns a list of registers which are equal in the manner that one registers uses the memory space of the other.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.asm.Register.Register.get_fallback_list" title="vizasm.model.asm.Register.Register.get_fallback_list"><tt class="xref py py-obj docutils literal"><span class="pre">get_fallback_list</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.asm.Register.Register.get_register" title="vizasm.model.asm.Register.Register.get_register"><tt class="xref py py-obj docutils literal"><span class="pre">get_register</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.asm.Register.Register.get_register_dict" title="vizasm.model.asm.Register.Register.get_register_dict"><tt class="xref py py-obj docutils literal"><span class="pre">get_register_dict</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.asm.Register.Register.set_fallback_list" title="vizasm.model.asm.Register.Register.set_fallback_list"><tt class="xref py py-obj docutils literal"><span class="pre">set_fallback_list</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.asm.Register.Register.set_register" title="vizasm.model.asm.Register.Register.set_register"><tt class="xref py py-obj docutils literal"><span class="pre">set_register</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.asm.Register.Register.set_register_dict" title="vizasm.model.asm.Register.Register.set_register_dict"><tt class="xref py py-obj docutils literal"><span class="pre">set_register_dict</span></tt></a>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="vizasm.model.asm.Register.Register.fallback_list">
+<tt class="descname">fallback_list</tt><a class="headerlink" href="#vizasm.model.asm.Register.Register.fallback_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>fallback_list(list&lt;string&gt;) &#8211; list of equivalent registers used for fallback support. E.g. on x86_64 &#8216;rsp&#8217; and &#8216;esp&#8217; are equal.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="vizasm.model.asm.Register.Register.fallback_support">
+<em class="property">static </em><tt class="descname">fallback_support</tt><big>(</big><em>register</em>, <em>register_dict</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/Register.html#Register.fallback_support"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.Register.Register.fallback_support" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of registers which are equal in the manner that one registers uses the memory space of the other.
+E.g. &#8220;eax&#8221; presents the lower 32 bits of &#8220;rax&#8221;.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>register: string</strong> :</p>
+<p><strong>register_dict: dict&lt;string, list&lt;string&gt;&gt;</strong> :</p>
+<blockquote>
+<div><p>dictionary containing a list of fallback registers for each register</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>reg_list: list&lt;string&gt;</strong> :</p>
+<blockquote class="last">
+<div><p>a list of fallback registers. The Register <cite>register</cite> is also included in the list.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.Register.Register.get_fallback_list">
+<tt class="descname">get_fallback_list</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/Register.html#Register.get_fallback_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.Register.Register.get_fallback_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.Register.Register.get_register">
+<tt class="descname">get_register</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/Register.html#Register.get_register"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.Register.Register.get_register" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.Register.Register.get_register_dict">
+<tt class="descname">get_register_dict</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/Register.html#Register.get_register_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.Register.Register.get_register_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.model.asm.Register.Register.register">
+<tt class="descname">register</tt><a class="headerlink" href="#vizasm.model.asm.Register.Register.register" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.Register.Register.set_fallback_list">
+<tt class="descname">set_fallback_list</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/Register.html#Register.set_fallback_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.Register.Register.set_fallback_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.Register.Register.set_register">
+<tt class="descname">set_register</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/Register.html#Register.set_register"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.Register.Register.set_register" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.Register.Register.set_register_dict">
+<tt class="descname">set_register_dict</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/Register.html#Register.set_register_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.Register.Register.set_register_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.model.asm.Segments">
+<span id="segments-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">Segments</span></tt> Module<a class="headerlink" href="#module-vizasm.model.asm.Segments" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 02.10.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="data">
+<dt id="vizasm.model.asm.Segments.SEGMENT_OBJC_DATA">
+<tt class="descclassname">vizasm.model.asm.Segments.</tt><tt class="descname">SEGMENT_OBJC_DATA</tt><em class="property"> = '__objc_data'</em><a class="headerlink" href="#vizasm.model.asm.Segments.SEGMENT_OBJC_DATA" title="Permalink to this definition">¶</a></dt>
+<dd><p>the segments where the superclass infos are stored</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.model.asm.Segments.segment_for_name">
+<tt class="descclassname">vizasm.model.asm.Segments.</tt><tt class="descname">segment_for_name</tt><big>(</big><em>name</em>, <em>segments</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/Segments.html#segment_for_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.Segments.segment_for_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the section from the list of available section</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.model.asm.StackVar">
+<span id="stackvar-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">StackVar</span></tt> Module<a class="headerlink" href="#module-vizasm.model.asm.StackVar" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 29.03.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.model.asm.StackVar.StackVar">
+<em class="property">class </em><tt class="descclassname">vizasm.model.asm.StackVar.</tt><tt class="descname">StackVar</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/StackVar.html#StackVar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.StackVar.StackVar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.model.asm.Value.Value" title="vizasm.model.asm.Value.Value"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.model.asm.Value.Value</span></tt></a></p>
+<p>Represents a stack variable which can be created from an assembler line e.g. &#8220;[ss:rbp-0x30+var_40]&#8221;</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>name: string</strong> :</p>
+<blockquote class="last">
+<div><p>the name of the StackVar</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_obj_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_value</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_obj_name</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_value</span></tt>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.model.asm.Value">
+<span id="value-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">Value</span></tt> Module<a class="headerlink" href="#module-vizasm.model.asm.Value" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 27.03.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.model.asm.Value.Value">
+<em class="property">class </em><tt class="descclassname">vizasm.model.asm.Value.</tt><tt class="descname">Value</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/Value.html#Value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.Value.Value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vizasm.model.objc.object.html#vizasm.model.objc.object.Object.Object" title="vizasm.model.objc.object.Object.Object"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.model.objc.object.Object.Object</span></tt></a></p>
+<p>Represents an objective-c value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>value: object</strong> :</p>
+<blockquote class="last">
+<div><p>value of the variable (maps to objc_name)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_obj_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.asm.Value.Value.get_value" title="vizasm.model.asm.Value.Value.get_value"><tt class="xref py py-obj docutils literal"><span class="pre">get_value</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_obj_name</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.asm.Value.Value.set_value" title="vizasm.model.asm.Value.Value.set_value"><tt class="xref py py-obj docutils literal"><span class="pre">set_value</span></tt></a>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.model.asm.Value.Value.get_value">
+<tt class="descname">get_value</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/Value.html#Value.get_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.Value.Value.get_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.Value.Value.set_value">
+<tt class="descname">set_value</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/Value.html#Value.set_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.Value.Value.set_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.model.asm.Value.Value.value">
+<tt class="descname">value</tt><a class="headerlink" href="#vizasm.model.asm.Value.Value.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>value &#8211; value of the variable</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="vizasm.model.asm.imp.html">imp Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.imp.html#module-vizasm.model.asm.imp.Imp"><tt class="docutils literal"><span class="pre">Imp</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.imp.html#module-vizasm.model.asm.imp.ImpGot"><tt class="docutils literal"><span class="pre">ImpGot</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.imp.html#module-vizasm.model.asm.imp.ImpStub"><tt class="docutils literal"><span class="pre">ImpStub</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vizasm.model.asm.ivar.html">ivar Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.ivar.html#module-vizasm.model.asm.ivar.IVar"><tt class="docutils literal"><span class="pre">IVar</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.ivar.html#module-vizasm.model.asm.ivar.IvarRefCouldNotBeResolved"><tt class="docutils literal"><span class="pre">IvarRefCouldNotBeResolved</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.ivar.html#module-vizasm.model.asm.ivar.IvarRefException"><tt class="docutils literal"><span class="pre">IvarRefException</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.ivar.html#module-vizasm.model.asm.ivar.IvarRefWrongTypeException"><tt class="docutils literal"><span class="pre">IvarRefWrongTypeException</span></tt> Module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vizasm.model.asm.var_assignment.html">var_assignment Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.var_assignment.html#module-vizasm.model.asm.var_assignment.VarAssignment"><tt class="docutils literal"><span class="pre">VarAssignment</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.var_assignment.html#module-vizasm.model.asm.var_assignment.VarAssignmentIvarRegisterWrongTypeException"><tt class="docutils literal"><span class="pre">VarAssignmentIvarRegisterWrongTypeException</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.var_assignment.html#module-vizasm.model.asm.var_assignment.VarAssignmentResolveIvarRegisterException"><tt class="docutils literal"><span class="pre">VarAssignmentResolveIvarRegisterException</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.var_assignment.html#module-vizasm.model.asm.var_assignment.VarAssignmentResolveRegisterException"><tt class="docutils literal"><span class="pre">VarAssignmentResolveRegisterException</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.var_assignment.html#module-vizasm.model.asm.var_assignment.VarAssignmentResolveSelfrefRegisterException"><tt class="docutils literal"><span class="pre">VarAssignmentResolveSelfrefRegisterException</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

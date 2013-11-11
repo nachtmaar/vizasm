@@ -1,0 +1,196 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>See VizAsm in action &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="index.html" />
+    <link rel="next" title="Installation" href="install.html" />
+    <link rel="prev" title="VizAsm" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="install.html" title="Installation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="VizAsm"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">See VizAsm in action</a><ul>
+<li><a class="reference internal" href="#hopper">Hopper</a><ul>
+<li><a class="reference internal" href="#annotation">Annotation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#security-audit">Security Audit</a><ul>
+<li><a class="reference internal" href="#filters">Filters</a><ul>
+<li><a class="reference internal" href="#detail-view">Detail view</a></li>
+<li><a class="reference internal" href="#explore-the-graph">Explore the graph</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#method-call-graph">Method call graph</a><ul>
+<li><a class="reference internal" href="#application-with-100-loc">Application with ~ 100 loc</a></li>
+<li><a class="reference internal" href="#loc">~10.000 loc</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">VizAsm</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="install.html"
+                        title="next chapter">Installation</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/action.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="see-vizasm-in-action">
+<h1>See VizAsm in action<a class="headerlink" href="#see-vizasm-in-action" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="hopper">
+<h2>Hopper<a class="headerlink" href="#hopper" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="annotation">
+<h3>Annotation<a class="headerlink" href="#annotation" title="Permalink to this headline">¶</a></h3>
+<p>VizAsm can annotate your assembler code!
+Consider e.g. the following method:</p>
+<div class="highlight-objective-c"><div class="highlight"><pre><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">method:</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="nv">param1</span> <span class="nf">paramname2:</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="nv">param2</span> <span class="p">{</span>
+        <span class="p">[</span><span class="n">self</span> <span class="n">method</span><span class="o">:</span><span class="n">param1</span> <span class="n">paramname2</span><span class="o">:</span><span class="mi">0</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>And take a look at the annotation:</p>
+<img alt="_images/hopper_annotation.png" src="_images/hopper_annotation.png" />
+<p>This is just one example, VizAsm is also capable of annotating the instance variables.</p>
+</div>
+</div>
+<div class="section" id="security-audit">
+<h2>Security Audit<a class="headerlink" href="#security-audit" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm has a few standard filters which you can use to perform a security audit.
+If you&#8217;re not satisfied with the available filters, just write your own and use it ;)</p>
+<p>The following pictures show the results in <a class="reference external" href="http://gephi.org/">Gephi</a> . But they are also viewable as text file.
+Choose whatever you like more.</p>
+<div class="section" id="filters">
+<h3>Filters<a class="headerlink" href="#filters" title="Permalink to this headline">¶</a></h3>
+<img alt="_images/methodcall_f.png" src="_images/methodcall_f.png" />
+<div class="section" id="detail-view">
+<h4>Detail view<a class="headerlink" href="#detail-view" title="Permalink to this headline">¶</a></h4>
+<img alt="_images/methodcall_f_detail.png" src="_images/methodcall_f_detail.png" />
+</div>
+<div class="section" id="explore-the-graph">
+<h4>Explore the graph<a class="headerlink" href="#explore-the-graph" title="Permalink to this headline">¶</a></h4>
+<img alt="_images/gephi_inspect.png" src="_images/gephi_inspect.png" />
+</div>
+</div>
+</div>
+<div class="section" id="method-call-graph">
+<h2>Method call graph<a class="headerlink" href="#method-call-graph" title="Permalink to this headline">¶</a></h2>
+<p>You can even create a call graph without any filters at all to reverse engineer the application or get an idea of the internal structure.</p>
+<div class="section" id="application-with-100-loc">
+<h3>Application with ~ 100 loc<a class="headerlink" href="#application-with-100-loc" title="Permalink to this headline">¶</a></h3>
+<img alt="_images/methodcall_nf_100.png" src="_images/methodcall_nf_100.png" />
+</div>
+<div class="section" id="loc">
+<h3>~10.000 loc<a class="headerlink" href="#loc" title="Permalink to this headline">¶</a></h3>
+<img alt="_images/methodcall_nf_10k.png" src="_images/methodcall_nf_10k.png" />
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="install.html" title="Installation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="VizAsm"
+             >previous</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

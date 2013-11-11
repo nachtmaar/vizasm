@@ -1,0 +1,1302 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>function Package &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">function Package</a><ul>
+<li><a class="reference internal" href="#module-vizasm.model.objc.function.ClassFunc"><tt class="docutils literal"><span class="pre">ClassFunc</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.function.Function"><tt class="docutils literal"><span class="pre">Function</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.function.FunctionInterface"><tt class="docutils literal"><span class="pre">FunctionInterface</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.function.MethodImplementation"><tt class="docutils literal"><span class="pre">MethodImplementation</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.function.MethodSelectorArgument"><tt class="docutils literal"><span class="pre">MethodSelectorArgument</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.function.MsgSend"><tt class="docutils literal"><span class="pre">MsgSend</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.function.MsgSendInterface"><tt class="docutils literal"><span class="pre">MsgSendInterface</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.function.Sub"><tt class="docutils literal"><span class="pre">Sub</span></tt> Module</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/vizasm.model.objc.Function.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="function-package">
+<h1>function Package<a class="headerlink" href="#function-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-vizasm.model.objc.function.ClassFunc">
+<span id="classfunc-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">ClassFunc</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.function.ClassFunc" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 21.04.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.model.objc.function.ClassFunc.ClassFunc">
+<em class="property">class </em><tt class="descclassname">vizasm.model.objc.function.ClassFunc.</tt><tt class="descname">ClassFunc</tt><big>(</big><em>class_of_func</em>, <em>function</em>, <em>func_arguments</em>, <em>is_static=False</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/ClassFunc.html#ClassFunc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.ClassFunc.ClassFunc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.model.objc.function.Function.Function" title="vizasm.model.objc.function.Function.Function"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.model.objc.function.Function.Function</span></tt></a>, <a class="reference internal" href="vizasm.model.objc.object.nsobject.html#vizasm.model.objc.object.nsobject.NSObjectInterface.NSObjectInterface" title="vizasm.model.objc.object.nsobject.NSObjectInterface.NSObjectInterface"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.model.objc.object.nsobject.NSObjectInterface.NSObjectInterface</span></tt></a></p>
+<p>Represents a class function. 
+A <cite>ClassFunc</cite> has additionally a class to which it belongs.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>__class_of_func: ObjcClass</strong> :</p>
+<blockquote class="last">
+<div><p>The class to which the function belongs.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">cnt_has_arguments</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">cnt_needs_arguments</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">create_msg_send</span></tt>(selector,&nbsp;*args,&nbsp;**kwargs)</td>
+<td>Create a <cite>MsgSend</cite> with the specified <cite>selector</cite>.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_arguments</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.function.ClassFunc.ClassFunc.get_class_of_func" title="vizasm.model.objc.function.ClassFunc.ClassFunc.get_class_of_func"><tt class="xref py py-obj docutils literal"><span class="pre">get_class_of_func</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_func_arguments</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_function</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_function_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_is_static</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.function.ClassFunc.ClassFunc.get_nsobject" title="vizasm.model.objc.function.ClassFunc.ClassFunc.get_nsobject"><tt class="xref py py-obj docutils literal"><span class="pre">get_nsobject</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_c_function</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_function</span></tt>(function)</td>
+<td>Check if the given <cite>function</cite> is a subclass of <cite>FunctionInterface</cite></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_objc_function</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.function.ClassFunc.ClassFunc.set_class_of_func" title="vizasm.model.objc.function.ClassFunc.ClassFunc.set_class_of_func"><tt class="xref py py-obj docutils literal"><span class="pre">set_class_of_func</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_func_arguments</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_function</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_is_static</span></tt>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="vizasm.model.objc.function.ClassFunc.ClassFunc.class_of_func">
+<tt class="descname">class_of_func</tt><a class="headerlink" href="#vizasm.model.objc.function.ClassFunc.ClassFunc.class_of_func" title="Permalink to this definition">¶</a></dt>
+<dd><p>__class_of_func(ObjcClass) &#8211; the class to which the function belongs.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.ClassFunc.ClassFunc.get_class_of_func">
+<tt class="descname">get_class_of_func</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/ClassFunc.html#ClassFunc.get_class_of_func"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.ClassFunc.ClassFunc.get_class_of_func" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.ClassFunc.ClassFunc.get_nsobject">
+<tt class="descname">get_nsobject</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/ClassFunc.html#ClassFunc.get_nsobject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.ClassFunc.ClassFunc.get_nsobject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.ClassFunc.ClassFunc.set_class_of_func">
+<tt class="descname">set_class_of_func</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/ClassFunc.html#ClassFunc.set_class_of_func"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.ClassFunc.ClassFunc.set_class_of_func" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.model.objc.function.Function">
+<span id="function-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">Function</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.function.Function" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 21.04.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.model.objc.function.Function.Function">
+<em class="property">class </em><tt class="descclassname">vizasm.model.objc.function.Function.</tt><tt class="descname">Function</tt><big>(</big><em>function</em>, <em>func_arguments=None</em>, <em>is_static=True</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/Function.html#Function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.Function.Function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.model.objc.function.FunctionInterface.FunctionInterface" title="vizasm.model.objc.function.FunctionInterface.FunctionInterface"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.model.objc.function.FunctionInterface.FunctionInterface</span></tt></a>, <a class="reference internal" href="#vizasm.model.objc.function.MsgSendInterface.MsgSendInterface" title="vizasm.model.objc.function.MsgSendInterface.MsgSendInterface"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.model.objc.function.MsgSendInterface.MsgSendInterface</span></tt></a></p>
+<p>Represents a function that can take arguments.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>__function: string</strong> :</p>
+<blockquote>
+<div><p>The name of the function.</p>
+</div></blockquote>
+<p><strong>__func_arguments: list&lt;object&gt;, optional</strong> :</p>
+<blockquote class="last">
+<div><p>The arguments of the function.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.function.Function.Function.cnt_has_arguments" title="vizasm.model.objc.function.Function.Function.cnt_has_arguments"><tt class="xref py py-obj docutils literal"><span class="pre">cnt_has_arguments</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.function.Function.Function.cnt_needs_arguments" title="vizasm.model.objc.function.Function.Function.cnt_needs_arguments"><tt class="xref py py-obj docutils literal"><span class="pre">cnt_needs_arguments</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.function.Function.Function.create_msg_send" title="vizasm.model.objc.function.Function.Function.create_msg_send"><tt class="xref py py-obj docutils literal"><span class="pre">create_msg_send</span></tt></a>(selector,&nbsp;*args,&nbsp;**kwargs)</td>
+<td>Create a <cite>MsgSend</cite> with the specified <cite>selector</cite>.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.function.Function.Function.get_arguments" title="vizasm.model.objc.function.Function.Function.get_arguments"><tt class="xref py py-obj docutils literal"><span class="pre">get_arguments</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.function.Function.Function.get_func_arguments" title="vizasm.model.objc.function.Function.Function.get_func_arguments"><tt class="xref py py-obj docutils literal"><span class="pre">get_func_arguments</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.function.Function.Function.get_function" title="vizasm.model.objc.function.Function.Function.get_function"><tt class="xref py py-obj docutils literal"><span class="pre">get_function</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.function.Function.Function.get_function_name" title="vizasm.model.objc.function.Function.Function.get_function_name"><tt class="xref py py-obj docutils literal"><span class="pre">get_function_name</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_is_static</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.function.Function.Function.is_c_function" title="vizasm.model.objc.function.Function.Function.is_c_function"><tt class="xref py py-obj docutils literal"><span class="pre">is_c_function</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_function</span></tt>(function)</td>
+<td>Check if the given <cite>function</cite> is a subclass of <cite>FunctionInterface</cite></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.function.Function.Function.is_objc_function" title="vizasm.model.objc.function.Function.Function.is_objc_function"><tt class="xref py py-obj docutils literal"><span class="pre">is_objc_function</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.function.Function.Function.set_func_arguments" title="vizasm.model.objc.function.Function.Function.set_func_arguments"><tt class="xref py py-obj docutils literal"><span class="pre">set_func_arguments</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.function.Function.Function.set_function" title="vizasm.model.objc.function.Function.Function.set_function"><tt class="xref py py-obj docutils literal"><span class="pre">set_function</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_is_static</span></tt>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.model.objc.function.Function.Function.cnt_has_arguments">
+<tt class="descname">cnt_has_arguments</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/Function.html#Function.cnt_has_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.Function.Function.cnt_has_arguments" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.Function.Function.cnt_needs_arguments">
+<tt class="descname">cnt_needs_arguments</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/Function.html#Function.cnt_needs_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.Function.Function.cnt_needs_arguments" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.Function.Function.create_msg_send">
+<tt class="descname">create_msg_send</tt><big>(</big><em>selector</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/Function.html#Function.create_msg_send"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.Function.Function.create_msg_send" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a <cite>MsgSend</cite> with the specified <cite>selector</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>selector: Selector</strong> :</p>
+<blockquote>
+<div><p>the <cite>Selector</cite> with which the <cite>MsgSend</cite> shall be created.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>MsgSend</strong> :</p>
+<blockquote class="last">
+<div><p>the created <cite>MsgSend</cite></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.model.objc.function.Function.Function.func_arguments">
+<tt class="descname">func_arguments</tt><a class="headerlink" href="#vizasm.model.objc.function.Function.Function.func_arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>__func_arguments(list&lt;string&gt;) &#8211; the name of the function</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.model.objc.function.Function.Function.function">
+<tt class="descname">function</tt><a class="headerlink" href="#vizasm.model.objc.function.Function.Function.function" title="Permalink to this definition">¶</a></dt>
+<dd><p>__function(string) &#8211; the name of the function</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.Function.Function.get_arguments">
+<tt class="descname">get_arguments</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/Function.html#Function.get_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.Function.Function.get_arguments" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.Function.Function.get_func_arguments">
+<tt class="descname">get_func_arguments</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/Function.html#Function.get_func_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.Function.Function.get_func_arguments" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.Function.Function.get_function">
+<tt class="descname">get_function</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/Function.html#Function.get_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.Function.Function.get_function" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.Function.Function.get_function_name">
+<tt class="descname">get_function_name</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/Function.html#Function.get_function_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.Function.Function.get_function_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.Function.Function.is_c_function">
+<tt class="descname">is_c_function</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/Function.html#Function.is_c_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.Function.Function.is_c_function" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.Function.Function.is_objc_function">
+<tt class="descname">is_objc_function</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/Function.html#Function.is_objc_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.Function.Function.is_objc_function" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.Function.Function.set_func_arguments">
+<tt class="descname">set_func_arguments</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/Function.html#Function.set_func_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.Function.Function.set_func_arguments" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.Function.Function.set_function">
+<tt class="descname">set_function</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/Function.html#Function.set_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.Function.Function.set_function" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.model.objc.function.FunctionInterface">
+<span id="functioninterface-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">FunctionInterface</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.function.FunctionInterface" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 07.08.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.model.objc.function.FunctionInterface.FunctionInterface">
+<em class="property">class </em><tt class="descclassname">vizasm.model.objc.function.FunctionInterface.</tt><tt class="descname">FunctionInterface</tt><big>(</big><em>is_static=False</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/FunctionInterface.html#FunctionInterface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.FunctionInterface.FunctionInterface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Interface for a function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>_is_static: bool</strong> :</p>
+<blockquote class="last">
+<div><p>check if the function is static</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.function.FunctionInterface.FunctionInterface.cnt_has_arguments" title="vizasm.model.objc.function.FunctionInterface.FunctionInterface.cnt_has_arguments"><tt class="xref py py-obj docutils literal"><span class="pre">cnt_has_arguments</span></tt></a>()</td>
+<td>Returns the number of arguments the function has</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.function.FunctionInterface.FunctionInterface.cnt_needs_arguments" title="vizasm.model.objc.function.FunctionInterface.FunctionInterface.cnt_needs_arguments"><tt class="xref py py-obj docutils literal"><span class="pre">cnt_needs_arguments</span></tt></a>()</td>
+<td>Returns the number of arguments the function needs</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.function.FunctionInterface.FunctionInterface.get_arguments" title="vizasm.model.objc.function.FunctionInterface.FunctionInterface.get_arguments"><tt class="xref py py-obj docutils literal"><span class="pre">get_arguments</span></tt></a>()</td>
+<td>Get the arguments.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.function.FunctionInterface.FunctionInterface.get_function_name" title="vizasm.model.objc.function.FunctionInterface.FunctionInterface.get_function_name"><tt class="xref py py-obj docutils literal"><span class="pre">get_function_name</span></tt></a>()</td>
+<td>Get the function name</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.function.FunctionInterface.FunctionInterface.get_is_static" title="vizasm.model.objc.function.FunctionInterface.FunctionInterface.get_is_static"><tt class="xref py py-obj docutils literal"><span class="pre">get_is_static</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.function.FunctionInterface.FunctionInterface.is_c_function" title="vizasm.model.objc.function.FunctionInterface.FunctionInterface.is_c_function"><tt class="xref py py-obj docutils literal"><span class="pre">is_c_function</span></tt></a>()</td>
+<td>Returns if the function is a c function</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.function.FunctionInterface.FunctionInterface.is_function" title="vizasm.model.objc.function.FunctionInterface.FunctionInterface.is_function"><tt class="xref py py-obj docutils literal"><span class="pre">is_function</span></tt></a>(function)</td>
+<td>Check if the given <cite>function</cite> is a subclass of <cite>FunctionInterface</cite></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.function.FunctionInterface.FunctionInterface.is_objc_function" title="vizasm.model.objc.function.FunctionInterface.FunctionInterface.is_objc_function"><tt class="xref py py-obj docutils literal"><span class="pre">is_objc_function</span></tt></a>()</td>
+<td>Returns if the function is an objective c function</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.function.FunctionInterface.FunctionInterface.set_is_static" title="vizasm.model.objc.function.FunctionInterface.FunctionInterface.set_is_static"><tt class="xref py py-obj docutils literal"><span class="pre">set_is_static</span></tt></a>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.model.objc.function.FunctionInterface.FunctionInterface.cnt_has_arguments">
+<tt class="descname">cnt_has_arguments</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/FunctionInterface.html#FunctionInterface.cnt_has_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.FunctionInterface.FunctionInterface.cnt_has_arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of arguments the function has</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.FunctionInterface.FunctionInterface.cnt_needs_arguments">
+<tt class="descname">cnt_needs_arguments</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/FunctionInterface.html#FunctionInterface.cnt_needs_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.FunctionInterface.FunctionInterface.cnt_needs_arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of arguments the function needs</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.FunctionInterface.FunctionInterface.get_arguments">
+<tt class="descname">get_arguments</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/FunctionInterface.html#FunctionInterface.get_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.FunctionInterface.FunctionInterface.get_arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the arguments.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><strong>arguments: list&lt;object&gt;</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.FunctionInterface.FunctionInterface.get_function_name">
+<tt class="descname">get_function_name</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/FunctionInterface.html#FunctionInterface.get_function_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.FunctionInterface.FunctionInterface.get_function_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the function name</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.FunctionInterface.FunctionInterface.get_is_static">
+<tt class="descname">get_is_static</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/FunctionInterface.html#FunctionInterface.get_is_static"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.FunctionInterface.FunctionInterface.get_is_static" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.FunctionInterface.FunctionInterface.is_c_function">
+<tt class="descname">is_c_function</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/FunctionInterface.html#FunctionInterface.is_c_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.FunctionInterface.FunctionInterface.is_c_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns if the function is a c function</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="vizasm.model.objc.function.FunctionInterface.FunctionInterface.is_function">
+<em class="property">static </em><tt class="descname">is_function</tt><big>(</big><em>function</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/FunctionInterface.html#FunctionInterface.is_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.FunctionInterface.FunctionInterface.is_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the given <cite>function</cite> is a subclass of <cite>FunctionInterface</cite></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.FunctionInterface.FunctionInterface.is_objc_function">
+<tt class="descname">is_objc_function</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/FunctionInterface.html#FunctionInterface.is_objc_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.FunctionInterface.FunctionInterface.is_objc_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns if the function is an objective c function</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.model.objc.function.FunctionInterface.FunctionInterface.is_static">
+<tt class="descname">is_static</tt><a class="headerlink" href="#vizasm.model.objc.function.FunctionInterface.FunctionInterface.is_static" title="Permalink to this definition">¶</a></dt>
+<dd><p>_is_static(bool) &#8211; check if the function is static</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.FunctionInterface.FunctionInterface.set_is_static">
+<tt class="descname">set_is_static</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/FunctionInterface.html#FunctionInterface.set_is_static"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.FunctionInterface.FunctionInterface.set_is_static" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.model.objc.function.MethodImplementation">
+<span id="methodimplementation-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">MethodImplementation</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.function.MethodImplementation" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 14.09.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.model.objc.function.MethodImplementation.MethodImplementation">
+<em class="property">class </em><tt class="descclassname">vizasm.model.objc.function.MethodImplementation.</tt><tt class="descname">MethodImplementation</tt><big>(</big><em>msg_send_class</em>, <em>selectors=None</em>, <em>is_static=False</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/MethodImplementation.html#MethodImplementation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.MethodImplementation.MethodImplementation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.model.objc.function.MsgSend.MsgSend" title="vizasm.model.objc.function.MsgSend.MsgSend"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.model.objc.function.MsgSend.MsgSend</span></tt></a>, <a class="reference internal" href="vizasm.model.objc.html#vizasm.model.objc.AsmParserInterface.AsmParserInterface" title="vizasm.model.objc.AsmParserInterface.AsmParserInterface"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.model.objc.AsmParserInterface.AsmParserInterface</span></tt></a></p>
+<p>Represents a method implementation (normal objective-C Method or category)</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">cnt_has_arguments</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">cnt_init_selectors</span></tt>()</td>
+<td>Return the number of init selectors.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">cnt_needs_arguments</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.function.MethodImplementation.MethodImplementation.create_from_asm_line" title="vizasm.model.objc.function.MethodImplementation.MethodImplementation.create_from_asm_line"><tt class="xref py py-obj docutils literal"><span class="pre">create_from_asm_line</span></tt></a>(asmline)</td>
+<td>Create a <cite>MethodImplementation</cite> from an assembler line like e.g &#8221; +[NSURLRequest(AnyHttpsCert) allowsAnyHTTPSCertificateForHost:]_100002120:&#8221;</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">create_from_msgsend</span></tt>(msg_send,&nbsp;selector)</td>
+<td>Create a MsgSend from existing MsgSend.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">create_msg_send</span></tt>(selector,&nbsp;*args,&nbsp;**kwargs)</td>
+<td>Create a <cite>MsgSend</cite> with the specified <cite>selector</cite>.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">fst_sel_does_release</span></tt>()</td>
+<td>Check if the first selector decrements the retain count</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">fst_sel_does_retain</span></tt>()</td>
+<td>Check if the first selector increments the retain count</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">fst_sel_is_alloc</span></tt>()</td>
+<td>Check if the first selector is alloc</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">fst_sel_is_new</span></tt>()</td>
+<td>Check if the first selector is new</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">fst_selector</span></tt>()</td>
+<td>Returns the first selector.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_arguments</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_class</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_first_selector</span></tt>()</td>
+<td>Returns the first selector.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_function_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_is_static</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_msg_receiver</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_nsobject</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_selectors</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">has_init</span></tt>()</td>
+<td>Return if the first so selectors are alloc and init (order is important!) or new</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_c_function</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_function</span></tt>(function)</td>
+<td>Check if the given <cite>function</cite> is a subclass of <cite>FunctionInterface</cite></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_objc_function</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">lst_sel_does_release</span></tt>()</td>
+<td>Check if the last selector decrements the retain count</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">lst_sel_does_retain</span></tt>()</td>
+<td>Check if the first selector increments the retain count</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">selectors_without_init</span></tt>()</td>
+<td>Return the selectors without any init selectors.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_is_static</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_msg_receiver</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_selectors</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">unfilled_args_name</span></tt>()</td>
+<td>Get a string representation without filling the <cite>Selector</cite> with its arguments</td>
+</tr>
+</tbody>
+</table>
+<dl class="staticmethod">
+<dt id="vizasm.model.objc.function.MethodImplementation.MethodImplementation.create_from_asm_line">
+<em class="property">static </em><tt class="descname">create_from_asm_line</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/MethodImplementation.html#MethodImplementation.create_from_asm_line"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.MethodImplementation.MethodImplementation.create_from_asm_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a <cite>MethodImplementation</cite> from an assembler line like e.g &#8221; +[NSURLRequest(AnyHttpsCert) allowsAnyHTTPSCertificateForHost:]_100002120:&#8221; 
+Returns a <cite>MethodImplementation</cite> where the class is a <cite>CategoryClass</cite>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.model.objc.function.MethodSelectorArgument">
+<span id="methodselectorargument-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">MethodSelectorArgument</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.function.MethodSelectorArgument" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 06.09.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.model.objc.function.MethodSelectorArgument.MethodSelectorArgument">
+<em class="property">class </em><tt class="descclassname">vizasm.model.objc.function.MethodSelectorArgument.</tt><tt class="descname">MethodSelectorArgument</tt><big>(</big><em>msg_send_class</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/MethodSelectorArgument.html#MethodSelectorArgument"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.MethodSelectorArgument.MethodSelectorArgument" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.model.objc.function.MsgSend.MsgSend" title="vizasm.model.objc.function.MsgSend.MsgSend"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.model.objc.function.MsgSend.MsgSend</span></tt></a></p>
+<p>A <cite>MethodSelectorArgument</cite> is a <cite>MsgSend</cite> without any selectors and overwritten __str__ method..    
+It&#8217;s used for the unknown arguments of a method implementations <cite>Selector</cite></p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">cnt_has_arguments</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">cnt_init_selectors</span></tt>()</td>
+<td>Return the number of init selectors.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">cnt_needs_arguments</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">create_from_msgsend</span></tt>(msg_send,&nbsp;selector)</td>
+<td>Create a MsgSend from existing MsgSend.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">create_msg_send</span></tt>(selector,&nbsp;*args,&nbsp;**kwargs)</td>
+<td>Create a <cite>MsgSend</cite> with the specified <cite>selector</cite>.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">fst_sel_does_release</span></tt>()</td>
+<td>Check if the first selector decrements the retain count</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">fst_sel_does_retain</span></tt>()</td>
+<td>Check if the first selector increments the retain count</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">fst_sel_is_alloc</span></tt>()</td>
+<td>Check if the first selector is alloc</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">fst_sel_is_new</span></tt>()</td>
+<td>Check if the first selector is new</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">fst_selector</span></tt>()</td>
+<td>Returns the first selector.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_arguments</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_class</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_first_selector</span></tt>()</td>
+<td>Returns the first selector.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_function_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_is_static</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_msg_receiver</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_nsobject</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_selectors</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">has_init</span></tt>()</td>
+<td>Return if the first so selectors are alloc and init (order is important!) or new</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_c_function</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_function</span></tt>(function)</td>
+<td>Check if the given <cite>function</cite> is a subclass of <cite>FunctionInterface</cite></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_objc_function</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">lst_sel_does_release</span></tt>()</td>
+<td>Check if the last selector decrements the retain count</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">lst_sel_does_retain</span></tt>()</td>
+<td>Check if the first selector increments the retain count</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">selectors_without_init</span></tt>()</td>
+<td>Return the selectors without any init selectors.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_is_static</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_msg_receiver</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_selectors</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">unfilled_args_name</span></tt>()</td>
+<td>Get a string representation without filling the <cite>Selector</cite> with its arguments</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.model.objc.function.MsgSend">
+<span id="msgsend-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">MsgSend</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.function.MsgSend" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 01.04.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.model.objc.function.MsgSend.MsgSend">
+<em class="property">class </em><tt class="descclassname">vizasm.model.objc.function.MsgSend.</tt><tt class="descname">MsgSend</tt><big>(</big><em>msg_send_class</em>, <em>selectors=None</em>, <em>is_static=False</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/MsgSend.html#MsgSend"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.MsgSend.MsgSend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.model.objc.function.FunctionInterface.FunctionInterface" title="vizasm.model.objc.function.FunctionInterface.FunctionInterface"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.model.objc.function.FunctionInterface.FunctionInterface</span></tt></a>, <a class="reference internal" href="vizasm.model.objc.object.nsobject.html#vizasm.model.objc.object.nsobject.NSObjectInterface.NSObjectInterface" title="vizasm.model.objc.object.nsobject.NSObjectInterface.NSObjectInterface"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.model.objc.object.nsobject.NSObjectInterface.NSObjectInterface</span></tt></a>, <a class="reference internal" href="#vizasm.model.objc.function.MsgSendInterface.MsgSendInterface" title="vizasm.model.objc.function.MsgSendInterface.MsgSendInterface"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.model.objc.function.MsgSendInterface.MsgSendInterface</span></tt></a></p>
+<p>Represents a MsgSend in objective-c like e.g. [NSUserDefaults standardUserdefaults]
+or [[[NSUserDefaults standardUserDefaults] objectForKey:aKey] setValueForKey:aKey value:value]</p>
+<p>Alloc init stuff like [[Object3 alloc] init] or [[Object3] new] is reformatted to Object3*.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>__msg_receiver: FunctionInterface</strong> :</p>
+<blockquote>
+<div><p>the class to which the message(s) will be sent</p>
+</div></blockquote>
+<p><strong>__selectors: list&lt;Selector&gt;</strong> :</p>
+<blockquote class="last">
+<div><p>the selector(s) to send to the class (default [])</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.function.MsgSend.MsgSend.cnt_has_arguments" title="vizasm.model.objc.function.MsgSend.MsgSend.cnt_has_arguments"><tt class="xref py py-obj docutils literal"><span class="pre">cnt_has_arguments</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.function.MsgSend.MsgSend.cnt_init_selectors" title="vizasm.model.objc.function.MsgSend.MsgSend.cnt_init_selectors"><tt class="xref py py-obj docutils literal"><span class="pre">cnt_init_selectors</span></tt></a>()</td>
+<td>Return the number of init selectors.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.function.MsgSend.MsgSend.cnt_needs_arguments" title="vizasm.model.objc.function.MsgSend.MsgSend.cnt_needs_arguments"><tt class="xref py py-obj docutils literal"><span class="pre">cnt_needs_arguments</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.function.MsgSend.MsgSend.create_from_msgsend" title="vizasm.model.objc.function.MsgSend.MsgSend.create_from_msgsend"><tt class="xref py py-obj docutils literal"><span class="pre">create_from_msgsend</span></tt></a>(msg_send,&nbsp;selector)</td>
+<td>Create a MsgSend from existing MsgSend.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.function.MsgSend.MsgSend.create_msg_send" title="vizasm.model.objc.function.MsgSend.MsgSend.create_msg_send"><tt class="xref py py-obj docutils literal"><span class="pre">create_msg_send</span></tt></a>(selector,&nbsp;*args,&nbsp;**kwargs)</td>
+<td>Create a <cite>MsgSend</cite> with the specified <cite>selector</cite>.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.function.MsgSend.MsgSend.fst_sel_does_release" title="vizasm.model.objc.function.MsgSend.MsgSend.fst_sel_does_release"><tt class="xref py py-obj docutils literal"><span class="pre">fst_sel_does_release</span></tt></a>()</td>
+<td>Check if the first selector decrements the retain count</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.function.MsgSend.MsgSend.fst_sel_does_retain" title="vizasm.model.objc.function.MsgSend.MsgSend.fst_sel_does_retain"><tt class="xref py py-obj docutils literal"><span class="pre">fst_sel_does_retain</span></tt></a>()</td>
+<td>Check if the first selector increments the retain count</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.function.MsgSend.MsgSend.fst_sel_is_alloc" title="vizasm.model.objc.function.MsgSend.MsgSend.fst_sel_is_alloc"><tt class="xref py py-obj docutils literal"><span class="pre">fst_sel_is_alloc</span></tt></a>()</td>
+<td>Check if the first selector is alloc</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.function.MsgSend.MsgSend.fst_sel_is_new" title="vizasm.model.objc.function.MsgSend.MsgSend.fst_sel_is_new"><tt class="xref py py-obj docutils literal"><span class="pre">fst_sel_is_new</span></tt></a>()</td>
+<td>Check if the first selector is new</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.function.MsgSend.MsgSend.fst_selector" title="vizasm.model.objc.function.MsgSend.MsgSend.fst_selector"><tt class="xref py py-obj docutils literal"><span class="pre">fst_selector</span></tt></a>()</td>
+<td>Returns the first selector.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.function.MsgSend.MsgSend.get_arguments" title="vizasm.model.objc.function.MsgSend.MsgSend.get_arguments"><tt class="xref py py-obj docutils literal"><span class="pre">get_arguments</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.function.MsgSend.MsgSend.get_class" title="vizasm.model.objc.function.MsgSend.MsgSend.get_class"><tt class="xref py py-obj docutils literal"><span class="pre">get_class</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.function.MsgSend.MsgSend.get_first_selector" title="vizasm.model.objc.function.MsgSend.MsgSend.get_first_selector"><tt class="xref py py-obj docutils literal"><span class="pre">get_first_selector</span></tt></a>()</td>
+<td>Returns the first selector.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.function.MsgSend.MsgSend.get_function_name" title="vizasm.model.objc.function.MsgSend.MsgSend.get_function_name"><tt class="xref py py-obj docutils literal"><span class="pre">get_function_name</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_is_static</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.function.MsgSend.MsgSend.get_msg_receiver" title="vizasm.model.objc.function.MsgSend.MsgSend.get_msg_receiver"><tt class="xref py py-obj docutils literal"><span class="pre">get_msg_receiver</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.function.MsgSend.MsgSend.get_nsobject" title="vizasm.model.objc.function.MsgSend.MsgSend.get_nsobject"><tt class="xref py py-obj docutils literal"><span class="pre">get_nsobject</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.function.MsgSend.MsgSend.get_selectors" title="vizasm.model.objc.function.MsgSend.MsgSend.get_selectors"><tt class="xref py py-obj docutils literal"><span class="pre">get_selectors</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.function.MsgSend.MsgSend.has_init" title="vizasm.model.objc.function.MsgSend.MsgSend.has_init"><tt class="xref py py-obj docutils literal"><span class="pre">has_init</span></tt></a>()</td>
+<td>Return if the first so selectors are alloc and init (order is important!) or new</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.function.MsgSend.MsgSend.is_c_function" title="vizasm.model.objc.function.MsgSend.MsgSend.is_c_function"><tt class="xref py py-obj docutils literal"><span class="pre">is_c_function</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_function</span></tt>(function)</td>
+<td>Check if the given <cite>function</cite> is a subclass of <cite>FunctionInterface</cite></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.function.MsgSend.MsgSend.is_objc_function" title="vizasm.model.objc.function.MsgSend.MsgSend.is_objc_function"><tt class="xref py py-obj docutils literal"><span class="pre">is_objc_function</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.function.MsgSend.MsgSend.lst_sel_does_release" title="vizasm.model.objc.function.MsgSend.MsgSend.lst_sel_does_release"><tt class="xref py py-obj docutils literal"><span class="pre">lst_sel_does_release</span></tt></a>()</td>
+<td>Check if the last selector decrements the retain count</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.function.MsgSend.MsgSend.lst_sel_does_retain" title="vizasm.model.objc.function.MsgSend.MsgSend.lst_sel_does_retain"><tt class="xref py py-obj docutils literal"><span class="pre">lst_sel_does_retain</span></tt></a>()</td>
+<td>Check if the first selector increments the retain count</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.function.MsgSend.MsgSend.selectors_without_init" title="vizasm.model.objc.function.MsgSend.MsgSend.selectors_without_init"><tt class="xref py py-obj docutils literal"><span class="pre">selectors_without_init</span></tt></a>()</td>
+<td>Return the selectors without any init selectors.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_is_static</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.function.MsgSend.MsgSend.set_msg_receiver" title="vizasm.model.objc.function.MsgSend.MsgSend.set_msg_receiver"><tt class="xref py py-obj docutils literal"><span class="pre">set_msg_receiver</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.function.MsgSend.MsgSend.set_selectors" title="vizasm.model.objc.function.MsgSend.MsgSend.set_selectors"><tt class="xref py py-obj docutils literal"><span class="pre">set_selectors</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.function.MsgSend.MsgSend.unfilled_args_name" title="vizasm.model.objc.function.MsgSend.MsgSend.unfilled_args_name"><tt class="xref py py-obj docutils literal"><span class="pre">unfilled_args_name</span></tt></a>()</td>
+<td>Get a string representation without filling the <cite>Selector</cite> with its arguments</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.model.objc.function.MsgSend.MsgSend.cnt_has_arguments">
+<tt class="descname">cnt_has_arguments</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/MsgSend.html#MsgSend.cnt_has_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.MsgSend.MsgSend.cnt_has_arguments" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.MsgSend.MsgSend.cnt_init_selectors">
+<tt class="descname">cnt_init_selectors</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/MsgSend.html#MsgSend.cnt_init_selectors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.MsgSend.MsgSend.cnt_init_selectors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of init selectors.
+Returns:
+0 &#8211; no init selectors
+1 &#8211; selector is new
+2 &#8211; selectors are alloc and init</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.MsgSend.MsgSend.cnt_needs_arguments">
+<tt class="descname">cnt_needs_arguments</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/MsgSend.html#MsgSend.cnt_needs_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.MsgSend.MsgSend.cnt_needs_arguments" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="vizasm.model.objc.function.MsgSend.MsgSend.create_from_msgsend">
+<em class="property">static </em><tt class="descname">create_from_msgsend</tt><big>(</big><em>msg_send</em>, <em>selector</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/MsgSend.html#MsgSend.create_from_msgsend"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.MsgSend.MsgSend.create_from_msgsend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a MsgSend from existing MsgSend.
+This method makes a deep copy of the parameters <cite>msg_send</cite> and <cite>selector</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>msg_send: MsgSend</strong> :</p>
+<p><strong>selector: Selector</strong> :</p>
+<p><strong>Returns:</strong> :</p>
+<p><strong>MsgSend</strong> :</p>
+<blockquote class="last">
+<div><p><cite>MsgSend</cite> created from the parameters</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.MsgSend.MsgSend.create_msg_send">
+<tt class="descname">create_msg_send</tt><big>(</big><em>selector</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/MsgSend.html#MsgSend.create_msg_send"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.MsgSend.MsgSend.create_msg_send" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a <cite>MsgSend</cite> with the specified <cite>selector</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>selector: Selector</strong> :</p>
+<blockquote>
+<div><p>the <cite>Selector</cite> with which the <cite>MsgSend</cite> shall be created.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>MsgSend</strong> :</p>
+<blockquote class="last">
+<div><p>the created <cite>MsgSend</cite></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.MsgSend.MsgSend.fst_sel_does_release">
+<tt class="descname">fst_sel_does_release</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/MsgSend.html#MsgSend.fst_sel_does_release"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.MsgSend.MsgSend.fst_sel_does_release" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the first selector decrements the retain count</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.MsgSend.MsgSend.fst_sel_does_retain">
+<tt class="descname">fst_sel_does_retain</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/MsgSend.html#MsgSend.fst_sel_does_retain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.MsgSend.MsgSend.fst_sel_does_retain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the first selector increments the retain count</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.MsgSend.MsgSend.fst_sel_is_alloc">
+<tt class="descname">fst_sel_is_alloc</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/MsgSend.html#MsgSend.fst_sel_is_alloc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.MsgSend.MsgSend.fst_sel_is_alloc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the first selector is alloc</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.MsgSend.MsgSend.fst_sel_is_new">
+<tt class="descname">fst_sel_is_new</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/MsgSend.html#MsgSend.fst_sel_is_new"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.MsgSend.MsgSend.fst_sel_is_new" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the first selector is new</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.MsgSend.MsgSend.fst_selector">
+<tt class="descname">fst_selector</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/MsgSend.html#MsgSend.fst_selector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.MsgSend.MsgSend.fst_selector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the first selector. None if not available</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.MsgSend.MsgSend.get_arguments">
+<tt class="descname">get_arguments</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/MsgSend.html#MsgSend.get_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.MsgSend.MsgSend.get_arguments" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.MsgSend.MsgSend.get_class">
+<tt class="descname">get_class</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/MsgSend.html#MsgSend.get_class"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.MsgSend.MsgSend.get_class" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.MsgSend.MsgSend.get_first_selector">
+<tt class="descname">get_first_selector</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/MsgSend.html#MsgSend.get_first_selector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.MsgSend.MsgSend.get_first_selector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the first selector. None if not exisiting.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.MsgSend.MsgSend.get_function_name">
+<tt class="descname">get_function_name</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/MsgSend.html#MsgSend.get_function_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.MsgSend.MsgSend.get_function_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.MsgSend.MsgSend.get_msg_receiver">
+<tt class="descname">get_msg_receiver</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/MsgSend.html#MsgSend.get_msg_receiver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.MsgSend.MsgSend.get_msg_receiver" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.MsgSend.MsgSend.get_nsobject">
+<tt class="descname">get_nsobject</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/MsgSend.html#MsgSend.get_nsobject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.MsgSend.MsgSend.get_nsobject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.MsgSend.MsgSend.get_selectors">
+<tt class="descname">get_selectors</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/MsgSend.html#MsgSend.get_selectors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.MsgSend.MsgSend.get_selectors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.MsgSend.MsgSend.has_init">
+<tt class="descname">has_init</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/MsgSend.html#MsgSend.has_init"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.MsgSend.MsgSend.has_init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return if the first so selectors are alloc and init (order is important!) or new</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.MsgSend.MsgSend.is_c_function">
+<tt class="descname">is_c_function</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/MsgSend.html#MsgSend.is_c_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.MsgSend.MsgSend.is_c_function" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.MsgSend.MsgSend.is_objc_function">
+<tt class="descname">is_objc_function</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/MsgSend.html#MsgSend.is_objc_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.MsgSend.MsgSend.is_objc_function" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.MsgSend.MsgSend.lst_sel_does_release">
+<tt class="descname">lst_sel_does_release</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/MsgSend.html#MsgSend.lst_sel_does_release"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.MsgSend.MsgSend.lst_sel_does_release" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the last selector decrements the retain count</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.MsgSend.MsgSend.lst_sel_does_retain">
+<tt class="descname">lst_sel_does_retain</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/MsgSend.html#MsgSend.lst_sel_does_retain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.MsgSend.MsgSend.lst_sel_does_retain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the first selector increments the retain count</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.model.objc.function.MsgSend.MsgSend.msg_receiver">
+<tt class="descname">msg_receiver</tt><a class="headerlink" href="#vizasm.model.objc.function.MsgSend.MsgSend.msg_receiver" title="Permalink to this definition">¶</a></dt>
+<dd><p>__msg_receiver(ObjClass) &#8211; the class to which the message(s) will be sent</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.model.objc.function.MsgSend.MsgSend.selectors">
+<tt class="descname">selectors</tt><a class="headerlink" href="#vizasm.model.objc.function.MsgSend.MsgSend.selectors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.MsgSend.MsgSend.selectors_without_init">
+<tt class="descname">selectors_without_init</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/MsgSend.html#MsgSend.selectors_without_init"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.MsgSend.MsgSend.selectors_without_init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the selectors without any init selectors.
+See  <cite>cnt_init_selectors()</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><strong>list&lt;Selector&gt;</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.MsgSend.MsgSend.set_msg_receiver">
+<tt class="descname">set_msg_receiver</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/MsgSend.html#MsgSend.set_msg_receiver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.MsgSend.MsgSend.set_msg_receiver" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.MsgSend.MsgSend.set_selectors">
+<tt class="descname">set_selectors</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/MsgSend.html#MsgSend.set_selectors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.MsgSend.MsgSend.set_selectors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.function.MsgSend.MsgSend.unfilled_args_name">
+<tt class="descname">unfilled_args_name</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/MsgSend.html#MsgSend.unfilled_args_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.MsgSend.MsgSend.unfilled_args_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a string representation without filling the <cite>Selector</cite> with its arguments</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.model.objc.function.MsgSendInterface">
+<span id="msgsendinterface-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">MsgSendInterface</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.function.MsgSendInterface" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 11.05.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.model.objc.function.MsgSendInterface.MsgSendInterface">
+<em class="property">class </em><tt class="descclassname">vizasm.model.objc.function.MsgSendInterface.</tt><tt class="descname">MsgSendInterface</tt><a class="reference internal" href="_modules/vizasm/model/objc/function/MsgSendInterface.html#MsgSendInterface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.MsgSendInterface.MsgSendInterface" title="Permalink to this definition">¶</a></dt>
+<dd><p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.function.MsgSendInterface.MsgSendInterface.create_msg_send" title="vizasm.model.objc.function.MsgSendInterface.MsgSendInterface.create_msg_send"><tt class="xref py py-obj docutils literal"><span class="pre">create_msg_send</span></tt></a>(selector,&nbsp;*args,&nbsp;**kwargs)</td>
+<td>All classes that can create a MsgSend with the</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.model.objc.function.MsgSendInterface.MsgSendInterface.create_msg_send">
+<tt class="descname">create_msg_send</tt><big>(</big><em>selector</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/MsgSendInterface.html#MsgSendInterface.create_msg_send"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.MsgSendInterface.MsgSendInterface.create_msg_send" title="Permalink to this definition">¶</a></dt>
+<dd><p>All classes that can create a MsgSend with the 
+specified Selector should implement this method.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>selector: Selector</strong> :</p>
+<blockquote>
+<div><p>the <cite>Selector</cite> with which the <cite>MsgSend</cite> shall be created.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>MsgSend</strong> :</p>
+<blockquote class="last">
+<div><p>the <cite>MsgSend</cite> created</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.model.objc.function.Sub">
+<span id="sub-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">Sub</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.function.Sub" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 18.10.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.model.objc.function.Sub.Sub">
+<em class="property">class </em><tt class="descclassname">vizasm.model.objc.function.Sub.</tt><tt class="descname">Sub</tt><big>(</big><em>function</em>, <em>func_arguments=None</em>, <em>is_static=True</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/Sub.html#Sub"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.Sub.Sub" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.model.objc.function.Function.Function" title="vizasm.model.objc.function.Function.Function"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.model.objc.function.Function.Function</span></tt></a></p>
+<p>Models a subroutine like e.g. &#8220;sub_10013ec80&#8221;</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">cnt_has_arguments</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">cnt_needs_arguments</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">create_msg_send</span></tt>(selector,&nbsp;*args,&nbsp;**kwargs)</td>
+<td>Create a <cite>MsgSend</cite> with the specified <cite>selector</cite>.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_arguments</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_func_arguments</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_function</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_function_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_is_static</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_c_function</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_function</span></tt>(function)</td>
+<td>Check if the given <cite>function</cite> is a subclass of <cite>FunctionInterface</cite></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_objc_function</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_func_arguments</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_function</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_is_static</span></tt>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

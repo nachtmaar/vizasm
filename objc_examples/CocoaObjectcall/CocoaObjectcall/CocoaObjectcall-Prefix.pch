@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'CocoaObjectcall' target in the 'CocoaObjectcall' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif

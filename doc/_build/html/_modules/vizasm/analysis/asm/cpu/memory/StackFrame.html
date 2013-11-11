@@ -1,0 +1,280 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm.analysis.asm.cpu.memory.StackFrame &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="../../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vizasm.analysis.asm.cpu.memory.StackFrame</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 07.04.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.Resetable</span> <span class="kn">import</span> <span class="n">Resetable</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.exceptions.CpuException</span> <span class="kn">import</span> <span class="n">CpuException</span>
+<span class="kn">from</span> <span class="nn">vizasm.hopper.hopannotate</span> <span class="kn">import</span> <span class="n">hopanno</span>
+<span class="kn">from</span> <span class="nn">vizasm.util</span> <span class="kn">import</span> <span class="n">Util</span>
+<span class="kn">from</span> <span class="nn">vizasm.util.Log</span> <span class="kn">import</span> <span class="n">log</span>
+
+
+<div class="viewcode-block" id="NoSuchStackObjectException"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.memory.html#vizasm.analysis.asm.cpu.memory.StackFrame.NoSuchStackObjectException">[docs]</a><span class="k">class</span> <span class="nc">NoSuchStackObjectException</span><span class="p">(</span><span class="n">CpuException</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Exception for the case that the element at the specified address or idx does not exist.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    addr: int</span>
+<span class="sd">    stack: StackFrame</span>
+<span class="sd">    &#39;&#39;&#39;</span>    
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addr</span><span class="p">,</span> <span class="n">stack</span><span class="p">):</span> 
+        <span class="n">CpuException</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_addr</span> <span class="o">=</span> <span class="n">addr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stack</span> <span class="o">=</span> <span class="n">stack</span>
+    
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;There is no object at address/idx: </span><span class="si">%d</span><span class="s"> on the stack frame:</span><span class="se">\n</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_addr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stack</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="NoSuchStackObjectAtAddressException"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.memory.html#vizasm.analysis.asm.cpu.memory.StackFrame.NoSuchStackObjectAtAddressException">[docs]</a><span class="k">class</span> <span class="nc">NoSuchStackObjectAtAddressException</span><span class="p">(</span><span class="n">NoSuchStackObjectException</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;There is no object at address: </span><span class="si">%d</span><span class="s"> on the stack frame:</span><span class="se">\n</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_addr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stack</span><span class="p">)</span>    
+    </div>
+<div class="viewcode-block" id="NoSuchStackObjectAtIdxException"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.memory.html#vizasm.analysis.asm.cpu.memory.StackFrame.NoSuchStackObjectAtIdxException">[docs]</a><span class="k">class</span> <span class="nc">NoSuchStackObjectAtIdxException</span><span class="p">(</span><span class="n">NoSuchStackObjectException</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;There is no object at idx: </span><span class="si">%d</span><span class="s"> on the stack frame:</span><span class="se">\n</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_addr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stack</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="StackFrame"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.memory.html#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame">[docs]</a><span class="k">class</span> <span class="nc">StackFrame</span><span class="p">(</span><span class="nb">object</span><span class="p">,</span> <span class="n">Resetable</span><span class="p">):</span>
+    <span class="sd">r&#39;&#39;&#39; </span>
+<span class="sd">    Represents a stack frame.</span>
+<span class="sd">        </span>
+<span class="sd">    Let r10 = arg1, r11 = arg2, rbx = arg3, then pushes to stack look like (x86_64 example):</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;0000000100002b67 4C891424                        mov        qword [ss:rsp], r10</span>
+<span class="sd">    </span>
+<span class="sd">    0000000100002b6b 4C895C2408                       mov        qword [ss:rsp+0x8], r11</span>
+<span class="sd">    </span>
+<span class="sd">    0000000100002b70 48895C2410                       mov        qword [ss:rsp+0x10], rbx&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    The example leads to the stack: arg1, arg2, arg3 (with top of the stack = left, lowest address)</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    __stack: dict&lt;int, object&gt;</span>
+<span class="sd">        stack of the CPU</span>
+<span class="sd">    __cpu: Cpu</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+<span class="c">#####################################################################################</span>
+<span class="c"># Resetable                                                                         #</span>
+<span class="c">#####################################################################################    </span>
+
+<div class="viewcode-block" id="StackFrame.reset"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.memory.html#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__stack</span> <span class="o">=</span> <span class="p">{}</span>
+        
+<span class="c">#####################################################################################</span>
+<span class="c"># Implementation                                                                    #</span>
+<span class="c">#####################################################################################</span>
+
+    <span class="c"># TODO: keep stack sorted?? -&gt; IMRPROVES PERFORMANCE! OrderedDict ?</span></div>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cpu</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__cpu</span> <span class="o">=</span> <span class="n">cpu</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">Util</span><span class="o">.</span><span class="n">pretty_format_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stack</span><span class="p">))</span>
+    
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">(</span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">Util</span><span class="o">.</span><span class="n">pretty_format_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stack</span><span class="p">,</span> <span class="bp">True</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stack</span><span class="p">)</span>
+    
+<div class="viewcode-block" id="StackFrame.get_stack"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.memory.html#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.get_stack">[docs]</a>    <span class="k">def</span> <span class="nf">get_stack</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__stack</span>
+</div>
+<div class="viewcode-block" id="StackFrame.set_stack"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.memory.html#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.set_stack">[docs]</a>    <span class="k">def</span> <span class="nf">set_stack</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__stack</span> <span class="o">=</span> <span class="n">value</span>
+</div>
+<div class="viewcode-block" id="StackFrame.get_cpu"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.memory.html#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.get_cpu">[docs]</a>    <span class="k">def</span> <span class="nf">get_cpu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cpu</span>
+</div>
+<div class="viewcode-block" id="StackFrame.set_cpu"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.memory.html#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.set_cpu">[docs]</a>    <span class="k">def</span> <span class="nf">set_cpu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__cpu</span> <span class="o">=</span> <span class="n">value</span>
+</div>
+<div class="viewcode-block" id="StackFrame.stack_is_empty"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.memory.html#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.stack_is_empty">[docs]</a>    <span class="k">def</span> <span class="nf">stack_is_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return whether the stack is empty &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_stack</span><span class="p">())</span>
+        </div>
+    <span class="n">stack</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_stack</span><span class="p">,</span> <span class="n">set_stack</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;__stack(dict&lt;int, object&gt;) -- stack of the CPU&quot;</span><span class="p">)</span>
+    <span class="n">cpu</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_cpu</span><span class="p">,</span> <span class="n">set_cpu</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;__cpu(Cpu)&quot;</span><span class="p">)</span> 
+    
+<div class="viewcode-block" id="StackFrame.add"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.memory.html#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">address</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Add an object to the `StackFrame`.</span>
+<span class="sd">        The stack grows to higher addresses, </span>
+<span class="sd">        meaning that the top of the stack is always the value with the lowest address.</span>
+<span class="sd">        The order in which the elements are added does not play any role.</span>
+<span class="sd">        The order is given by the `address`.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        address: int</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s">&#39;stack frame at </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="nb">hex</span><span class="p">(</span><span class="n">address</span><span class="p">)</span>
+        <span class="n">hopanno</span><span class="o">.</span><span class="n">annotate_assignment</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cpu</span><span class="o">.</span><span class="n">address</span><span class="p">)</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stack</span><span class="p">[</span><span class="n">address</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        </div>
+<div class="viewcode-block" id="StackFrame.add_from_idx"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.memory.html#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.add_from_idx">[docs]</a>    <span class="k">def</span> <span class="nf">add_from_idx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Add an value from given `idx` &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">idx</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">cpu</span><span class="o">.</span><span class="n">pointer_size</span><span class="p">())</span>
+    </div>
+<div class="viewcode-block" id="StackFrame.pop"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.memory.html#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.pop">[docs]</a>    <span class="k">def</span> <span class="nf">pop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Pop item. Top of stack is the lowest address &#39;&#39;&#39;</span>
+        <span class="n">items_list</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stack</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">val</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="n">items_list</span><span class="p">:</span>
+            <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span> <span class="n">items_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">val</span>
+    </div>
+<div class="viewcode-block" id="StackFrame.get_from_idx"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.memory.html#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.get_from_idx">[docs]</a>    <span class="k">def</span> <span class="nf">get_from_idx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get element from given `idx`.</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        NoSuchStackObjectAtIdxException</span>
+<span class="sd">            if there is no object at the given idx</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">items_list</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stack</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="n">items_list</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">_</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span> <span class="n">items_list</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> 
+                <span class="k">return</span> <span class="n">val</span>
+            <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">NoSuchStackObjectAtIdxException</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="bp">self</span><span class="p">),</span> <span class="bp">None</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    </div>
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addr</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        NoSuchStackObjectAtIdxException</span>
+<span class="sd">            if there is no object at the given address</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">stack</span><span class="p">[</span><span class="n">addr</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NoSuchStackObjectAtAddressException</span><span class="p">(</span><span class="n">addr</span><span class="p">,</span> <span class="bp">self</span><span class="p">),</span> <span class="bp">None</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">]</span>
+        </div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">sf</span> <span class="o">=</span> <span class="n">StackFrame</span><span class="p">()</span>
+    <span class="n">sf</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&#39;arg3&#39;</span><span class="p">,</span> <span class="mh">0x3e8</span><span class="p">)</span>
+    <span class="n">sf</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&#39;arg2&#39;</span><span class="p">,</span> <span class="mh">0x3e7</span><span class="p">)</span>
+    <span class="n">sf</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&#39;arg4&#39;</span><span class="p">,</span> <span class="mh">0x2710</span><span class="p">)</span>
+    <span class="n">sf</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&#39;arg1&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">sf</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&#39;arg5&#39;</span><span class="p">,</span> <span class="mh">0x186a0</span><span class="p">)</span>
+    <span class="k">print</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">sf</span><span class="o">.</span><span class="n">stack</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+    <span class="k">print</span> <span class="n">sf</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+    <span class="k">print</span> <span class="n">sf</span><span class="o">.</span><span class="n">get_from_idx</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">sf</span><span class="o">.</span><span class="n">get_from_idx</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

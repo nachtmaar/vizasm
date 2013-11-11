@@ -1,0 +1,210 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm.Settings &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vizasm.Settings</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 11.10.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+
+<span class="sd">Stores the user supplied settings and servers functions to set and retrieve these settings.</span>
+
+<span class="sd">Parameters</span>
+<span class="sd">----------</span>
+<span class="sd">asm_filepath: string</span>
+<span class="sd">    the path and/or file name of the .asm file</span>
+<span class="sd">architecture: string (see `Archs`)</span>
+<span class="sd">    the architecture</span>
+<span class="sd">c_func_heuristic: bool</span>
+<span class="sd">    if enabled use heuristic to determine arguments for c function calls</span>
+<span class="sd">read_single_procedure: boolean, optional (default is False)</span>
+<span class="sd">    if the asm only consists of one procedure without any section    </span>
+<span class="sd">read_all_methods: boolean, optional</span>
+<span class="sd">    read all methods, even those that can not be matched to a type    </span>
+<span class="sd">filters: list&lt;SecurityFilter&gt;, optional</span>
+<span class="sd">    list of filters to use, if None do not filter at all</span>
+<span class="sd">cnt_surrounding_lines: int, optional (default is 5)</span>
+<span class="sd">    number of surrounding messages</span>
+<span class="sd">dont_skip_exception: bool, optional (default is False)</span>
+<span class="sd">    If enabled and and error occurrs while reading a line of assembler code, don&#39;t skip the whole method.</span>
+<span class="sd">    This might lead to errors!    </span>
+<span class="sd">output_filepath: string, optional</span>
+<span class="sd">    where the output of the read messages shall be written,</span>
+<span class="sd">    if None do not write</span>
+<span class="sd">graph_filepath: string, optional</span>
+<span class="sd">    where to write the graph, if None do not write    </span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">from</span> <span class="nn">vizasm</span> <span class="kn">import</span> <span class="n">Archs</span>
+
+<div class="viewcode-block" id="Settings"><a class="viewcode-back" href="../../vizasm.html#vizasm.Settings.Settings">[docs]</a><span class="k">class</span> <span class="nc">Settings</span><span class="p">:</span>
+    
+    <span class="c"># store the settings in the dict</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+    
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        
+<div class="viewcode-block" id="Settings.set_default_settings"><a class="viewcode-back" href="../../vizasm.html#vizasm.Settings.Settings.set_default_settings">[docs]</a>    <span class="k">def</span> <span class="nf">set_default_settings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">default_settings_dict</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Set the default settings with `default_settings_dict`.</span>
+<span class="sd">        Overwrites all other settings.</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        default_settings_dict: dict</span>
+<span class="sd">            dictionary with SETTINGS_ keys</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">settings</span> <span class="o">=</span> <span class="n">default_settings_dict</span>
+
+<span class="c"># the default `Settings` object        </span></div></div>
+<span class="n">settings</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">()</span>
+
+<span class="c"># available keys</span>
+<span class="n">SETTINGS_ASM_FILEPATH</span> <span class="o">=</span> <span class="s">&#39;asm_filepath&#39;</span>
+<span class="n">SETTINGS_OUTPUT_FILEPATH</span> <span class="o">=</span> <span class="s">&#39;output_filepath&#39;</span>
+<span class="n">SETTINGS_GRAPH_FILEPATH</span> <span class="o">=</span> <span class="s">&#39;graph_filepath&#39;</span>
+<span class="n">SETTINGS_C_FUNC_HEURISTIC</span> <span class="o">=</span> <span class="s">&#39;c_func_heuristic&#39;</span>
+<span class="n">SETTINGS_ARCHITECTURE</span> <span class="o">=</span> <span class="s">&#39;architecture&#39;</span>
+<span class="n">SETTINGS_READ_SINGLE_PROCEDURE</span> <span class="o">=</span> <span class="s">&#39;read_single_procedure&#39;</span>
+<span class="n">SETTINGS_READ_ALL_METHODS</span> <span class="o">=</span> <span class="s">&#39;read_all_methods&#39;</span>
+<span class="n">SETTINGS_FILTERS</span> <span class="o">=</span> <span class="s">&#39;filters&#39;</span>
+<span class="n">SETTINGS_CNT_SURROUNDING_LINES</span> <span class="o">=</span> <span class="s">&#39;cnt_surrounding_lines&#39;</span>
+<span class="n">SETTINGS_DONT_SKIP_EXCEPTION</span> <span class="o">=</span> <span class="s">&#39;dont_skip_exception&#39;</span>
+
+<div class="viewcode-block" id="setting_for_key"><a class="viewcode-back" href="../../vizasm.html#vizasm.Settings.setting_for_key">[docs]</a><span class="k">def</span> <span class="nf">setting_for_key</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Get the setting for the specified `key` &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">settings</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="set_setting_for_key"><a class="viewcode-back" href="../../vizasm.html#vizasm.Settings.set_setting_for_key">[docs]</a><span class="k">def</span> <span class="nf">set_setting_for_key</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Set the `value` for the specified `key` &#39;&#39;&#39;</span>
+    <span class="n">settings</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+    </div>
+<div class="viewcode-block" id="set_defaul_settings"><a class="viewcode-back" href="../../vizasm.html#vizasm.Settings.set_defaul_settings">[docs]</a><span class="k">def</span> <span class="nf">set_defaul_settings</span><span class="p">(</span><span class="n">default_settings_dict</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Set the default settings. This overwrites the existing keys.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    default_settings_dict: dict</span>
+<span class="sd">        dict with the settings keys</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">set_default_settings</span><span class="p">(</span><span class="n">default_settings_dict</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="is_arm"><a class="viewcode-back" href="../../vizasm.html#vizasm.Settings.is_arm">[docs]</a><span class="k">def</span> <span class="nf">is_arm</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39; Check if arch is arm &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">setting_for_key</span><span class="p">(</span><span class="n">SETTINGS_ARCHITECTURE</span><span class="p">)</span> <span class="o">==</span> <span class="n">Archs</span><span class="o">.</span><span class="n">ARCH_ARM</span>
+</div>
+<div class="viewcode-block" id="is_x86"><a class="viewcode-back" href="../../vizasm.html#vizasm.Settings.is_x86">[docs]</a><span class="k">def</span> <span class="nf">is_x86</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39; Check if arch is x86 &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">setting_for_key</span><span class="p">(</span><span class="n">SETTINGS_ARCHITECTURE</span><span class="p">)</span> <span class="o">==</span> <span class="n">Archs</span><span class="o">.</span><span class="n">ARCH_X86</span>
+</div>
+<div class="viewcode-block" id="is_x86_64"><a class="viewcode-back" href="../../vizasm.html#vizasm.Settings.is_x86_64">[docs]</a><span class="k">def</span> <span class="nf">is_x86_64</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39; Check if arch is x86_64 &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">setting_for_key</span><span class="p">(</span><span class="n">SETTINGS_ARCHITECTURE</span><span class="p">)</span> <span class="o">==</span> <span class="n">Archs</span><span class="o">.</span><span class="n">ARCH_X86_64</span>
+</div>
+<div class="viewcode-block" id="filtering_enabled"><a class="viewcode-back" href="../../vizasm.html#vizasm.Settings.filtering_enabled">[docs]</a><span class="k">def</span> <span class="nf">filtering_enabled</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39; Check if filtering is enabled &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">setting_for_key</span><span class="p">(</span><span class="n">SETTINGS_FILTERS</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

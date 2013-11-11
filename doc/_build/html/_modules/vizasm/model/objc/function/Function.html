@@ -1,0 +1,221 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm.model.objc.function.Function &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vizasm.model.objc.function.Function</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 21.04.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.function.FunctionInterface</span> <span class="kn">import</span> <span class="n">FunctionInterface</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.function.MsgSend</span> <span class="kn">import</span> <span class="n">MsgSend</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.function.MsgSendInterface</span> <span class="kn">import</span> <span class="n">MsgSendInterface</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">imap</span>
+
+<div class="viewcode-block" id="Function"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.Function.Function">[docs]</a><span class="k">class</span> <span class="nc">Function</span><span class="p">(</span><span class="n">FunctionInterface</span><span class="p">,</span> <span class="n">MsgSendInterface</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    Represents a function that can take arguments.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    __function: string</span>
+<span class="sd">        The name of the function.</span>
+<span class="sd">    __func_arguments: list&lt;object&gt;, optional</span>
+<span class="sd">        The arguments of the function.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">func_arguments</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">is_static</span> <span class="o">=</span> <span class="bp">True</span><span class="p">):</span>
+        <span class="n">FunctionInterface</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">is_static</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__function</span> <span class="o">=</span> <span class="n">function</span>
+        <span class="k">if</span> <span class="n">func_arguments</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">func_arguments</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__func_arguments</span> <span class="o">=</span> <span class="n">func_arguments</span>
+
+<div class="viewcode-block" id="Function.get_function"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.Function.Function.get_function">[docs]</a>    <span class="k">def</span> <span class="nf">get_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__function</span>
+</div>
+<div class="viewcode-block" id="Function.get_func_arguments"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.Function.Function.get_func_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">get_func_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__func_arguments</span>
+</div>
+<div class="viewcode-block" id="Function.set_function"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.Function.Function.set_function">[docs]</a>    <span class="k">def</span> <span class="nf">set_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__function</span> <span class="o">=</span> <span class="n">value</span>
+</div>
+<div class="viewcode-block" id="Function.set_func_arguments"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.Function.Function.set_func_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">set_func_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__func_arguments</span> <span class="o">=</span> <span class="n">value</span>
+    </div>
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">(</span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_function</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_arguments_formatted_with_comma</span><span class="p">())</span>
+    
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">(</span><span class="si">%s</span><span class="s">, args: </span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_function</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_func_arguments</span><span class="p">())</span>
+
+             
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Function</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span> <span class="ow">is</span> <span class="n">other</span> <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">function</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    
+    <span class="k">def</span> <span class="nf">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span> <span class="o">==</span> <span class="n">other</span>    
+    
+    <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">))</span>
+    
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>         
+        <span class="sd">&#39;&#39;&#39; Return an iterator over the function arguments &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">func_arguments</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">_arguments_formatted_with_comma</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return a string where the arguments are separated with a comma &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="s">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">imap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">func_arguments</span><span class="p">))</span>
+    
+    <span class="n">function</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_function</span><span class="p">,</span> <span class="n">set_function</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;__function(string) -- the name of the function&quot;</span><span class="p">)</span>
+    <span class="n">func_arguments</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_func_arguments</span><span class="p">,</span> <span class="n">set_func_arguments</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;__func_arguments(list&lt;string&gt;) -- the name of the function&quot;</span><span class="p">)</span>
+
+<span class="c">#####################################################################################</span>
+<span class="c"># FunctionInterface                                                                 #</span>
+<span class="c">#####################################################################################    </span>
+
+<div class="viewcode-block" id="Function.get_arguments"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.Function.Function.get_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">get_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_func_arguments</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="Function.get_function_name"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.Function.Function.get_function_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_function_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_function</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="Function.is_c_function"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.Function.Function.is_c_function">[docs]</a>    <span class="k">def</span> <span class="nf">is_c_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">FunctionInterface</span><span class="o">.</span><span class="n">is_c_function</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Function.is_objc_function"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.Function.Function.is_objc_function">[docs]</a>    <span class="k">def</span> <span class="nf">is_objc_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">False</span>
+</div>
+<div class="viewcode-block" id="Function.cnt_needs_arguments"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.Function.Function.cnt_needs_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">cnt_needs_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s">&quot;Currently not supported. The number of arguments for a c function cannot be read from the asm file!&quot;</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="Function.cnt_has_arguments"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.Function.Function.cnt_has_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">cnt_has_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_arguments</span><span class="p">())</span>
+
+<span class="c">#####################################################################################</span>
+<span class="c"># MsgSendInterface                                                                  #</span>
+<span class="c">#####################################################################################    </span></div>
+<div class="viewcode-block" id="Function.create_msg_send"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.Function.Function.create_msg_send">[docs]</a>    <span class="k">def</span> <span class="nf">create_msg_send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Create a `MsgSend` with the specified `selector`.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        selector: Selector</span>
+<span class="sd">            the `Selector` with which the `MsgSend` shall be created.</span>
+<span class="sd">            </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        MsgSend</span>
+<span class="sd">            the created `MsgSend` </span>
+<span class="sd">        &#39;&#39;&#39;</span> 
+        <span class="k">return</span> <span class="n">MsgSend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">[</span><span class="n">selector</span><span class="p">])</span>
+    </div></div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">function</span> <span class="o">=</span> <span class="s">&#39;function&#39;</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;1&#39;</span><span class="p">,</span> <span class="s">&#39;2&#39;</span><span class="p">,</span> <span class="s">&#39;3&#39;</span><span class="p">]</span>
+    <span class="n">classfunc</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">classfunc</span>
+    <span class="n">function</span> <span class="o">=</span> <span class="s">&#39;function&#39;</span>
+    <span class="n">classfunc</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">classfunc</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

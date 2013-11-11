@@ -1,0 +1,442 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>asm Package &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">asm Package</a><ul>
+<li><a class="reference internal" href="#module-vizasm.reader.asm.AsmReader"><tt class="docutils literal"><span class="pre">AsmReader</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.reader.asm.AsmRegEx"><tt class="docutils literal"><span class="pre">AsmRegEx</span></tt> Module</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/vizasm.reader.asm.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="asm-package">
+<h1>asm Package<a class="headerlink" href="#asm-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-vizasm.reader.asm.AsmReader">
+<span id="asmreader-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">AsmReader</span></tt> Module<a class="headerlink" href="#module-vizasm.reader.asm.AsmReader" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 11.04.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.reader.asm.AsmReader.AsmReader">
+<em class="property">class </em><tt class="descclassname">vizasm.reader.asm.AsmReader.</tt><tt class="descname">AsmReader</tt><big>(</big><em>file_path</em><big>)</big><a class="reference internal" href="_modules/vizasm/reader/asm/AsmReader.html#AsmReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.reader.asm.AsmReader.AsmReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Reader for an asm file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>__abs_file_path: string</strong> :</p>
+<blockquote>
+<div><p>absolute file path of the asm file</p>
+</div></blockquote>
+<p><strong>__file_obj: file</strong> :</p>
+<blockquote class="last">
+<div><p>the opened file object</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.reader.asm.AsmReader.AsmReader.close_file" title="vizasm.reader.asm.AsmReader.AsmReader.close_file"><tt class="xref py py-obj docutils literal"><span class="pre">close_file</span></tt></a>()</td>
+<td>Close the current opened file</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.reader.asm.AsmReader.AsmReader.get_abs_file_path" title="vizasm.reader.asm.AsmReader.AsmReader.get_abs_file_path"><tt class="xref py py-obj docutils literal"><span class="pre">get_abs_file_path</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.reader.asm.AsmReader.AsmReader.get_file" title="vizasm.reader.asm.AsmReader.AsmReader.get_file"><tt class="xref py py-obj docutils literal"><span class="pre">get_file</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.reader.asm.AsmReader.AsmReader.linenr_it" title="vizasm.reader.asm.AsmReader.AsmReader.linenr_it"><tt class="xref py py-obj docutils literal"><span class="pre">linenr_it</span></tt></a>(it)</td>
+<td>Returns an iterator counting the lines.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.reader.asm.AsmReader.AsmReader.methods_it" title="vizasm.reader.asm.AsmReader.AsmReader.methods_it"><tt class="xref py py-obj docutils literal"><span class="pre">methods_it</span></tt></a>(file_iterator[,&nbsp;read_all_procedures])</td>
+<td>Returns an iterator running over the methods.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.reader.asm.AsmReader.AsmReader.reopen_file" title="vizasm.reader.asm.AsmReader.AsmReader.reopen_file"><tt class="xref py py-obj docutils literal"><span class="pre">reopen_file</span></tt></a>()</td>
+<td>Reopen the file</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.reader.asm.AsmReader.AsmReader.sections_it" title="vizasm.reader.asm.AsmReader.AsmReader.sections_it"><tt class="xref py py-obj docutils literal"><span class="pre">sections_it</span></tt></a>(file_iterator,&nbsp;section_list)</td>
+<td>Read the lines for the specified sections.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.reader.asm.AsmReader.AsmReader.set_abs_file_path" title="vizasm.reader.asm.AsmReader.AsmReader.set_abs_file_path"><tt class="xref py py-obj docutils literal"><span class="pre">set_abs_file_path</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.reader.asm.AsmReader.AsmReader.set_file" title="vizasm.reader.asm.AsmReader.AsmReader.set_file"><tt class="xref py py-obj docutils literal"><span class="pre">set_file</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.reader.asm.AsmReader.AsmReader.single_method_it" title="vizasm.reader.asm.AsmReader.AsmReader.single_method_it"><tt class="xref py py-obj docutils literal"><span class="pre">single_method_it</span></tt></a>(it)</td>
+<td>Returns an iterator running over a single method/procedure.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.reader.asm.AsmReader.AsmReader.single_method_it_asm_file" title="vizasm.reader.asm.AsmReader.AsmReader.single_method_it_asm_file"><tt class="xref py py-obj docutils literal"><span class="pre">single_method_it_asm_file</span></tt></a>()</td>
+<td>Returns an iterator running over a single method/procedure from the asm file.</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="vizasm.reader.asm.AsmReader.AsmReader.abs_file_path">
+<tt class="descname">abs_file_path</tt><a class="headerlink" href="#vizasm.reader.asm.AsmReader.AsmReader.abs_file_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>__abs_file_path(string) &#8211; absolute file path of the asm file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.reader.asm.AsmReader.AsmReader.close_file">
+<tt class="descname">close_file</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/reader/asm/AsmReader.html#AsmReader.close_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.reader.asm.AsmReader.AsmReader.close_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close the current opened file</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.reader.asm.AsmReader.AsmReader.file_obj">
+<tt class="descname">file_obj</tt><a class="headerlink" href="#vizasm.reader.asm.AsmReader.AsmReader.file_obj" title="Permalink to this definition">¶</a></dt>
+<dd><p>__file_obj(file) &#8211; the opened file object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.reader.asm.AsmReader.AsmReader.get_abs_file_path">
+<tt class="descname">get_abs_file_path</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/reader/asm/AsmReader.html#AsmReader.get_abs_file_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.reader.asm.AsmReader.AsmReader.get_abs_file_path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.reader.asm.AsmReader.AsmReader.get_file">
+<tt class="descname">get_file</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/reader/asm/AsmReader.html#AsmReader.get_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.reader.asm.AsmReader.AsmReader.get_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="vizasm.reader.asm.AsmReader.AsmReader.linenr_it">
+<em class="property">static </em><tt class="descname">linenr_it</tt><big>(</big><em>it</em><big>)</big><a class="reference internal" href="_modules/vizasm/reader/asm/AsmReader.html#AsmReader.linenr_it"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.reader.asm.AsmReader.AsmReader.linenr_it" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an iterator counting the lines.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>it: iterator&lt;str&gt;</strong> :</p>
+<blockquote>
+<div><p>the iterator to add line numbers to</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first last"><strong>method_dict: iterator&lt;tuple&lt;int, string&gt;&gt;</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="vizasm.reader.asm.AsmReader.AsmReader.methods_it">
+<em class="property">static </em><tt class="descname">methods_it</tt><big>(</big><em>file_iterator</em>, <em>read_all_procedures=False</em><big>)</big><a class="reference internal" href="_modules/vizasm/reader/asm/AsmReader.html#AsmReader.methods_it"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.reader.asm.AsmReader.AsmReader.methods_it" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an iterator running over the methods.
+For each method a dictionary is yield with the line number as key and the method line as value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>read_all_procedures: boolean, optional (default is False)</strong> :</p>
+<blockquote>
+<div><p>If True, all procedures will be read.
+If False, only those recognized as a <cite>CategoryClass</cite> or method implementation
+will be read. 
+See <cite>AsmRegEx.is_method_implementation</cite> for details.</p>
+</div></blockquote>
+<p><strong>file_iterator: iterator&lt;tuple&lt;int, string&gt;&gt;</strong> :</p>
+<blockquote>
+<div><p>the iterator to use</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first last"><strong>method_dict iterator: iterator&lt;dict&lt;int, string&gt;&gt;</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.reader.asm.AsmReader.AsmReader.reopen_file">
+<tt class="descname">reopen_file</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/reader/asm/AsmReader.html#AsmReader.reopen_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.reader.asm.AsmReader.AsmReader.reopen_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reopen the file</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="vizasm.reader.asm.AsmReader.AsmReader.sections_it">
+<em class="property">static </em><tt class="descname">sections_it</tt><big>(</big><em>file_iterator</em>, <em>section_list</em><big>)</big><a class="reference internal" href="_modules/vizasm/reader/asm/AsmReader.html#AsmReader.sections_it"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.reader.asm.AsmReader.AsmReader.sections_it" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the lines for the specified sections.
+Returns an iterator over the lines and line numbers.</p>
+<p>Text before the first occurrence of the specific section is omitted !</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>file_iterator: iterator&lt;string&gt;</strong> :</p>
+<blockquote>
+<div><p>iterator over the asm file</p>
+</div></blockquote>
+<p><strong>section_list: list&lt;str&gt;</strong> :</p>
+<blockquote>
+<div><p>list of section names</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>iterator&lt;tuple&lt;int, string&gt;&gt;</strong> :</p>
+<blockquote>
+<div><p>the sections</p>
+</div></blockquote>
+<p><strong>empty iterator</strong> :</p>
+<blockquote class="last">
+<div><p>if an io error occurred</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.reader.asm.AsmReader.AsmReader.set_abs_file_path">
+<tt class="descname">set_abs_file_path</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/reader/asm/AsmReader.html#AsmReader.set_abs_file_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.reader.asm.AsmReader.AsmReader.set_abs_file_path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.reader.asm.AsmReader.AsmReader.set_file">
+<tt class="descname">set_file</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/reader/asm/AsmReader.html#AsmReader.set_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.reader.asm.AsmReader.AsmReader.set_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="vizasm.reader.asm.AsmReader.AsmReader.single_method_it">
+<em class="property">static </em><tt class="descname">single_method_it</tt><big>(</big><em>it</em><big>)</big><a class="reference internal" href="_modules/vizasm/reader/asm/AsmReader.html#AsmReader.single_method_it"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.reader.asm.AsmReader.AsmReader.single_method_it" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an iterator running over a single method/procedure.
+Yields a dictionary with the line number as key and the method line as value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>it: iterator&lt;str&gt;</strong> :</p>
+<blockquote>
+<div><p>iterator over the procedure lines</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first last"><strong>method_dict: iterator&lt;dict&lt;int, string&gt;&gt;</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.reader.asm.AsmReader.AsmReader.single_method_it_asm_file">
+<tt class="descname">single_method_it_asm_file</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/reader/asm/AsmReader.html#AsmReader.single_method_it_asm_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.reader.asm.AsmReader.AsmReader.single_method_it_asm_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an iterator running over a single method/procedure from the asm file.
+Yields a dictionary with the line number as key and the method line as value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><strong>method_dict: iterator&lt;dict&lt;int, string&gt;&gt;</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.reader.asm.AsmRegEx">
+<span id="asmregex-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">AsmRegEx</span></tt> Module<a class="headerlink" href="#module-vizasm.reader.asm.AsmRegEx" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 12.04.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.reader.asm.AsmRegEx.AsmRegEx">
+<em class="property">class </em><tt class="descclassname">vizasm.reader.asm.AsmRegEx.</tt><tt class="descname">AsmRegEx</tt><a class="reference internal" href="_modules/vizasm/reader/asm/AsmRegEx.html#AsmRegEx"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.reader.asm.AsmRegEx.AsmRegEx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vizasm.html#vizasm.RegEx.RegEx" title="vizasm.RegEx.RegEx"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.RegEx.RegEx</span></tt></a></p>
+<p>This class contains regular expressions used for the reading of an asm file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>RE_SECTION_SPLIT</strong> :</p>
+<blockquote>
+<div><p>use to split asm file into sections</p>
+</div></blockquote>
+<p><strong>RE_PROCEDURE</strong> :</p>
+<blockquote class="last">
+<div><p>use to detect the beginning of a procedure, use with flag re.DOTALL and without re.VERBOSE !</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">compiled_re</span></tt>(regex[,&nbsp;flags])</td>
+<td>Returns a compiled regex pattern object</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">compiled_vre</span></tt>(regex[,&nbsp;flags])</td>
+<td>Returns a compiled regex pattern object</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="vizasm.reader.asm.AsmRegEx.AsmRegEx.RE_PROCEDURE">
+<tt class="descname">RE_PROCEDURE</tt><em class="property"> = '================ B E G I N   O F   P R O C E D U R E ================'</em><a class="headerlink" href="#vizasm.reader.asm.AsmRegEx.AsmRegEx.RE_PROCEDURE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.reader.asm.AsmRegEx.AsmRegEx.RE_SECTION">
+<tt class="descname">RE_SECTION</tt><em class="property"> = '\n     Section\\s+              # Section __\n     (?P&lt;section&gt;__\\w+)             # section name (e.g. text)\n    '</em><a class="headerlink" href="#vizasm.reader.asm.AsmRegEx.AsmRegEx.RE_SECTION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.reader.asm.AsmRegEx.AsmRegEx.RE_SECTION_GR_SECTION">
+<tt class="descname">RE_SECTION_GR_SECTION</tt><em class="property"> = 'section'</em><a class="headerlink" href="#vizasm.reader.asm.AsmRegEx.AsmRegEx.RE_SECTION_GR_SECTION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.reader.asm.AsmRegEx.AsmRegEx.RE_SECTION_SPLIT">
+<tt class="descname">RE_SECTION_SPLIT</tt><em class="property"> = '\n Section\\s+               # Section __\n (__.*)                   # first split is section name (text) and the rest is the section data\n \\s+;\\s+                  # remove the next line with whitespace and semicolon and whitespace\n '</em><a class="headerlink" href="#vizasm.reader.asm.AsmRegEx.AsmRegEx.RE_SECTION_SPLIT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,842 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm Package &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">vizasm Package</a><ul>
+<li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">vizasm</span></tt> Package</a></li>
+<li><a class="reference internal" href="#module-vizasm.Archs"><tt class="docutils literal"><span class="pre">Archs</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vizasm.RegEx"><tt class="docutils literal"><span class="pre">RegEx</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.Settings"><tt class="docutils literal"><span class="pre">Settings</span></tt> Module</a><ul>
+<li><a class="reference internal" href="#parameters">Parameters</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/vizasm.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="vizasm-package">
+<h1>vizasm Package<a class="headerlink" href="#vizasm-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">vizasm</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-vizasm.__init__"></span><p>VizAsm</p>
+<p>Created on 11.04.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+</div>
+<div class="section" id="module-vizasm.Archs">
+<span id="archs-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">Archs</span></tt> Module<a class="headerlink" href="#module-vizasm.Archs" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 09.10.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<p>Architecture stuff</p>
+<dl class="function">
+<dt id="vizasm.Archs.transform_hopper_arch">
+<tt class="descclassname">vizasm.Archs.</tt><tt class="descname">transform_hopper_arch</tt><big>(</big><em>arch_str</em><big>)</big><a class="reference internal" href="_modules/vizasm/Archs.html#transform_hopper_arch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.Archs.transform_hopper_arch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform the hopper architecture to the internal string representation of the arch</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.RegEx">
+<span id="regex-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">RegEx</span></tt> Module<a class="headerlink" href="#module-vizasm.RegEx" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 12.04.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.RegEx.RegEx">
+<em class="property">class </em><tt class="descclassname">vizasm.RegEx.</tt><tt class="descname">RegEx</tt><a class="reference internal" href="_modules/vizasm/RegEx.html#RegEx"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.RegEx.RegEx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.RegEx.RegEx.compiled_re" title="vizasm.RegEx.RegEx.compiled_re"><tt class="xref py py-obj docutils literal"><span class="pre">compiled_re</span></tt></a>(regex[,&nbsp;flags])</td>
+<td>Returns a compiled regex pattern object</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.RegEx.RegEx.compiled_vre" title="vizasm.RegEx.RegEx.compiled_vre"><tt class="xref py py-obj docutils literal"><span class="pre">compiled_vre</span></tt></a>(regex[,&nbsp;flags])</td>
+<td>Returns a compiled regex pattern object</td>
+</tr>
+</tbody>
+</table>
+<dl class="staticmethod">
+<dt id="vizasm.RegEx.RegEx.compiled_re">
+<em class="property">static </em><tt class="descname">compiled_re</tt><big>(</big><em>regex</em>, <em>flags=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/RegEx.html#RegEx.compiled_re"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.RegEx.RegEx.compiled_re" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a compiled regex pattern object
+Flags will only be passed if not None.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>flags: optional</strong> :</p>
+<blockquote class="last">
+<div><p>the flags to be passed to re</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="vizasm.RegEx.RegEx.compiled_vre">
+<em class="property">static </em><tt class="descname">compiled_vre</tt><big>(</big><em>regex</em>, <em>flags=64</em><big>)</big><a class="reference internal" href="_modules/vizasm/RegEx.html#RegEx.compiled_vre"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.RegEx.RegEx.compiled_vre" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a compiled regex pattern object 
+Parameters
+&#8212;&#8212;&#8212;-
+flags</p>
+<blockquote>
+<div>the flags to be passed to re (default is re.VERBOSE)</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.Settings">
+<span id="settings-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">Settings</span></tt> Module<a class="headerlink" href="#module-vizasm.Settings" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 11.10.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<p>Stores the user supplied settings and servers functions to set and retrieve these settings.</p>
+<div class="section" id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>asm_filepath: string</dt>
+<dd>the path and/or file name of the .asm file</dd>
+<dt>architecture: string (see <cite>Archs</cite>)</dt>
+<dd>the architecture</dd>
+<dt>c_func_heuristic: bool</dt>
+<dd>if enabled use heuristic to determine arguments for c function calls</dd>
+<dt>read_single_procedure: boolean, optional (default is False)</dt>
+<dd>if the asm only consists of one procedure without any section</dd>
+<dt>read_all_methods: boolean, optional</dt>
+<dd>read all methods, even those that can not be matched to a type</dd>
+<dt>filters: list&lt;SecurityFilter&gt;, optional</dt>
+<dd>list of filters to use, if None do not filter at all</dd>
+<dt>cnt_surrounding_lines: int, optional (default is 5)</dt>
+<dd>number of surrounding messages</dd>
+<dt>dont_skip_exception: bool, optional (default is False)</dt>
+<dd>If enabled and and error occurrs while reading a line of assembler code, don&#8217;t skip the whole method.
+This might lead to errors!</dd>
+<dt>output_filepath: string, optional</dt>
+<dd>where the output of the read messages shall be written,
+if None do not write</dd>
+<dt>graph_filepath: string, optional</dt>
+<dd>where to write the graph, if None do not write</dd>
+</dl>
+<dl class="class">
+<dt id="vizasm.Settings.Settings">
+<em class="property">class </em><tt class="descclassname">vizasm.Settings.</tt><tt class="descname">Settings</tt><a class="reference internal" href="_modules/vizasm/Settings.html#Settings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.Settings.Settings" title="Permalink to this definition">¶</a></dt>
+<dd><p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.Settings.Settings.set_default_settings" title="vizasm.Settings.Settings.set_default_settings"><tt class="xref py py-obj docutils literal"><span class="pre">set_default_settings</span></tt></a>(default_settings_dict)</td>
+<td>Set the default settings with <cite>default_settings_dict</cite>.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.Settings.Settings.set_default_settings">
+<tt class="descname">set_default_settings</tt><big>(</big><em>default_settings_dict</em><big>)</big><a class="reference internal" href="_modules/vizasm/Settings.html#Settings.set_default_settings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.Settings.Settings.set_default_settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the default settings with <cite>default_settings_dict</cite>.
+Overwrites all other settings.
+Parameters
+&#8212;&#8212;&#8212;-
+default_settings_dict: dict</p>
+<blockquote>
+<div>dictionary with <a href="#id2"><span class="problematic" id="id3">SETTINGS_</span></a> keys</div></blockquote>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.Settings.Settings.settings">
+<tt class="descname">settings</tt><em class="property"> = {}</em><a class="headerlink" href="#vizasm.Settings.Settings.settings" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.Settings.filtering_enabled">
+<tt class="descclassname">vizasm.Settings.</tt><tt class="descname">filtering_enabled</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/Settings.html#filtering_enabled"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.Settings.filtering_enabled" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if filtering is enabled</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.Settings.is_arm">
+<tt class="descclassname">vizasm.Settings.</tt><tt class="descname">is_arm</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/Settings.html#is_arm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.Settings.is_arm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if arch is arm</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.Settings.is_x86">
+<tt class="descclassname">vizasm.Settings.</tt><tt class="descname">is_x86</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/Settings.html#is_x86"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.Settings.is_x86" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if arch is x86</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.Settings.is_x86_64">
+<tt class="descclassname">vizasm.Settings.</tt><tt class="descname">is_x86_64</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/Settings.html#is_x86_64"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.Settings.is_x86_64" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if arch is x86_64</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.Settings.set_defaul_settings">
+<tt class="descclassname">vizasm.Settings.</tt><tt class="descname">set_defaul_settings</tt><big>(</big><em>default_settings_dict</em><big>)</big><a class="reference internal" href="_modules/vizasm/Settings.html#set_defaul_settings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.Settings.set_defaul_settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the default settings. This overwrites the existing keys.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>default_settings_dict: dict</strong> :</p>
+<blockquote class="last">
+<div><p>dict with the settings keys</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.Settings.set_setting_for_key">
+<tt class="descclassname">vizasm.Settings.</tt><tt class="descname">set_setting_for_key</tt><big>(</big><em>key</em>, <em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/Settings.html#set_setting_for_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.Settings.set_setting_for_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the <cite>value</cite> for the specified <cite>key</cite></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.Settings.setting_for_key">
+<tt class="descclassname">vizasm.Settings.</tt><tt class="descname">setting_for_key</tt><big>(</big><em>key</em><big>)</big><a class="reference internal" href="_modules/vizasm/Settings.html#setting_for_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.Settings.setting_for_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the setting for the specified <cite>key</cite></p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="vizasm.analysis.html">analysis Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="vizasm.analysis.asm.html">asm Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.analysis.asm.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="vizasm.analysis.asm.asmanalyzer.html">asmanalyzer Package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.analysis.asm.asmanalyzer.html#module-vizasm.analysis.asm.asmanalyzer.AsmAnalyzerBase"><tt class="docutils literal"><span class="pre">AsmAnalyzerBase</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.analysis.asm.asmanalyzer.html#module-vizasm.analysis.asm.asmanalyzer.AsmAnalyzerCli"><tt class="docutils literal"><span class="pre">AsmAnalyzerCli</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.analysis.asm.asmanalyzer.html#module-vizasm.analysis.asm.asmanalyzer.AsmAnalyzerHopper"><tt class="docutils literal"><span class="pre">AsmAnalyzerHopper</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="vizasm.analysis.asm.cpu.html">cpu Package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.analysis.asm.cpu.html#module-vizasm.analysis.asm.cpu.AsmRegEx"><tt class="docutils literal"><span class="pre">AsmRegEx</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.analysis.asm.cpu.html#module-vizasm.analysis.asm.cpu.AssignmentMatchingSystem"><tt class="docutils literal"><span class="pre">AssignmentMatchingSystem</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.analysis.asm.cpu.html#module-vizasm.analysis.asm.cpu.CRuntime"><tt class="docutils literal"><span class="pre">CRuntime</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.analysis.asm.cpu.html#module-vizasm.analysis.asm.cpu.CallingConventionsInterface"><tt class="docutils literal"><span class="pre">CallingConventionsInterface</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.analysis.asm.cpu.html#module-vizasm.analysis.asm.cpu.Cpu"><tt class="docutils literal"><span class="pre">Cpu</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.analysis.asm.cpu.html#module-vizasm.analysis.asm.cpu.ParseUtil"><tt class="docutils literal"><span class="pre">ParseUtil</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.analysis.asm.cpu.html#module-vizasm.analysis.asm.cpu.Resetable"><tt class="docutils literal"><span class="pre">Resetable</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.analysis.asm.cpu.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="vizasm.analysis.asm.cpu.arm.html">arm Package</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.analysis.asm.cpu.arm.html#module-vizasm.analysis.asm.cpu.arm.AsmRegEx_arm"><tt class="docutils literal"><span class="pre">AsmRegEx_arm</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.analysis.asm.cpu.arm.html#module-vizasm.analysis.asm.cpu.arm.Asm_arm"><tt class="docutils literal"><span class="pre">Asm_arm</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.analysis.asm.cpu.arm.html#module-vizasm.analysis.asm.cpu.arm.Cpu_arm"><tt class="docutils literal"><span class="pre">Cpu_arm</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.analysis.asm.cpu.arm.html#module-vizasm.analysis.asm.cpu.arm.ObjcRuntime_arm"><tt class="docutils literal"><span class="pre">ObjcRuntime_arm</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.analysis.asm.cpu.arm.html#module-vizasm.analysis.asm.cpu.arm.ParseUtil_arm"><tt class="docutils literal"><span class="pre">ParseUtil_arm</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.analysis.asm.cpu.arm.html#module-vizasm.analysis.asm.cpu.arm.Register_Arm"><tt class="docutils literal"><span class="pre">Register_Arm</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l7"><a class="reference internal" href="vizasm.analysis.asm.cpu.exceptions.html">exceptions Package</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.analysis.asm.cpu.exceptions.html#module-vizasm.analysis.asm.cpu.exceptions.CpuCouldNotGetDestination"><tt class="docutils literal"><span class="pre">CpuCouldNotGetDestination</span></tt> Module</a></li>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.analysis.asm.cpu.exceptions.html#module-vizasm.analysis.asm.cpu.exceptions.CpuCouldNotGetSelfref"><tt class="docutils literal"><span class="pre">CpuCouldNotGetSelfref</span></tt> Module</a></li>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.analysis.asm.cpu.exceptions.html#module-vizasm.analysis.asm.cpu.exceptions.CpuCouldNotReadNSLogException"><tt class="docutils literal"><span class="pre">CpuCouldNotReadNSLogException</span></tt> Module</a></li>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.analysis.asm.cpu.exceptions.html#module-vizasm.analysis.asm.cpu.exceptions.CpuException"><tt class="docutils literal"><span class="pre">CpuException</span></tt> Module</a></li>
+</ul>
+</li>
+<li class="toctree-l7"><a class="reference internal" href="vizasm.analysis.asm.cpu.memory.html">memory Package</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.analysis.asm.cpu.memory.html#module-vizasm.analysis.asm.cpu.memory.Memory"><tt class="docutils literal"><span class="pre">Memory</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.analysis.asm.cpu.memory.html#module-vizasm.analysis.asm.cpu.memory.MemoryLookupException"><tt class="docutils literal"><span class="pre">MemoryLookupException</span></tt> Module</a></li>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.analysis.asm.cpu.memory.html#module-vizasm.analysis.asm.cpu.memory.Registers"><tt class="docutils literal"><span class="pre">Registers</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.analysis.asm.cpu.memory.html#module-vizasm.analysis.asm.cpu.memory.StackFrame"><tt class="docutils literal"><span class="pre">StackFrame</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l7"><a class="reference internal" href="vizasm.analysis.asm.cpu.objcruntime.html">objcruntime Package</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.analysis.asm.cpu.objcruntime.html#module-vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup"><tt class="docutils literal"><span class="pre">IVarRefLookup</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.analysis.asm.cpu.objcruntime.html#module-vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime"><tt class="docutils literal"><span class="pre">ObjectiveCRuntime</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.analysis.asm.cpu.objcruntime.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l9"><a class="reference internal" href="vizasm.analysis.asm.cpu.objcruntime.exceptions.html">exceptions Package</a><ul>
+<li class="toctree-l10"><a class="reference internal" href="vizasm.analysis.asm.cpu.objcruntime.exceptions.html#module-vizasm.analysis.asm.cpu.objcruntime.exceptions.ObjcRuntimeCouldNotGetSelector"><tt class="docutils literal"><span class="pre">ObjcRuntimeCouldNotGetSelector</span></tt> Module</a></li>
+<li class="toctree-l10"><a class="reference internal" href="vizasm.analysis.asm.cpu.objcruntime.exceptions.html#module-vizasm.analysis.asm.cpu.objcruntime.exceptions.ObjcRuntimeCouldNotReadMsgSendException"><tt class="docutils literal"><span class="pre">ObjcRuntimeCouldNotReadMsgSendException</span></tt> Module</a></li>
+<li class="toctree-l10"><a class="reference internal" href="vizasm.analysis.asm.cpu.objcruntime.exceptions.html#module-vizasm.analysis.asm.cpu.objcruntime.exceptions.ObjcRuntimeSelectorWrongTypeException"><tt class="docutils literal"><span class="pre">ObjcRuntimeSelectorWrongTypeException</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l7"><a class="reference internal" href="vizasm.analysis.asm.cpu.x86.html">x86 Package</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.analysis.asm.cpu.x86.html#module-vizasm.analysis.asm.cpu.x86.ASM_x86"><tt class="docutils literal"><span class="pre">ASM_x86</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.analysis.asm.cpu.x86.html#module-vizasm.analysis.asm.cpu.x86.AsmRegEx_x86"><tt class="docutils literal"><span class="pre">AsmRegEx_x86</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.analysis.asm.cpu.x86.html#module-vizasm.analysis.asm.cpu.x86.Cpu_x86"><tt class="docutils literal"><span class="pre">Cpu_x86</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.analysis.asm.cpu.x86.html#module-vizasm.analysis.asm.cpu.x86.ObjcRuntime_x86"><tt class="docutils literal"><span class="pre">ObjcRuntime_x86</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.analysis.asm.cpu.x86.html#module-vizasm.analysis.asm.cpu.x86.ParseUtil_x86"><tt class="docutils literal"><span class="pre">ParseUtil_x86</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.analysis.asm.cpu.x86.html#module-vizasm.analysis.asm.cpu.x86.Register_x86"><tt class="docutils literal"><span class="pre">Register_x86</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l7"><a class="reference internal" href="vizasm.analysis.asm.cpu.x86_64.html">x86_64 Package</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.analysis.asm.cpu.x86_64.html#module-vizasm.analysis.asm.cpu.x86_64.ASM_x86_64"><tt class="docutils literal"><span class="pre">ASM_x86_64</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.analysis.asm.cpu.x86_64.html#module-vizasm.analysis.asm.cpu.x86_64.AsmRegEx_x86_64"><tt class="docutils literal"><span class="pre">AsmRegEx_x86_64</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.analysis.asm.cpu.x86_64.html#module-vizasm.analysis.asm.cpu.x86_64.Cpu_x86_64"><tt class="docutils literal"><span class="pre">Cpu_x86_64</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.analysis.asm.cpu.x86_64.html#module-vizasm.analysis.asm.cpu.x86_64.ObjcRuntime_x86_64"><tt class="docutils literal"><span class="pre">ObjcRuntime_x86_64</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.analysis.asm.cpu.x86_64.html#module-vizasm.analysis.asm.cpu.x86_64.ParseUtil_x86_64"><tt class="docutils literal"><span class="pre">ParseUtil_x86_64</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.analysis.asm.cpu.x86_64.html#module-vizasm.analysis.asm.cpu.x86_64.Register_x86_64"><tt class="docutils literal"><span class="pre">Register_x86_64</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="vizasm.analysis.security.html">security Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.analysis.security.html#module-vizasm.analysis.security.SecurityAnalyzer"><tt class="docutils literal"><span class="pre">SecurityAnalyzer</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.analysis.security.html#module-vizasm.analysis.security.SecurityFilters"><tt class="docutils literal"><span class="pre">SecurityFilters</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.analysis.security.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="vizasm.analysis.security.filter.html">filter Package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.analysis.security.filter.html#id1"><tt class="docutils literal"><span class="pre">filter</span></tt> Package</a></li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.BackgroundTasksFilter"><tt class="docutils literal"><span class="pre">BackgroundTasksFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.CFStreamSSLLevelFilter"><tt class="docutils literal"><span class="pre">CFStreamSSLLevelFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.CookiePolicyFilter"><tt class="docutils literal"><span class="pre">CookiePolicyFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.CustomFilter"><tt class="docutils literal"><span class="pre">CustomFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.DataProtectionFilter"><tt class="docutils literal"><span class="pre">DataProtectionFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.FormatStringFilter"><tt class="docutils literal"><span class="pre">FormatStringFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.FrameworkClassFilter"><tt class="docutils literal"><span class="pre">FrameworkClassFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.GeoLocationFilter"><tt class="docutils literal"><span class="pre">GeoLocationFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.IPCFilter"><tt class="docutils literal"><span class="pre">IPCFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.KeyChainFilter"><tt class="docutils literal"><span class="pre">KeyChainFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.NSStreamSSLLevelFilter"><tt class="docutils literal"><span class="pre">NSStreamSSLLevelFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.NSUserDefaultsFilter"><tt class="docutils literal"><span class="pre">NSUserDefaultsFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.RandomFuncFilter"><tt class="docutils literal"><span class="pre">RandomFuncFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.SQLiteFilter"><tt class="docutils literal"><span class="pre">SQLiteFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.SeatBeltFilter"><tt class="docutils literal"><span class="pre">SeatBeltFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.SecurityFilter"><tt class="docutils literal"><span class="pre">SecurityFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.UIPasteBoardFilter"><tt class="docutils literal"><span class="pre">UIPasteBoardFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.UntrustedSSLCertsFilter"><tt class="docutils literal"><span class="pre">UntrustedSSLCertsFilter</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.analysis.security.filter.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="vizasm.analysis.security.filter.util.html">util Package</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.analysis.security.filter.util.html#id1"><tt class="docutils literal"><span class="pre">util</span></tt> Package</a></li>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.analysis.security.filter.util.html#module-vizasm.analysis.security.filter.util.MethodCallFilterUtil"><tt class="docutils literal"><span class="pre">MethodCallFilterUtil</span></tt> Module</a></li>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.analysis.security.filter.util.html#module-vizasm.analysis.security.filter.util.MethodDefFilterUtil"><tt class="docutils literal"><span class="pre">MethodDefFilterUtil</span></tt> Module</a></li>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.analysis.security.filter.util.html#module-vizasm.analysis.security.filter.util.Util"><tt class="docutils literal"><span class="pre">Util</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vizasm.hopper.html">hopper Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.hopper.html#module-vizasm.hopper.HopperAnnotationInterface"><tt class="docutils literal"><span class="pre">HopperAnnotationInterface</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.hopper.html#module-vizasm.hopper.HopperLoggingHandler"><tt class="docutils literal"><span class="pre">HopperLoggingHandler</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.hopper.html#module-vizasm.hopper.hopannotate"><tt class="docutils literal"><span class="pre">hopannotate</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.hopper.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="vizasm.hopper.scripts.html">scripts Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.hopper.scripts.html#vizasm-arm-helper-module"><tt class="docutils literal"><span class="pre">vizasm_arm_helper</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.hopper.scripts.html#vizasm-hopper-module"><tt class="docutils literal"><span class="pre">vizasm_hopper</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vizasm.model.html">model Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.html#module-vizasm.model.ModelUtil"><tt class="docutils literal"><span class="pre">ModelUtil</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="vizasm.model.asm.html">asm Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.asm.html#module-vizasm.model.asm.CString"><tt class="docutils literal"><span class="pre">CString</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.asm.html#module-vizasm.model.asm.Register"><tt class="docutils literal"><span class="pre">Register</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.asm.html#module-vizasm.model.asm.Segments"><tt class="docutils literal"><span class="pre">Segments</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.asm.html#module-vizasm.model.asm.StackVar"><tt class="docutils literal"><span class="pre">StackVar</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.asm.html#module-vizasm.model.asm.Value"><tt class="docutils literal"><span class="pre">Value</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.asm.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="vizasm.model.asm.imp.html">imp Package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.model.asm.imp.html#module-vizasm.model.asm.imp.Imp"><tt class="docutils literal"><span class="pre">Imp</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.model.asm.imp.html#module-vizasm.model.asm.imp.ImpGot"><tt class="docutils literal"><span class="pre">ImpGot</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.model.asm.imp.html#module-vizasm.model.asm.imp.ImpStub"><tt class="docutils literal"><span class="pre">ImpStub</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="vizasm.model.asm.ivar.html">ivar Package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.model.asm.ivar.html#module-vizasm.model.asm.ivar.IVar"><tt class="docutils literal"><span class="pre">IVar</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.model.asm.ivar.html#module-vizasm.model.asm.ivar.IvarRefCouldNotBeResolved"><tt class="docutils literal"><span class="pre">IvarRefCouldNotBeResolved</span></tt> Module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.model.asm.ivar.html#module-vizasm.model.asm.ivar.IvarRefException"><tt class="docutils literal"><span class="pre">IvarRefException</span></tt> Module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.model.asm.ivar.html#module-vizasm.model.asm.ivar.IvarRefWrongTypeException"><tt class="docutils literal"><span class="pre">IvarRefWrongTypeException</span></tt> Module</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="vizasm.model.asm.var_assignment.html">var_assignment Package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.model.asm.var_assignment.html#module-vizasm.model.asm.var_assignment.VarAssignment"><tt class="docutils literal"><span class="pre">VarAssignment</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.model.asm.var_assignment.html#module-vizasm.model.asm.var_assignment.VarAssignmentIvarRegisterWrongTypeException"><tt class="docutils literal"><span class="pre">VarAssignmentIvarRegisterWrongTypeException</span></tt> Module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.model.asm.var_assignment.html#module-vizasm.model.asm.var_assignment.VarAssignmentResolveIvarRegisterException"><tt class="docutils literal"><span class="pre">VarAssignmentResolveIvarRegisterException</span></tt> Module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.model.asm.var_assignment.html#module-vizasm.model.asm.var_assignment.VarAssignmentResolveRegisterException"><tt class="docutils literal"><span class="pre">VarAssignmentResolveRegisterException</span></tt> Module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.model.asm.var_assignment.html#module-vizasm.model.asm.var_assignment.VarAssignmentResolveSelfrefRegisterException"><tt class="docutils literal"><span class="pre">VarAssignmentResolveSelfrefRegisterException</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="vizasm.model.objc.html">objc Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.objc.html#module-vizasm.model.objc.AsmParserInterface"><tt class="docutils literal"><span class="pre">AsmParserInterface</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.objc.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="vizasm.model.objc.arguments.html">arguments Package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.model.objc.arguments.html#module-vizasm.model.objc.arguments.Arguments"><tt class="docutils literal"><span class="pre">Arguments</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.model.objc.arguments.html#module-vizasm.model.objc.arguments.ArgumentsException"><tt class="docutils literal"><span class="pre">ArgumentsException</span></tt> Module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.model.objc.arguments.html#module-vizasm.model.objc.arguments.ArgumentsOverloadedException"><tt class="docutils literal"><span class="pre">ArgumentsOverloadedException</span></tt> Module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.model.objc.arguments.html#module-vizasm.model.objc.arguments.ArgumentsUnderloadedException"><tt class="docutils literal"><span class="pre">ArgumentsUnderloadedException</span></tt> Module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.model.objc.arguments.html#module-vizasm.model.objc.arguments.CFormatString"><tt class="docutils literal"><span class="pre">CFormatString</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.model.objc.arguments.html#module-vizasm.model.objc.arguments.FillFromCpuInterface"><tt class="docutils literal"><span class="pre">FillFromCpuInterface</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.model.objc.arguments.html#module-vizasm.model.objc.arguments.FormatString"><tt class="docutils literal"><span class="pre">FormatString</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.model.objc.arguments.html#module-vizasm.model.objc.arguments.Selector"><tt class="docutils literal"><span class="pre">Selector</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="vizasm.model.objc.methodcall.html">methodcall Package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.model.objc.methodcall.html#module-vizasm.model.objc.methodcall.MethodCall"><tt class="docutils literal"><span class="pre">MethodCall</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.model.objc.methodcall.html#module-vizasm.model.objc.methodcall.MethodCallItem"><tt class="docutils literal"><span class="pre">MethodCallItem</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="vizasm.model.objc.object.html">object Package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.model.objc.object.html#module-vizasm.model.objc.object.Object"><tt class="docutils literal"><span class="pre">Object</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.model.objc.object.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="vizasm.model.objc.object.nsobject.html">nsobject Package</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.model.objc.object.nsobject.html#module-vizasm.model.objc.object.nsobject.NSObject"><tt class="docutils literal"><span class="pre">NSObject</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.model.objc.object.nsobject.html#module-vizasm.model.objc.object.nsobject.NSObjectInterface"><tt class="docutils literal"><span class="pre">NSObjectInterface</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.model.objc.object.nsobject.html#module-vizasm.model.objc.object.nsobject.NSString"><tt class="docutils literal"><span class="pre">NSString</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.model.objc.object.nsobject.html#module-vizasm.model.objc.object.nsobject.Variable"><tt class="docutils literal"><span class="pre">Variable</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.model.objc.object.nsobject.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l9"><a class="reference internal" href="vizasm.model.objc.object.nsobject.objcclass.html">objcclass Package</a><ul>
+<li class="toctree-l10"><a class="reference internal" href="vizasm.model.objc.object.nsobject.objcclass.html#module-vizasm.model.objc.object.nsobject.objcclass.CategoryClass"><tt class="docutils literal"><span class="pre">CategoryClass</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l10"><a class="reference internal" href="vizasm.model.objc.object.nsobject.objcclass.html#module-vizasm.model.objc.object.nsobject.objcclass.ObjcClass"><tt class="docutils literal"><span class="pre">ObjcClass</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vizasm.reader.html">reader Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.reader.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="vizasm.reader.asm.html">asm Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.reader.asm.html#module-vizasm.reader.asm.AsmReader"><tt class="docutils literal"><span class="pre">AsmReader</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.reader.asm.html#module-vizasm.reader.asm.AsmRegEx"><tt class="docutils literal"><span class="pre">AsmRegEx</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vizasm.tests.html">tests Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.tests.html#module-vizasm.tests.Tests"><tt class="docutils literal"><span class="pre">Tests</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.tests.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="vizasm.tests.model.html">model Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.tests.model.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="vizasm.tests.model.objc.html">objc Package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.tests.model.objc.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="vizasm.tests.model.objc.function.html">function Package</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.tests.model.objc.function.html#module-vizasm.tests.model.objc.function.Function"><tt class="docutils literal"><span class="pre">Function</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="vizasm.tests.security.html">security Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.tests.security.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="vizasm.tests.security.filter.html">filter Package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.tests.security.filter.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="vizasm.tests.security.filter.util.html">util Package</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.tests.security.filter.util.html#module-vizasm.tests.security.filter.util.FunctionFilterUtilTests"><tt class="docutils literal"><span class="pre">FunctionFilterUtilTests</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.tests.security.filter.util.html#module-vizasm.tests.security.filter.util.MethodDefFilterUtilTests"><tt class="docutils literal"><span class="pre">MethodDefFilterUtilTests</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vizasm.util.html">util Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.util.html#module-vizasm.util.Log"><tt class="docutils literal"><span class="pre">Log</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.util.html#module-vizasm.util.ModuleClassNameException"><tt class="docutils literal"><span class="pre">ModuleClassNameException</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.util.html#module-vizasm.util.Util"><tt class="docutils literal"><span class="pre">Util</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.util.html#module-vizasm.util.WrapperException"><tt class="docutils literal"><span class="pre">WrapperException</span></tt> Module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vizasm.vizasm_networkx.html">vizasm_networkx Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.vizasm_networkx.html#module-vizasm.vizasm_networkx.AddMethodCallToGraphInterface"><tt class="docutils literal"><span class="pre">AddMethodCallToGraphInterface</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.vizasm_networkx.html#module-vizasm.vizasm_networkx.AttributeDictInterface"><tt class="docutils literal"><span class="pre">AttributeDictInterface</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.vizasm_networkx.html#module-vizasm.vizasm_networkx.AttributeNodeInterface"><tt class="docutils literal"><span class="pre">AttributeNodeInterface</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.vizasm_networkx.html#module-vizasm.vizasm_networkx.GexfConstants"><tt class="docutils literal"><span class="pre">GexfConstants</span></tt> Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="vizasm.vizasm_networkx.html#see-also">See Also</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.vizasm_networkx.html#module-vizasm.vizasm_networkx.Graph"><tt class="docutils literal"><span class="pre">Graph</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.vizasm_networkx.html#module-vizasm.vizasm_networkx.GraphUtil"><tt class="docutils literal"><span class="pre">GraphUtil</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.vizasm_networkx.html#module-vizasm.vizasm_networkx.NodeAttributes"><tt class="docutils literal"><span class="pre">NodeAttributes</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

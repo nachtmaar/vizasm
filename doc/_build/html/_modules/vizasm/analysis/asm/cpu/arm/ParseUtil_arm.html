@@ -1,0 +1,415 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm.analysis.asm.cpu.arm.ParseUtil_arm &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="../../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vizasm.analysis.asm.cpu.arm.ParseUtil_arm</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 31.08.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.ParseUtil</span> <span class="kn">import</span> <span class="n">ParseUtil</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.arm.AsmRegEx_arm</span> <span class="kn">import</span> <span class="n">AsmRegEx_arm</span> <span class="k">as</span> <span class="n">regexp</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.asm.imp.ImpGot</span> <span class="kn">import</span> <span class="n">ImpGot</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.asm.imp.ImpStub</span> <span class="kn">import</span> <span class="n">ImpStub</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.asm.ivar.IVar</span> <span class="kn">import</span> <span class="n">IVar</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.asm.var_assignment.VarAssignment</span> <span class="kn">import</span> <span class="n">VarAssignment</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.object.nsobject.Variable</span> <span class="kn">import</span> <span class="n">Variable</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.object.nsobject.objcclass.ObjcClass</span> <span class="kn">import</span> <span class="n">ObjcClass</span>
+<span class="kn">from</span> <span class="nn">vizasm.util</span> <span class="kn">import</span> <span class="n">Util</span>
+
+<div class="viewcode-block" id="ParseUtil_arm"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.arm.html#vizasm.analysis.asm.cpu.arm.ParseUtil_arm.ParseUtil_arm">[docs]</a><span class="k">class</span> <span class="nc">ParseUtil_arm</span><span class="p">(</span><span class="n">ParseUtil</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; `ParseUtil` for arm arch &#39;&#39;&#39;</span>
+    
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ParseUtil_arm.parse_add"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.arm.html#vizasm.analysis.asm.cpu.arm.ParseUtil_arm.ParseUtil_arm.parse_add">[docs]</a>    <span class="k">def</span> <span class="nf">parse_add</span><span class="p">(</span><span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Parse an add statement like e.g. &quot;add r7, sp, #0xc&quot;</span>
+<span class="sd">        and return tuple(destination, operand1, operand2).</span>
+<span class="sd">        Operand2 can be empty (None).</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">add_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_ADD</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">add_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">destination</span> <span class="o">=</span> <span class="n">add_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_ADD_GR_DEST</span><span class="p">)</span>
+            <span class="n">operand1</span><span class="p">,</span> <span class="n">operand2</span> <span class="o">=</span> <span class="n">add_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_ADD_GR_OPERAND1</span><span class="p">),</span> <span class="n">add_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_ADD_GR_OPERAND2</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">destination</span><span class="p">,</span> <span class="n">operand1</span><span class="p">,</span> <span class="n">operand2</span>
+        <span class="k">return</span> <span class="bp">None</span>
+        </div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ParseUtil_arm.parse_assignment_split"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.arm.html#vizasm.analysis.asm.cpu.arm.ParseUtil_arm.ParseUtil_arm.parse_assignment_split">[docs]</a>    <span class="k">def</span> <span class="nf">parse_assignment_split</span><span class="p">(</span><span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Parse an assignment and split to operation, value before and after comma</span>
+<span class="sd">        See `RE_ASSINGMENT_SPLIT` for details.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple&lt;string, string, string&gt;</span>
+<span class="sd">            tuple containing operation, value1, value2</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">assignment_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_ASSINGMENT_SPLIT</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="n">op</span> <span class="o">=</span> <span class="n">val1</span> <span class="o">=</span> <span class="n">val2</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="n">assignment_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">op</span> <span class="o">=</span> <span class="n">assignment_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_ASSINGMENT_SPLIT_GR_OP</span><span class="p">)</span>
+            <span class="n">val1</span> <span class="o">=</span> <span class="n">assignment_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_ASSINGMENT_SPLIT_GR_VAL1</span><span class="p">)</span>
+            <span class="n">val2</span> <span class="o">=</span> <span class="n">assignment_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_ASSINGMENT_SPLIT_GR_VAL2</span><span class="p">)</span>   
+        <span class="k">return</span> <span class="n">op</span><span class="p">,</span> <span class="n">val1</span><span class="p">,</span> <span class="n">val2</span>
+    </div>
+<div class="viewcode-block" id="ParseUtil_arm.parse_stack_push_via_stm"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.arm.html#vizasm.analysis.asm.cpu.arm.ParseUtil_arm.ParseUtil_arm.parse_stack_push_via_stm">[docs]</a>    <span class="k">def</span> <span class="nf">parse_stack_push_via_stm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">,</span> <span class="n">stack_pointer_name</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Parse a stack push via &quot;stm&quot; command like e.g. &quot;&quot;stm.w      sp, {r3, r11}&quot;.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        stack_pointer_name: string</span>
+<span class="sd">            name of the stack pointer register</span>
+<span class="sd">            </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list&lt;Register&gt;</span>
+<span class="sd">            list of pushed registers.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">reg_list_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_re_stack_push_via_stm</span><span class="p">(</span><span class="n">stack_pointer_name</span><span class="p">,</span> <span class="n">asmline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">reg_list_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">reg_list</span> <span class="o">=</span> <span class="n">reg_list_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_STACK_PUSH_GR_REGISTERS</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;,&#39;</span><span class="p">)</span>
+            <span class="n">reg_list</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">register_class</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">reg_list</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">reg_list</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    </div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ParseUtil_arm.parse_offset_addring_offset_needed"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.arm.html#vizasm.analysis.asm.cpu.arm.ParseUtil_arm.ParseUtil_arm.parse_offset_addring_offset_needed">[docs]</a>    <span class="k">def</span> <span class="nf">parse_offset_addring_offset_needed</span><span class="p">(</span><span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Parse arm offset addressing like e.g. &quot;[sp, #0x8]&quot; and return the values as a tuple&lt;string&gt;</span>
+<span class="sd">        Without an offset (meaning a second value seperated by &quot;,&quot;) this will not match!</span>
+<span class="sd">        -&gt; &quot;[r5] does not match! </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">offset_addr_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_OFFSET_ADDRESSING</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">offset_addr_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">offset_addr</span> <span class="o">=</span> <span class="n">offset_addr_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_OFFSET_ADDRESSING_GR_OFFSET</span><span class="p">)</span>
+            <span class="c"># offset is needed! if not given return None</span>
+            <span class="k">if</span> <span class="n">offset_addr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">offset_addr_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_OFFSET_ADDRESSING_GR_BASE_REGISTER</span><span class="p">),</span> <span class="n">offset_addr</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    </div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ParseUtil_arm.parse_offset_addressing"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.arm.html#vizasm.analysis.asm.cpu.arm.ParseUtil_arm.ParseUtil_arm.parse_offset_addressing">[docs]</a>    <span class="k">def</span> <span class="nf">parse_offset_addressing</span><span class="p">(</span><span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Parse arm offset addressing like e.g. &quot;[sp, #0x8]&quot; and return the values as a tuple&lt;string&gt;</span>
+<span class="sd">        If no offset given, assume 0x0 is offset (e.g. &quot;[sp, #0x8]&quot;) </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">assgn_split</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="n">offset_addr_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_OFFSET_ADDRESSING</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">offset_addr_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">offset_addr</span> <span class="o">=</span> <span class="n">offset_addr_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_OFFSET_ADDRESSING_GR_OFFSET</span><span class="p">)</span>
+            <span class="n">assgn_split</span> <span class="o">=</span> <span class="n">offset_addr_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_OFFSET_ADDRESSING_GR_BASE_REGISTER</span><span class="p">),</span> <span class="n">offset_addr</span>
+            <span class="n">oa_base_reg</span><span class="p">,</span> <span class="n">oa_offset_addr</span> <span class="o">=</span> <span class="n">assgn_split</span>
+            <span class="k">if</span> <span class="n">oa_offset_addr</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">oa_offset_addr</span> <span class="o">=</span> <span class="s">&#39;0x0&#39;</span>
+                <span class="k">return</span> <span class="n">oa_base_reg</span><span class="p">,</span> <span class="n">oa_offset_addr</span>
+        <span class="k">return</span> <span class="bp">None</span>
+        </div>
+<div class="viewcode-block" id="ParseUtil_arm.parse_stack_pointer_sub"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.arm.html#vizasm.analysis.asm.cpu.arm.ParseUtil_arm.ParseUtil_arm.parse_stack_pointer_sub">[docs]</a>    <span class="k">def</span> <span class="nf">parse_stack_pointer_sub</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Read a line like e.g. &quot;sub sp, #0x14&quot;</span>
+<span class="sd">        and return the value that is being subtracted from the stack pointer as int.</span>
+<span class="sd">        None if did not match. </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">subtracted_value</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">stack_pointer_sub</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cpu</span><span class="o">.</span><span class="n">stack_pointer_register</span><span class="p">()</span><span class="o">.</span><span class="n">register</span><span class="p">,</span> <span class="n">asmline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">subtracted_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">subtracted_value</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    
+<span class="c">#####################################################################################</span>
+<span class="c"># ParseUtil                                                                         #</span>
+<span class="c">#####################################################################################</span></div>
+<div class="viewcode-block" id="ParseUtil_arm.parse_objc_class_from_classref"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.arm.html#vizasm.analysis.asm.cpu.arm.ParseUtil_arm.ParseUtil_arm.parse_objc_class_from_classref">[docs]</a>    <span class="k">def</span> <span class="nf">parse_objc_class_from_classref</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="n">classref_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_CLASSREF</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">classref_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">ObjcClass</span><span class="p">(</span><span class="n">classref_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_CLASSREF_GR_CLASSREF</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">None</span>
+</div>
+<div class="viewcode-block" id="ParseUtil_arm.parse_objc_class_from_framework_class"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.arm.html#vizasm.analysis.asm.cpu.arm.ParseUtil_arm.ParseUtil_arm.parse_objc_class_from_framework_class">[docs]</a>    <span class="k">def</span> <span class="nf">parse_objc_class_from_framework_class</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    </div>
+<div class="viewcode-block" id="ParseUtil_arm.parse_var_assignment_without_ivar_ref_from_asmline"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.arm.html#vizasm.analysis.asm.cpu.arm.ParseUtil_arm.ParseUtil_arm.parse_var_assignment_without_ivar_ref_from_asmline">[docs]</a>    <span class="k">def</span> <span class="nf">parse_var_assignment_without_ivar_ref_from_asmline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Create a VarAssignment from asmline like e.g. &quot;[r4, r5]&quot; </span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        asmline: String</span>
+<span class="sd">            </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        VarAssignmentResolveSelfrefRegisterException</span>
+<span class="sd">            if the value cannot be resolved</span>
+<span class="sd">        VarAssignmentResolveIvarRegisterException</span>
+<span class="sd">            if the value cannot be resolved and `resolve_ivar_value` is true</span>
+<span class="sd">        VarAssignmentIvarRegisterWrongTypeException</span>
+<span class="sd">            if the type of the ivar_reg is not `IVar and `resolve_ivar_value` is true</span>
+<span class="sd">                        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        VarAssignment</span>
+<span class="sd">            the VarAssignment without ivar_ref set (None if no VarAssignment)           </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">offset_addressing</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_offset_addring_offset_needed</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">offset_addressing</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">reg1</span><span class="p">,</span> <span class="n">reg2</span> <span class="o">=</span> <span class="n">offset_addressing</span>
+            <span class="n">reg1</span><span class="p">,</span> <span class="n">reg2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">register_class</span><span class="p">(</span><span class="n">reg1</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">register_class</span><span class="p">(</span><span class="n">reg2</span><span class="p">)</span>
+            <span class="c"># check that this is no stack operation like e.g. &quot;str r1, [sp, #0x4]&quot;</span>
+            <span class="k">if</span> <span class="n">reg1</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cpu</span><span class="o">.</span><span class="n">stack_pointer_register</span><span class="p">():</span>
+                <span class="k">return</span> <span class="n">VarAssignment</span><span class="p">(</span><span class="n">reg1</span><span class="p">,</span> <span class="n">reg2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cpu</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>       
+    </div>
+<div class="viewcode-block" id="ParseUtil_arm.parse_var_assignment_with_ivar_ref_from_asmline"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.arm.html#vizasm.analysis.asm.cpu.arm.ParseUtil_arm.ParseUtil_arm.parse_var_assignment_with_ivar_ref_from_asmline">[docs]</a>    <span class="k">def</span> <span class="nf">parse_var_assignment_with_ivar_ref_from_asmline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Create a VarAssignment from asmline like e.g. &quot;r0, [r4, r5]&quot;.</span>
+<span class="sd">        Try to resolve the ivar_ref of the IVar from the register of the left side of the assignment.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        asmline: String</span>
+<span class="sd">            the `asmline` should have the form of &quot;r0, [r4, r5]&quot; where the part before the comma is optional. </span>
+<span class="sd">            If left out, the ivar_ref cannot be resolved.</span>
+<span class="sd">        cpu: Cpu</span>
+<span class="sd">            the cpu which is needed for resolving the values of the registers</span>
+<span class="sd">        register_class: class</span>
+<span class="sd">            the class of the register to create. If non given, a string is used for the register representation.</span>
+<span class="sd">            </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        VarAssignmentResolveSelfrefRegisterException</span>
+<span class="sd">            if the value cannot be resolved</span>
+<span class="sd">        VarAssignmentResolveIvarRegisterException</span>
+<span class="sd">            if the value cannot be resolved and `resolve_ivar_value` is true</span>
+<span class="sd">        VarAssignmentIvarRegisterWrongTypeException</span>
+<span class="sd">            if the type of the ivar_reg is not `IVar and `resolve_ivar_value` is true</span>
+<span class="sd">            </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        VarAssignment</span>
+<span class="sd">            the VarAssignment with ivar_ref set (None if no VarAssignment)</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">assignment_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_ASSINGMENT_SPLIT</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="n">var_assign</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="n">assignment_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">op</span> <span class="o">=</span> <span class="n">assignment_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_ASSINGMENT_SPLIT_GR_OP</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">op</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;str&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">val1</span> <span class="o">=</span> <span class="n">assignment_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_ASSINGMENT_SPLIT_GR_VAL1</span><span class="p">)</span>
+                <span class="n">val2</span> <span class="o">=</span> <span class="n">assignment_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_ASSINGMENT_SPLIT_GR_VAL2</span><span class="p">)</span>
+                <span class="n">reg1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">register_class</span><span class="p">(</span><span class="n">val1</span><span class="p">)</span>
+                <span class="c"># conclude that is not any stack operation like e.g. &quot;str        r1, [sp, #0x4]&quot;</span>
+                <span class="k">if</span> <span class="n">reg1</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_cpu</span><span class="p">()</span><span class="o">.</span><span class="n">stack_pointer_register</span><span class="p">():</span>
+                    <span class="n">var_assign</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_var_assignment_without_ivar_ref_from_asmline</span><span class="p">(</span><span class="n">val2</span><span class="p">)</span>
+                    <span class="n">ivar_ref</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cpu</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">registers</span><span class="o">.</span><span class="n">get_value_for_register</span><span class="p">(</span><span class="n">reg1</span><span class="p">)</span>
+                    <span class="c"># just an assignment? check if var_assign is None to conclude that pattern really is a var assignment</span>
+                    <span class="k">if</span> <span class="n">var_assign</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">ivar_ref</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                        <span class="n">ivar_val</span> <span class="o">=</span> <span class="n">var_assign</span><span class="o">.</span><span class="n">get_ivar_value</span><span class="p">()</span>
+                        <span class="k">if</span> <span class="n">ivar_val</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                            <span class="n">ivar_val</span><span class="o">.</span><span class="n">set_ivar_ref</span><span class="p">(</span><span class="n">ivar_ref</span><span class="p">)</span>            
+                    <span class="k">return</span> <span class="n">var_assign</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    </div>
+<div class="viewcode-block" id="ParseUtil_arm.parse_ivar"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.arm.html#vizasm.analysis.asm.cpu.arm.ParseUtil_arm.ParseUtil_arm.parse_ivar">[docs]</a>    <span class="k">def</span> <span class="nf">parse_ivar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Create a ObjcClass from e.g. &quot;IVAR_0x291c&quot; &#39;&#39;&#39;</span> 
+        <span class="n">ivar_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_IVAR</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ivar_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">ivar_name</span> <span class="o">=</span> <span class="n">ivar_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_IVAR_GR_NAME</span><span class="p">)</span>
+            <span class="n">var</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="n">ivar_name</span><span class="p">)</span>
+            <span class="n">ivar_class</span> <span class="o">=</span> <span class="n">ObjcClass</span><span class="p">(</span><span class="s">&#39;IVAR&#39;</span><span class="p">,</span> <span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="n">var</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">IVar</span><span class="p">(</span><span class="n">ivar_class</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span> 
+</div>
+<div class="viewcode-block" id="ParseUtil_arm.parse_imp_stub"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.arm.html#vizasm.analysis.asm.cpu.arm.ParseUtil_arm.ParseUtil_arm.parse_imp_stub">[docs]</a>    <span class="k">def</span> <span class="nf">parse_imp_stub</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Parse an imp stub like e.g. &quot;imp___symbolstub1__objc_msgSend&quot; &#39;&#39;&#39;</span>
+        <span class="n">imp_symbolstub_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_IMP_SYMBOLSTUB</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">imp_symbolstub_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">ImpStub</span><span class="p">(</span><span class="n">imp_symbolstub_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_IMP_STUBS_GR_IMP_SYMBOLSTUB</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    
+    <span class="c"># TODO: RE_IMP_NL_SYMBOL_PTR SAME AS IMPGOT OR IMPSTUB ??</span></div>
+<div class="viewcode-block" id="ParseUtil_arm.parse_imp_got"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.arm.html#vizasm.analysis.asm.cpu.arm.ParseUtil_arm.ParseUtil_arm.parse_imp_got">[docs]</a>    <span class="k">def</span> <span class="nf">parse_imp_got</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+            <span class="n">imp_nl_symbol_ptr_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_IMP_NL_SYMBOL_PTR</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">imp_nl_symbol_ptr_match</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">ImpGot</span><span class="p">(</span><span class="n">imp_nl_symbol_ptr_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_IMP_NL_SYMBOL_PTR_GR_NAME</span><span class="p">))</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        </div>
+<div class="viewcode-block" id="ParseUtil_arm.parse_register"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.arm.html#vizasm.analysis.asm.cpu.arm.ParseUtil_arm.ParseUtil_arm.parse_register">[docs]</a>    <span class="k">def</span> <span class="nf">parse_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">register</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Parse a register and wrap it into the `Register` class.</span>
+<span class="sd">        Use this to match as last, cause it will match nearly everything! &#39;&#39;&#39;</span>
+        <span class="n">register_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_REGISTER</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">register</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">register_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">register_class</span><span class="p">(</span><span class="n">register_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_REGISTER_GR_NAME</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    </div>
+<div class="viewcode-block" id="ParseUtil_arm.parse_call_instruction"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.arm.html#vizasm.analysis.asm.cpu.arm.ParseUtil_arm.ParseUtil_arm.parse_call_instruction">[docs]</a>    <span class="k">def</span> <span class="nf">parse_call_instruction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Read a call instruction like e.g. &quot;blx imp___symbolstub1__objc_msgSend&quot; &#39;&#39;&#39;</span>
+        <span class="n">call_instr_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_CALL_INSTRUCTION</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">call_instr_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">call_instr_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_CALL_INSTRUCTION_GR_CALLED</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+</div>
+<div class="viewcode-block" id="ParseUtil_arm.parse_stack_access"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.arm.html#vizasm.analysis.asm.cpu.arm.ParseUtil_arm.ParseUtil_arm.parse_stack_access">[docs]</a>    <span class="k">def</span> <span class="nf">parse_stack_access</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Parse a stack access like e.g. &quot;[sp, #0x8]&quot; or &quot;[r7, #0x8]&quot; or &quot;[sp] or &quot;[sp], #0x4&quot;.</span>
+<span class="sd">        The latter leads to an address of 0x0.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple&lt;string, string&gt;</span>
+<span class="sd">            Return the stack pointer name as well as the stack address as hex string.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">cpu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cpu</span>
+        <span class="n">frame_reg</span><span class="p">,</span> <span class="n">stack_reg</span> <span class="o">=</span> <span class="n">cpu</span><span class="o">.</span><span class="n">stack_pointer_register</span><span class="p">()</span><span class="o">.</span><span class="n">register</span><span class="p">,</span> <span class="n">cpu</span><span class="o">.</span><span class="n">frame_pointer_register</span><span class="p">()</span><span class="o">.</span><span class="n">register</span>
+        <span class="n">stack_access_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_re_stack</span><span class="p">(</span><span class="n">frame_reg</span><span class="p">,</span> <span class="n">stack_reg</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">stack_access_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">stack_addr</span> <span class="o">=</span> <span class="n">Util</span><span class="o">.</span><span class="n">get_fst_not_none</span><span class="p">((</span><span class="n">stack_access_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_STACK_GR_ADDRESS</span><span class="p">),</span> <span class="n">stack_access_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_STACK_GR_OFFSET</span><span class="p">)))</span>
+            <span class="n">stack_pointer_name</span> <span class="o">=</span> <span class="n">stack_access_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_STACK_GR_STACK_POINTER</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">stack_addr</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">stack_addr</span> <span class="o">=</span> <span class="s">&#39;0x0&#39;</span>
+            <span class="k">return</span> <span class="n">stack_pointer_name</span><span class="p">,</span> <span class="n">stack_addr</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    
+</div></div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.arm.Register_Arm</span> <span class="kn">import</span> <span class="n">Register_arm</span> <span class="k">as</span> <span class="n">reg</span>
+    <span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.arm.Cpu_arm</span> <span class="kn">import</span> <span class="n">Cpu_arm</span>
+    <span class="kn">from</span> <span class="nn">vizasm.model.objc.arguments.Selector</span> <span class="kn">import</span> <span class="n">Selector</span>
+    <span class="kn">from</span> <span class="nn">vizasm.model.objc.function.MsgSend</span> <span class="kn">import</span> <span class="n">MsgSend</span>
+ 
+    <span class="n">cpu</span> <span class="o">=</span> <span class="n">Cpu_arm</span><span class="p">(</span><span class="n">superclasses_dict</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="n">pu</span> <span class="o">=</span> <span class="n">ParseUtil_arm</span><span class="p">(</span><span class="n">cpu</span><span class="p">,</span> <span class="n">reg</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_imp_stub</span><span class="p">(</span><span class="s">&#39;00002708 01F068EC                        blx        imp___symbolstub1__objc_msgSend&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_objc_class</span><span class="p">(</span><span class="s">&#39;000026c0 1068                            ldr        r0, [r2]                              ; @bind__OBJC_CLASS_$_UIScreen&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_imp</span><span class="p">(</span><span class="s">&#39;@imp___nl_symbol_ptr__objc_retain&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_imp</span><span class="p">(</span><span class="s">&#39;@imp___nl_symbol_ptr___NSConcreteStackBlock&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_imp</span><span class="p">(</span><span class="s">&#39;0000a71c 0668                            ldr        r6, [r0]                              ; @imp___nl_symbol_ptr__NSFileProtectionKey&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_ivar</span><span class="p">(</span><span class="s">&#39;add        r1, pc ; IVAR_0x291c&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_assignment_split</span><span class="p">(</span><span class="s">&#39;add        r7, sp, #0x8&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_assignment_split</span><span class="p">(</span><span class="s">&#39;add        r7, sp&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_assignment_split</span><span class="p">(</span><span class="s">&#39;str r0, [r4, r5]&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&#39;register: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_register</span><span class="p">(</span><span class="s">&#39; r2                                ; XREF=0x31ae&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_stack_push_via_stm</span><span class="p">(</span><span class="s">&#39;stm.w      sp, {r3, r11}&#39;</span><span class="p">,</span> <span class="n">cpu</span><span class="o">.</span><span class="n">stack_pointer_register</span><span class="p">())</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_stack_push_via_stm</span><span class="p">(</span><span class="s">&#39;stm.w      sp, {r2, r9}&#39;</span><span class="p">,</span> <span class="n">cpu</span><span class="o">.</span><span class="n">stack_pointer_register</span><span class="p">()</span><span class="o">.</span><span class="n">register</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_stack_access</span><span class="p">(</span><span class="s">&#39;[sp, #0x8]&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_stack_access</span><span class="p">(</span><span class="s">&#39;[sp]&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_offset_addring_offset_needed</span><span class="p">(</span><span class="s">&#39;[r0, r4]&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_offset_addressing</span><span class="p">(</span><span class="s">&#39;[r0]&#39;</span><span class="p">)</span>
+       
+    <span class="c"># VarAssignment test</span>
+    <span class="n">cpu</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">registers</span><span class="o">.</span><span class="n">set_value_for_register</span><span class="p">(</span><span class="n">reg</span><span class="p">(</span><span class="s">&#39;r5&#39;</span><span class="p">),</span> <span class="n">IVar</span><span class="p">(</span><span class="n">ObjcClass</span><span class="p">(</span><span class="s">&#39;SelfClass&#39;</span><span class="p">),</span> <span class="n">MsgSend</span><span class="p">(</span><span class="n">ObjcClass</span><span class="p">(</span><span class="s">&#39;Foo&#39;</span><span class="p">),</span> <span class="p">[</span><span class="n">Selector</span><span class="p">(</span><span class="s">&#39;alloc&#39;</span><span class="p">),</span> <span class="n">Selector</span><span class="p">(</span><span class="s">&#39;init&#39;</span><span class="p">)])))</span>
+    <span class="n">cpu</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">registers</span><span class="o">.</span><span class="n">set_value_for_register</span><span class="p">(</span><span class="n">reg</span><span class="p">(</span><span class="s">&#39;r0&#39;</span><span class="p">),</span> <span class="n">ObjcClass</span><span class="p">(</span><span class="s">&#39;Foo&#39;</span><span class="p">))</span>
+    <span class="n">cpu</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">registers</span><span class="o">.</span><span class="n">set_value_for_register</span><span class="p">(</span><span class="n">reg</span><span class="p">(</span><span class="s">&#39;r4&#39;</span><span class="p">),</span> <span class="n">ObjcClass</span><span class="p">(</span><span class="s">&#39;SelfClass&#39;</span><span class="p">))</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_var_assignment_with_ivar_ref_from_asmline</span><span class="p">(</span><span class="s">&#39;str r0, [r4, r5]&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_var_assignment_without_ivar_ref_from_asmline</span><span class="p">(</span><span class="s">&#39;[sp, r5]&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_var_assignment_with_ivar_ref_from_asmline</span><span class="p">(</span><span class="s">&#39;str r0, [sp, r5]&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&#39;stack access: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">pu</span><span class="o">.</span><span class="n">parse_stack_access</span><span class="p">(</span><span class="s">&#39;[sp, #0x4]&#39;</span><span class="p">))</span>
+    <span class="k">print</span> <span class="s">&#39;stack access: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">pu</span><span class="o">.</span><span class="n">parse_stack_access</span><span class="p">(</span><span class="s">&#39;[sp], #0x4&#39;</span><span class="p">))</span>
+    <span class="k">print</span> <span class="s">&#39;stack access: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">pu</span><span class="o">.</span><span class="n">parse_stack_access</span><span class="p">(</span><span class="s">&#39;[sp]&#39;</span><span class="p">))</span>
+     
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_add</span><span class="p">(</span><span class="s">&#39;add        r7, sp, #0xc&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_add</span><span class="p">(</span><span class="s">&#39;add        r7, sp&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_add</span><span class="p">(</span><span class="s">&#39;add        r7, #0xc&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_stack_pointer_sub</span><span class="p">(</span><span class="s">&#39;sub        sp, #0x14&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_call_instruction</span><span class="p">(</span><span class="s">&#39;00002c50 01F0B2E9                        blx        imp___symbolstub1__NSSearchPathForDirectoriesInDomains ; XREF=0x310e&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&#39;call instr: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_call_instruction</span><span class="p">(</span><span class="s">&#39;bl sub_7183c&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_stack_access</span><span class="p">(</span><span class="s">&#39;[r7, #0x8]&#39;</span><span class="p">)</span>
+    
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_assignment_split</span><span class="p">(</span><span class="s">&#39;add r2, pc   ; 0xe5d0c&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_assignment_split</span><span class="p">(</span><span class="s">&#39;ldr        r1,=0xfff&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_assignment_split</span><span class="p">(</span><span class="s">&#39;0000a56c 0546                            mov        r5, r0&#39;</span><span class="p">)</span>
+    
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_register</span><span class="p">(</span><span class="s">&#39;[ro]&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_register</span><span class="p">(</span><span class="s">&#39;ro&#39;</span><span class="p">)</span>
+    
+    
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

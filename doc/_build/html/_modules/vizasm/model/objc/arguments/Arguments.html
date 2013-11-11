@@ -1,0 +1,289 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm.model.objc.arguments.Arguments &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vizasm.model.objc.arguments.Arguments</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 04.04.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.Resetable</span> <span class="kn">import</span> <span class="n">Resetable</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.memory.MemoryLookupException</span> <span class="kn">import</span> \
+    <span class="n">MemoryCouldNotGetAllRegisterValues</span><span class="p">,</span> <span class="n">MemoryCouldNotGetAllStackValues</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.arguments.ArgumentsOverloadedException</span> <span class="kn">import</span> \
+    <span class="n">ArgumentsOverloadedException</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.arguments.ArgumentsUnderloadedException</span> <span class="kn">import</span> \
+    <span class="n">ArgumentsUnderloadedException</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.object.nsobject.NSObject</span> <span class="kn">import</span> <span class="n">NSObject</span>
+
+
+<div class="viewcode-block" id="Arguments"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Arguments.Arguments">[docs]</a><span class="k">class</span> <span class="nc">Arguments</span><span class="p">(</span><span class="n">NSObject</span><span class="p">,</span> <span class="n">Resetable</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    Superclass for a class with arguments that can be filled from the cpu (register or stack)</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    arguments: list&lt;object&gt;</span>
+<span class="sd">        queue holding selector arguments   </span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    cnt_needs_arguments</span>
+<span class="sd">    cnt_has_arguments</span>
+<span class="sd">    &#39;&#39;&#39;</span> 
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">arguments</span><span class="p">,</span> <span class="n">is_static</span><span class="p">):</span>
+        <span class="n">NSObject</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">is_static</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__arguments</span> <span class="o">=</span> <span class="n">arguments</span>
+    
+    <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="n">NSObject</span><span class="o">.</span><span class="n">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_arguments</span><span class="p">())))</span>
+    
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Arguments</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span> <span class="ow">is</span> <span class="n">other</span> <span class="ow">or</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">get_arguments</span><span class="p">()</span> <span class="o">==</span> <span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">get_arguments</span><span class="p">()))</span> <span class="ow">and</span> <span class="n">NSObject</span><span class="o">.</span><span class="n">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    
+    <span class="k">def</span> <span class="nf">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span> <span class="o">==</span> <span class="n">other</span>    
+    
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return and iterator over the arguments &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arguments</span><span class="p">)</span>
+    
+<div class="viewcode-block" id="Arguments.get_arguments"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Arguments.Arguments.get_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">get_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__arguments</span>
+</div>
+<div class="viewcode-block" id="Arguments.set_arguments"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Arguments.Arguments.set_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">set_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__arguments</span> <span class="o">=</span> <span class="n">value</span>
+</div>
+<div class="viewcode-block" id="Arguments.add_argument"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Arguments.Arguments.add_argument">[docs]</a>    <span class="k">def</span> <span class="nf">add_argument</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argument</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        Add an argument to the object. </span>
+<span class="sd">        Subclasses should raise their own Exception if the arguments are overloaded.</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ArgumentsOverloadedException</span>
+<span class="sd">            if the class has more arguments than it needs</span>
+<span class="sd">        RuntimeError</span>
+<span class="sd">            if a subclass of `Arguments` is already in the arguments.</span>
+<span class="sd">        &#39;&#39;&#39;</span> 
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">needs_more_arguments</span><span class="p">():</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_runtime_exception_safe</span><span class="p">(</span><span class="n">argument</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">get_arguments</span><span class="p">()</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">argument</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;Its not RuntimeError-safe to add the argument: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">argument</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ArgumentsOverloadedException</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argument</span><span class="p">)</span>
+        </div>
+<div class="viewcode-block" id="Arguments.try_add_arguments"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Arguments.Arguments.try_add_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">try_add_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg_list</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Try to add the arguments. Trying means not to raise any exception if the operation fails. &#39;&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">arg_list</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> 
+            <span class="k">except</span> <span class="n">ArgumentsOverloadedException</span><span class="p">:</span>
+                <span class="k">pass</span>
+    </div>
+<div class="viewcode-block" id="Arguments.clear_arguments"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Arguments.Arguments.clear_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">clear_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Reset the arguments &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_arguments</span><span class="p">([])</span>
+        </div>
+<div class="viewcode-block" id="Arguments.cnt_needs_arguments"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Arguments.Arguments.cnt_needs_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">cnt_needs_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return the number of arguments needed &#39;&#39;&#39;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    </div>
+<div class="viewcode-block" id="Arguments.cnt_has_arguments"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Arguments.Arguments.cnt_has_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">cnt_has_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return the number of arguments currently available &#39;&#39;&#39;</span> 
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    </div>
+<div class="viewcode-block" id="Arguments.needs_more_arguments"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Arguments.Arguments.needs_more_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">needs_more_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return if more arguments are needed &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cnt_missing_arguments</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    </div>
+<div class="viewcode-block" id="Arguments.cnt_missing_arguments"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Arguments.Arguments.cnt_missing_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">cnt_missing_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return the number of missing arguments &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cnt_needs_arguments</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">cnt_has_arguments</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="Arguments.fill_from_cpu"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Arguments.Arguments.fill_from_cpu">[docs]</a>    <span class="k">def</span> <span class="nf">fill_from_cpu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cpu</span><span class="p">,</span> <span class="n">register_list</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        Fill as much arguments as possible from cpu (registers and stack).</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        register_list: list&lt;Register&gt;</span>
+<span class="sd">            the list of registers from which to fill </span>
+<span class="sd">    </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ArgumentsUnderloadedException</span>
+<span class="sd">            raised if more arguments than needed came from the cpu</span>
+<span class="sd">        ArgumentsOverloadedException</span>
+<span class="sd">            raised if not enough arguments came from the cpu</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">cnt_arguments</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cnt_missing_arguments</span><span class="p">()</span>
+        <span class="n">arguments</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">arguments</span> <span class="o">=</span> <span class="n">cpu</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">get_arguments_from_registers</span><span class="p">(</span><span class="n">cnt_arguments</span><span class="p">,</span> <span class="n">register_list</span><span class="p">)</span>
+            <span class="c"># fill arguments for arguments if they can/need arguments </span>
+            <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">arguments</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">Arguments</span><span class="p">):</span>
+                    <span class="c"># fill using not used registers of the register list</span>
+                    <span class="n">arg</span><span class="o">.</span><span class="n">fill_from_cpu</span><span class="p">(</span><span class="n">cpu</span><span class="p">,</span> <span class="n">register_list</span><span class="p">[</span><span class="n">cnt_arguments</span><span class="p">:])</span>
+        <span class="k">except</span> <span class="n">MemoryCouldNotGetAllRegisterValues</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ArgumentsUnderloadedException</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cpu</span><span class="p">)</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">arguments</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">arguments</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">cnt_arguments</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fill_remaining_args_from_stack</span><span class="p">(</span><span class="n">cpu</span><span class="p">)</span>
+            </div>
+    <span class="k">def</span> <span class="nf">_fill_remaining_args_from_stack</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cpu</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        Fill as much arguments as possible from stack. </span>
+<span class="sd">    </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ArgumentsUnderloadedException</span>
+<span class="sd">            raised if more arguments than needed came from the stack of the cpu</span>
+<span class="sd">        ArgumentsOverloadedException</span>
+<span class="sd">            raised if not enough arguments came from the stack of the cpu</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">arguments</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">needs_more_arguments</span><span class="p">():</span>
+            <span class="n">cnt_missing_args</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cnt_missing_arguments</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">arguments</span> <span class="o">=</span> <span class="n">cpu</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">get_arguments_from_stack</span><span class="p">(</span><span class="n">cnt_missing_args</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">MemoryCouldNotGetAllStackValues</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ArgumentsUnderloadedException</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cpu</span><span class="p">)</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">arguments</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>    
+    
+    <span class="k">def</span> <span class="nf">_is_runtime_exception_safe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ext_arg</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Check if a subclass of `Arguments` is already in the arguments.</span>
+<span class="sd">        Use this to prevent a `RuntimeError`.</span>
+<span class="sd">        If true it is safe to add the `ext_arg` to the arguments.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ext_arg</span><span class="p">,</span> <span class="n">Arguments</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contains_argument</span><span class="p">(</span><span class="n">ext_arg</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    
+    <span class="k">def</span> <span class="nf">_contains_argument</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ext_arg</span><span class="p">):</span>   
+        <span class="sd">&#39;&#39;&#39; Check recursive if `ext_arg` is already an argument inside the `Arguments` class &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">ext_arg</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">Arguments</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">arg</span><span class="o">.</span><span class="n">_contains_argument</span><span class="p">(</span><span class="n">ext_arg</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="bp">True</span>
+            
+    <span class="n">arguments</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_arguments</span><span class="p">,</span> <span class="n">set_arguments</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;arguments(list&lt;object&gt;) -- queue holding selector arguments&quot;</span><span class="p">)</span>
+    
+<span class="c">#####################################################################################</span>
+<span class="c"># Resetable                                                                         #</span>
+<span class="c">#####################################################################################</span>
+
+<div class="viewcode-block" id="Arguments.reset"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Arguments.Arguments.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Reset the `Arguments` by clearing its arguments &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">arguments</span> <span class="o">=</span> <span class="p">[]</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

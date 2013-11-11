@@ -1,0 +1,161 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm.analysis.asm.cpu.arm.ObjcRuntime_arm &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="../../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vizasm.analysis.asm.cpu.arm.ObjcRuntime_arm</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 18.09.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime</span> <span class="kn">import</span> \
+    <span class="n">ObjectiveCRuntime</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.arguments.Selector</span> <span class="kn">import</span> <span class="n">Selector</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.function.MsgSend</span> <span class="kn">import</span> <span class="n">MsgSend</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.object.nsobject.objcclass.ObjcClass</span> <span class="kn">import</span> <span class="n">ObjcClass</span>
+
+<div class="viewcode-block" id="ObjcRuntime_arm"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.arm.html#vizasm.analysis.asm.cpu.arm.ObjcRuntime_arm.ObjcRuntime_arm">[docs]</a><span class="k">class</span> <span class="nc">ObjcRuntime_arm</span><span class="p">(</span><span class="n">ObjectiveCRuntime</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Objective-C runtime for arm arch &#39;&#39;&#39;</span>
+    
+<div class="viewcode-block" id="ObjcRuntime_arm.create_and_store_method_selector_arguments"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.arm.html#vizasm.analysis.asm.cpu.arm.ObjcRuntime_arm.ObjcRuntime_arm.create_and_store_method_selector_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">create_and_store_method_selector_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method_selector</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Create the `method_selector` arguments.</span>
+<span class="sd">        The first ones are stored in the registers specified by `selector_arg_registers`.</span>
+<span class="sd">        The remaining ones are pushed onto the stack (beginning at address 0x8)</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">method_selector</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">cpu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cpu</span>
+            <span class="n">method_selector_cnt_needs_args</span> <span class="o">=</span> <span class="n">method_selector</span><span class="o">.</span><span class="n">cnt_needs_arguments</span><span class="p">()</span> 
+            <span class="n">selector_arg_registers</span> <span class="o">=</span> <span class="n">cpu</span><span class="o">.</span><span class="n">selector_arg_registers</span><span class="p">()</span>
+            <span class="n">cnt_args_registers</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">selector_arg_registers</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">method_selector_cnt_needs_args</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">method_selector_arg</span> <span class="o">=</span> <span class="n">ObjcRuntime_arm</span><span class="o">.</span><span class="n">create_method_selector_arg</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="c"># set value for register</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">cnt_args_registers</span><span class="p">:</span>
+                    <span class="n">cpu</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">registers</span><span class="o">.</span><span class="n">set_value_for_register_ann_method_ead</span><span class="p">(</span><span class="n">selector_arg_registers</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">method_selector_arg</span><span class="p">)</span>
+                <span class="c"># push rest on stack</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c"># +2 for 0x8 as beginning address</span>
+                    <span class="n">cpu</span><span class="o">.</span><span class="n">get_prev_stack_frame</span><span class="p">()</span><span class="o">.</span><span class="n">add_from_idx</span><span class="p">(</span><span class="n">method_selector_arg</span><span class="p">,</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">cnt_args_registers</span><span class="p">)</span>
+                    
+    <span class="c"># TODO: HOPPER_ARM: REMOVE IF HOPPER ANNOTATION GETS BETTER!</span></div>
+<div class="viewcode-block" id="ObjcRuntime_arm.msg_send_from_destination"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.arm.html#vizasm.analysis.asm.cpu.arm.ObjcRuntime_arm.ObjcRuntime_arm.msg_send_from_destination">[docs]</a>    <span class="k">def</span> <span class="nf">msg_send_from_destination</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">destination</span><span class="p">,</span> <span class="n">selector</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Overwritten to accept other ints as destination.</span>
+<span class="sd">        Currently annotation in Hopper is not so good, leading often to hex values (parsed to int) in the `destination_register`. &#39;&#39;&#39;</span>
+        <span class="c"># temporary workaround to read a msgSend even if destination is integer (transformed from hex)</span>
+        <span class="c"># because Hopper is currently not annotating all destinations!</span>
+        <span class="n">msg_send</span> <span class="o">=</span> <span class="n">ObjectiveCRuntime</span><span class="o">.</span><span class="n">msg_send_from_destination</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">destination</span><span class="p">,</span> <span class="n">selector</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">msg_send</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">arm_fix</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">selector</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">arm_fix</span><span class="p">:</span>
+                <span class="n">msg_send</span> <span class="o">=</span> <span class="n">MsgSend</span><span class="p">(</span><span class="n">ObjcClass</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">destination</span><span class="p">)),</span> <span class="p">[</span><span class="n">selector</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">msg_send</span>        
+    
+    <span class="c"># TODO: HOPPER_ARM: REMOVE IF HOPPER ANNOTATION GETS BETTER!</span></div>
+<div class="viewcode-block" id="ObjcRuntime_arm.get_current_selector_check_sel_type"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.arm.html#vizasm.analysis.asm.cpu.arm.ObjcRuntime_arm.ObjcRuntime_arm.get_current_selector_check_sel_type">[docs]</a>    <span class="k">def</span> <span class="nf">get_current_selector_check_sel_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objc_msgSend_stret</span> <span class="o">=</span> <span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        Overwritten to accept other types as Selector.</span>
+<span class="sd">        Currently annotation in Hopper is not so good, leading often to hex values etc. in the `selector_register`. </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_current_selector</span><span class="p">(</span><span class="n">objc_msgSend_stret</span><span class="p">,</span> <span class="n">raise_cpu_selector_wrong_type_exception</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span>        
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">Selector</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Selector</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">res</span>    </div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

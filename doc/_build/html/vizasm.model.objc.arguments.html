@@ -1,0 +1,1262 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>arguments Package &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">arguments Package</a><ul>
+<li><a class="reference internal" href="#module-vizasm.model.objc.arguments.Arguments"><tt class="docutils literal"><span class="pre">Arguments</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.arguments.ArgumentsException"><tt class="docutils literal"><span class="pre">ArgumentsException</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.arguments.ArgumentsOverloadedException"><tt class="docutils literal"><span class="pre">ArgumentsOverloadedException</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.arguments.ArgumentsUnderloadedException"><tt class="docutils literal"><span class="pre">ArgumentsUnderloadedException</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.arguments.CFormatString"><tt class="docutils literal"><span class="pre">CFormatString</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.arguments.FillFromCpuInterface"><tt class="docutils literal"><span class="pre">FillFromCpuInterface</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.arguments.FormatString"><tt class="docutils literal"><span class="pre">FormatString</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.arguments.Selector"><tt class="docutils literal"><span class="pre">Selector</span></tt> Module</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/vizasm.model.objc.arguments.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="arguments-package">
+<h1>arguments Package<a class="headerlink" href="#arguments-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-vizasm.model.objc.arguments.Arguments">
+<span id="arguments-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">Arguments</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.arguments.Arguments" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 04.04.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.model.objc.arguments.Arguments.Arguments">
+<em class="property">class </em><tt class="descclassname">vizasm.model.objc.arguments.Arguments.</tt><tt class="descname">Arguments</tt><big>(</big><em>name</em>, <em>arguments</em>, <em>is_static</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Arguments.html#Arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Arguments.Arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vizasm.model.objc.object.nsobject.html#vizasm.model.objc.object.nsobject.NSObject.NSObject" title="vizasm.model.objc.object.nsobject.NSObject.NSObject"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.model.objc.object.nsobject.NSObject.NSObject</span></tt></a>, <a class="reference internal" href="vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Resetable.Resetable" title="vizasm.analysis.asm.cpu.Resetable.Resetable"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.asm.cpu.Resetable.Resetable</span></tt></a></p>
+<p>Superclass for a class with arguments that can be filled from the cpu (register or stack)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>arguments: list&lt;object&gt;</strong> :</p>
+<blockquote class="last">
+<div><p>queue holding selector arguments</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>cnt_needs_arguments
+cnt_has_arguments</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Arguments.Arguments.add_argument" title="vizasm.model.objc.arguments.Arguments.Arguments.add_argument"><tt class="xref py py-obj docutils literal"><span class="pre">add_argument</span></tt></a>(argument)</td>
+<td>Add an argument to the object.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Arguments.Arguments.clear_arguments" title="vizasm.model.objc.arguments.Arguments.Arguments.clear_arguments"><tt class="xref py py-obj docutils literal"><span class="pre">clear_arguments</span></tt></a>()</td>
+<td>Reset the arguments</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Arguments.Arguments.cnt_has_arguments" title="vizasm.model.objc.arguments.Arguments.Arguments.cnt_has_arguments"><tt class="xref py py-obj docutils literal"><span class="pre">cnt_has_arguments</span></tt></a>()</td>
+<td>Return the number of arguments currently available</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Arguments.Arguments.cnt_missing_arguments" title="vizasm.model.objc.arguments.Arguments.Arguments.cnt_missing_arguments"><tt class="xref py py-obj docutils literal"><span class="pre">cnt_missing_arguments</span></tt></a>()</td>
+<td>Return the number of missing arguments</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Arguments.Arguments.cnt_needs_arguments" title="vizasm.model.objc.arguments.Arguments.Arguments.cnt_needs_arguments"><tt class="xref py py-obj docutils literal"><span class="pre">cnt_needs_arguments</span></tt></a>()</td>
+<td>Return the number of arguments needed</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">create_msg_send</span></tt>(selector,&nbsp;*args,&nbsp;**kwargs)</td>
+<td>Create a <cite>MsgSend</cite> with the specified <cite>selector</cite>.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Arguments.Arguments.fill_from_cpu" title="vizasm.model.objc.arguments.Arguments.Arguments.fill_from_cpu"><tt class="xref py py-obj docutils literal"><span class="pre">fill_from_cpu</span></tt></a>(cpu,&nbsp;register_list)</td>
+<td>Fill as much arguments as possible from cpu (registers and stack).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Arguments.Arguments.get_arguments" title="vizasm.model.objc.arguments.Arguments.Arguments.get_arguments"><tt class="xref py py-obj docutils literal"><span class="pre">get_arguments</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_is_static</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_nsobject</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_obj_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_objc_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_retain_count</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Arguments.Arguments.needs_more_arguments" title="vizasm.model.objc.arguments.Arguments.Arguments.needs_more_arguments"><tt class="xref py py-obj docutils literal"><span class="pre">needs_more_arguments</span></tt></a>()</td>
+<td>Return if more arguments are needed</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">release</span></tt>()</td>
+<td>Release object &#8211; decrement retain count</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Arguments.Arguments.reset" title="vizasm.model.objc.arguments.Arguments.Arguments.reset"><tt class="xref py py-obj docutils literal"><span class="pre">reset</span></tt></a>()</td>
+<td>Reset the <cite>Arguments</cite> by clearing its arguments</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">retain</span></tt>()</td>
+<td>Retain object &#8211; increment retain count</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Arguments.Arguments.set_arguments" title="vizasm.model.objc.arguments.Arguments.Arguments.set_arguments"><tt class="xref py py-obj docutils literal"><span class="pre">set_arguments</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_is_static</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_obj_name</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_objc_name</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Arguments.Arguments.try_add_arguments" title="vizasm.model.objc.arguments.Arguments.Arguments.try_add_arguments"><tt class="xref py py-obj docutils literal"><span class="pre">try_add_arguments</span></tt></a>(arg_list)</td>
+<td>Try to add the arguments.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.Arguments.Arguments.add_argument">
+<tt class="descname">add_argument</tt><big>(</big><em>argument</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Arguments.html#Arguments.add_argument"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Arguments.Arguments.add_argument" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add an argument to the object. 
+Subclasses should raise their own Exception if the arguments are overloaded.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><strong>ArgumentsOverloadedException</strong> :</p>
+<blockquote>
+<div><p>if the class has more arguments than it needs</p>
+</div></blockquote>
+<p><strong>RuntimeError</strong> :</p>
+<blockquote class="last">
+<div><p>if a subclass of <cite>Arguments</cite> is already in the arguments.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.model.objc.arguments.Arguments.Arguments.arguments">
+<tt class="descname">arguments</tt><a class="headerlink" href="#vizasm.model.objc.arguments.Arguments.Arguments.arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>arguments(list&lt;object&gt;) &#8211; queue holding selector arguments</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.Arguments.Arguments.clear_arguments">
+<tt class="descname">clear_arguments</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Arguments.html#Arguments.clear_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Arguments.Arguments.clear_arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the arguments</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.Arguments.Arguments.cnt_has_arguments">
+<tt class="descname">cnt_has_arguments</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Arguments.html#Arguments.cnt_has_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Arguments.Arguments.cnt_has_arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of arguments currently available</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.Arguments.Arguments.cnt_missing_arguments">
+<tt class="descname">cnt_missing_arguments</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Arguments.html#Arguments.cnt_missing_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Arguments.Arguments.cnt_missing_arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of missing arguments</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.Arguments.Arguments.cnt_needs_arguments">
+<tt class="descname">cnt_needs_arguments</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Arguments.html#Arguments.cnt_needs_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Arguments.Arguments.cnt_needs_arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of arguments needed</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.Arguments.Arguments.fill_from_cpu">
+<tt class="descname">fill_from_cpu</tt><big>(</big><em>cpu</em>, <em>register_list</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Arguments.html#Arguments.fill_from_cpu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Arguments.Arguments.fill_from_cpu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fill as much arguments as possible from cpu (registers and stack).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>register_list: list&lt;Register&gt;</strong> :</p>
+<blockquote>
+<div><p>the list of registers from which to fill</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><strong>ArgumentsUnderloadedException</strong> :</p>
+<blockquote>
+<div><p>raised if more arguments than needed came from the cpu</p>
+</div></blockquote>
+<p><strong>ArgumentsOverloadedException</strong> :</p>
+<blockquote class="last">
+<div><p>raised if not enough arguments came from the cpu</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.Arguments.Arguments.get_arguments">
+<tt class="descname">get_arguments</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Arguments.html#Arguments.get_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Arguments.Arguments.get_arguments" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.Arguments.Arguments.needs_more_arguments">
+<tt class="descname">needs_more_arguments</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Arguments.html#Arguments.needs_more_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Arguments.Arguments.needs_more_arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return if more arguments are needed</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.Arguments.Arguments.reset">
+<tt class="descname">reset</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Arguments.html#Arguments.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Arguments.Arguments.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the <cite>Arguments</cite> by clearing its arguments</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.Arguments.Arguments.set_arguments">
+<tt class="descname">set_arguments</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Arguments.html#Arguments.set_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Arguments.Arguments.set_arguments" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.Arguments.Arguments.try_add_arguments">
+<tt class="descname">try_add_arguments</tt><big>(</big><em>arg_list</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Arguments.html#Arguments.try_add_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Arguments.Arguments.try_add_arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Try to add the arguments. Trying means not to raise any exception if the operation fails.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.model.objc.arguments.ArgumentsException">
+<span id="argumentsexception-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">ArgumentsException</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.arguments.ArgumentsException" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 10.04.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="exception">
+<dt id="vizasm.model.objc.arguments.ArgumentsException.ArgumentsException">
+<em class="property">exception </em><tt class="descclassname">vizasm.model.objc.arguments.ArgumentsException.</tt><tt class="descname">ArgumentsException</tt><big>(</big><em>arguments_interface</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/ArgumentsException.html#ArgumentsException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.ArgumentsException.ArgumentsException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></p>
+<p>Generic Exception for the Arguments Superclass</p>
+<dl class="docutils">
+<dt>arguments_interface: object&lt;Arguments&gt;</dt>
+<dd>subclass of Arguments</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.model.objc.arguments.ArgumentsOverloadedException">
+<span id="argumentsoverloadedexception-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">ArgumentsOverloadedException</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.arguments.ArgumentsOverloadedException" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 10.04.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="exception">
+<dt id="vizasm.model.objc.arguments.ArgumentsOverloadedException.ArgumentsOverloadedException">
+<em class="property">exception </em><tt class="descclassname">vizasm.model.objc.arguments.ArgumentsOverloadedException.</tt><tt class="descname">ArgumentsOverloadedException</tt><big>(</big><em>arguments_interface</em>, <em>new_argument=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/ArgumentsOverloadedException.html#ArgumentsOverloadedException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.ArgumentsOverloadedException.ArgumentsOverloadedException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.model.objc.arguments.ArgumentsException.ArgumentsException" title="vizasm.model.objc.arguments.ArgumentsException.ArgumentsException"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.model.objc.arguments.ArgumentsException.ArgumentsException</span></tt></a></p>
+<p>Exception for the case that there are too many arguments.</p>
+<dl class="docutils">
+<dt>arguments_interface: object&lt;Arguments&gt;</dt>
+<dd>subclass of Arguments</dd>
+<dt>new_argument: object, optional</dt>
+<dd>the new argument added</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.model.objc.arguments.ArgumentsUnderloadedException">
+<span id="argumentsunderloadedexception-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">ArgumentsUnderloadedException</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.arguments.ArgumentsUnderloadedException" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 10.04.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="exception">
+<dt id="vizasm.model.objc.arguments.ArgumentsUnderloadedException.ArgumentsUnderloadedException">
+<em class="property">exception </em><tt class="descclassname">vizasm.model.objc.arguments.ArgumentsUnderloadedException.</tt><tt class="descname">ArgumentsUnderloadedException</tt><big>(</big><em>arguments_interface</em>, <em>cpu</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/ArgumentsUnderloadedException.html#ArgumentsUnderloadedException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.ArgumentsUnderloadedException.ArgumentsUnderloadedException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.model.objc.arguments.ArgumentsException.ArgumentsException" title="vizasm.model.objc.arguments.ArgumentsException.ArgumentsException"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.model.objc.arguments.ArgumentsException.ArgumentsException</span></tt></a>, <a class="reference internal" href="vizasm.analysis.asm.cpu.exceptions.html#vizasm.analysis.asm.cpu.exceptions.CpuException.CpuException" title="vizasm.analysis.asm.cpu.exceptions.CpuException.CpuException"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.asm.cpu.exceptions.CpuException.CpuException</span></tt></a></p>
+<p>Exception for the case that there are not enough arguments</p>
+<p>cpu: Cpu
+arguments_interface: object&lt;Arguments&gt;</p>
+<blockquote>
+<div>subclass of Arguments</div></blockquote>
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.model.objc.arguments.CFormatString">
+<span id="cformatstring-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">CFormatString</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.arguments.CFormatString" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 10.10.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.model.objc.arguments.CFormatString.CFormatString">
+<em class="property">class </em><tt class="descclassname">vizasm.model.objc.arguments.CFormatString.</tt><tt class="descname">CFormatString</tt><big>(</big><em>format_string</em>, <em>arguments=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/CFormatString.html#CFormatString"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.CFormatString.CFormatString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.model.objc.arguments.FormatString.FormatString" title="vizasm.model.objc.arguments.FormatString.FormatString"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.model.objc.arguments.FormatString.FormatString</span></tt></a></p>
+<p>Represents a string with format included like e.g. &#8220;%s&#8221;, &#64;&#8221;foo&#8221;</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>format_string: CString</strong> :</p>
+<blockquote class="last">
+<div><p>the format string</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_argument</span></tt>(argument)</td>
+<td>Add an argument to the FormatString</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">clear_arguments</span></tt>()</td>
+<td>Reset the arguments</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">cnt_has_arguments</span></tt>()</td>
+<td>Return the number of arguments the FormatString already has</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">cnt_missing_arguments</span></tt>()</td>
+<td>Return the number of missing arguments</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">cnt_needs_arguments</span></tt>()</td>
+<td>Return the number of arguments the FormatString needs</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">create_msg_send</span></tt>(selector,&nbsp;*args,&nbsp;**kwargs)</td>
+<td>Create a <cite>MsgSend</cite> with the specified <cite>selector</cite>.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">fill_from_cpu</span></tt>(cpu[,&nbsp;register_list])</td>
+<td>Fill the arguments of the selector from cpu (registers and stack)</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_arguments</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_format_string</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_is_static</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_nsobject</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_obj_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_objc_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_retain_count</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">needs_more_arguments</span></tt>()</td>
+<td>Return if more arguments are needed</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">release</span></tt>()</td>
+<td>Release object &#8211; decrement retain count</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">reset</span></tt>()</td>
+<td>Reset the <cite>Arguments</cite> by clearing its arguments</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">retain</span></tt>()</td>
+<td>Retain object &#8211; increment retain count</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_arguments</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_format_string</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_is_static</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_obj_name</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_objc_name</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">try_add_arguments</span></tt>(arg_list)</td>
+<td>Try to add the arguments.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.model.objc.arguments.FillFromCpuInterface">
+<span id="fillfromcpuinterface-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">FillFromCpuInterface</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.arguments.FillFromCpuInterface" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 04.04.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.model.objc.arguments.FillFromCpuInterface.FillFromCpuInterface">
+<em class="property">class </em><tt class="descclassname">vizasm.model.objc.arguments.FillFromCpuInterface.</tt><tt class="descname">FillFromCpuInterface</tt><a class="reference internal" href="_modules/vizasm/model/objc/arguments/FillFromCpuInterface.html#FillFromCpuInterface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.FillFromCpuInterface.FillFromCpuInterface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interface for filling data of an object from cpu (registers or stack)</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.arguments.FillFromCpuInterface.FillFromCpuInterface.fill_from_cpu" title="vizasm.model.objc.arguments.FillFromCpuInterface.FillFromCpuInterface.fill_from_cpu"><tt class="xref py py-obj docutils literal"><span class="pre">fill_from_cpu</span></tt></a>(cpu)</td>
+<td>Fill data of object from cpu (registers or stack)</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.FillFromCpuInterface.FillFromCpuInterface.fill_from_cpu">
+<tt class="descname">fill_from_cpu</tt><big>(</big><em>cpu</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/FillFromCpuInterface.html#FillFromCpuInterface.fill_from_cpu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.FillFromCpuInterface.FillFromCpuInterface.fill_from_cpu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fill data of object from cpu (registers or stack)</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.model.objc.arguments.FormatString">
+<span id="formatstring-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">FormatString</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.arguments.FormatString" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 04.04.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.model.objc.arguments.FormatString.FormatString">
+<em class="property">class </em><tt class="descclassname">vizasm.model.objc.arguments.FormatString.</tt><tt class="descname">FormatString</tt><big>(</big><em>format_string</em>, <em>arguments=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/FormatString.html#FormatString"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.FormatString.FormatString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.model.objc.arguments.Arguments.Arguments" title="vizasm.model.objc.arguments.Arguments.Arguments"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.model.objc.arguments.Arguments.Arguments</span></tt></a></p>
+<p>Represents a string with format included like e.g. &#64;&#8221;%s&#8221;, &#64;&#8221;foo&#8221;</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>format_string: NSString</strong> :</p>
+<blockquote class="last">
+<div><p>the format string (mapped to objc_name)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.arguments.FormatString.FormatString.add_argument" title="vizasm.model.objc.arguments.FormatString.FormatString.add_argument"><tt class="xref py py-obj docutils literal"><span class="pre">add_argument</span></tt></a>(argument)</td>
+<td>Add an argument to the FormatString</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">clear_arguments</span></tt>()</td>
+<td>Reset the arguments</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.arguments.FormatString.FormatString.cnt_has_arguments" title="vizasm.model.objc.arguments.FormatString.FormatString.cnt_has_arguments"><tt class="xref py py-obj docutils literal"><span class="pre">cnt_has_arguments</span></tt></a>()</td>
+<td>Return the number of arguments the FormatString already has</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">cnt_missing_arguments</span></tt>()</td>
+<td>Return the number of missing arguments</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.arguments.FormatString.FormatString.cnt_needs_arguments" title="vizasm.model.objc.arguments.FormatString.FormatString.cnt_needs_arguments"><tt class="xref py py-obj docutils literal"><span class="pre">cnt_needs_arguments</span></tt></a>()</td>
+<td>Return the number of arguments the FormatString needs</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">create_msg_send</span></tt>(selector,&nbsp;*args,&nbsp;**kwargs)</td>
+<td>Create a <cite>MsgSend</cite> with the specified <cite>selector</cite>.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.arguments.FormatString.FormatString.fill_from_cpu" title="vizasm.model.objc.arguments.FormatString.FormatString.fill_from_cpu"><tt class="xref py py-obj docutils literal"><span class="pre">fill_from_cpu</span></tt></a>(cpu[,&nbsp;register_list])</td>
+<td>Fill the arguments of the selector from cpu (registers and stack)</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_arguments</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.arguments.FormatString.FormatString.get_format_string" title="vizasm.model.objc.arguments.FormatString.FormatString.get_format_string"><tt class="xref py py-obj docutils literal"><span class="pre">get_format_string</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_is_static</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_nsobject</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_obj_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_objc_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_retain_count</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">needs_more_arguments</span></tt>()</td>
+<td>Return if more arguments are needed</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">release</span></tt>()</td>
+<td>Release object &#8211; decrement retain count</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">reset</span></tt>()</td>
+<td>Reset the <cite>Arguments</cite> by clearing its arguments</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">retain</span></tt>()</td>
+<td>Retain object &#8211; increment retain count</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_arguments</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.arguments.FormatString.FormatString.set_format_string" title="vizasm.model.objc.arguments.FormatString.FormatString.set_format_string"><tt class="xref py py-obj docutils literal"><span class="pre">set_format_string</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_is_static</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_obj_name</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_objc_name</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">try_add_arguments</span></tt>(arg_list)</td>
+<td>Try to add the arguments.</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="vizasm.model.objc.arguments.FormatString.FormatString.ARGUMENT_DELIMITER">
+<tt class="descname">ARGUMENT_DELIMITER</tt><em class="property"> = '%'</em><a class="headerlink" href="#vizasm.model.objc.arguments.FormatString.FormatString.ARGUMENT_DELIMITER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.FormatString.FormatString.add_argument">
+<tt class="descname">add_argument</tt><big>(</big><em>argument</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/FormatString.html#FormatString.add_argument"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.FormatString.FormatString.add_argument" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add an argument to the FormatString</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><strong>FormatStringOverLoadedException</strong> :</p>
+<blockquote class="last">
+<div><p>if FormatString has more arguments than it needs</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.FormatString.FormatString.cnt_has_arguments">
+<tt class="descname">cnt_has_arguments</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/FormatString.html#FormatString.cnt_has_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.FormatString.FormatString.cnt_has_arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of arguments the FormatString already has</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.FormatString.FormatString.cnt_needs_arguments">
+<tt class="descname">cnt_needs_arguments</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/FormatString.html#FormatString.cnt_needs_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.FormatString.FormatString.cnt_needs_arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of arguments the FormatString needs</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.FormatString.FormatString.fill_from_cpu">
+<tt class="descname">fill_from_cpu</tt><big>(</big><em>cpu</em>, <em>register_list=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/FormatString.html#FormatString.fill_from_cpu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.FormatString.FormatString.fill_from_cpu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fill the arguments of the selector from cpu (registers and stack)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>register_list</strong> :</p>
+<blockquote>
+<div><p>the list of register from which to fill (if None is passed, the default register list is used)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><strong>FormatStringOverLoadedException</strong> :</p>
+<blockquote>
+<div><p>raised if more arguments than needed came from the cpu</p>
+</div></blockquote>
+<p><strong>FormatStringUnderLoadedException</strong> :</p>
+<blockquote class="last">
+<div><p>raised if not enough arguments came from the cpu</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.model.objc.arguments.FormatString.FormatString.format_string">
+<tt class="descname">format_string</tt><a class="headerlink" href="#vizasm.model.objc.arguments.FormatString.FormatString.format_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>format_string &#8211; the format string (mapped to value from Value)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.FormatString.FormatString.get_format_string">
+<tt class="descname">get_format_string</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/FormatString.html#FormatString.get_format_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.FormatString.FormatString.get_format_string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.FormatString.FormatString.set_format_string">
+<tt class="descname">set_format_string</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/FormatString.html#FormatString.set_format_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.FormatString.FormatString.set_format_string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="vizasm.model.objc.arguments.FormatString.FormatStringOverLoadedException">
+<em class="property">exception </em><tt class="descclassname">vizasm.model.objc.arguments.FormatString.</tt><tt class="descname">FormatStringOverLoadedException</tt><big>(</big><em>arguments_interface</em>, <em>new_argument=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/FormatString.html#FormatStringOverLoadedException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.FormatString.FormatStringOverLoadedException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.model.objc.arguments.ArgumentsOverloadedException.ArgumentsOverloadedException" title="vizasm.model.objc.arguments.ArgumentsOverloadedException.ArgumentsOverloadedException"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.model.objc.arguments.ArgumentsOverloadedException.ArgumentsOverloadedException</span></tt></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="vizasm.model.objc.arguments.FormatString.FormatStringUnderLoadedException">
+<em class="property">exception </em><tt class="descclassname">vizasm.model.objc.arguments.FormatString.</tt><tt class="descname">FormatStringUnderLoadedException</tt><big>(</big><em>arguments_interface</em>, <em>cpu</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/FormatString.html#FormatStringUnderLoadedException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.FormatString.FormatStringUnderLoadedException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.model.objc.arguments.ArgumentsUnderloadedException.ArgumentsUnderloadedException" title="vizasm.model.objc.arguments.ArgumentsUnderloadedException.ArgumentsUnderloadedException"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.model.objc.arguments.ArgumentsUnderloadedException.ArgumentsUnderloadedException</span></tt></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.model.objc.arguments.Selector">
+<span id="selector-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">Selector</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.arguments.Selector" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 27.03.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.model.objc.arguments.Selector.Selector">
+<em class="property">class </em><tt class="descclassname">vizasm.model.objc.arguments.Selector.</tt><tt class="descname">Selector</tt><big>(</big><em>name</em>, <em>arguments=None</em>, <em>is_static=False</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Selector.html#Selector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.model.objc.arguments.Arguments.Arguments" title="vizasm.model.objc.arguments.Arguments.Arguments"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.model.objc.arguments.Arguments.Arguments</span></tt></a>, <a class="reference internal" href="vizasm.model.objc.html#vizasm.model.objc.AsmParserInterface.AsmParserInterface" title="vizasm.model.objc.AsmParserInterface.AsmParserInterface"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.model.objc.AsmParserInterface.AsmParserInterface</span></tt></a>, <a class="reference internal" href="vizasm.hopper.html#vizasm.hopper.HopperAnnotationInterface.HopperAnnotationInterface" title="vizasm.hopper.HopperAnnotationInterface.HopperAnnotationInterface"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.hopper.HopperAnnotationInterface.HopperAnnotationInterface</span></tt></a></p>
+<p>Represents an objective-c selector</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>selector_name: string</strong> :</p>
+<blockquote class="last">
+<div><p>the name of the selector (mapped to objc_name)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Selector.Selector.add_argument" title="vizasm.model.objc.arguments.Selector.Selector.add_argument"><tt class="xref py py-obj docutils literal"><span class="pre">add_argument</span></tt></a>(argument)</td>
+<td>Add an argument to the selector</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">clear_arguments</span></tt>()</td>
+<td>Reset the arguments</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Selector.Selector.cnt_has_arguments" title="vizasm.model.objc.arguments.Selector.Selector.cnt_has_arguments"><tt class="xref py py-obj docutils literal"><span class="pre">cnt_has_arguments</span></tt></a>()</td>
+<td>Return the number of arguments the selector has.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">cnt_missing_arguments</span></tt>()</td>
+<td>Return the number of missing arguments</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Selector.Selector.cnt_needs_arguments" title="vizasm.model.objc.arguments.Selector.Selector.cnt_needs_arguments"><tt class="xref py py-obj docutils literal"><span class="pre">cnt_needs_arguments</span></tt></a>()</td>
+<td>return the number of arguments the selector takes indicated by the number of &#8221;:&#8221; in the selector name</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Selector.Selector.create_from_asm_line" title="vizasm.model.objc.arguments.Selector.Selector.create_from_asm_line"><tt class="xref py py-obj docutils literal"><span class="pre">create_from_asm_line</span></tt></a>(asmline)</td>
+<td>Create Selector from asm line like e.g. &#64;selector(objectForKey:)</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">create_msg_send</span></tt>(selector,&nbsp;*args,&nbsp;**kwargs)</td>
+<td>Create a <cite>MsgSend</cite> with the specified <cite>selector</cite>.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Selector.Selector.does_release" title="vizasm.model.objc.arguments.Selector.Selector.does_release"><tt class="xref py py-obj docutils literal"><span class="pre">does_release</span></tt></a>()</td>
+<td>Return if the selector decrements the retain count</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Selector.Selector.does_retain" title="vizasm.model.objc.arguments.Selector.Selector.does_retain"><tt class="xref py py-obj docutils literal"><span class="pre">does_retain</span></tt></a>()</td>
+<td>Return if the selector increments the retain count</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Selector.Selector.fill_from_cpu" title="vizasm.model.objc.arguments.Selector.Selector.fill_from_cpu"><tt class="xref py py-obj docutils literal"><span class="pre">fill_from_cpu</span></tt></a>(cpu[,&nbsp;register_list])</td>
+<td>Fill the arguments of the selector from cpu (registers and stack)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Selector.Selector.get_argument_at_idx" title="vizasm.model.objc.arguments.Selector.Selector.get_argument_at_idx"><tt class="xref py py-obj docutils literal"><span class="pre">get_argument_at_idx</span></tt></a>(idx)</td>
+<td>Return the argument at specified idx.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Selector.Selector.get_argument_for_sub_selector" title="vizasm.model.objc.arguments.Selector.Selector.get_argument_for_sub_selector"><tt class="xref py py-obj docutils literal"><span class="pre">get_argument_for_sub_selector</span></tt></a>(subsel_name)</td>
+<td>Get the argument for the sub selector.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_arguments</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_is_static</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_nsobject</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_obj_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_objc_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_retain_count</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Selector.Selector.get_selector_name" title="vizasm.model.objc.arguments.Selector.Selector.get_selector_name"><tt class="xref py py-obj docutils literal"><span class="pre">get_selector_name</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Selector.Selector.hopper_str" title="vizasm.model.objc.arguments.Selector.Selector.hopper_str"><tt class="xref py py-obj docutils literal"><span class="pre">hopper_str</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Selector.Selector.is_alloc" title="vizasm.model.objc.arguments.Selector.Selector.is_alloc"><tt class="xref py py-obj docutils literal"><span class="pre">is_alloc</span></tt></a>()</td>
+<td>Return if the selectorname is alloc</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Selector.Selector.is_autorelease" title="vizasm.model.objc.arguments.Selector.Selector.is_autorelease"><tt class="xref py py-obj docutils literal"><span class="pre">is_autorelease</span></tt></a>()</td>
+<td>Return if the selectorname is autorelease</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Selector.Selector.is_init" title="vizasm.model.objc.arguments.Selector.Selector.is_init"><tt class="xref py py-obj docutils literal"><span class="pre">is_init</span></tt></a>()</td>
+<td>Return if the selectorname is init</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Selector.Selector.is_kind_of_init" title="vizasm.model.objc.arguments.Selector.Selector.is_kind_of_init"><tt class="xref py py-obj docutils literal"><span class="pre">is_kind_of_init</span></tt></a>()</td>
+<td>Return if the selectorname begins with init</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Selector.Selector.is_new" title="vizasm.model.objc.arguments.Selector.Selector.is_new"><tt class="xref py py-obj docutils literal"><span class="pre">is_new</span></tt></a>()</td>
+<td>Return if the selectorname is new</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Selector.Selector.is_release" title="vizasm.model.objc.arguments.Selector.Selector.is_release"><tt class="xref py py-obj docutils literal"><span class="pre">is_release</span></tt></a>()</td>
+<td>Return if the selectorname is release</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Selector.Selector.is_retain" title="vizasm.model.objc.arguments.Selector.Selector.is_retain"><tt class="xref py py-obj docutils literal"><span class="pre">is_retain</span></tt></a>()</td>
+<td>Return if the selectorname is retain</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Selector.Selector.is_retain_count_important" title="vizasm.model.objc.arguments.Selector.Selector.is_retain_count_important"><tt class="xref py py-obj docutils literal"><span class="pre">is_retain_count_important</span></tt></a>()</td>
+<td>Return if the selector has an impact on the retain count</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">needs_more_arguments</span></tt>()</td>
+<td>Return if more arguments are needed</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">release</span></tt>()</td>
+<td>Release object &#8211; decrement retain count</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">reset</span></tt>()</td>
+<td>Reset the <cite>Arguments</cite> by clearing its arguments</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">retain</span></tt>()</td>
+<td>Retain object &#8211; increment retain count</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Selector.Selector.selector_from_delimiter" title="vizasm.model.objc.arguments.Selector.Selector.selector_from_delimiter"><tt class="xref py py-obj docutils literal"><span class="pre">selector_from_delimiter</span></tt></a>(selectorname[,&nbsp;...])</td>
+<td>Return a Selector from a string like e.g. <a href="#id1"><span class="problematic" id="id2">get_arg1_arg2_</span></a> where &#8220;_&#8221; is the delimiter</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Selector.Selector.selector_from_underscore_delimiter" title="vizasm.model.objc.arguments.Selector.Selector.selector_from_underscore_delimiter"><tt class="xref py py-obj docutils literal"><span class="pre">selector_from_underscore_delimiter</span></tt></a>(selectorname)</td>
+<td>Return a Selector from a string like e.g. <a href="#id3"><span class="problematic" id="id4">get_arg1_arg2_</span></a> where &#8220;_&#8221; is the delimiter</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Selector.Selector.set_argument_for_sub_selector" title="vizasm.model.objc.arguments.Selector.Selector.set_argument_for_sub_selector"><tt class="xref py py-obj docutils literal"><span class="pre">set_argument_for_sub_selector</span></tt></a>(subsel_name,&nbsp;...)</td>
+<td>Set the argument for the sub selector.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_arguments</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_is_static</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_obj_name</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_objc_name</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Selector.Selector.set_selector_name" title="vizasm.model.objc.arguments.Selector.Selector.set_selector_name"><tt class="xref py py-obj docutils literal"><span class="pre">set_selector_name</span></tt></a>(selname)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Selector.Selector.sub_selectors" title="vizasm.model.objc.arguments.Selector.Selector.sub_selectors"><tt class="xref py py-obj docutils literal"><span class="pre">sub_selectors</span></tt></a>()</td>
+<td>Get a list of sub selector names</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">try_add_arguments</span></tt>(arg_list)</td>
+<td>Try to add the arguments.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">try_get_hopper_string</span></tt>(obj)</td>
+<td>Use the <cite>hopper_str()</cite> representation if available.</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="vizasm.model.objc.arguments.Selector.Selector.SELECTOR_ALLOC">
+<tt class="descname">SELECTOR_ALLOC</tt><em class="property"> = 'alloc'</em><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.SELECTOR_ALLOC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.model.objc.arguments.Selector.Selector.SELECTOR_AUTORELEASE">
+<tt class="descname">SELECTOR_AUTORELEASE</tt><em class="property"> = 'autorelease'</em><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.SELECTOR_AUTORELEASE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.model.objc.arguments.Selector.Selector.SELECTOR_DELIMITER">
+<tt class="descname">SELECTOR_DELIMITER</tt><em class="property"> = ':'</em><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.SELECTOR_DELIMITER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.model.objc.arguments.Selector.Selector.SELECTOR_INIT">
+<tt class="descname">SELECTOR_INIT</tt><em class="property"> = 'init'</em><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.SELECTOR_INIT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.model.objc.arguments.Selector.Selector.SELECTOR_NEW">
+<tt class="descname">SELECTOR_NEW</tt><em class="property"> = 'new'</em><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.SELECTOR_NEW" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.model.objc.arguments.Selector.Selector.SELECTOR_RELEASE">
+<tt class="descname">SELECTOR_RELEASE</tt><em class="property"> = 'release'</em><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.SELECTOR_RELEASE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.model.objc.arguments.Selector.Selector.SELECTOR_RETAIN">
+<tt class="descname">SELECTOR_RETAIN</tt><em class="property"> = 'retain'</em><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.SELECTOR_RETAIN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.Selector.Selector.add_argument">
+<tt class="descname">add_argument</tt><big>(</big><em>argument</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Selector.html#Selector.add_argument"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.add_argument" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add an argument to the selector</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><strong>SelectorOverloadedException</strong> :</p>
+<blockquote class="last">
+<div><p>if selector has more arguments than it needs</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.Selector.Selector.cnt_has_arguments">
+<tt class="descname">cnt_has_arguments</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Selector.html#Selector.cnt_has_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.cnt_has_arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of arguments the selector has. 
+This is not the number of arguments the selector really (see cnt_needs_arguments()) needs!</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.Selector.Selector.cnt_needs_arguments">
+<tt class="descname">cnt_needs_arguments</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Selector.html#Selector.cnt_needs_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.cnt_needs_arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>return the number of arguments the selector takes indicated by the number of &#8221;:&#8221; in the selector name</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="vizasm.model.objc.arguments.Selector.Selector.create_from_asm_line">
+<em class="property">static </em><tt class="descname">create_from_asm_line</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Selector.html#Selector.create_from_asm_line"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.create_from_asm_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create Selector from asm line like e.g. &#64;selector(objectForKey:)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.Selector.Selector.does_release">
+<tt class="descname">does_release</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Selector.html#Selector.does_release"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.does_release" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return if the selector decrements the retain count</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.Selector.Selector.does_retain">
+<tt class="descname">does_retain</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Selector.html#Selector.does_retain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.does_retain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return if the selector increments the retain count</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.Selector.Selector.fill_from_cpu">
+<tt class="descname">fill_from_cpu</tt><big>(</big><em>cpu</em>, <em>register_list=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Selector.html#Selector.fill_from_cpu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.fill_from_cpu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fill the arguments of the selector from cpu (registers and stack)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>register_list</strong> :</p>
+<blockquote>
+<div><p>the list of register from which to fill (if None is passed, the default register list is used <cite>Cpu.selector_arg_registers()</cite>)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><strong>SelectorUnderloadedException</strong> :</p>
+<blockquote>
+<div><p>raised if more arguments than needed came from the cpu</p>
+</div></blockquote>
+<p><strong>SelectorOverloadedException</strong> :</p>
+<blockquote class="last">
+<div><p>raised if not enough arguments came from the cpu</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.Selector.Selector.get_argument_at_idx">
+<tt class="descname">get_argument_at_idx</tt><big>(</big><em>idx</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Selector.html#Selector.get_argument_at_idx"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.get_argument_at_idx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the argument at specified idx. If not found None will be returned</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.Selector.Selector.get_argument_for_sub_selector">
+<tt class="descname">get_argument_for_sub_selector</tt><big>(</big><em>subsel_name</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Selector.html#Selector.get_argument_for_sub_selector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.get_argument_for_sub_selector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the argument for the sub selector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>subsel_name: string</strong> :</p>
+<blockquote class="last">
+<div><p>name of the sub selector</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.Selector.Selector.get_selector_name">
+<tt class="descname">get_selector_name</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Selector.html#Selector.get_selector_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.get_selector_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.Selector.Selector.hopper_str">
+<tt class="descname">hopper_str</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Selector.html#Selector.hopper_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.hopper_str" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.Selector.Selector.is_alloc">
+<tt class="descname">is_alloc</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Selector.html#Selector.is_alloc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.is_alloc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return if the selectorname is alloc</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.Selector.Selector.is_autorelease">
+<tt class="descname">is_autorelease</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Selector.html#Selector.is_autorelease"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.is_autorelease" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return if the selectorname is autorelease</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.Selector.Selector.is_init">
+<tt class="descname">is_init</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Selector.html#Selector.is_init"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.is_init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return if the selectorname is init</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.Selector.Selector.is_kind_of_init">
+<tt class="descname">is_kind_of_init</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Selector.html#Selector.is_kind_of_init"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.is_kind_of_init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return if the selectorname begins with init</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.Selector.Selector.is_new">
+<tt class="descname">is_new</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Selector.html#Selector.is_new"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.is_new" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return if the selectorname is new</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.Selector.Selector.is_release">
+<tt class="descname">is_release</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Selector.html#Selector.is_release"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.is_release" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return if the selectorname is release</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.Selector.Selector.is_retain">
+<tt class="descname">is_retain</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Selector.html#Selector.is_retain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.is_retain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return if the selectorname is retain</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.Selector.Selector.is_retain_count_important">
+<tt class="descname">is_retain_count_important</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Selector.html#Selector.is_retain_count_important"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.is_retain_count_important" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return if the selector has an impact on the retain count</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="vizasm.model.objc.arguments.Selector.Selector.selector_from_delimiter">
+<em class="property">static </em><tt class="descname">selector_from_delimiter</tt><big>(</big><em>selectorname</em>, <em>delimiter='_'</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Selector.html#Selector.selector_from_delimiter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.selector_from_delimiter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a Selector from a string like e.g. <a href="#id5"><span class="problematic" id="id6">get_arg1_arg2_</span></a> where &#8220;_&#8221; is the delimiter</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>selectorname: string</strong> :</p>
+<blockquote>
+<div><p>selectorname like <a href="#id7"><span class="problematic" id="id8">get_arg1_arg2_</span></a></p>
+</div></blockquote>
+<p><strong>delimiter: string, optional</strong> :</p>
+<blockquote class="last">
+<div><p>delimits the selector (default is &#8220;_&#8221;)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="vizasm.model.objc.arguments.Selector.Selector.selector_from_underscore_delimiter">
+<em class="property">static </em><tt class="descname">selector_from_underscore_delimiter</tt><big>(</big><em>selectorname</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Selector.html#Selector.selector_from_underscore_delimiter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.selector_from_underscore_delimiter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a Selector from a string like e.g. <a href="#id9"><span class="problematic" id="id10">get_arg1_arg2_</span></a> where &#8220;_&#8221; is the delimiter</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.model.objc.arguments.Selector.Selector.selector_name">
+<tt class="descname">selector_name</tt><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.selector_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>selector_name &#8211; the name of the selector (mapped to objc_name)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.Selector.Selector.set_argument_for_sub_selector">
+<tt class="descname">set_argument_for_sub_selector</tt><big>(</big><em>subsel_name</em>, <em>argument</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Selector.html#Selector.set_argument_for_sub_selector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.set_argument_for_sub_selector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the argument for the sub selector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>subsel_name: string</strong> :</p>
+<blockquote>
+<div><p>name of the sub selector</p>
+</div></blockquote>
+<p><strong>argument: object</strong> :</p>
+<blockquote class="last">
+<div><p>the argument to set for the sub selector</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.Selector.Selector.set_selector_name">
+<tt class="descname">set_selector_name</tt><big>(</big><em>selname</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Selector.html#Selector.set_selector_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.set_selector_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.objc.arguments.Selector.Selector.sub_selectors">
+<tt class="descname">sub_selectors</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Selector.html#Selector.sub_selectors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.sub_selectors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of sub selector names</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="vizasm.model.objc.arguments.Selector.SelectorOverloadedException">
+<em class="property">exception </em><tt class="descclassname">vizasm.model.objc.arguments.Selector.</tt><tt class="descname">SelectorOverloadedException</tt><big>(</big><em>arguments_interface</em>, <em>new_argument=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Selector.html#SelectorOverloadedException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.SelectorOverloadedException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.model.objc.arguments.ArgumentsOverloadedException.ArgumentsOverloadedException" title="vizasm.model.objc.arguments.ArgumentsOverloadedException.ArgumentsOverloadedException"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.model.objc.arguments.ArgumentsOverloadedException.ArgumentsOverloadedException</span></tt></a></p>
+<p>Indicates that the selector has more arguments than it needs!</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="vizasm.model.objc.arguments.Selector.SelectorUnderloadedException">
+<em class="property">exception </em><tt class="descclassname">vizasm.model.objc.arguments.Selector.</tt><tt class="descname">SelectorUnderloadedException</tt><big>(</big><em>arguments_interface</em>, <em>cpu</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Selector.html#SelectorUnderloadedException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.SelectorUnderloadedException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.model.objc.arguments.ArgumentsUnderloadedException.ArgumentsUnderloadedException" title="vizasm.model.objc.arguments.ArgumentsUnderloadedException.ArgumentsUnderloadedException"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.model.objc.arguments.ArgumentsUnderloadedException.ArgumentsUnderloadedException</span></tt></a></p>
+<p>Indicates that the selector has less arguments than it needs!</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

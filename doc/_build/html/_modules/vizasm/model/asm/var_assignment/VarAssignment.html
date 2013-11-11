@@ -1,0 +1,254 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm.model.asm.var_assignment.VarAssignment &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vizasm.model.asm.var_assignment.VarAssignment</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 31.03.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.asm.ivar.IVar</span> <span class="kn">import</span> <span class="n">IVar</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.asm.var_assignment.VarAssignmentIvarRegisterWrongTypeException</span> <span class="kn">import</span> \
+    <span class="n">VarAssignmentIvarRegisterWrongTypeException</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.asm.var_assignment.VarAssignmentResolveIvarRegisterException</span> <span class="kn">import</span> \
+    <span class="n">VarAssignmentResolveIvarRegisterException</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.asm.var_assignment.VarAssignmentResolveSelfrefRegisterException</span> <span class="kn">import</span> \
+    <span class="n">VarAssignmentResolveSelfrefRegisterException</span>
+    
+<div class="viewcode-block" id="VarAssignment"><a class="viewcode-back" href="../../../../../vizasm.model.asm.var_assignment.html#vizasm.model.asm.var_assignment.VarAssignment.VarAssignment">[docs]</a><span class="k">class</span> <span class="nc">VarAssignment</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    Represents a variable assignment in assembler code created e.g. from the assembler line &quot;[ds:rdx+rsi]&quot; </span>
+<span class="sd">    </span>
+<span class="sd">    In this line rdx is the selfref_register and rsi the ivar_dest which holds the ivar (e.g. asmline &quot;[ds:_OBJC_IVAR_$_AppDelegate.obj3]&quot;)</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    __selfref_register: String</span>
+<span class="sd">        this register stores the self reference of the current instance from which the method is acting</span>
+<span class="sd">    __selfref_value: ObjcClass</span>
+<span class="sd">        the value of the selfref register (None if no cpu has been given at init or cannot be resolved)</span>
+<span class="sd">    __ivar_dest: classobj&lt;Register&gt; or x86: hex address as string</span>
+<span class="sd">        the destination to which the ivar will be assigned </span>
+<span class="sd">    __ivar_value: IVar</span>
+<span class="sd">        the value of the ivar register (None if no cpu has been given at init or cannot be resolved)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selfref_register</span><span class="p">,</span> <span class="n">ivar_dest</span><span class="p">,</span> <span class="n">cpu</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">resolve_selfref_value</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">resolve_ivar_value</span> <span class="o">=</span> <span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Init and resolve the `selfref_value` as well as the `ivar_value` (optional).</span>
+<span class="sd">        </span>
+<span class="sd">        If no `Cpu` is given, nothing will be resolved at all.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        resolve_selfref_value: bool</span>
+<span class="sd">            if true resolve the `__selfref_value` at init</span>
+<span class="sd">        resolve_ivar_value: bool</span>
+<span class="sd">            if true resolve the `ivar_value` at init</span>
+<span class="sd">            </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        VarAssignmentResolveSelfrefRegisterException</span>
+<span class="sd">            if the value cannot be resolved</span>
+<span class="sd">        VarAssignmentResolveIvarRegisterException</span>
+<span class="sd">            if the value cannot be resolved and `resolve_ivar_value` is true</span>
+<span class="sd">        VarAssignmentIvarRegisterWrongTypeException</span>
+<span class="sd">            if the type of the ivar_reg is not `IVar and `resolve_ivar_value` is true</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__selfref_register</span> <span class="o">=</span> <span class="n">selfref_register</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__ivar_dest</span> <span class="o">=</span> <span class="n">ivar_dest</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__selfref_value</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__ivar_value</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="n">cpu</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">resolve_selfref_value</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__selfref_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__resolve_selfref_reg</span><span class="p">(</span><span class="n">cpu</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">resolve_ivar_value</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__ivar_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__resolve_ivar_dest</span><span class="p">(</span><span class="n">cpu</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;*(</span><span class="si">%s</span><span class="s"> + </span><span class="si">%s</span><span class="s">) = *(</span><span class="si">%s</span><span class="s"> + </span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_selfref_register</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_ivar_dest</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selfref_value</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_ivar_value</span><span class="p">())</span>
+    
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">(</span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selfref_register</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_ivar_dest</span><span class="p">())</span>
+    
+<div class="viewcode-block" id="VarAssignment.set_selfref_register"><a class="viewcode-back" href="../../../../../vizasm.model.asm.var_assignment.html#vizasm.model.asm.var_assignment.VarAssignment.VarAssignment.set_selfref_register">[docs]</a>    <span class="k">def</span> <span class="nf">set_selfref_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__selfref_register</span> <span class="o">=</span> <span class="n">value</span>
+</div>
+<div class="viewcode-block" id="VarAssignment.set_ivar_dest"><a class="viewcode-back" href="../../../../../vizasm.model.asm.var_assignment.html#vizasm.model.asm.var_assignment.VarAssignment.VarAssignment.set_ivar_dest">[docs]</a>    <span class="k">def</span> <span class="nf">set_ivar_dest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__ivar_dest</span> <span class="o">=</span> <span class="n">value</span>
+</div>
+<div class="viewcode-block" id="VarAssignment.set_selfref_value"><a class="viewcode-back" href="../../../../../vizasm.model.asm.var_assignment.html#vizasm.model.asm.var_assignment.VarAssignment.VarAssignment.set_selfref_value">[docs]</a>    <span class="k">def</span> <span class="nf">set_selfref_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__selfref_value</span> <span class="o">=</span> <span class="n">value</span>
+</div>
+<div class="viewcode-block" id="VarAssignment.set_ivar_value"><a class="viewcode-back" href="../../../../../vizasm.model.asm.var_assignment.html#vizasm.model.asm.var_assignment.VarAssignment.VarAssignment.set_ivar_value">[docs]</a>    <span class="k">def</span> <span class="nf">set_ivar_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__ivar_value</span> <span class="o">=</span> <span class="n">value</span>
+</div>
+<div class="viewcode-block" id="VarAssignment.get_selfref_register"><a class="viewcode-back" href="../../../../../vizasm.model.asm.var_assignment.html#vizasm.model.asm.var_assignment.VarAssignment.VarAssignment.get_selfref_register">[docs]</a>    <span class="k">def</span> <span class="nf">get_selfref_register</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__selfref_register</span>
+</div>
+<div class="viewcode-block" id="VarAssignment.get_ivar_dest"><a class="viewcode-back" href="../../../../../vizasm.model.asm.var_assignment.html#vizasm.model.asm.var_assignment.VarAssignment.VarAssignment.get_ivar_dest">[docs]</a>    <span class="k">def</span> <span class="nf">get_ivar_dest</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ivar_dest</span>
+</div>
+<div class="viewcode-block" id="VarAssignment.get_selfref_value"><a class="viewcode-back" href="../../../../../vizasm.model.asm.var_assignment.html#vizasm.model.asm.var_assignment.VarAssignment.VarAssignment.get_selfref_value">[docs]</a>    <span class="k">def</span> <span class="nf">get_selfref_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__selfref_value</span>
+</div>
+<div class="viewcode-block" id="VarAssignment.get_ivar_value"><a class="viewcode-back" href="../../../../../vizasm.model.asm.var_assignment.html#vizasm.model.asm.var_assignment.VarAssignment.VarAssignment.get_ivar_value">[docs]</a>    <span class="k">def</span> <span class="nf">get_ivar_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ivar_value</span>
+</div>
+    <span class="n">selfref_register</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_selfref_register</span><span class="p">,</span> <span class="n">set_selfref_register</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;__selfref_register(string) -- this register stores the self reference of the current instance from which the method is acting&quot;</span><span class="p">)</span>
+    <span class="n">ivar_dest</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_ivar_dest</span><span class="p">,</span> <span class="n">set_ivar_dest</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;__ivar_dest(classobj&lt;Register&gt; or x86: hex address as string) -- the destination to which the ivar will be assigned&quot;</span><span class="p">)</span>
+    <span class="n">selfref_value</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_selfref_value</span><span class="p">,</span> <span class="n">set_selfref_register</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;__selfref_value(ObjcClass) -- the value of the selfref register (None if no cpu has been given at init or cannot be resolved)&quot;</span><span class="p">)</span>
+    <span class="n">ivar_value</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_ivar_value</span><span class="p">,</span> <span class="n">set_ivar_value</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;__ivar_value(IVar) -- the value of the ivar register (None if no cpu has been given at init or cannot be resolved)&quot;</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__resolve_selfref_reg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cpu</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Resolve the value of the selfreg register.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        VarAssignmentResolveSelfrefRegisterException</span>
+<span class="sd">            if the value cannot be resolved</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">selfref_reg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selfref_register</span><span class="p">()</span>
+        <span class="c"># x86 references always the same self reference -&gt; need to copy to not change the existing one on modification</span>
+        <span class="n">selfref_reg_resolved</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">cpu</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">registers</span><span class="o">.</span><span class="n">get_value_for_register</span><span class="p">(</span><span class="n">selfref_reg</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">selfref_reg_resolved</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">selfref_reg_resolved</span>
+        <span class="k">raise</span> <span class="n">VarAssignmentResolveSelfrefRegisterException</span><span class="p">(</span><span class="n">selfref_reg</span><span class="p">,</span> <span class="n">cpu</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">__resolve_ivar_dest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cpu</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Resolve the value of the ivar destination.</span>
+<span class="sd">        This should be an IVar. </span>
+<span class="sd">            </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        VarAssignmentResolveIvarRegisterException</span>
+<span class="sd">            if the value cannot be resolved</span>
+<span class="sd">        VarAssignmentIvarRegisterWrongTypeException</span>
+<span class="sd">            if the type of the ivar_reg is not Ivar</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">ivar_reg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_ivar_dest</span><span class="p">()</span>
+        <span class="n">ivar_reg_resolved</span> <span class="o">=</span> <span class="n">cpu</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">registers</span><span class="o">.</span><span class="n">get_value_for_register</span><span class="p">(</span><span class="n">ivar_reg</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ivar_reg_resolved</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ivar_reg_resolved</span><span class="p">,</span> <span class="n">IVar</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">ivar_reg_resolved</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">VarAssignmentIvarRegisterWrongTypeException</span><span class="p">(</span><span class="n">ivar_reg_resolved</span><span class="p">,</span> <span class="n">ivar_reg</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">VarAssignmentResolveIvarRegisterException</span><span class="p">(</span><span class="n">ivar_reg</span><span class="p">,</span> <span class="n">cpu</span><span class="p">)</span>
+    
+    <span class="n">selfref_register</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_selfref_register</span><span class="p">,</span> <span class="n">set_selfref_register</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="n">ivar_dest</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_ivar_dest</span><span class="p">,</span> <span class="n">set_ivar_dest</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="n">selfref_value</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_selfref_value</span><span class="p">,</span> <span class="n">set_selfref_value</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="n">ivar_value</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_ivar_value</span><span class="p">,</span> <span class="n">set_ivar_value</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+</div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.x86_64.Cpu_x86_64</span> <span class="kn">import</span> <span class="n">Cpu_x86_64</span>
+    <span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.x86_64.Register_x86_64</span> <span class="kn">import</span> <span class="n">Register_x86_64</span> <span class="k">as</span> <span class="n">reg</span>
+    <span class="n">cpu</span> <span class="o">=</span> <span class="n">Cpu_x86_64</span><span class="p">()</span>
+    <span class="n">cpu</span><span class="o">.</span><span class="n">read_line</span><span class="p">(</span><span class="s">&#39; ; Basic Block Input Regs: rax rdx rsi rdi -  Killed Regs: rax rcx rdx rsp rbp rsi rdi r8&#39;</span><span class="p">)</span>
+    <span class="n">cpu</span><span class="o">.</span><span class="n">read_line</span><span class="p">(</span><span class="s">&#39;methImpl_AppDelegate_applicationDidFinishLaunching_:&#39;</span><span class="p">)</span>
+    <span class="n">cpu</span><span class="o">.</span><span class="n">read_line</span><span class="p">(</span><span class="s">&#39;0000000100001ca0 488B0D99230000                  mov        rax, rdi&#39;</span><span class="p">)</span>
+    <span class="n">cpu</span><span class="o">.</span><span class="n">read_line</span><span class="p">(</span><span class="s">&#39;0000000100001ca0 488B0D99230000                  mov        rcx, qword [ds:_OBJC_IVAR_$_AppDelegate.command]&#39;</span><span class="p">)</span>
+    <span class="n">va</span> <span class="o">=</span> <span class="n">VarAssignment</span><span class="p">(</span><span class="n">reg</span><span class="p">(</span><span class="s">&#39;rax&#39;</span><span class="p">),</span> <span class="n">reg</span><span class="p">(</span><span class="s">&#39;rcx&#39;</span><span class="p">),</span> <span class="n">cpu</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">va</span>
+    
+    
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

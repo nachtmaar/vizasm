@@ -1,0 +1,253 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>VizAsm &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="#" />
+    <link rel="next" title="See VizAsm in action" href="action.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="action.html" title="See VizAsm in action"
+             accesskey="N">next</a> |</li>
+        <li><a href="#">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">VizAsm</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#documentation">Documentation</a></li>
+<li><a class="reference internal" href="#about">About</a></li>
+<li><a class="reference internal" href="#features">Features</a></li>
+<li><a class="reference internal" href="#supported-architectures">Supported architectures</a></li>
+<li><a class="reference internal" href="#requirements">Requirements</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="action.html"
+                        title="next chapter">See VizAsm in action</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="vizasm">
+<h1>VizAsm<a class="headerlink" href="#vizasm" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Release:</th><td class="field-body">0.1</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Date:</th><td class="field-body">November 11, 2013</td>
+</tr>
+</tbody>
+</table>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="action.html">See VizAsm in action</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="action.html#hopper">Hopper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="action.html#security-audit">Security Audit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="action.html#method-call-graph">Method call graph</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#get-a-copy">Get a copy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#general-steps">General steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#which-python-version-do-i-need">Which Python version do I need?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#hopper-scripts-location">Hopper Scripts location</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#specific-installation">Specific installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#arm">Arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#cli">Cli</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#hopper">Hopper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#gephi">Gephi</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="builtin_filters.html">Built-in filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_filters.html">Custom Filters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="filter_api.html">Filter Api</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_filters.html">Example Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_filters.html#write">Write</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_filters.html#load">Load</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="description">
+<h1>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h1>
+<p>VizAsm is a reverse-enineering-tool for Mach-O binaries (Mach and iOS).
+It is capable of reading the Objective-C and C method calls and performing a security audit.
+VizAsm comes with a few built-in filters that you can use but is also expandable with user written filters (easy to write with the help of the Filter Api).</p>
+<p>The results of the security audit is visualized as a graph (viewable in <a class="reference external" href="http://gephi.org/">Gephi</a>)
+but can also be viewed as simple text.</p>
+<p>VizAsm needs the help of the <a class="reference external" href="http://hopperapp.com/">Hopper Disassembler</a> to get the disassembly.
+You can either run it as script from Hopper or export the .asm file and run the analysis from the command line.</p>
+</div>
+<div class="section" id="documentation">
+<h1>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h1>
+<p>If you want to see the whole documentation checkout the project and have a look at doc/_build/html/index.html</p>
+</div>
+<div class="section" id="about">
+<h1>About<a class="headerlink" href="#about" title="Permalink to this headline">¶</a></h1>
+<p>VizAsm has been created at the University of Marburg 2013 out of a software project in the Distributed Systems Group.</p>
+<p>The idee came from my two advisers:</p>
+<ol class="arabic simple">
+<li>Lars Baumgärtner</li>
+<li>Matthias Leinweber</li>
+</ol>
+<p>which supported me during the whole project.</p>
+</div>
+<div class="section" id="features">
+<h1>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h1>
+<ul>
+<li><p class="first">Read Objective-C and C method calls</p>
+</li>
+<li><p class="first">Automated security audit</p>
+</li>
+<li><p class="first">Create method call graph</p>
+</li>
+<li><dl class="first docutils">
+<dt>Extensible with user supplied filters</dt>
+<dd><ul class="first last simple">
+<li>Filter Api</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Commandline version</p>
+</li>
+<li><dl class="first docutils">
+<dt>Integration into the <a class="reference external" href="http://hopperapp.com/">Hopper Disassembler</a></dt>
+<dd><ul class="first last simple">
+<li>Annotate method calls</li>
+<li>Annotate intance variables</li>
+<li>Annotate registers and stack</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="supported-architectures">
+<h1>Supported architectures<a class="headerlink" href="#supported-architectures" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>x86</li>
+<li>x86_64</li>
+<li>arm (32 bit)</li>
+</ul>
+</div>
+<div class="section" id="requirements">
+<h1>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>python &gt;= 2.6 (2.6 only for Mac and usage inside Hopper)</li>
+<li>networkx</li>
+<li>argparse</li>
+<li><a class="reference external" href="http://hopperapp.com/">Hopper Disassembler</a></li>
+<li><a class="reference external" href="http://gephi.org/">Gephi</a> (optional)</li>
+</ul>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="action.html" title="See VizAsm in action"
+             >next</a> |</li>
+        <li><a href="#">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

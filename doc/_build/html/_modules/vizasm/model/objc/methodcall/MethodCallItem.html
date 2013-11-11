@@ -1,0 +1,188 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm.model.objc.methodcall.MethodCallItem &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vizasm.model.objc.methodcall.MethodCallItem</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 26.07.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">vizasm.vizasm_networkx</span> <span class="kn">import</span> <span class="n">NodeAttributes</span>
+<span class="kn">from</span> <span class="nn">vizasm.vizasm_networkx.AttributeNodeInterface</span> <span class="kn">import</span> <span class="n">AttributeNodeInterface</span>
+
+<div class="viewcode-block" id="MethodCallItem"><a class="viewcode-back" href="../../../../../vizasm.model.objc.methodcall.html#vizasm.model.objc.methodcall.MethodCallItem.MethodCallItem">[docs]</a><span class="k">class</span> <span class="nc">MethodCallItem</span><span class="p">(</span><span class="nb">object</span><span class="p">,</span> <span class="n">AttributeNodeInterface</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    Item for `MethodCall`.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    call: MsgSend or Function</span>
+<span class="sd">    linenr: int, optional (default is -1)</span>
+<span class="sd">        line number in the asm file where the call has been made</span>
+<span class="sd">    address: int, optional (default is -1)</span>
+<span class="sd">        the address where to find in the asm file</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">,</span> <span class="n">linenr</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">address</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="n">AttributeNodeInterface</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__call</span> <span class="o">=</span> <span class="n">call</span>
+        <span class="k">if</span> <span class="n">linenr</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">linenr</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">if</span> <span class="n">address</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">address</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__linenr</span> <span class="o">=</span> <span class="n">linenr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__address</span> <span class="o">=</span> <span class="n">address</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s"> </span><span class="si">%d</span><span class="s"> </span><span class="si">%s</span><span class="se">\n</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">linenr</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">)))</span>    
+                
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="o">.</span><span class="n">__repr__</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">MethodCallItem</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span> <span class="ow">is</span> <span class="n">other</span> <span class="ow">or</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">linenr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="p">))</span> <span class="o">==</span> <span class="p">((</span><span class="n">other</span><span class="o">.</span><span class="n">call</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">linenr</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">address</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    
+    <span class="k">def</span> <span class="nf">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span> <span class="o">==</span> <span class="n">other</span>    
+    
+    <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">linenr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="p">))</span>
+    
+    <span class="k">def</span> <span class="nf">__cmp__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">address</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">address</span>
+                      
+<div class="viewcode-block" id="MethodCallItem.get_call"><a class="viewcode-back" href="../../../../../vizasm.model.objc.methodcall.html#vizasm.model.objc.methodcall.MethodCallItem.MethodCallItem.get_call">[docs]</a>    <span class="k">def</span> <span class="nf">get_call</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__call</span>
+</div>
+<div class="viewcode-block" id="MethodCallItem.get_linenr"><a class="viewcode-back" href="../../../../../vizasm.model.objc.methodcall.html#vizasm.model.objc.methodcall.MethodCallItem.MethodCallItem.get_linenr">[docs]</a>    <span class="k">def</span> <span class="nf">get_linenr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__linenr</span>
+</div>
+<div class="viewcode-block" id="MethodCallItem.set_call"><a class="viewcode-back" href="../../../../../vizasm.model.objc.methodcall.html#vizasm.model.objc.methodcall.MethodCallItem.MethodCallItem.set_call">[docs]</a>    <span class="k">def</span> <span class="nf">set_call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__call</span> <span class="o">=</span> <span class="n">value</span>
+</div>
+<div class="viewcode-block" id="MethodCallItem.set_linenr"><a class="viewcode-back" href="../../../../../vizasm.model.objc.methodcall.html#vizasm.model.objc.methodcall.MethodCallItem.MethodCallItem.set_linenr">[docs]</a>    <span class="k">def</span> <span class="nf">set_linenr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__linenr</span> <span class="o">=</span> <span class="n">value</span>
+</div>
+<div class="viewcode-block" id="MethodCallItem.get_address"><a class="viewcode-back" href="../../../../../vizasm.model.objc.methodcall.html#vizasm.model.objc.methodcall.MethodCallItem.MethodCallItem.get_address">[docs]</a>    <span class="k">def</span> <span class="nf">get_address</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__address</span>
+</div>
+<div class="viewcode-block" id="MethodCallItem.set_address"><a class="viewcode-back" href="../../../../../vizasm.model.objc.methodcall.html#vizasm.model.objc.methodcall.MethodCallItem.MethodCallItem.set_address">[docs]</a>    <span class="k">def</span> <span class="nf">set_address</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__address</span> <span class="o">=</span> <span class="n">value</span>
+                    </div>
+    <span class="n">call</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_call</span><span class="p">,</span> <span class="n">set_call</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;call(MsgSend or Function)&quot;</span><span class="p">)</span>
+    <span class="n">linenr</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_linenr</span><span class="p">,</span> <span class="n">set_linenr</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;linenr(int, optional) -- line number in the asm file where the call has been made&quot;</span><span class="p">)</span>
+    <span class="n">address</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_address</span><span class="p">,</span> <span class="n">set_address</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;address(int, optional) -- the address where to find in the asm file&quot;</span><span class="p">)</span>
+    
+<span class="c">#####################################################################################</span>
+<span class="c"># AttributeNodeInterface                                                            #</span>
+<span class="c">#####################################################################################</span>
+
+<div class="viewcode-block" id="MethodCallItem.node_size"><a class="viewcode-back" href="../../../../../vizasm.model.objc.methodcall.html#vizasm.model.objc.methodcall.MethodCallItem.MethodCallItem.node_size">[docs]</a>    <span class="k">def</span> <span class="nf">node_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">NodeAttributes</span><span class="o">.</span><span class="n">NVAL_METHODCALL_SIZE_CALL</span>
+    
+<span class="c">#####################################################################################</span>
+<span class="c"># MethodCallItem                                                                    #</span>
+<span class="c">#####################################################################################</span>
+</div></div>
+<span class="n">METHODCALLITEM_PSEUDO</span> <span class="o">=</span> <span class="n">MethodCallItem</span><span class="p">(</span><span class="s">&#39;pseudo entry&#39;</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,901 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>memory Package &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">memory Package</a><ul>
+<li><a class="reference internal" href="#module-vizasm.analysis.asm.cpu.memory.Memory"><tt class="docutils literal"><span class="pre">Memory</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.analysis.asm.cpu.memory.MemoryLookupException"><tt class="docutils literal"><span class="pre">MemoryLookupException</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vizasm.analysis.asm.cpu.memory.Registers"><tt class="docutils literal"><span class="pre">Registers</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.analysis.asm.cpu.memory.StackFrame"><tt class="docutils literal"><span class="pre">StackFrame</span></tt> Module</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/vizasm.analysis.asm.cpu.memory.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="memory-package">
+<h1>memory Package<a class="headerlink" href="#memory-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-vizasm.analysis.asm.cpu.memory.Memory">
+<span id="memory-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">Memory</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.asm.cpu.memory.Memory" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 17.09.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.asm.cpu.memory.Memory.Memory">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.asm.cpu.memory.Memory.</tt><tt class="descname">Memory</tt><big>(</big><em>cpu</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/Memory.html#Memory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.Memory.Memory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt>, <a class="reference internal" href="vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Resetable.Resetable" title="vizasm.analysis.asm.cpu.Resetable.Resetable"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.asm.cpu.Resetable.Resetable</span></tt></a></p>
+<p>Manages the memory of the <cite>Cpu</cite>.
+This includes <cite>Register`s as well as the `StackFrame</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>cpu: Cpu</strong> :</p>
+<blockquote>
+<div><p>the corresponding cpu</p>
+</div></blockquote>
+<p><strong>_registers: Registers</strong> :</p>
+<blockquote>
+<div><p>Registers of the cpu</p>
+</div></blockquote>
+<p><strong>_stack: StackFrame</strong> :</p>
+<blockquote class="last">
+<div><p>Stack of the cpu</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.Memory.Memory.get_argument" title="vizasm.analysis.asm.cpu.memory.Memory.Memory.get_argument"><tt class="xref py py-obj docutils literal"><span class="pre">get_argument</span></tt></a>([register,&nbsp;objc_msgSend_stret])</td>
+<td>Get an argument from the specified <cite>Register</cite>.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.Memory.Memory.get_arguments" title="vizasm.analysis.asm.cpu.memory.Memory.Memory.get_arguments"><tt class="xref py py-obj docutils literal"><span class="pre">get_arguments</span></tt></a>(cnt,&nbsp;register_list[,&nbsp;try_only])</td>
+<td>Look up the values of <a href="#id1"><span class="problematic" id="id2">`</span></a>Register`s and return a list of the looked up values,</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.Memory.Memory.get_arguments_from_asm_heuristic" title="vizasm.analysis.asm.cpu.memory.Memory.Memory.get_arguments_from_asm_heuristic"><tt class="xref py py-obj docutils literal"><span class="pre">get_arguments_from_asm_heuristic</span></tt></a>()</td>
+<td>Use the number of arguments (stack and register usage since last call, See the <cite>AssignmentMatchingSystem</cite>)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.Memory.Memory.get_arguments_from_registers" title="vizasm.analysis.asm.cpu.memory.Memory.Memory.get_arguments_from_registers"><tt class="xref py py-obj docutils literal"><span class="pre">get_arguments_from_registers</span></tt></a>(cnt,&nbsp;register_list)</td>
+<td>Look up the values of registers and return a list of the looked up values,</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.Memory.Memory.get_arguments_from_stack" title="vizasm.analysis.asm.cpu.memory.Memory.Memory.get_arguments_from_stack"><tt class="xref py py-obj docutils literal"><span class="pre">get_arguments_from_stack</span></tt></a>(cnt[,&nbsp;try_only])</td>
+<td>Get a number of stack arguments.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.Memory.Memory.get_cpu" title="vizasm.analysis.asm.cpu.memory.Memory.Memory.get_cpu"><tt class="xref py py-obj docutils literal"><span class="pre">get_cpu</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.Memory.Memory.get_registers" title="vizasm.analysis.asm.cpu.memory.Memory.Memory.get_registers"><tt class="xref py py-obj docutils literal"><span class="pre">get_registers</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.Memory.Memory.get_stack" title="vizasm.analysis.asm.cpu.memory.Memory.Memory.get_stack"><tt class="xref py py-obj docutils literal"><span class="pre">get_stack</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.Memory.Memory.reset" title="vizasm.analysis.asm.cpu.memory.Memory.Memory.reset"><tt class="xref py py-obj docutils literal"><span class="pre">reset</span></tt></a>()</td>
+<td>Reset the memory by resetting the registers and stack</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.Memory.Memory.set_cpu" title="vizasm.analysis.asm.cpu.memory.Memory.Memory.set_cpu"><tt class="xref py py-obj docutils literal"><span class="pre">set_cpu</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.Memory.Memory.set_return_register_value" title="vizasm.analysis.asm.cpu.memory.Memory.Memory.set_return_register_value"><tt class="xref py py-obj docutils literal"><span class="pre">set_return_register_value</span></tt></a>(value)</td>
+<td>Set the value for the return register</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.memory.Memory.Memory.cpu">
+<tt class="descname">cpu</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.Memory.Memory.cpu" title="Permalink to this definition">¶</a></dt>
+<dd><p>cpu(Cpu) &#8211; the corresponding cpu</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.memory.Memory.Memory.get_argument">
+<tt class="descname">get_argument</tt><big>(</big><em>register=None</em>, <em>objc_msgSend_stret=False</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/Memory.html#Memory.get_argument"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.Memory.Memory.get_argument" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an argument from the specified <cite>Register</cite>.
+If the <cite>Cpu</cite> fetches its arguments from stack, pop it from where.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>register: Register</strong> :</p>
+<blockquote class="last">
+<div><p>from which <cite>Register</cite> to get_from_idx the argument</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.memory.Memory.Memory.get_arguments">
+<tt class="descname">get_arguments</tt><big>(</big><em>cnt</em>, <em>register_list</em>, <em>try_only=False</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/Memory.html#Memory.get_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.Memory.Memory.get_arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Look up the values of <cite>Register`s and return a list of the looked up values,
+but only if the `Cpu</cite> fetches arguments from stack (returns []).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>cnt: int</strong> :</p>
+<blockquote>
+<div><p>the number of arguments to look up</p>
+</div></blockquote>
+<p><strong>register_list:list&lt;Register&gt;</strong> :</p>
+<blockquote>
+<div><p>the register list from which to get the value</p>
+</div></blockquote>
+<p><strong>try_only: bool, optional (default is False)</strong> :</p>
+<blockquote>
+<div><p>If True no exception will be raised if not all values could be looked up.
+Tries to get the maximum number of arguments it can until one is None</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>arguments: list&lt;object&gt;</strong> :</p>
+<blockquote>
+<div><p>list of resolved registers</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><strong>MemoryCouldNotGetAllRegisterValues</strong> :</p>
+<blockquote>
+<div><p>raised if not all values could be looked up and not <cite>try_only</cite></p>
+</div></blockquote>
+<p><strong>MemoryCouldNotGetAllStackValues</strong> :</p>
+<blockquote class="last">
+<div><p>raised if not all values could be looked up and not <cite>try_only</cite></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.memory.Memory.Memory.get_arguments_from_asm_heuristic">
+<tt class="descname">get_arguments_from_asm_heuristic</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/Memory.html#Memory.get_arguments_from_asm_heuristic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.Memory.Memory.get_arguments_from_asm_heuristic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use the number of arguments (stack and register usage since last call, See the <cite>AssignmentMatchingSystem</cite>)
+to determine the number of arguments for the function.</p>
+<p>Only works if the c function call arguments heuristic is enabled!</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><strong>list&lt;object&gt;</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.memory.Memory.Memory.get_arguments_from_registers">
+<tt class="descname">get_arguments_from_registers</tt><big>(</big><em>cnt</em>, <em>register_list</em>, <em>try_only=False</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/Memory.html#Memory.get_arguments_from_registers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.Memory.Memory.get_arguments_from_registers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Look up the values of registers and return a list of the looked up values,
+but only if the <cite>Cpu</cite> fetches arguments from stack (returns []).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>cnt: int</strong> :</p>
+<blockquote>
+<div><p>the number of arguments to look up</p>
+</div></blockquote>
+<p><strong>register_list:list&lt;Register&gt;</strong> :</p>
+<blockquote>
+<div><p>the register list from which to get the value</p>
+</div></blockquote>
+<p><strong>try_only: bool, optional (default is False)</strong> :</p>
+<blockquote>
+<div><p>If True no exception will be raised if not all values could be looked up.
+Tries to get the maximum number of arguments it can until one is None</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>arguments: list&lt;object&gt;</strong> :</p>
+<blockquote>
+<div><p>list of resolved registers</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><strong>MemoryCouldNotGetAllRegisterValues</strong> :</p>
+<blockquote>
+<div><p>raised if not all values could be looked up and not <cite>try_only</cite></p>
+</div></blockquote>
+<p><strong>MemoryCouldNotGetAllStackValues</strong> :</p>
+<blockquote class="last">
+<div><p>raised if not all values could be looked up and not <cite>try_only</cite></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.memory.Memory.Memory.get_arguments_from_stack">
+<tt class="descname">get_arguments_from_stack</tt><big>(</big><em>cnt</em>, <em>try_only=False</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/Memory.html#Memory.get_arguments_from_stack"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.Memory.Memory.get_arguments_from_stack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a number of stack arguments.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>cnt: int</strong> :</p>
+<blockquote>
+<div><p>the number of stack arguments to look up</p>
+</div></blockquote>
+<p><strong>try_only: bool, optional (default is False)</strong> :</p>
+<blockquote>
+<div><p>If True no exception will be raised if not all values could be looked up.
+Tries to get the maximum number of arguments it can until one is None</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>arguments: list&lt;object&gt;</strong> :</p>
+<blockquote>
+<div><p>list of arguments</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><strong>MemoryCouldNotGetAllStackValues</strong> :</p>
+<blockquote class="last">
+<div><p>raised if not all values could be looked up and not <cite>try_only</cite></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.memory.Memory.Memory.get_cpu">
+<tt class="descname">get_cpu</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/Memory.html#Memory.get_cpu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.Memory.Memory.get_cpu" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.memory.Memory.Memory.get_registers">
+<tt class="descname">get_registers</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/Memory.html#Memory.get_registers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.Memory.Memory.get_registers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.memory.Memory.Memory.get_stack">
+<tt class="descname">get_stack</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/Memory.html#Memory.get_stack"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.Memory.Memory.get_stack" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.memory.Memory.Memory.registers">
+<tt class="descname">registers</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.Memory.Memory.registers" title="Permalink to this definition">¶</a></dt>
+<dd><p>_registers(Registers) &#8211; registers of the CPU</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.memory.Memory.Memory.reset">
+<tt class="descname">reset</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/Memory.html#Memory.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.Memory.Memory.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the memory by resetting the registers and stack</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.memory.Memory.Memory.set_cpu">
+<tt class="descname">set_cpu</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/Memory.html#Memory.set_cpu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.Memory.Memory.set_cpu" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.memory.Memory.Memory.set_return_register_value">
+<tt class="descname">set_return_register_value</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/Memory.html#Memory.set_return_register_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.Memory.Memory.set_return_register_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the value for the return register</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.memory.Memory.Memory.stack">
+<tt class="descname">stack</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.Memory.Memory.stack" title="Permalink to this definition">¶</a></dt>
+<dd><p>_stack(StackFrame)  &#8211; stack of the CPU</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.asm.cpu.memory.MemoryLookupException">
+<span id="memorylookupexception-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">MemoryLookupException</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.asm.cpu.memory.MemoryLookupException" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 07.04.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="exception">
+<dt id="vizasm.analysis.asm.cpu.memory.MemoryLookupException.MemoryCouldNotGetAllRegisterValues">
+<em class="property">exception </em><tt class="descclassname">vizasm.analysis.asm.cpu.memory.MemoryLookupException.</tt><tt class="descname">MemoryCouldNotGetAllRegisterValues</tt><big>(</big><em>cpu</em>, <em>register_list</em>, <em>looked_up_list</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/MemoryLookupException.html#MemoryCouldNotGetAllRegisterValues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.MemoryLookupException.MemoryCouldNotGetAllRegisterValues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.MemoryLookupException.MemoryLookupException" title="vizasm.analysis.asm.cpu.memory.MemoryLookupException.MemoryLookupException"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.asm.cpu.memory.MemoryLookupException.MemoryLookupException</span></tt></a></p>
+<p>Exception for the case that not all register values could be resolved (e.g. are None)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>_looked_up_list: list&lt;object&gt;</strong> :</p>
+<blockquote>
+<div><p>list of the already looked up ones</p>
+</div></blockquote>
+<p><strong>_register_list: list&lt;object&gt;</strong> :</p>
+<blockquote class="last">
+<div><p>list of the registers that have been looked up</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="exception">
+<dt id="vizasm.analysis.asm.cpu.memory.MemoryLookupException.MemoryCouldNotGetAllStackValues">
+<em class="property">exception </em><tt class="descclassname">vizasm.analysis.asm.cpu.memory.MemoryLookupException.</tt><tt class="descname">MemoryCouldNotGetAllStackValues</tt><big>(</big><em>cpu</em>, <em>cnt_stack_values</em>, <em>looked_up_list</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/MemoryLookupException.html#MemoryCouldNotGetAllStackValues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.MemoryLookupException.MemoryCouldNotGetAllStackValues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.MemoryLookupException.MemoryLookupException" title="vizasm.analysis.asm.cpu.memory.MemoryLookupException.MemoryLookupException"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.asm.cpu.memory.MemoryLookupException.MemoryLookupException</span></tt></a></p>
+<p>Exception for the case that not all stack values could be resolved (e.g. are None)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>_cnt_stack_values: int</strong> :</p>
+<blockquote class="last">
+<div><p>the number of stack values that should be looked up</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="exception">
+<dt id="vizasm.analysis.asm.cpu.memory.MemoryLookupException.MemoryLookupException">
+<em class="property">exception </em><tt class="descclassname">vizasm.analysis.asm.cpu.memory.MemoryLookupException.</tt><tt class="descname">MemoryLookupException</tt><big>(</big><em>cpu</em>, <em>looked_up_list</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/MemoryLookupException.html#MemoryLookupException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.MemoryLookupException.MemoryLookupException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vizasm.analysis.asm.cpu.exceptions.html#vizasm.analysis.asm.cpu.exceptions.CpuException.CpuException" title="vizasm.analysis.asm.cpu.exceptions.CpuException.CpuException"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.asm.cpu.exceptions.CpuException.CpuException</span></tt></a></p>
+<p>Exception for the case that multiple values could not be looked up from memory.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>_looked_up_list: list&lt;object&gt;</strong> :</p>
+<blockquote class="last">
+<div><p>list of the already looked up ones</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.asm.cpu.memory.Registers">
+<span id="registers-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">Registers</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.asm.cpu.memory.Registers" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 07.04.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.asm.cpu.memory.Registers.Registers">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.asm.cpu.memory.Registers.</tt><tt class="descname">Registers</tt><big>(</big><em>cpu</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/Registers.html#Registers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.Registers.Registers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt>, <a class="reference internal" href="vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Resetable.Resetable" title="vizasm.analysis.asm.cpu.Resetable.Resetable"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.asm.cpu.Resetable.Resetable</span></tt></a></p>
+<p>Represents the registers of a cpu.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>__registers: dict</strong> :</p>
+<blockquote>
+<div><p>registers of the CPU</p>
+</div></blockquote>
+<p class="last"><strong>__cpu: Cpu</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.Registers.Registers.delete_element" title="vizasm.analysis.asm.cpu.memory.Registers.Registers.delete_element"><tt class="xref py py-obj docutils literal"><span class="pre">delete_element</span></tt></a>(key)</td>
+<td>Delete an element from the registers dictionary.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.Registers.Registers.delete_elements" title="vizasm.analysis.asm.cpu.memory.Registers.Registers.delete_elements"><tt class="xref py py-obj docutils literal"><span class="pre">delete_elements</span></tt></a>(killed_regs)</td>
+<td>Read a list of killed regs and delete them.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.Registers.Registers.get_cpu" title="vizasm.analysis.asm.cpu.memory.Registers.Registers.get_cpu"><tt class="xref py py-obj docutils literal"><span class="pre">get_cpu</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.Registers.Registers.get_registers" title="vizasm.analysis.asm.cpu.memory.Registers.Registers.get_registers"><tt class="xref py py-obj docutils literal"><span class="pre">get_registers</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.Registers.Registers.get_value_for_register" title="vizasm.analysis.asm.cpu.memory.Registers.Registers.get_value_for_register"><tt class="xref py py-obj docutils literal"><span class="pre">get_value_for_register</span></tt></a>(register)</td>
+<td>Return the value which is currently stored in the register.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.Registers.Registers.reset" title="vizasm.analysis.asm.cpu.memory.Registers.Registers.reset"><tt class="xref py py-obj docutils literal"><span class="pre">reset</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.Registers.Registers.resolve_current_register_value" title="vizasm.analysis.asm.cpu.memory.Registers.Registers.resolve_current_register_value"><tt class="xref py py-obj docutils literal"><span class="pre">resolve_current_register_value</span></tt></a>(register)</td>
+<td>Resolve the current register value.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.Registers.Registers.set_cpu" title="vizasm.analysis.asm.cpu.memory.Registers.Registers.set_cpu"><tt class="xref py py-obj docutils literal"><span class="pre">set_cpu</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.Registers.Registers.set_value_for_register" title="vizasm.analysis.asm.cpu.memory.Registers.Registers.set_value_for_register"><tt class="xref py py-obj docutils literal"><span class="pre">set_value_for_register</span></tt></a>(register,&nbsp;value)</td>
+<td>Set the value for the specified register and annotate the assignment</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.Registers.Registers.set_value_for_register_ann_method_ead" title="vizasm.analysis.asm.cpu.memory.Registers.Registers.set_value_for_register_ann_method_ead"><tt class="xref py py-obj docutils literal"><span class="pre">set_value_for_register_ann_method_ead</span></tt></a>(...)</td>
+<td>Set the value for the specified register and annotate the method head</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.memory.Registers.Registers.cpu">
+<tt class="descname">cpu</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.Registers.Registers.cpu" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.memory.Registers.Registers.delete_element">
+<tt class="descname">delete_element</tt><big>(</big><em>key</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/Registers.html#Registers.delete_element"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.Registers.Registers.delete_element" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete an element from the registers dictionary.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>key</strong> :</p>
+<blockquote>
+<div><p>any key of the dictionary</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>True</strong> :</p>
+<blockquote>
+<div><p>if the entry could be deleted</p>
+</div></blockquote>
+<p><strong>False</strong> :</p>
+<blockquote class="last">
+<div><p>otherwise</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.memory.Registers.Registers.delete_elements">
+<tt class="descname">delete_elements</tt><big>(</big><em>killed_regs</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/Registers.html#Registers.delete_elements"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.Registers.Registers.delete_elements" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a list of killed regs and delete them.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>input_regs: list&lt;string&gt;</strong> :</p>
+<blockquote>
+<div><p>e.g. [&#8216;rax&#8217;, &#8216;rcx&#8217;, &#8216;rdx&#8217;, &#8216;rsp&#8217; ,&#8217;rbp&#8217;, &#8216;rsi&#8217;, &#8216;rdi&#8217;, &#8216;r8&#8217;]</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>True</strong> :</p>
+<blockquote>
+<div><p>if all registers could be deleted</p>
+</div></blockquote>
+<p><strong>False</strong> :</p>
+<blockquote class="last">
+<div><p>otherwise</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.memory.Registers.Registers.get_cpu">
+<tt class="descname">get_cpu</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/Registers.html#Registers.get_cpu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.Registers.Registers.get_cpu" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.memory.Registers.Registers.get_registers">
+<tt class="descname">get_registers</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/Registers.html#Registers.get_registers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.Registers.Registers.get_registers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.memory.Registers.Registers.get_value_for_register">
+<tt class="descname">get_value_for_register</tt><big>(</big><em>register</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/Registers.html#Registers.get_value_for_register"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.Registers.Registers.get_value_for_register" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the value which is currently stored in the register.
+If register is not in dict, None will be returned</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.memory.Registers.Registers.registers">
+<tt class="descname">registers</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.Registers.Registers.registers" title="Permalink to this definition">¶</a></dt>
+<dd><p>__registers(dict) &#8211; registers of the CPU</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.memory.Registers.Registers.reset">
+<tt class="descname">reset</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/Registers.html#Registers.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.Registers.Registers.reset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.memory.Registers.Registers.resolve_current_register_value">
+<tt class="descname">resolve_current_register_value</tt><big>(</big><em>register</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/Registers.html#Registers.resolve_current_register_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.Registers.Registers.resolve_current_register_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resolve the current register value. 
+If the register has an entry in the registers dictionary this will be returned.
+Otherwise the register will be returned</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>register: string</strong> :</p>
+<blockquote class="last">
+<div><p>the register for which to look up the value</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.memory.Registers.Registers.set_cpu">
+<tt class="descname">set_cpu</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/Registers.html#Registers.set_cpu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.Registers.Registers.set_cpu" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.memory.Registers.Registers.set_value_for_register">
+<tt class="descname">set_value_for_register</tt><big>(</big><em>register</em>, <em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/Registers.html#Registers.set_value_for_register"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.Registers.Registers.set_value_for_register" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the value for the specified register and annotate the assignment</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.memory.Registers.Registers.set_value_for_register_ann_method_ead">
+<tt class="descname">set_value_for_register_ann_method_ead</tt><big>(</big><em>register</em>, <em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/Registers.html#Registers.set_value_for_register_ann_method_ead"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.Registers.Registers.set_value_for_register_ann_method_ead" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the value for the specified register and annotate the method head</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.asm.cpu.memory.StackFrame">
+<span id="stackframe-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">StackFrame</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.asm.cpu.memory.StackFrame" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 07.04.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="exception">
+<dt id="vizasm.analysis.asm.cpu.memory.StackFrame.NoSuchStackObjectAtAddressException">
+<em class="property">exception </em><tt class="descclassname">vizasm.analysis.asm.cpu.memory.StackFrame.</tt><tt class="descname">NoSuchStackObjectAtAddressException</tt><big>(</big><em>addr</em>, <em>stack</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/StackFrame.html#NoSuchStackObjectAtAddressException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.StackFrame.NoSuchStackObjectAtAddressException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.StackFrame.NoSuchStackObjectException" title="vizasm.analysis.asm.cpu.memory.StackFrame.NoSuchStackObjectException"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.asm.cpu.memory.StackFrame.NoSuchStackObjectException</span></tt></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="vizasm.analysis.asm.cpu.memory.StackFrame.NoSuchStackObjectAtIdxException">
+<em class="property">exception </em><tt class="descclassname">vizasm.analysis.asm.cpu.memory.StackFrame.</tt><tt class="descname">NoSuchStackObjectAtIdxException</tt><big>(</big><em>addr</em>, <em>stack</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/StackFrame.html#NoSuchStackObjectAtIdxException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.StackFrame.NoSuchStackObjectAtIdxException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.StackFrame.NoSuchStackObjectException" title="vizasm.analysis.asm.cpu.memory.StackFrame.NoSuchStackObjectException"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.asm.cpu.memory.StackFrame.NoSuchStackObjectException</span></tt></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="vizasm.analysis.asm.cpu.memory.StackFrame.NoSuchStackObjectException">
+<em class="property">exception </em><tt class="descclassname">vizasm.analysis.asm.cpu.memory.StackFrame.</tt><tt class="descname">NoSuchStackObjectException</tt><big>(</big><em>addr</em>, <em>stack</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/StackFrame.html#NoSuchStackObjectException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.StackFrame.NoSuchStackObjectException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vizasm.analysis.asm.cpu.exceptions.html#vizasm.analysis.asm.cpu.exceptions.CpuException.CpuException" title="vizasm.analysis.asm.cpu.exceptions.CpuException.CpuException"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.asm.cpu.exceptions.CpuException.CpuException</span></tt></a></p>
+<p>Exception for the case that the element at the specified address or idx does not exist.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>addr: int</strong> :</p>
+<p class="last"><strong>stack: StackFrame</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.asm.cpu.memory.StackFrame.</tt><tt class="descname">StackFrame</tt><big>(</big><em>cpu</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/StackFrame.html#StackFrame"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt>, <a class="reference internal" href="vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Resetable.Resetable" title="vizasm.analysis.asm.cpu.Resetable.Resetable"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.asm.cpu.Resetable.Resetable</span></tt></a></p>
+<p>Represents a stack frame.</p>
+<p>Let r10 = arg1, r11 = arg2, rbx = arg3, then pushes to stack look like (x86_64 example):</p>
+<p>&#8220;0000000100002b67 4C891424                        mov        qword [ss:rsp], r10</p>
+<p>0000000100002b6b 4C895C2408                       mov        qword [ss:rsp+0x8], r11</p>
+<p>0000000100002b70 48895C2410                       mov        qword [ss:rsp+0x10], rbx&#8221;</p>
+<p>The example leads to the stack: arg1, arg2, arg3 (with top of the stack = left, lowest address)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>__stack: dict&lt;int, object&gt;</strong> :</p>
+<blockquote>
+<div><p>stack of the CPU</p>
+</div></blockquote>
+<p class="last"><strong>__cpu: Cpu</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.add" title="vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.add"><tt class="xref py py-obj docutils literal"><span class="pre">add</span></tt></a>(value,&nbsp;address)</td>
+<td>Add an object to the <cite>StackFrame</cite>.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.add_from_idx" title="vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.add_from_idx"><tt class="xref py py-obj docutils literal"><span class="pre">add_from_idx</span></tt></a>(value,&nbsp;idx)</td>
+<td>Add an value from given <cite>idx</cite></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.get_cpu" title="vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.get_cpu"><tt class="xref py py-obj docutils literal"><span class="pre">get_cpu</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.get_from_idx" title="vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.get_from_idx"><tt class="xref py py-obj docutils literal"><span class="pre">get_from_idx</span></tt></a>(idx)</td>
+<td>Get element from given <cite>idx</cite>.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.get_stack" title="vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.get_stack"><tt class="xref py py-obj docutils literal"><span class="pre">get_stack</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.pop" title="vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.pop"><tt class="xref py py-obj docutils literal"><span class="pre">pop</span></tt></a>()</td>
+<td>Pop item.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.reset" title="vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.reset"><tt class="xref py py-obj docutils literal"><span class="pre">reset</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.set_cpu" title="vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.set_cpu"><tt class="xref py py-obj docutils literal"><span class="pre">set_cpu</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.set_stack" title="vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.set_stack"><tt class="xref py py-obj docutils literal"><span class="pre">set_stack</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.stack_is_empty" title="vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.stack_is_empty"><tt class="xref py py-obj docutils literal"><span class="pre">stack_is_empty</span></tt></a>()</td>
+<td>Return whether the stack is empty</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.add">
+<tt class="descname">add</tt><big>(</big><em>value</em>, <em>address</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/StackFrame.html#StackFrame.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add an object to the <cite>StackFrame</cite>.
+The stack grows to higher addresses, 
+meaning that the top of the stack is always the value with the lowest address.
+The order in which the elements are added does not play any role.
+The order is given by the <cite>address</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><strong>address: int</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.add_from_idx">
+<tt class="descname">add_from_idx</tt><big>(</big><em>value</em>, <em>idx</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/StackFrame.html#StackFrame.add_from_idx"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.add_from_idx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add an value from given <cite>idx</cite></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.cpu">
+<tt class="descname">cpu</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.cpu" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.get_cpu">
+<tt class="descname">get_cpu</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/StackFrame.html#StackFrame.get_cpu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.get_cpu" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.get_from_idx">
+<tt class="descname">get_from_idx</tt><big>(</big><em>idx</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/StackFrame.html#StackFrame.get_from_idx"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.get_from_idx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get element from given <cite>idx</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><strong>NoSuchStackObjectAtIdxException</strong> :</p>
+<blockquote class="last">
+<div><p>if there is no object at the given idx</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.get_stack">
+<tt class="descname">get_stack</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/StackFrame.html#StackFrame.get_stack"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.get_stack" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.pop">
+<tt class="descname">pop</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/StackFrame.html#StackFrame.pop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.pop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pop item. Top of stack is the lowest address</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.reset">
+<tt class="descname">reset</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/StackFrame.html#StackFrame.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.reset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.set_cpu">
+<tt class="descname">set_cpu</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/StackFrame.html#StackFrame.set_cpu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.set_cpu" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.set_stack">
+<tt class="descname">set_stack</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/StackFrame.html#StackFrame.set_stack"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.set_stack" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.stack">
+<tt class="descname">stack</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.stack" title="Permalink to this definition">¶</a></dt>
+<dd><p>__stack(dict&lt;int, object&gt;) &#8211; stack of the CPU</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.stack_is_empty">
+<tt class="descname">stack_is_empty</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/memory/StackFrame.html#StackFrame.stack_is_empty"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.memory.StackFrame.StackFrame.stack_is_empty" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return whether the stack is empty</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

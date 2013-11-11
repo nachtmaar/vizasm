@@ -1,0 +1,755 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm.analysis.asm.cpu.Cpu &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vizasm.analysis.asm.cpu.Cpu</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 26.03.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.AsmRegEx</span> <span class="kn">import</span> <span class="n">AsmRegEx</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.CRuntime</span> <span class="kn">import</span> <span class="n">CRuntime</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.CallingConventionsInterface</span> <span class="kn">import</span> \
+    <span class="n">CallingConventionsInterface</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.ParseUtil</span> <span class="kn">import</span> <span class="n">ParseUtil</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.Resetable</span> <span class="kn">import</span> <span class="n">Resetable</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.exceptions.CpuCouldNotGetDestination</span> <span class="kn">import</span> \
+    <span class="n">CpuCouldNotGetDestination</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.exceptions.CpuCouldNotGetSelfref</span> <span class="kn">import</span> \
+    <span class="n">CpuCouldNotGetSelfref</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.exceptions.CpuCouldNotReadNSLogException</span> <span class="kn">import</span> \
+    <span class="n">CpuCouldNotReadLogFuncException</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.exceptions.CpuException</span> <span class="kn">import</span> <span class="n">CpuException</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.memory.Memory</span> <span class="kn">import</span> <span class="n">Memory</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime</span> <span class="kn">import</span> \
+    <span class="n">ObjectiveCRuntime</span>
+<span class="kn">from</span> <span class="nn">vizasm.hopper.hopannotate</span> <span class="kn">import</span> <span class="n">hopanno</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.asm.imp.Imp</span> <span class="kn">import</span> <span class="n">Imp</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.asm.imp.ImpStub</span> <span class="kn">import</span> <span class="n">ImpStub</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.asm.var_assignment.VarAssignment</span> <span class="kn">import</span> <span class="n">VarAssignment</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.asm.var_assignment.VarAssignmentIvarRegisterWrongTypeException</span> <span class="kn">import</span> \
+    <span class="n">VarAssignmentIvarRegisterWrongTypeException</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.arguments.ArgumentsException</span> <span class="kn">import</span> <span class="n">ArgumentsException</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.arguments.FormatString</span> <span class="kn">import</span> \
+    <span class="n">FormatStringOverLoadedException</span><span class="p">,</span> <span class="n">FormatStringUnderLoadedException</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.arguments.Selector</span> <span class="kn">import</span> <span class="n">Selector</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.function.Function</span> <span class="kn">import</span> <span class="n">Function</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.methodcall.MethodCall</span> <span class="kn">import</span> <span class="n">MethodCall</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.object.nsobject.NSString</span> <span class="kn">import</span> <span class="n">NSString</span>
+<span class="kn">from</span> <span class="nn">vizasm.util.Log</span> <span class="kn">import</span> <span class="n">log</span><span class="p">,</span> <span class="n">clilog</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.arguments.Arguments</span> <span class="kn">import</span> <span class="n">Arguments</span>
+<span class="kn">from</span> <span class="nn">vizasm.Settings</span> <span class="kn">import</span> <span class="n">setting_for_key</span><span class="p">,</span> <span class="n">SETTINGS_C_FUNC_HEURISTIC</span>
+<span class="kn">from</span> <span class="nn">vizasm.model</span> <span class="kn">import</span> <span class="n">ModelUtil</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.asm.CString</span> <span class="kn">import</span> <span class="n">CString</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.asm.var_assignment.VarAssignmentResolveRegisterException</span> <span class="kn">import</span> <span class="n">VarAssignmentResolveRegisterException</span>
+
+<div class="viewcode-block" id="Cpu"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Cpu.Cpu">[docs]</a><span class="k">class</span> <span class="nc">Cpu</span><span class="p">(</span><span class="nb">object</span><span class="p">,</span> <span class="n">CRuntime</span><span class="p">,</span> <span class="n">CallingConventionsInterface</span><span class="p">,</span> <span class="n">Resetable</span><span class="p">):</span> 
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    The `Cpu` is the heart of VizAsm.</span>
+<span class="sd">    </span>
+<span class="sd">    It reads and interprets the asm file (use `read_line`).</span>
+<span class="sd">    and keeps track of the `StackFrame` and the `Register`s.</span>
+<span class="sd">    </span>
+<span class="sd">    It stores the method calls that have been made in the `MethodCall` </span>
+<span class="sd">    (stores the calls for a single method implementation).</span>
+<span class="sd">    </span>
+<span class="sd">    Every time you read a new method implementation, you should `reset` the `Cpu`.</span>
+<span class="sd">     </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    _memory: Memory</span>
+<span class="sd">        the memory of the cpu</span>
+<span class="sd">    _objc_runtime: ObjectiveCRuntime, optional (default is ObjectiveCRuntime)</span>
+<span class="sd">        the objective-c runtime</span>
+<span class="sd">    __assignment_matching_system: AssignmentMatchingSystem</span>
+<span class="sd">        the system to read assignments</span>
+<span class="sd">    _parse_util: ParseUtil</span>
+<span class="sd">        utility for parsing the asm file</span>
+<span class="sd">    _register_class: classobj</span>
+<span class="sd">        subclass of Register (only the reference!). </span>
+<span class="sd">        this class reference is used to create the correct register subclass depending on the cpu architecture.</span>
+<span class="sd">    _linenumber: int</span>
+<span class="sd">        the current line number in the asm file. Given as parameter in `read_line`. </span>
+<span class="sd">    __address: int</span>
+<span class="sd">        the address of the current asm line</span>
+<span class="sd">    _method: FunctionInterface</span>
+<span class="sd">        the method which is currently being analyzed</span>
+<span class="sd">    __method_call: MethodCall</span>
+<span class="sd">        This is the actual output of the `Cpu`. It stores the messages that have been read. </span>
+<span class="sd">    c_func_heuristic: bool</span>
+<span class="sd">        if enabled use heuristic to determine arguments for c function calls</span>
+<span class="sd">        </span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Subclasses need to implement `CallingConventionsInterface` as well as:</span>
+<span class="sd">        create_and_store_method_selector_arguments</span>
+<span class="sd">        ignore_hex_addr_call</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+<span class="c">#####################################################################################</span>
+<span class="c"># Resetable                                                                         #</span>
+<span class="c">#####################################################################################    </span>
+
+<div class="viewcode-block" id="Cpu.reset"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Cpu.Cpu.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Reset the `Cpu` and make it ready to analyze the next method implementation &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">objc_runtime</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__init_resetable_stuff</span><span class="p">()</span>
+        
+<span class="c">#####################################################################################</span>
+<span class="c"># Implementation                                                                    #</span>
+<span class="c">#####################################################################################</span>
+    </div>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">assignment_matching_system</span><span class="p">,</span> <span class="n">parse_util</span><span class="p">,</span> <span class="n">_register_class</span><span class="p">,</span> <span class="n">superclass_dict</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">objc_runtime</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__assignment_matching_system</span> <span class="o">=</span> <span class="n">assignment_matching_system</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parse_util</span> <span class="o">=</span> <span class="n">parse_util</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_register_class</span> <span class="o">=</span> <span class="n">_register_class</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_memory</span> <span class="o">=</span> <span class="n">Memory</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="c"># use standard objective-c runtime if nothing else given</span>
+        <span class="k">if</span> <span class="n">objc_runtime</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">objc_runtime</span> <span class="o">=</span> <span class="n">ObjectiveCRuntime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">superclass_dict</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_objc_runtime</span> <span class="o">=</span> <span class="n">objc_runtime</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_c_func_heuristic</span> <span class="o">=</span> <span class="n">setting_for_key</span><span class="p">(</span><span class="n">SETTINGS_C_FUNC_HEURISTIC</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__init_resetable_stuff</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__init_resetable_stuff</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Init stuff that needs to be initiliazed/resetted for </span>
+<span class="sd">        every method implementation that will be read &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__method_call</span> <span class="o">=</span> <span class="n">MethodCall</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_line_number</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__address</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_method</span> <span class="o">=</span> <span class="bp">None</span>
+    
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">: </span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">objc_runtime</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">(</span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="p">),</span> <span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">objc_runtime</span><span class="p">))</span>
+    
+<span class="c">#####################################################################################</span>
+<span class="c"># Getter and Setter                                                                 #</span>
+<span class="c">#####################################################################################</span>
+
+<div class="viewcode-block" id="Cpu.get_c_func_heuristic"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Cpu.Cpu.get_c_func_heuristic">[docs]</a>    <span class="k">def</span> <span class="nf">get_c_func_heuristic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c_func_heuristic</span>
+</div>
+<div class="viewcode-block" id="Cpu.set_c_func_heuristic"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Cpu.Cpu.set_c_func_heuristic">[docs]</a>    <span class="k">def</span> <span class="nf">set_c_func_heuristic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_c_func_heuristic</span> <span class="o">=</span> <span class="n">value</span>
+        </div>
+<div class="viewcode-block" id="Cpu.get_objc_runtime"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Cpu.Cpu.get_objc_runtime">[docs]</a>    <span class="k">def</span> <span class="nf">get_objc_runtime</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_objc_runtime</span>
+</div>
+<div class="viewcode-block" id="Cpu.set_objc_runtime"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Cpu.Cpu.set_objc_runtime">[docs]</a>    <span class="k">def</span> <span class="nf">set_objc_runtime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_objc_runtime</span> <span class="o">=</span> <span class="n">value</span>
+        </div>
+<div class="viewcode-block" id="Cpu.get_memory"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Cpu.Cpu.get_memory">[docs]</a>    <span class="k">def</span> <span class="nf">get_memory</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_memory</span>
+</div>
+<div class="viewcode-block" id="Cpu.set_memory"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Cpu.Cpu.set_memory">[docs]</a>    <span class="k">def</span> <span class="nf">set_memory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_memory</span> <span class="o">=</span> <span class="n">value</span>
+        </div>
+<div class="viewcode-block" id="Cpu.get_parse_util"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Cpu.Cpu.get_parse_util">[docs]</a>    <span class="k">def</span> <span class="nf">get_parse_util</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_util</span>
+</div>
+<div class="viewcode-block" id="Cpu.set_parse_util"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Cpu.Cpu.set_parse_util">[docs]</a>    <span class="k">def</span> <span class="nf">set_parse_util</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parse_util</span> <span class="o">=</span> <span class="n">value</span>
+</div>
+<div class="viewcode-block" id="Cpu.get_method"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Cpu.Cpu.get_method">[docs]</a>    <span class="k">def</span> <span class="nf">get_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_method</span>
+</div>
+<div class="viewcode-block" id="Cpu.set_method"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Cpu.Cpu.set_method">[docs]</a>    <span class="k">def</span> <span class="nf">set_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_method</span> <span class="o">=</span> <span class="n">value</span>
+        </div>
+<div class="viewcode-block" id="Cpu.get_line_number"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Cpu.Cpu.get_line_number">[docs]</a>    <span class="k">def</span> <span class="nf">get_line_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_number</span>
+</div>
+<div class="viewcode-block" id="Cpu.set_line_number"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Cpu.Cpu.set_line_number">[docs]</a>    <span class="k">def</span> <span class="nf">set_line_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_line_number</span> <span class="o">=</span> <span class="n">value</span>
+        </div>
+<div class="viewcode-block" id="Cpu.get_address"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Cpu.Cpu.get_address">[docs]</a>    <span class="k">def</span> <span class="nf">get_address</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__address</span>
+</div>
+<div class="viewcode-block" id="Cpu.set_address"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Cpu.Cpu.set_address">[docs]</a>    <span class="k">def</span> <span class="nf">set_address</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__address</span> <span class="o">=</span> <span class="n">value</span>
+</div>
+<div class="viewcode-block" id="Cpu.get_assignment_matching_system"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Cpu.Cpu.get_assignment_matching_system">[docs]</a>    <span class="k">def</span> <span class="nf">get_assignment_matching_system</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__assignment_matching_system</span>
+    </div>
+<div class="viewcode-block" id="Cpu.set_assignment_matching_system"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Cpu.Cpu.set_assignment_matching_system">[docs]</a>    <span class="k">def</span> <span class="nf">set_assignment_matching_system</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__assignment_matching_system</span> <span class="o">=</span> <span class="n">value</span>
+        </div>
+<div class="viewcode-block" id="Cpu.get_register_class"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Cpu.Cpu.get_register_class">[docs]</a>    <span class="k">def</span> <span class="nf">get_register_class</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_register_class</span>
+</div>
+<div class="viewcode-block" id="Cpu.set_register_class"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Cpu.Cpu.set_register_class">[docs]</a>    <span class="k">def</span> <span class="nf">set_register_class</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_register_class</span> <span class="o">=</span> <span class="n">value</span>
+    </div>
+<div class="viewcode-block" id="Cpu.get_method_call"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Cpu.Cpu.get_method_call">[docs]</a>    <span class="k">def</span> <span class="nf">get_method_call</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__method_call</span>
+</div>
+<div class="viewcode-block" id="Cpu.set_method_call"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Cpu.Cpu.set_method_call">[docs]</a>    <span class="k">def</span> <span class="nf">set_method_call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__method_call</span> <span class="o">=</span> <span class="n">value</span>
+        </div>
+<div class="viewcode-block" id="Cpu.set_method_selector_reg_value"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Cpu.Cpu.set_method_selector_reg_value">[docs]</a>    <span class="k">def</span> <span class="nf">set_method_selector_reg_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Set the value for the register where the selector of the current method is stored. &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetches_all_arguments_from_stack</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">registers</span><span class="o">.</span><span class="n">set_value_for_register</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selector_register</span><span class="p">(),</span> <span class="n">value</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="Cpu.set_selfref_reg_value"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Cpu.Cpu.set_selfref_reg_value">[docs]</a>    <span class="k">def</span> <span class="nf">set_selfref_reg_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Set the value for the register where the self reference of the current method is stored &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetches_all_arguments_from_stack</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">registers</span><span class="o">.</span><span class="n">set_value_for_register</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">destination_register</span><span class="p">(),</span> <span class="n">value</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="Cpu.get_method_selector_reg_value"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Cpu.Cpu.get_method_selector_reg_value">[docs]</a>    <span class="k">def</span> <span class="nf">get_method_selector_reg_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Get the value for the register where the selector of the current method is stored.</span>
+<span class="sd">        If the argument is on stack, do not pop it. &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetches_all_arguments_from_stack</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">stack</span><span class="o">.</span><span class="n">get_from_idx</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">registers</span><span class="o">.</span><span class="n">get_value_for_register</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selector_register</span><span class="p">())</span>
+        </div>
+<div class="viewcode-block" id="Cpu.get_selfref_reg_value"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Cpu.Cpu.get_selfref_reg_value">[docs]</a>    <span class="k">def</span> <span class="nf">get_selfref_reg_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Get the value for the register where the self reference of the current method is stored.</span>
+<span class="sd">        If the argument is on stack, do not pop it. &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetches_all_arguments_from_stack</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">stack</span><span class="o">.</span><span class="n">get_from_idx</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">registers</span><span class="o">.</span><span class="n">get_value_for_register</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">destination_register</span><span class="p">())</span>
+    </div>
+    <span class="n">memory</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_memory</span><span class="p">,</span> <span class="n">set_memory</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;memory(Memory) -- the memory of the cpu&quot;</span><span class="p">)</span>
+    <span class="n">objc_runtime</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_objc_runtime</span><span class="p">,</span> <span class="n">set_objc_runtime</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;_objc_runtime(ObjectiveCRuntime) -- the objective-c runtime&quot;</span><span class="p">)</span>
+    <span class="n">parse_util</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_parse_util</span><span class="p">,</span> <span class="n">set_parse_util</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;_parse_util(ParseUtil) -- utility for parsing the asm file&quot;</span><span class="p">)</span>
+    <span class="n">assignment_matching_system</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_assignment_matching_system</span><span class="p">,</span> <span class="n">set_assignment_matching_system</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;__assignment_matching_system(AssignmentMatchingSystem) -- the system to read assignments&quot;</span><span class="p">)</span>
+    <span class="n">line_number</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_line_number</span><span class="p">,</span> <span class="n">set_line_number</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;the current line number in the asm file. Given as parameter in `read_line`.&quot;</span><span class="p">)</span>
+    <span class="n">address</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_address</span><span class="p">,</span> <span class="n">set_address</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;__address(int) -- the address of the current asm line&quot;</span><span class="p">)</span>
+    <span class="n">register_class</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_register_class</span><span class="p">,</span> <span class="n">set_register_class</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;&quot;&quot;_register_clas(classobj) -- </span>
+<span class="s">    subclass of Register (only the reference!). </span>
+<span class="s">    This class reference is used to create the correct register subclass depending on the cpu architecture&quot;&quot;&quot;</span><span class="p">)</span> 
+    <span class="n">method_call</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_method_call</span><span class="p">,</span> <span class="n">set_method_call</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;__method_call(MethodCall) -- this is the actual output of the `Cpu`. It stores the messages that have been read.&quot;</span><span class="p">)</span>
+    <span class="n">method</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_method</span><span class="p">,</span> <span class="n">set_method</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;_method(FunctionInterface) -- the method which is currently being analyzed&quot;</span><span class="p">)</span>
+    <span class="n">c_func_heuristic</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_c_func_heuristic</span><span class="p">,</span> <span class="n">set_c_func_heuristic</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;c_func_heuristic(bool) -- if enabled use heuristic to determine arguments for c function calls&quot;</span><span class="p">)</span>
+
+<span class="c">#####################################################################################</span>
+<span class="c"># Subclasses need to overwrite these methods                                        #</span>
+<span class="c">#####################################################################################</span>
+<div class="viewcode-block" id="Cpu.pointer_size"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Cpu.Cpu.pointer_size">[docs]</a>    <span class="k">def</span> <span class="nf">pointer_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return the pointer size in bytes &#39;&#39;&#39;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    </div>
+<div class="viewcode-block" id="Cpu.ignore_hex_addr_call"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Cpu.Cpu.ignore_hex_addr_call">[docs]</a>    <span class="k">def</span> <span class="nf">ignore_hex_addr_call</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return True if you want to ignore calls to hex addresses &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    
+<span class="c">#####################################################################################</span>
+<span class="c"># Public Interface                                                                  #</span>
+<span class="c">#####################################################################################</span>
+</div>
+<div class="viewcode-block" id="Cpu.is_32_bits"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Cpu.Cpu.is_32_bits">[docs]</a>    <span class="k">def</span> <span class="nf">is_32_bits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Check if is 32 bit `Cpu` &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pointer_size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">4</span>
+    </div>
+<div class="viewcode-block" id="Cpu.is_64_bits"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Cpu.Cpu.is_64_bits">[docs]</a>    <span class="k">def</span> <span class="nf">is_64_bits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Check if is 64 bit `Cpu` &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pointer_size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">8</span>
+    </div>
+<div class="viewcode-block" id="Cpu.read_line"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Cpu.Cpu.read_line">[docs]</a>    <span class="k">def</span> <span class="nf">read_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">,</span> <span class="n">linenr</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        Read a line of the asm file and process the information</span>
+<span class="sd">        to keep track of the registers and stack.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        asmline: string</span>
+<span class="sd">            a line of assembler</span>
+<span class="sd">        linenr: int, optional</span>
+<span class="sd">            the current line number in the file. </span>
+<span class="sd">            If not given, it will not be used in the output.</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        CpuException</span>
+<span class="sd">            if any underlying exception has been raised </span>
+<span class="sd">         &#39;&#39;&#39;</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;reading line: </span><span class="si">%s</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">asmline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">linenr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">line_number</span> <span class="o">=</span> <span class="n">linenr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">address</span> <span class="o">=</span> <span class="n">ParseUtil</span><span class="o">.</span><span class="n">get_address_from_asmline</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_basic_block</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_meth_impl</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_assignment</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_call_line</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">ArgumentsException</span><span class="p">,</span> <span class="n">VarAssignmentIvarRegisterWrongTypeException</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">CpuException</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">),</span> <span class="bp">None</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">]</span>
+    </div>
+<div class="viewcode-block" id="Cpu.get_current_destination"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Cpu.Cpu.get_current_destination">[docs]</a>    <span class="k">def</span> <span class="nf">get_current_destination</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objc_msgSend_stret</span> <span class="o">=</span> <span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return the current destination. </span>
+<span class="sd">    </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        objc_msgSend_stret: bool, optional (default is False)</span>
+<span class="sd">            indicate an objc_msgSend_stret</span>
+<span class="sd">            </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ----------</span>
+<span class="sd">        CpuCouldNotGetDestination</span>
+<span class="sd">            raised if the value of the destination could not be detected</span>
+<span class="sd">            </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        destination</span>
+<span class="sd">        &#39;&#39;&#39;</span> 
+        <span class="n">dest_reg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">destination_register</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">objc_msgSend_stret</span><span class="p">:</span>
+            <span class="n">dest_reg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_reg_for_spret</span><span class="p">(</span><span class="n">dest_reg</span><span class="p">)</span>
+        <span class="n">dest</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">get_argument</span><span class="p">(</span><span class="n">dest_reg</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dest</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">dest</span>
+        <span class="k">raise</span> <span class="n">CpuCouldNotGetDestination</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    
+<span class="c">#####################################################################################</span>
+<span class="c"># Private Interface                                                                 #</span>
+<span class="c">#####################################################################################</span>
+                    </div>
+    <span class="k">def</span> <span class="nf">_read_basic_block</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        Read a Basic Block like &quot; ; Basic Block Input Regs: rax rdx rsi rdi -  Killed Regs: rax rcx rdx rsp rbp rsi rdi r8&quot;</span>
+<span class="sd">        and kill the specified registers.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">basic_block_match</span> <span class="o">=</span> <span class="n">AsmRegEx</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">AsmRegEx</span><span class="o">.</span><span class="n">RE_BASIC_BLOCK</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">basic_block_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">killed_regs</span> <span class="o">=</span> <span class="n">basic_block_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">AsmRegEx</span><span class="o">.</span><span class="n">RE_BASIC_BLOCK_KILLED_REGS</span><span class="p">)</span>
+            <span class="n">killed_regs</span> <span class="o">=</span> <span class="n">killed_regs</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">registers</span><span class="o">.</span><span class="n">delete_elements</span><span class="p">(</span><span class="n">killed_regs</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">_read_meth_impl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Read a line like e.g. &quot;methImpl_AppDelegate_applicationDidFinishLaunching_&quot;</span>
+<span class="sd">        and detect the current class (AppDelegate) as well as the current method (applicationDidFinishLaunching_)</span>
+<span class="sd">        </span>
+<span class="sd">        If the `Cpu` does not fetch all of its arguments from stack, </span>
+<span class="sd">        self and _cmd will be set to the `Register`s defined by `CallingConventionsInterface`.</span>
+<span class="sd">        </span>
+<span class="sd">        Otherwise implement `store_self_cmd_for_stack_fetching_cpu` in your `Cpu`.</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        CpuCouldNotGetSelfref</span>
+<span class="sd">            raised if the self reference could not be detected</span>
+<span class="sd">        SelectorOverloadedException</span>
+<span class="sd">            raised if the selector has more arguments than it needs</span>
+<span class="sd">        SelectorUnderloadedException</span>
+<span class="sd">            raised if the selector has less arguments than it needs </span>
+<span class="sd">            &#39;&#39;&#39;</span>
+        <span class="n">method_implementation</span><span class="p">,</span> <span class="n">match</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_util</span><span class="o">.</span><span class="n">parse_any_method_implementation</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="n">is_meth_impl</span><span class="p">,</span> <span class="n">is_own_c_method_def</span><span class="p">,</span> <span class="n">is_c_method</span><span class="p">,</span> <span class="n">is_category</span> <span class="o">=</span> <span class="n">method_implementation</span>
+        
+        <span class="n">method_impl</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">is_meth_impl</span><span class="p">,</span> <span class="n">is_category</span><span class="p">]):</span>
+            <span class="n">method_impl</span> <span class="o">=</span> <span class="n">match</span>
+            <span class="n">selector</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">fst_selector</span><span class="p">()</span>
+            <span class="n">objc_class</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">msg_receiver</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetches_all_arguments_from_stack</span><span class="p">():</span>
+                <span class="n">selfref_reg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">destination_register</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">selfref_reg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="c"># store class for self reference</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">set_selfref_reg_value</span><span class="p">(</span><span class="n">objc_class</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">CpuCouldNotGetSelfref</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selfref_reg</span><span class="p">,</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">.</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">objc_class</span><span class="p">,</span> <span class="n">selector</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c"># set self and _cmd for cpu fetching its args from stack</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">objc_runtime</span><span class="o">.</span><span class="n">store_self_cmd_for_stack_fetching_cpu</span><span class="p">(</span><span class="n">objc_class</span><span class="p">,</span> <span class="n">selector</span><span class="p">)</span>
+                
+            <span class="bp">self</span><span class="o">.</span><span class="n">objc_runtime</span><span class="o">.</span><span class="n">create_and_store_method_selector_arguments</span><span class="p">(</span><span class="n">selector</span><span class="p">)</span>
+            <span class="c"># set method to use it in _try_log_reading_meth_impl</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="n">method_impl</span>
+
+            <span class="c"># log method</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_try_log_reading_meth_impl</span><span class="p">(</span><span class="n">selector</span><span class="p">)</span>
+            
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_method_selector_reg_value</span><span class="p">(</span><span class="n">selector</span><span class="p">)</span>
+            
+        <span class="k">elif</span> <span class="n">is_c_method</span> <span class="ow">or</span> <span class="n">is_own_c_method_def</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;reading method: </span><span class="si">%s</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">match</span><span class="p">)</span>
+            <span class="n">method_impl</span> <span class="o">=</span> <span class="n">match</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">create_and_store_c_func_arguments</span><span class="p">(</span><span class="n">method_impl</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">method_implementation</span><span class="p">):</span>
+            <span class="n">clilog</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;reading method: </span><span class="si">%s</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">method_impl</span><span class="p">)</span>
+            <span class="c"># set method and sender for `MethodCall`</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="n">method_impl</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">method_call</span><span class="o">.</span><span class="n">sender</span> <span class="o">=</span> <span class="n">method_impl</span>
+    
+    <span class="k">def</span> <span class="nf">_try_log_reading_meth_impl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method_selector</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Log the current meth_impl if selector has been filled with all its arguments &#39;&#39;&#39;</span> 
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetches_all_arguments_from_stack</span><span class="p">():</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;reading meth_impl: </span><span class="si">%s</span><span class="s">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">method</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">method_selector</span><span class="o">.</span><span class="n">needs_more_arguments</span><span class="p">():</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;reading meth_impl: [(</span><span class="si">%s</span><span class="s">)</span><span class="si">%s</span><span class="s"> (</span><span class="si">%s</span><span class="s">)</span><span class="si">%s</span><span class="s">]&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">destination_register</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selfref_reg_value</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">selector_register</span><span class="p">(),</span> <span class="n">method_selector</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_read_assignment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Read a line of assembler code containing an assignment</span>
+<span class="sd">        and let the `AssignmentMatchingSystem` process it.</span>
+<span class="sd">        </span>
+<span class="sd">        This includes stack operations.</span>
+<span class="sd">        The assignments being made are stored in the appropriate place (stack or register)</span>
+<span class="sd">        </span>
+<span class="sd">        Moreover this method reads a `VarAssignment` and keeps track of the instance variable cache</span>
+<span class="sd">        as well as setting the superclass if available.</span>
+<span class="sd">        &#39;&#39;&#39;</span> 
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">var_assign</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_util</span><span class="o">.</span><span class="n">parse_var_assignment</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">var_assign</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_process_var_assignment</span><span class="p">(</span><span class="n">var_assign</span><span class="p">)</span>
+            <span class="c"># CHECK IF ALSO CORRECT OR X86_64</span>
+            <span class="c"># consider &quot;str        r0, [r4, r5]&quot; (arm), needed to not set r5 = value(r0)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_process_assignment</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">VarAssignmentResolveRegisterException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+            
+    <span class="k">def</span> <span class="nf">_process_var_assignment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var_assign</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Process the `VarAssignment` and keep track of the instance variable cache</span>
+<span class="sd">        as well as setting the superclass if available.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        var_assign: VarAssignment</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">var_assign</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="c"># set entry in IVarLookup if VarAssignment contains IVar</span>
+            <span class="n">ivar</span> <span class="o">=</span> <span class="n">var_assign</span><span class="o">.</span><span class="n">get_ivar_value</span><span class="p">()</span>
+            <span class="n">ivar_ref</span> <span class="o">=</span> <span class="n">ivar</span><span class="o">.</span><span class="n">get_ivar_ref</span><span class="p">()</span>
+    
+            <span class="bp">self</span><span class="o">.</span><span class="n">objc_runtime</span><span class="o">.</span><span class="n">set_superclass</span><span class="p">(</span><span class="n">ivar</span><span class="p">)</span>
+    
+            <span class="k">if</span> <span class="n">ivar</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">ivar</span><span class="o">.</span><span class="n">create_ivar_lookup_entry</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">objc_runtime</span><span class="o">.</span><span class="n">ivar_lookup</span><span class="p">):</span>
+                    <span class="n">msg</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s"> -&gt; </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">ivar</span><span class="o">.</span><span class="n">get_ivar_class</span><span class="p">(),</span> <span class="n">ivar_ref</span><span class="p">)</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+                    <span class="n">hopanno</span><span class="o">.</span><span class="n">annotate_other_assignment</span><span class="p">(</span><span class="s">&#39;added ivar lookup entry: &#39;</span> <span class="o">+</span> <span class="n">msg</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="p">)</span>
+                    <span class="n">hopanno</span><span class="o">.</span><span class="n">annotate_assignment_method_head</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+                
+    <span class="k">def</span> <span class="nf">_process_assignment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        If the `Selector` of the method still needs arguments,  try to fill the remaining ones from stack.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        asmline: string</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">asm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_assignment_matching_system</span><span class="p">()</span>
+        <span class="n">asm</span><span class="o">.</span><span class="n">read_assignment</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        
+        <span class="n">robject</span> <span class="o">=</span> <span class="n">asm</span><span class="o">.</span><span class="n">get_robject</span><span class="p">()</span> 
+        <span class="c"># keep track of StackFrame</span>
+        <span class="k">if</span> <span class="n">asm</span><span class="o">.</span><span class="n">is_stack_push</span><span class="p">:</span>
+            <span class="n">asm</span><span class="o">.</span><span class="n">process_stack_push</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c"># keep track of assignments</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">asm</span><span class="o">.</span><span class="n">get_lobject</span><span class="p">()</span>
+            <span class="k">if</span> <span class="bp">None</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">robject</span><span class="p">):</span> 
+                <span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">registers</span><span class="o">.</span><span class="n">set_value_for_register</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">robject</span><span class="p">)</span>      
+    
+    <span class="k">def</span> <span class="nf">_read_call_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Read a call line like e.g. &quot;call qword [ds:objc_msg_alloc] ; @selector(alloc)&quot; </span>
+<span class="sd">        ,split to what is called and interpret the called stuff.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">called</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_util</span><span class="o">.</span><span class="n">parse_call_instruction</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">called</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">c_func_heuristic</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;args since last call: </span><span class="se">\n</span><span class="si">%s</span><span class="s">&#39;</span><span class="p">,</span> <span class="s">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">assignment_matching_system</span><span class="o">.</span><span class="n">get_usage_since_last_call</span><span class="p">()))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_called</span><span class="p">(</span><span class="n">asmline</span><span class="p">,</span> <span class="n">called</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assignment_matching_system</span><span class="o">.</span><span class="n">clear_usage_since_last_call</span><span class="p">()</span>
+            
+    <span class="k">def</span> <span class="nf">_read_called</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">,</span> <span class="n">called</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Read a called line like e.g. &quot;qword [ds:objc_msg_alloc] ; @selector(alloc)&quot;</span>
+<span class="sd">        and hand it on to the appropriate read method.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        asmline: string</span>
+<span class="sd">        called: ImpStub, Selector or string</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        IvarRefWrongTypeException</span>
+<span class="sd">            if the ivar_ref has the wrong type</span>
+<span class="sd">        CpuException</span>
+<span class="sd">            if the value of the destination register could not be resolved</span>
+<span class="sd">        CpuCouldNotReadLogFuncException</span>
+<span class="sd">            if the NSLog could not be read</span>
+<span class="sd">        CpuCouldNotReadMsgSendEception</span>
+<span class="sd">            if the objc_msgsend() could not be read</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c"># called does not have to be a string due to the fact that read_register()</span>
+        <span class="c"># will recall this method with register resolved and passed as called</span>
+        <span class="n">imp</span> <span class="o">=</span> <span class="n">selector</span> <span class="o">=</span> <span class="n">destination</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">called</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">imp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_util</span><span class="o">.</span><span class="n">parse_imp</span><span class="p">(</span><span class="n">called</span><span class="p">)</span>
+            <span class="c"># called can be e.g. _foo or sub_foo</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">imp</span><span class="p">:</span>
+                <span class="n">called_method</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_util</span><span class="o">.</span><span class="n">parse_called_method_name</span><span class="p">(</span><span class="n">called</span><span class="p">)</span> 
+                <span class="k">if</span> <span class="n">called_method</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="n">called</span> <span class="o">=</span> <span class="n">called_method</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ignore_hex_addr_call</span><span class="p">()</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_util</span><span class="o">.</span><span class="n">parse_hex</span><span class="p">(</span><span class="n">called</span><span class="p">):</span>
+                        <span class="k">return</span>
+                    
+        <span class="c"># called can be Selector or Imp</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">called</span><span class="p">,</span> <span class="n">Imp</span><span class="p">):</span>
+                <span class="n">imp</span> <span class="o">=</span> <span class="n">called</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">called</span><span class="p">,</span> <span class="n">Selector</span><span class="p">):</span>
+                <span class="n">selector</span> <span class="o">=</span> <span class="n">called</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c"># only pop from stack if really needed for a MsgSend</span>
+            <span class="k">if</span> <span class="n">imp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">imp</span><span class="o">.</span><span class="n">is_any_msg_send</span><span class="p">()</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetches_all_arguments_from_stack</span><span class="p">()</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetches_all_arguments_from_stack</span><span class="p">():</span>
+                <span class="n">is_msg_send_stret</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="k">if</span> <span class="n">imp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="n">is_msg_send_stret</span> <span class="o">=</span> <span class="n">imp</span><span class="o">.</span><span class="n">is_any_msg_send_stret</span><span class="p">()</span>
+                <span class="n">destination</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_current_destination</span><span class="p">(</span><span class="n">is_msg_send_stret</span><span class="p">)</span>
+                                                           
+            <span class="n">return_register</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_register</span><span class="p">()</span>
+            
+            <span class="c"># if selector is not None, it&#39;s already resolved</span>
+            <span class="k">if</span> <span class="n">selector</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">selector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_util</span><span class="o">.</span><span class="n">parse_selector</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+            
+            <span class="n">register</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">called</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="c"># same as above, called can be anything else than a string</span>
+                <span class="n">register</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_util</span><span class="o">.</span><span class="n">parse_register</span><span class="p">(</span><span class="n">called</span><span class="p">)</span>
+            
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;destination is </span><span class="si">%s</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span>
+            
+            <span class="c"># destination is VarAssignment</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="n">VarAssignment</span><span class="p">):</span>
+                <span class="c"># get ivar value from VarAssignment</span>
+                <span class="n">destination</span> <span class="o">=</span> <span class="n">destination</span><span class="o">.</span><span class="n">get_ivar_value</span><span class="p">()</span>
+                  
+            <span class="k">if</span> <span class="n">imp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">msgSend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">objc_runtime</span><span class="o">.</span><span class="n">read_msg_send</span><span class="p">(</span><span class="n">imp</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">msgSend</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">objc_runtime</span><span class="o">.</span><span class="n">read_return_important_objc_call</span><span class="p">(</span><span class="n">imp</span><span class="p">,</span> <span class="n">destination</span><span class="p">,</span> <span class="n">return_register</span><span class="p">):</span>
+                        <span class="k">return</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_formatstring_log</span><span class="p">(</span><span class="n">imp</span><span class="p">):</span>
+                        <span class="k">return</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_read_remaining_stub</span><span class="p">(</span><span class="n">imp</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_c_func</span><span class="p">(</span><span class="n">called</span><span class="p">):</span>
+                    <span class="k">return</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_read_register</span><span class="p">(</span><span class="n">register</span><span class="p">,</span> <span class="n">asmline</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">objc_runtime</span><span class="o">.</span><span class="n">read_selector</span><span class="p">(</span><span class="n">selector</span><span class="p">,</span> <span class="n">destination</span><span class="p">):</span>
+                    <span class="c"># TODO: HOW TO HANDLE (fp)([NSURLRequest class], selx, YES, host); ???</span>
+                    <span class="c"># called can be something else due to recalling of `_read_register`</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">called</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                        <span class="n">own_c_method_call</span> <span class="o">=</span> <span class="n">ParseUtil</span><span class="o">.</span><span class="n">parse_own_c_method_called</span><span class="p">(</span><span class="n">called</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">own_c_method_call</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">_read_own_c_func_call</span><span class="p">(</span><span class="n">own_c_method_call</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="n">CpuCouldNotGetDestination</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">CpuException</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">),</span> <span class="bp">None</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_read_formatstring_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">imp</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Read an NSLog `ImpStub` and add it to the `MethodCall. </span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        imp: Imp</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        CpuCouldNotReadLogFuncException</span>
+<span class="sd">            if the NSLog could not be read </span>
+<span class="sd">            </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        is NSLog</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c"># TODO: IF FIRST ARG IS FORMAT STIRNG -&gt; READ REMAINING STUFF !</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">imp</span><span class="p">,</span> <span class="n">ImpStub</span><span class="p">):</span>
+            <span class="n">is_formatstring_log</span> <span class="o">=</span> <span class="n">imp</span><span class="o">.</span><span class="n">is_format_string_log</span><span class="p">()</span>
+            <span class="n">log_func_name</span> <span class="o">=</span> <span class="n">imp</span><span class="o">.</span><span class="n">imp</span>
+            <span class="n">formatstring_log</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="k">if</span> <span class="n">is_formatstring_log</span><span class="p">:</span>
+                <span class="n">format_string_args</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="c"># check if fst arg is `FormatString` and resolve the other arguments</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">formatstring_log_string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_current_destination</span><span class="p">(</span><span class="n">objc_msgSend_stret</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span>
+                    <span class="n">format_string_args</span> <span class="o">=</span> <span class="p">[</span><span class="n">formatstring_log_string</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">formatstring_log_string</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                        <span class="n">formatstring_log_string</span> <span class="o">=</span> <span class="n">NSString</span><span class="p">(</span><span class="n">formatstring_log_string</span><span class="p">)</span>
+                    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">formatstring_log_string</span><span class="p">,</span> <span class="n">Arguments</span><span class="p">):</span>
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="n">formatstring_log_string</span><span class="o">.</span><span class="n">fill_from_cpu</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+                        <span class="k">except</span> <span class="p">(</span><span class="n">FormatStringOverLoadedException</span><span class="p">,</span> <span class="n">FormatStringUnderLoadedException</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                            <span class="n">log</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+                    <span class="c"># fst arg is no format string -&gt; use heuristic for number of arguments</span>
+                    <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">formatstring_log_string</span><span class="p">,</span> <span class="p">(</span><span class="n">NSString</span><span class="p">,</span> <span class="n">CString</span><span class="p">)):</span>
+                        <span class="c"># use heuristic from `AssignmentMatchingSystem` to determine the number of arguments for the function</span>
+                        <span class="n">format_string_args</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_memory</span><span class="p">()</span><span class="o">.</span><span class="n">get_arguments_from_asm_heuristic</span><span class="p">()</span>
+                        <span class="c"># fill args that can fill themselves from cpu</span>
+                        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">format_string_args</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">Arguments</span><span class="p">):</span>
+                                <span class="n">arg</span><span class="o">.</span><span class="n">fill_from_cpu</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+                    <span class="n">formatstring_log</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">log_func_name</span><span class="p">,</span> <span class="n">format_string_args</span><span class="p">)</span> 
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_store_function</span><span class="p">(</span><span class="n">formatstring_log</span><span class="p">)</span>
+                <span class="k">except</span> <span class="n">CpuCouldNotGetDestination</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">CpuCouldNotReadLogFuncException</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log_func_name</span><span class="p">,</span> <span class="s">&#39;</span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">formatstring_log</span><span class="p">,</span> <span class="n">e</span><span class="p">)),</span> <span class="bp">None</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">]</span> 
+            <span class="k">return</span> <span class="n">is_formatstring_log</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    
+    <span class="k">def</span> <span class="nf">_read_c_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c_func</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Read a c function or subroutine like e.g. &quot;sub_10013ec80&quot; &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">ModelUtil</span><span class="o">.</span><span class="n">is_c_function</span><span class="p">(</span><span class="n">c_func</span><span class="p">):</span>
+            <span class="c"># use heuristic from `AssignmentMatchingSystem` to determine the number of arguments for the function</span>
+            <span class="n">arguments</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_memory</span><span class="p">()</span><span class="o">.</span><span class="n">get_arguments_from_asm_heuristic</span><span class="p">()</span>
+            <span class="n">c_func</span><span class="o">.</span><span class="n">set_func_arguments</span><span class="p">(</span><span class="n">arguments</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_store_function</span><span class="p">(</span><span class="n">c_func</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="bp">False</span>
+        
+    <span class="k">def</span> <span class="nf">_read_remaining_stub</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">imp_stub</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Turn remaining `ImpStub`s into a Function and store it in the `MethodCall` &#39;&#39;&#39;</span>
+        <span class="n">imp_stub_name</span> <span class="o">=</span> <span class="n">imp_stub</span><span class="o">.</span><span class="n">get_imp</span><span class="p">()</span>
+        <span class="n">function</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">imp_stub_name</span><span class="p">)</span>
+        <span class="c"># use heuristic from `AssignmentMatchingSystem` to determine the number of arguments for the function</span>
+        <span class="n">arguments</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_memory</span><span class="p">()</span><span class="o">.</span><span class="n">get_arguments_from_asm_heuristic</span><span class="p">()</span>
+        <span class="n">function</span><span class="o">.</span><span class="n">set_func_arguments</span><span class="p">(</span><span class="n">arguments</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_store_function</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">_read_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">register</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Called is register. Resolve the register value and try again reading the call line. </span>
+<span class="sd">            E.g. a `Selector` could be stored in the `Register`.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">register</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">register</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">registers</span><span class="o">.</span><span class="n">resolve_current_register_value</span><span class="p">(</span><span class="n">register</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_called</span><span class="p">(</span><span class="n">asmline</span><span class="p">,</span> <span class="n">register</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">_read_own_c_func_call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c_function</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Read a function call to a c function which is written in the application (not any library).</span>
+<span class="sd">        E.g. &quot;call       __Z9cFunctioniii_1000027d0    ; cFunction(int, int, int)&quot; </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">cnt_args</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">c_function</span><span class="p">)</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_memory</span><span class="p">()</span><span class="o">.</span><span class="n">get_arguments</span><span class="p">(</span><span class="n">cnt_args</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">arguments_registers</span><span class="p">(),</span> <span class="n">try_only</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span>
+        <span class="n">c_function</span><span class="o">.</span><span class="n">set_func_arguments</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_store_function</span><span class="p">(</span><span class="n">c_function</span><span class="p">)</span>
+                                
+    <span class="k">def</span> <span class="nf">_store_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">):</span>    
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Store the function in the `return_register` of the `Cpu` and add it to the `MethodCall`.</span>
+<span class="sd">         </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        function: FunctionInterface</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">function</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">set_return_register_value</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_method_call</span><span class="p">()</span><span class="o">.</span><span class="n">add_methodcall</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">line_number</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="p">)</span>
+        </div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

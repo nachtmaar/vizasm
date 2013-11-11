@@ -1,0 +1,396 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ivar Package &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">ivar Package</a><ul>
+<li><a class="reference internal" href="#module-vizasm.model.asm.ivar.IVar"><tt class="docutils literal"><span class="pre">IVar</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.model.asm.ivar.IvarRefCouldNotBeResolved"><tt class="docutils literal"><span class="pre">IvarRefCouldNotBeResolved</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.asm.ivar.IvarRefException"><tt class="docutils literal"><span class="pre">IvarRefException</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.asm.ivar.IvarRefWrongTypeException"><tt class="docutils literal"><span class="pre">IvarRefWrongTypeException</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/vizasm.model.asm.ivar.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ivar-package">
+<h1>ivar Package<a class="headerlink" href="#ivar-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-vizasm.model.asm.ivar.IVar">
+<span id="ivar-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">IVar</span></tt> Module<a class="headerlink" href="#module-vizasm.model.asm.ivar.IVar" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 10.04.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.model.asm.ivar.IVar.IVar">
+<em class="property">class </em><tt class="descclassname">vizasm.model.asm.ivar.IVar.</tt><tt class="descname">IVar</tt><big>(</big><em>ivar_class</em>, <em>ivar_ref=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/ivar/IVar.html#IVar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.ivar.IVar.IVar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt>, <a class="reference internal" href="vizasm.model.objc.object.nsobject.html#vizasm.model.objc.object.nsobject.NSObjectInterface.NSObjectInterface" title="vizasm.model.objc.object.nsobject.NSObjectInterface.NSObjectInterface"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.model.objc.object.nsobject.NSObjectInterface.NSObjectInterface</span></tt></a>, <a class="reference internal" href="vizasm.model.objc.Function.html#vizasm.model.objc.function.MsgSendInterface.MsgSendInterface" title="vizasm.model.objc.function.MsgSendInterface.MsgSendInterface"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.model.objc.function.MsgSendInterface.MsgSendInterface</span></tt></a></p>
+<p>Represents an ivar (instance variable) e.g. created out of this asmline: &#8220;[ds:_OBJC_IVAR_$_AppDelegate.obj3]&#8221;</p>
+<p>where obj3 is the variable of the ObjcClass AppDelegate</p>
+<p>which points to a MsgSend like [[Object3 alloc] init]</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>__ivar_class: ObjcClass</strong> :</p>
+<blockquote>
+<div><p>ObjcClass e.g. created from &#8220;[ds:_OBJC_IVAR_$_AppDelegate.obj3]&#8221;</p>
+</div></blockquote>
+<p><strong>__ivar_ref: MsgSend, optional (default is None)</strong> :</p>
+<blockquote class="last">
+<div><p>the MsgSend where the ivar points to</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.asm.ivar.IVar.IVar.create_ivar_lookup_entry" title="vizasm.model.asm.ivar.IVar.IVar.create_ivar_lookup_entry"><tt class="xref py py-obj docutils literal"><span class="pre">create_ivar_lookup_entry</span></tt></a>(ivar_ref_lookup)</td>
+<td>Create a lookup entry in the <cite>IVarLookup</cite> using ivar_class as key and ivar_ref as value.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.asm.ivar.IVar.IVar.create_msg_send" title="vizasm.model.asm.ivar.IVar.IVar.create_msg_send"><tt class="xref py py-obj docutils literal"><span class="pre">create_msg_send</span></tt></a>(selector[,&nbsp;ivar_ref_lookup])</td>
+<td>Create a <cite>MsgSend</cite> with the specified <cite>selector</cite>.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.asm.ivar.IVar.IVar.get_ivar_class" title="vizasm.model.asm.ivar.IVar.IVar.get_ivar_class"><tt class="xref py py-obj docutils literal"><span class="pre">get_ivar_class</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.asm.ivar.IVar.IVar.get_ivar_ref" title="vizasm.model.asm.ivar.IVar.IVar.get_ivar_ref"><tt class="xref py py-obj docutils literal"><span class="pre">get_ivar_ref</span></tt></a>()</td>
+<td>Get the <cite>ivar_ref</cite>.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.asm.ivar.IVar.IVar.get_nsobject" title="vizasm.model.asm.ivar.IVar.IVar.get_nsobject"><tt class="xref py py-obj docutils literal"><span class="pre">get_nsobject</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.asm.ivar.IVar.IVar.resolve_ivar_ref" title="vizasm.model.asm.ivar.IVar.IVar.resolve_ivar_ref"><tt class="xref py py-obj docutils literal"><span class="pre">resolve_ivar_ref</span></tt></a>(ivar_ref_lookup)</td>
+<td>Resolve the ivar_ref from <cite>ivar_ref_look</cite> and set it.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.asm.ivar.IVar.IVar.set_ivar_class" title="vizasm.model.asm.ivar.IVar.IVar.set_ivar_class"><tt class="xref py py-obj docutils literal"><span class="pre">set_ivar_class</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.asm.ivar.IVar.IVar.set_ivar_ref" title="vizasm.model.asm.ivar.IVar.IVar.set_ivar_ref"><tt class="xref py py-obj docutils literal"><span class="pre">set_ivar_ref</span></tt></a>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.model.asm.ivar.IVar.IVar.create_ivar_lookup_entry">
+<tt class="descname">create_ivar_lookup_entry</tt><big>(</big><em>ivar_ref_lookup</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/ivar/IVar.html#IVar.create_ivar_lookup_entry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.ivar.IVar.IVar.create_ivar_lookup_entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a lookup entry in the <cite>IVarLookup</cite> using ivar_class as key and ivar_ref as value.
+If <cite>ivar_ref</cite> is None, no entry will be created.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>ivar_ref_lookup: IVarRefLookup</strong> :</p>
+<blockquote>
+<div><p>the class where the <cite>ivar_ref</cite> will be stored</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>True</strong> :</p>
+<blockquote>
+<div><p>if the entry could be created</p>
+</div></blockquote>
+<p><strong>False</strong> :</p>
+<blockquote class="last">
+<div><p>if the entry could not be created because the ivar_ref was not available</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.ivar.IVar.IVar.create_msg_send">
+<tt class="descname">create_msg_send</tt><big>(</big><em>selector</em>, <em>ivar_ref_lookup=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/ivar/IVar.html#IVar.create_msg_send"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.ivar.IVar.IVar.create_msg_send" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a <cite>MsgSend</cite> with the specified <cite>selector</cite>.
+If the <cite>ivar_ref</cite> is not None, this will be used for the <cite>MsgSend</cite>.
+Otherwise the <cite>ivar_class</cite> is used.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>selector: Selector</strong> :</p>
+<blockquote>
+<div><p>the <cite>Selector</cite> with which the <cite>MsgSend</cite> shall be created.</p>
+</div></blockquote>
+<p><strong>ivar_ref_lookup: IVarRefLookup, optional</strong> :</p>
+<blockquote>
+<div><p>if given, the ivar_ref will be resolved</p>
+</div></blockquote>
+<p><strong>Returns</strong> :</p>
+<p><strong>&#8212;&#8212;-</strong> :</p>
+<p><strong>MsgSend</strong> :</p>
+<blockquote class="last">
+<div><p>the created <cite>MsgSend</cite> with <cite>ivar_ref</cite>  or <cite>ivar_class</cite></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.ivar.IVar.IVar.get_ivar_class">
+<tt class="descname">get_ivar_class</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/ivar/IVar.html#IVar.get_ivar_class"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.ivar.IVar.IVar.get_ivar_class" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.ivar.IVar.IVar.get_ivar_ref">
+<tt class="descname">get_ivar_ref</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/ivar/IVar.html#IVar.get_ivar_ref"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.ivar.IVar.IVar.get_ivar_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the <cite>ivar_ref</cite>.
+You might want to call resolve_ivar_ref() before to resolve it.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.ivar.IVar.IVar.get_nsobject">
+<tt class="descname">get_nsobject</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/ivar/IVar.html#IVar.get_nsobject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.ivar.IVar.IVar.get_nsobject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.model.asm.ivar.IVar.IVar.ivar_class">
+<tt class="descname">ivar_class</tt><a class="headerlink" href="#vizasm.model.asm.ivar.IVar.IVar.ivar_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>__ivar_class(ObjcClass) &#8211; ObjcClass e.g. create from &#8220;[ds:_OBJC_IVAR_$_AppDelegate.obj3]&#8221;</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.model.asm.ivar.IVar.IVar.ivar_ref">
+<tt class="descname">ivar_ref</tt><a class="headerlink" href="#vizasm.model.asm.ivar.IVar.IVar.ivar_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>__ivar_ref(MsgSend) &#8211; the MsgSend where the ivar points to</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.ivar.IVar.IVar.resolve_ivar_ref">
+<tt class="descname">resolve_ivar_ref</tt><big>(</big><em>ivar_ref_lookup</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/ivar/IVar.html#IVar.resolve_ivar_ref"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.ivar.IVar.IVar.resolve_ivar_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resolve the ivar_ref from <cite>ivar_ref_look</cite> and set it.
+The value can be obtained via get_ivar_ref() if no exception occurred.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>ivar_ref_lookup: IVarRefLookup</strong> :</p>
+<blockquote>
+<div><p>the class where the ivar_ref is stored</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><strong>IvarRefWrongTypeException</strong> :</p>
+<blockquote>
+<div><p>if the ivar_ref could not be resolved to the correct type (should be MsgSend)</p>
+</div></blockquote>
+<p><strong>IvarRefCouldNotBeResolvedException</strong> :</p>
+<blockquote class="last">
+<div><p>if the ivar_ref could not be resolved at all</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.ivar.IVar.IVar.set_ivar_class">
+<tt class="descname">set_ivar_class</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/ivar/IVar.html#IVar.set_ivar_class"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.ivar.IVar.IVar.set_ivar_class" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.ivar.IVar.IVar.set_ivar_ref">
+<tt class="descname">set_ivar_ref</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/ivar/IVar.html#IVar.set_ivar_ref"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.ivar.IVar.IVar.set_ivar_ref" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.model.asm.ivar.IvarRefCouldNotBeResolved">
+<span id="ivarrefcouldnotberesolved-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">IvarRefCouldNotBeResolved</span></tt> Module<a class="headerlink" href="#module-vizasm.model.asm.ivar.IvarRefCouldNotBeResolved" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 09.05.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="exception">
+<dt id="vizasm.model.asm.ivar.IvarRefCouldNotBeResolved.IvarRefCouldNotBeResolvedException">
+<em class="property">exception </em><tt class="descclassname">vizasm.model.asm.ivar.IvarRefCouldNotBeResolved.</tt><tt class="descname">IvarRefCouldNotBeResolvedException</tt><big>(</big><em>ivar</em>, <em>ivar_ref_lookup</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/ivar/IvarRefCouldNotBeResolved.html#IvarRefCouldNotBeResolvedException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.ivar.IvarRefCouldNotBeResolved.IvarRefCouldNotBeResolvedException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.model.asm.ivar.IvarRefException.IvarRefException" title="vizasm.model.asm.ivar.IvarRefException.IvarRefException"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.model.asm.ivar.IvarRefException.IvarRefException</span></tt></a></p>
+<p>Exception for the case that the ivar_ref could not be resolved</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.model.asm.ivar.IvarRefException">
+<span id="ivarrefexception-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">IvarRefException</span></tt> Module<a class="headerlink" href="#module-vizasm.model.asm.ivar.IvarRefException" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 09.05.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="exception">
+<dt id="vizasm.model.asm.ivar.IvarRefException.IvarRefException">
+<em class="property">exception </em><tt class="descclassname">vizasm.model.asm.ivar.IvarRefException.</tt><tt class="descname">IvarRefException</tt><big>(</big><em>ivar</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/ivar/IvarRefException.html#IvarRefException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.ivar.IvarRefException.IvarRefException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></p>
+<p>General IvarRef Exception</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.model.asm.ivar.IvarRefWrongTypeException">
+<span id="ivarrefwrongtypeexception-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">IvarRefWrongTypeException</span></tt> Module<a class="headerlink" href="#module-vizasm.model.asm.ivar.IvarRefWrongTypeException" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 10.04.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="exception">
+<dt id="vizasm.model.asm.ivar.IvarRefWrongTypeException.IvarRefWrongTypeException">
+<em class="property">exception </em><tt class="descclassname">vizasm.model.asm.ivar.IvarRefWrongTypeException.</tt><tt class="descname">IvarRefWrongTypeException</tt><big>(</big><em>ivar</em>, <em>ivar_ref</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/ivar/IvarRefWrongTypeException.html#IvarRefWrongTypeException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.ivar.IvarRefWrongTypeException.IvarRefWrongTypeException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.model.asm.ivar.IvarRefException.IvarRefException" title="vizasm.model.asm.ivar.IvarRefException.IvarRefException"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.model.asm.ivar.IvarRefException.IvarRefException</span></tt></a></p>
+<p>Exception for the case that the ivar_ref has the wrong type. Should be MsgSend</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

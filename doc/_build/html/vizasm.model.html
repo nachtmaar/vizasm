@@ -1,0 +1,392 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>model Package &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">model Package</a><ul>
+<li><a class="reference internal" href="#module-vizasm.model.ModelUtil"><tt class="docutils literal"><span class="pre">ModelUtil</span></tt> Module</a></li>
+<li><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/vizasm.model.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="model-package">
+<h1>model Package<a class="headerlink" href="#model-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-vizasm.model.ModelUtil">
+<span id="modelutil-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">ModelUtil</span></tt> Module<a class="headerlink" href="#module-vizasm.model.ModelUtil" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 09.09.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<p>Utility for determining if an object is of specific type.</p>
+<p>The functions have in common, that they take all one positional argument
+and return a boolean value (object =&gt; bool).</p>
+<dl class="function">
+<dt id="vizasm.model.ModelUtil.destination_not_initialized">
+<tt class="descclassname">vizasm.model.ModelUtil.</tt><tt class="descname">destination_not_initialized</tt><big>(</big><em>val</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/ModelUtil.html#destination_not_initialized"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.ModelUtil.destination_not_initialized" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the destination of an objc_msgSend is not initialized (has 0 as value).
+Do not check for 0 as int!
+Because an zero destination will be wrapped inside a certain class indicating a not initialized variable/destination</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.model.ModelUtil.is_c_format_string">
+<tt class="descclassname">vizasm.model.ModelUtil.</tt><tt class="descname">is_c_format_string</tt><big>(</big><em>c_format_string</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/ModelUtil.html#is_c_format_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.ModelUtil.is_c_format_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the given <cite>string</cite> is a <cite>CFormatString</cite></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.model.ModelUtil.is_c_function">
+<tt class="descclassname">vizasm.model.ModelUtil.</tt><tt class="descname">is_c_function</tt><big>(</big><em>c_function</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/ModelUtil.html#is_c_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.ModelUtil.is_c_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the given argument is a <cite>Function</cite></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.model.ModelUtil.is_category_class">
+<tt class="descclassname">vizasm.model.ModelUtil.</tt><tt class="descname">is_category_class</tt><big>(</big><em>clazz</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/ModelUtil.html#is_category_class"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.ModelUtil.is_category_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the given argument is an <cite>CategoryClass</cite></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.model.ModelUtil.is_format_string">
+<tt class="descclassname">vizasm.model.ModelUtil.</tt><tt class="descname">is_format_string</tt><big>(</big><em>string</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/ModelUtil.html#is_format_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.ModelUtil.is_format_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the given <cite>string</cite> is a <cite>FormatString</cite></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.model.ModelUtil.is_frameworkclass">
+<tt class="descclassname">vizasm.model.ModelUtil.</tt><tt class="descname">is_frameworkclass</tt><big>(</big><em>arg</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/ModelUtil.html#is_frameworkclass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.ModelUtil.is_frameworkclass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the given argument is a framework class.
+Only works for x86_64!</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.model.ModelUtil.is_imp_got">
+<tt class="descclassname">vizasm.model.ModelUtil.</tt><tt class="descname">is_imp_got</tt><big>(</big><em>imp_got</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/ModelUtil.html#is_imp_got"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.ModelUtil.is_imp_got" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check for <cite>ImpGot</cite></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.model.ModelUtil.is_imp_stub">
+<tt class="descclassname">vizasm.model.ModelUtil.</tt><tt class="descname">is_imp_stub</tt><big>(</big><em>imp_stub</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/ModelUtil.html#is_imp_stub"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.ModelUtil.is_imp_stub" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check for <cite>ImpStub</cite></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.model.ModelUtil.is_memcpy">
+<tt class="descclassname">vizasm.model.ModelUtil.</tt><tt class="descname">is_memcpy</tt><big>(</big><em>arg</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/ModelUtil.html#is_memcpy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.ModelUtil.is_memcpy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if argument is a memcpy()</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.model.ModelUtil.is_method_implementation">
+<tt class="descclassname">vizasm.model.ModelUtil.</tt><tt class="descname">is_method_implementation</tt><big>(</big><em>function</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/ModelUtil.html#is_method_implementation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.ModelUtil.is_method_implementation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the <cite>function</cite> is a <cite>MethodImplementation</cite>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.model.ModelUtil.is_method_implementation_argument">
+<tt class="descclassname">vizasm.model.ModelUtil.</tt><tt class="descname">is_method_implementation_argument</tt><big>(</big><em>arg</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/ModelUtil.html#is_method_implementation_argument"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.ModelUtil.is_method_implementation_argument" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the given argument is a <cite>MethodSelectorArgument</cite></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.model.ModelUtil.is_msg_send">
+<tt class="descclassname">vizasm.model.ModelUtil.</tt><tt class="descname">is_msg_send</tt><big>(</big><em>msg_send</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/ModelUtil.html#is_msg_send"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.ModelUtil.is_msg_send" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the given argument is a <cite>MsgSend</cite></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.model.ModelUtil.is_nsstring">
+<tt class="descclassname">vizasm.model.ModelUtil.</tt><tt class="descname">is_nsstring</tt><big>(</big><em>string</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/ModelUtil.html#is_nsstring"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.ModelUtil.is_nsstring" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the string is a <cite>NSString</cite></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.model.ModelUtil.is_number">
+<tt class="descclassname">vizasm.model.ModelUtil.</tt><tt class="descname">is_number</tt><big>(</big><em>int_val</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/ModelUtil.html#is_number"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.ModelUtil.is_number" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the given argument is a number</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.model.ModelUtil.is_objc_class">
+<tt class="descclassname">vizasm.model.ModelUtil.</tt><tt class="descname">is_objc_class</tt><big>(</big><em>clazz</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/ModelUtil.html#is_objc_class"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.ModelUtil.is_objc_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the given argument is an <cite>ObjcClass</cite></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.model.ModelUtil.is_objc_function">
+<tt class="descclassname">vizasm.model.ModelUtil.</tt><tt class="descname">is_objc_function</tt><big>(</big><em>objc_function</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/ModelUtil.html#is_objc_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.ModelUtil.is_objc_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if <cite>objc_function</cite> is an objective-c function</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.model.ModelUtil.is_python_string">
+<tt class="descclassname">vizasm.model.ModelUtil.</tt><tt class="descname">is_python_string</tt><big>(</big><em>string</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/ModelUtil.html#is_python_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.ModelUtil.is_python_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the given <cite>string</cite> is a python string</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.model.ModelUtil.is_selector">
+<tt class="descclassname">vizasm.model.ModelUtil.</tt><tt class="descname">is_selector</tt><big>(</big><em>selector</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/ModelUtil.html#is_selector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.ModelUtil.is_selector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the given argument is a <cite>Selector</cite></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.model.ModelUtil.is_stackvar">
+<tt class="descclassname">vizasm.model.ModelUtil.</tt><tt class="descname">is_stackvar</tt><big>(</big><em>stackvar</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/ModelUtil.html#is_stackvar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.ModelUtil.is_stackvar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the given argument is a <cite>StackVar</cite></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.model.ModelUtil.is_sub">
+<tt class="descclassname">vizasm.model.ModelUtil.</tt><tt class="descname">is_sub</tt><big>(</big><em>sub</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/ModelUtil.html#is_sub"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.ModelUtil.is_sub" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if <cite>sub</cite> is a subroutine like e.g. &#8220;sub_10013ec80&#8221;</p>
+</dd></dl>
+
+</div>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="vizasm.model.asm.html">asm Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.html#module-vizasm.model.asm.CString"><tt class="docutils literal"><span class="pre">CString</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.html#module-vizasm.model.asm.Register"><tt class="docutils literal"><span class="pre">Register</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.html#module-vizasm.model.asm.Segments"><tt class="docutils literal"><span class="pre">Segments</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.html#module-vizasm.model.asm.StackVar"><tt class="docutils literal"><span class="pre">StackVar</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.html#module-vizasm.model.asm.Value"><tt class="docutils literal"><span class="pre">Value</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="vizasm.model.asm.imp.html">imp Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.asm.imp.html#module-vizasm.model.asm.imp.Imp"><tt class="docutils literal"><span class="pre">Imp</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.asm.imp.html#module-vizasm.model.asm.imp.ImpGot"><tt class="docutils literal"><span class="pre">ImpGot</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.asm.imp.html#module-vizasm.model.asm.imp.ImpStub"><tt class="docutils literal"><span class="pre">ImpStub</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="vizasm.model.asm.ivar.html">ivar Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.asm.ivar.html#module-vizasm.model.asm.ivar.IVar"><tt class="docutils literal"><span class="pre">IVar</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.asm.ivar.html#module-vizasm.model.asm.ivar.IvarRefCouldNotBeResolved"><tt class="docutils literal"><span class="pre">IvarRefCouldNotBeResolved</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.asm.ivar.html#module-vizasm.model.asm.ivar.IvarRefException"><tt class="docutils literal"><span class="pre">IvarRefException</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.asm.ivar.html#module-vizasm.model.asm.ivar.IvarRefWrongTypeException"><tt class="docutils literal"><span class="pre">IvarRefWrongTypeException</span></tt> Module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="vizasm.model.asm.var_assignment.html">var_assignment Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.asm.var_assignment.html#module-vizasm.model.asm.var_assignment.VarAssignment"><tt class="docutils literal"><span class="pre">VarAssignment</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.asm.var_assignment.html#module-vizasm.model.asm.var_assignment.VarAssignmentIvarRegisterWrongTypeException"><tt class="docutils literal"><span class="pre">VarAssignmentIvarRegisterWrongTypeException</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.asm.var_assignment.html#module-vizasm.model.asm.var_assignment.VarAssignmentResolveIvarRegisterException"><tt class="docutils literal"><span class="pre">VarAssignmentResolveIvarRegisterException</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.asm.var_assignment.html#module-vizasm.model.asm.var_assignment.VarAssignmentResolveRegisterException"><tt class="docutils literal"><span class="pre">VarAssignmentResolveRegisterException</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.asm.var_assignment.html#module-vizasm.model.asm.var_assignment.VarAssignmentResolveSelfrefRegisterException"><tt class="docutils literal"><span class="pre">VarAssignmentResolveSelfrefRegisterException</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vizasm.model.objc.html">objc Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.objc.html#module-vizasm.model.objc.AsmParserInterface"><tt class="docutils literal"><span class="pre">AsmParserInterface</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.objc.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="vizasm.model.objc.arguments.html">arguments Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.objc.arguments.html#module-vizasm.model.objc.arguments.Arguments"><tt class="docutils literal"><span class="pre">Arguments</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.objc.arguments.html#module-vizasm.model.objc.arguments.ArgumentsException"><tt class="docutils literal"><span class="pre">ArgumentsException</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.objc.arguments.html#module-vizasm.model.objc.arguments.ArgumentsOverloadedException"><tt class="docutils literal"><span class="pre">ArgumentsOverloadedException</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.objc.arguments.html#module-vizasm.model.objc.arguments.ArgumentsUnderloadedException"><tt class="docutils literal"><span class="pre">ArgumentsUnderloadedException</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.objc.arguments.html#module-vizasm.model.objc.arguments.CFormatString"><tt class="docutils literal"><span class="pre">CFormatString</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.objc.arguments.html#module-vizasm.model.objc.arguments.FillFromCpuInterface"><tt class="docutils literal"><span class="pre">FillFromCpuInterface</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.objc.arguments.html#module-vizasm.model.objc.arguments.FormatString"><tt class="docutils literal"><span class="pre">FormatString</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.objc.arguments.html#module-vizasm.model.objc.arguments.Selector"><tt class="docutils literal"><span class="pre">Selector</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="vizasm.model.objc.methodcall.html">methodcall Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.objc.methodcall.html#module-vizasm.model.objc.methodcall.MethodCall"><tt class="docutils literal"><span class="pre">MethodCall</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.objc.methodcall.html#module-vizasm.model.objc.methodcall.MethodCallItem"><tt class="docutils literal"><span class="pre">MethodCallItem</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="vizasm.model.objc.object.html">object Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.objc.object.html#module-vizasm.model.objc.object.Object"><tt class="docutils literal"><span class="pre">Object</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.model.objc.object.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="vizasm.model.objc.object.nsobject.html">nsobject Package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.model.objc.object.nsobject.html#module-vizasm.model.objc.object.nsobject.NSObject"><tt class="docutils literal"><span class="pre">NSObject</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.model.objc.object.nsobject.html#module-vizasm.model.objc.object.nsobject.NSObjectInterface"><tt class="docutils literal"><span class="pre">NSObjectInterface</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.model.objc.object.nsobject.html#module-vizasm.model.objc.object.nsobject.NSString"><tt class="docutils literal"><span class="pre">NSString</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.model.objc.object.nsobject.html#module-vizasm.model.objc.object.nsobject.Variable"><tt class="docutils literal"><span class="pre">Variable</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="vizasm.model.objc.object.nsobject.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="vizasm.model.objc.object.nsobject.objcclass.html">objcclass Package</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.model.objc.object.nsobject.objcclass.html#module-vizasm.model.objc.object.nsobject.objcclass.CategoryClass"><tt class="docutils literal"><span class="pre">CategoryClass</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l8"><a class="reference internal" href="vizasm.model.objc.object.nsobject.objcclass.html#module-vizasm.model.objc.object.nsobject.objcclass.ObjcClass"><tt class="docutils literal"><span class="pre">ObjcClass</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

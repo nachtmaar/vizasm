@@ -1,0 +1,279 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Usage &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="index.html" />
+    <link rel="next" title="Built-in filters" href="builtin_filters.html" />
+    <link rel="prev" title="Installation" href="install.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="builtin_filters.html" title="Built-in filters"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="install.html" title="Installation"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Usage</a><ul>
+<li><a class="reference internal" href="#arm">Arm</a></li>
+<li><a class="reference internal" href="#cli">Cli</a></li>
+<li><a class="reference internal" href="#hopper">Hopper</a></li>
+<li><a class="reference internal" href="#gephi">Gephi</a><ul>
+<li><a class="reference internal" href="#import">Import</a></li>
+<li><a class="reference internal" href="#graph-exploration">Graph exploration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="install.html"
+                        title="previous chapter">Installation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="builtin_filters.html"
+                        title="next chapter">Built-in filters</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/usage.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
+<p>There are two possible ways of using VizAsm.
+The first is from inside Hopper and the second via command line.</p>
+<p>If you are just playing around with the demo version of Hopper, then use the VizAsm script to run it from inside Hopper.
+This is at least working for the Mac. But the command line seems to be faster than running from inside Hopper.</p>
+<p>To run it from the command line, you need to export the .asm file (the demo version is not capable of exporting the .asm file).</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">For iOS applications have a look at the section Arm before you start.</p>
+</div>
+<div class="section" id="arm">
+<h2>Arm<a class="headerlink" href="#arm" title="Permalink to this headline">¶</a></h2>
+<p>The arm applications are encrypted with the fairplay encryption.
+You have to find a solution for this yourself ;)
+If you have an apple developer account, you can build your applications for adhoc distribution.
+This way, it doesn&#8217;t get encrypted.
+If you just want to play around a bit, have a look at the files/ folders. There are a few .hop files.</p>
+<p>Hopper currently does not the same good job on the arm architecture like it does it for x86_64.</p>
+<p>So you have to use a few scripts before you can actually start.</p>
+<p>The first is the &#8220;Add CFString Inline Comments&#8221; script from <a class="reference external" href="https://github.com/phracker/HopperScripts">phracker</a>. Its needed to annotate strings.
+The second is already shipped with VizAsm and is called vizasm_arm_helper.py . It annotates the instance variables, so VizAsm can track them.</p>
+<p>Be sure to run both scripts before you start the analysis with VizAsm.</p>
+</div>
+<div class="section" id="cli">
+<h2>Cli<a class="headerlink" href="#cli" title="Permalink to this headline">¶</a></h2>
+<p>I just give you a few examples how to run VizAsm.</p>
+<div class="highlight-sh"><div class="highlight"><pre><span class="c"># just write the method calls out and create a call graph</span>
+<span class="c"># the last argument specifies the architecture (available: x86, x86_64, arm)</span>
+./VizAsm.py files/asm/x86_64/complete/SecureObjectiveC.asm -o methodcall.txt -g methodcall.gexf x86_64
+
+<span class="c"># same with standard filters enabled</span>
+<span class="c">#  -af, --all-filters    use all standard filters</span>
+./VizAsm.py files/asm/x86_64/complete/SecureObjectiveC.asm -o methodcall.txt -g methodcall.gexf -af x86_64
+
+<span class="c"># if you want to get the argument for the c functions use the -cfh switch</span>
+<span class="c"># -cfh, --c-func-heuristic</span>
+<span class="c">#                    use a heuristic to determine the arguments for a c</span>
+<span class="c">#                    function call (~2x slower) [default: False]</span>
+./VizAsm.py files/asm/x86_64/complete/SecureObjectiveC.asm -o methodcall.txt -g methodcall.gexf -af -cfh x86_64
+
+<span class="c"># in the default mode, VizAsm only reads Objective-C methods</span>
+<span class="c"># if you want to let it read all methods that it can, use the -ram switch</span>
+<span class="c">#  -ram, --read-all-methods</span>
+<span class="c">#                    read all methods (not only Objective-C ones)</span>
+ ./VizAsm.py files/asm/x86_64/complete/SecureObjectiveC.asm -o methodcall.txt -g methodcall.gexf -af -cfh -ram x86_64
+
+ <span class="c"># The default behaviour of VizAsm then it encounters an exception is to skip the whole method</span>
+ <span class="c"># but if you want to get more results for filtering, you can tell it to just ignore the current line where</span>
+ <span class="c"># the exception occurred and go on</span>
+ <span class="c"># Attention: this leads to wrong results! E.g. wrong arguments being passed to a function!</span>
+ <span class="c">#  -dse, --dont-skip-exception</span>
+ <span class="c">#                   if enabled the analysis of the current method will not</span>
+ <span class="c">#                   be skipped if any exception occurs [default: False]</span>
+  ./VizAsm.py files/asm/x86_64/complete/SecureObjectiveC.asm -o methodcall.txt -g methodcall.gexf -af -cfh -ram -dse x86_64
+
+ <span class="c"># to supply own filters use the -sf switch</span>
+ <span class="c">#  -sf FILTERS [FILTERS ...], --supply-filters FILTERS [FILTERS ...]</span>
+ <span class="c">#                   supply own filters (has to be last argument)</span>
+ <span class="c"># you can use -af and -sf together!</span>
+ ./VizAsm.py files/asm/x86_64/complete/SecureObjectiveC.asm -o methodcall.txt -g methodcall.gexf -cfh -ram x86_64 -sf FrameworkClassFilter
+</pre></div>
+</div>
+</div>
+<div class="section" id="hopper">
+<h2>Hopper<a class="headerlink" href="#hopper" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The usage of VizAsm from inside Hopper is currently only working for the Mac!
+Maybe with the next version of Hopper it will even work for Linux and Windows.</p>
+</div>
+<p>The usage from inside Hopper is very similiar. But you have to set all options in the config file vizasm_hopper.py .
+The most important part is to set the path to VizAsm.</p>
+<div class="highlight-sh"><div class="highlight"><pre><span class="nv">VIZASM_FILEAPTH</span> <span class="o">=</span> <span class="s1">&#39;/path&#39;</span>
+</pre></div>
+</div>
+<p>The other options are explained inside the script. Just have a look at <a class="reference external" href="../vizasm/hopper/scripts/vizasm_hopper.py">vizasm_hopper.py</a>.</p>
+<p>VizAsm enables you to either analyze the whole .asm file or only a single method.
+If you choose the latter, you have to selected the method yourself !</p>
+<p>This means to mark from &#8220;================ B E G I N   O F   P R O C E D U R E ================&#8221;
+to the end of the method. Mostly until the next procedure beginning (without it!).
+To mark means to select the method lines.</p>
+<p>Type &#8220;n&#8221; to analyze the whole file or &#8220;y&#8221; to analyze a single procedure.</p>
+<img alt="_images/choice.png" src="_images/choice.png" />
+<p>VizAsm can annotate your assembler code at the cost of performance.
+So you may just want to annotate very small disassemblies or single methods ;)</p>
+</div>
+<div class="section" id="gephi">
+<h2>Gephi<a class="headerlink" href="#gephi" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="import">
+<h3>Import<a class="headerlink" href="#import" title="Permalink to this headline">¶</a></h3>
+<p>To view the call graph or the results of the security audit, open the genereated .gexf file with <a class="reference external" href="http://gephi.org/">Gephi</a>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Be sure to uncheck &#8220;Auto-Scale&#8221; and &#8220;Create missing nodes&#8221;.
+The first destroys the VizAsm supplied graph formatting and the latter creates nodes for which an equal node already exists.</p>
+</div>
+<img alt="_images/gephi_import.png" src="_images/gephi_import.png" />
+<p>Then select &#8220;Yifan Hu Proportional&#8221; in the layout window.
+Use 300.0 as optimal distance and run it.</p>
+<p>If the nodes are still to close together, run the algorithm again.</p>
+<p>For very big graphs, use &#8220;ForceAtlas 2&#8221; (faster) first until the nodes have been grouped together and then try with &#8220;Yifan Hu Proportional&#8221; again.</p>
+</div>
+<div class="section" id="graph-exploration">
+<h3>Graph exploration<a class="headerlink" href="#graph-exploration" title="Permalink to this headline">¶</a></h3>
+<p>To show the labels, click on the big &#8220;T&#8221; at the bottom.
+To inspect the graph click on the cursor with the question mark in the &#8220;Graph&#8221; window.
+This enables you to see a few attributes in the left corner.</p>
+<p>Depending on which node you selected you can view different information.</p>
+<ul>
+<li><dl class="first docutils">
+<dt>Filter node</dt>
+<dd><ul class="first last simple">
+<li>filter description</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Method implementation node</dt>
+<dd><ul class="first last simple">
+<li>assembler code of the method</li>
+<li>all method calls which have been read</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Method call node</dt>
+<dd><ul class="first last simple">
+<li>hex address</li>
+<li>line number</li>
+<li>surrounding method calls</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<img alt="_images/gephi_inspect.png" src="_images/gephi_inspect.png" />
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="builtin_filters.html" title="Built-in filters"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="install.html" title="Installation"
+             >previous</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

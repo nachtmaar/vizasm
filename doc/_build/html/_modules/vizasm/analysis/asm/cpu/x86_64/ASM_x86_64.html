@@ -1,0 +1,277 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm.analysis.asm.cpu.x86_64.ASM_x86_64 &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="../../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vizasm.analysis.asm.cpu.x86_64.ASM_x86_64</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 19.06.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.AsmRegEx</span> <span class="kn">import</span> <span class="n">AsmRegEx</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.AssignmentMatchingSystem</span> <span class="kn">import</span> \
+    <span class="n">AssignmentMatchingSystem</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.ParseUtil</span> <span class="kn">import</span> <span class="n">ParseUtil</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.x86_64.AsmRegEx_x86_64</span> <span class="kn">import</span> \
+    <span class="n">AsmRegEx_x86_64</span> <span class="k">as</span> <span class="n">regexp</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.asm.Register</span> <span class="kn">import</span> <span class="n">Register</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.asm.StackVar</span> <span class="kn">import</span> <span class="n">StackVar</span>
+<span class="kn">from</span> <span class="nn">vizasm.util.Log</span> <span class="kn">import</span> <span class="n">log</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime</span> <span class="kn">import</span> <span class="n">ObjectiveCRuntime</span>
+<span class="kn">from</span> <span class="nn">vizasm.util.Util</span> <span class="kn">import</span> <span class="n">str2int</span><span class="p">,</span> <span class="n">hex2int</span>
+
+<div class="viewcode-block" id="ASM_x86_64"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.x86_64.html#vizasm.analysis.asm.cpu.x86_64.ASM_x86_64.ASM_x86_64">[docs]</a><span class="k">class</span> <span class="nc">ASM_x86_64</span><span class="p">(</span><span class="n">AssignmentMatchingSystem</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; AssignmentMatchingSystem for the x86_64 architecture.</span>
+<span class="sd">    </span>
+<span class="sd">    If a stack fetch is read, the  `_stack_address` will not be set.</span>
+<span class="sd">    However the object will be fetched from stack and stored in `lobject`.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cpu</span><span class="p">,</span> <span class="n">parse_util</span><span class="p">):</span>
+        <span class="n">AssignmentMatchingSystem</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cpu</span><span class="p">,</span> <span class="n">parse_util</span><span class="p">)</span>
+        
+<div class="viewcode-block" id="ASM_x86_64.get_stack_push_objects"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.x86_64.html#vizasm.analysis.asm.cpu.x86_64.ASM_x86_64.ASM_x86_64.get_stack_push_objects">[docs]</a>    <span class="k">def</span> <span class="nf">get_stack_push_objects</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; If `is_stack_push`, the stored object is a single register -&gt; wrap into list.</span>
+<span class="sd">        Otherwise return `robject` &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_is_stack_push</span><span class="p">():</span>
+            <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">robject</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    </div>
+<div class="viewcode-block" id="ASM_x86_64.read_assignment"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.x86_64.html#vizasm.analysis.asm.cpu.x86_64.ASM_x86_64.ASM_x86_64.read_assignment">[docs]</a>    <span class="k">def</span> <span class="nf">read_assignment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Read an assigment and try to split it.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        asmline : string</span>
+<span class="sd">            line of assembler</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">AssignmentMatchingSystem</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">assignment_match</span> <span class="o">=</span> <span class="n">AsmRegEx</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_ASSINGMENT_SPLIT</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">assignment_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_assignment</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="n">val1</span> <span class="o">=</span> <span class="n">assignment_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_ASSINGMENT_SPLIT_GR_VAL1</span><span class="p">)</span>
+            <span class="n">val2</span> <span class="o">=</span> <span class="n">assignment_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_ASSINGMENT_SPLIT_GR_VAL2</span><span class="p">)</span>            
+            <span class="n">pu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_util</span>
+            
+            <span class="c"># stack push</span>
+            <span class="n">stack_access</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_stack_access</span><span class="p">(</span><span class="n">val1</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">stack_access</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">_</span><span class="p">,</span> <span class="n">addr</span> <span class="o">=</span> <span class="n">stack_access</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">is_stack_push</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">stack_address</span> <span class="o">=</span> <span class="n">addr</span>
+                <span class="c"># save stack access in args_since_last_call to determine number of stack arguments needed for next call </span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">stack_usage_since_last_call</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">stack_access</span><span class="p">)</span>
+            
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log_assignment_split</span><span class="p">(</span><span class="n">val1</span><span class="p">,</span> <span class="n">val2</span><span class="p">)</span>
+            
+            <span class="n">stackvar1</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_stackvar</span><span class="p">(</span><span class="n">val1</span><span class="p">)</span>
+            <span class="n">var_assign1</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_var_assignment_without_ivar_ref_from_asmline</span><span class="p">(</span><span class="n">val1</span><span class="p">)</span>
+            
+            <span class="c"># assume classref, frameworkclass, ivar, selector and string cannot exist on the left side</span>
+            <span class="n">var_assign2</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_var_assignment_without_ivar_ref_from_asmline</span><span class="p">(</span><span class="n">val2</span><span class="p">)</span>
+            
+            <span class="n">val2_remaining_types</span> <span class="o">=</span> <span class="p">[</span><span class="n">pu</span><span class="o">.</span><span class="n">parse_ivar</span><span class="p">,</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_objc_class</span><span class="p">,</span>
+                                   <span class="n">pu</span><span class="o">.</span><span class="n">parse_selector</span><span class="p">,</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_string</span><span class="p">,</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_imp</span><span class="p">]</span>
+            
+            <span class="c"># stack fetch</span>
+            <span class="n">stackvar2</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_stackvar</span><span class="p">(</span><span class="n">val2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">stackvar2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">is_stack_fetch</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="c"># replace arg_ with method argument for c function definition</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_try_replace_argument_stack_var_c_method</span><span class="p">(</span><span class="n">stackvar2</span><span class="p">,</span> <span class="n">val2</span><span class="p">)</span>
+                
+            <span class="n">lobject</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_val1_value</span><span class="p">(</span><span class="n">val1</span><span class="p">,</span> <span class="n">stackvar1</span><span class="p">,</span> <span class="n">var_assign1</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lobject</span> <span class="o">=</span> <span class="n">lobject</span>
+            <span class="n">robject</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_val2_value</span><span class="p">(</span><span class="n">val2</span><span class="p">,</span> <span class="n">stackvar2</span><span class="p">,</span> <span class="n">var_assign2</span><span class="p">,</span> <span class="n">val2_remaining_types</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">robject</span> <span class="o">=</span> <span class="n">robject</span>
+            
+            <span class="c"># save register in args_since_last_call to determine number of register arguments needed for next call</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_reg_arg_since_last_call</span><span class="p">(</span><span class="n">lobject</span><span class="p">,</span> <span class="n">robject</span><span class="p">)</span>
+</div>
+    <span class="k">def</span> <span class="nf">_try_replace_argument_stack_var_c_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stackvar2</span><span class="p">,</span> <span class="n">val2</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Replace `StackVar` named arg_ with method argument for c function definition &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">stackvar2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">additional_method_argument_stack_nr_str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_util</span><span class="o">.</span><span class="n">parse_additional_method_argument_stack</span><span class="p">(</span><span class="n">val2</span><span class="p">)</span>
+            <span class="c"># additional method argument via stack (&quot;arg_&quot;)</span>
+            <span class="k">if</span> <span class="n">additional_method_argument_stack_nr_str</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">cpu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cpu</span>
+                <span class="n">method</span> <span class="o">=</span> <span class="n">cpu</span><span class="o">.</span><span class="n">method</span>
+                <span class="k">if</span> <span class="n">method</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">method</span><span class="o">.</span><span class="n">is_c_function</span><span class="p">():</span>
+                    <span class="c"># all other method arguments went over available argument register</span>
+                    <span class="c"># other arguments are arg_0, arg_8, ...</span>
+                    <span class="n">additional_method_argument_stack_nr</span> <span class="o">=</span> <span class="n">hex2int</span><span class="p">(</span><span class="n">additional_method_argument_stack_nr_str</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">additional_method_argument_stack_nr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                        <span class="c"># e.g. arg_0 -&gt; 1, arg_8 -&gt; 2</span>
+                        <span class="n">add_arg_nr</span> <span class="o">=</span> <span class="n">additional_method_argument_stack_nr</span> <span class="o">/</span> <span class="n">cpu</span><span class="o">.</span><span class="n">pointer_size</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+                        <span class="n">method_arg_nr</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cpu</span><span class="o">.</span><span class="n">arguments_registers</span><span class="p">())</span> <span class="o">+</span> <span class="n">add_arg_nr</span>
+                        <span class="n">method_arg</span> <span class="o">=</span> <span class="n">ObjectiveCRuntime</span><span class="o">.</span><span class="n">create_method_selector_arg</span><span class="p">(</span><span class="n">method_arg_nr</span><span class="p">)</span>
+                        <span class="c"># setting method argument for `StackVar`</span>
+                        <span class="n">cpu</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">registers</span><span class="o">.</span><span class="n">set_value_for_register_ann_method_ead</span><span class="p">(</span><span class="n">stackvar2</span><span class="p">,</span> <span class="n">method_arg</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">_get_val1_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val1</span><span class="p">,</span> <span class="n">stackvar1</span><span class="p">,</span> <span class="n">var_assign1</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Get the proper value for val1 and return it &#39;&#39;&#39;</span>
+        <span class="n">val1_value</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="c"># val1 is stackvar (qword [ss:rbp-0x70+var_104], .*)</span>
+        <span class="k">if</span> <span class="n">stackvar1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">val1_value</span> <span class="o">=</span> <span class="n">stackvar1</span>
+        <span class="k">elif</span> <span class="n">var_assign1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">var_assign1</span><span class="o">.</span><span class="n">get_ivar_dest</span><span class="p">()</span>  
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span> <span class="n">Register</span><span class="p">):</span>
+                <span class="n">val1_value</span> <span class="o">=</span> <span class="n">tmp</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c"># do not store value</span>
+                <span class="n">val1_value</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="c"># check if is register</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">val1_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_util</span><span class="o">.</span><span class="n">parse_register</span><span class="p">(</span><span class="n">val1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">val1_value</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s">&#39;Error: Seems like a value has not been mapped to a type appeared on the left side: </span><span class="si">%s</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">val1_value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">val1_value</span>  
+    
+    <span class="k">def</span> <span class="nf">_get_val2_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val2</span><span class="p">,</span> <span class="n">stackvar2</span><span class="p">,</span> <span class="n">var_assign2</span><span class="p">,</span> <span class="n">remaining_types</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        Determine the class which belongs to val2 and return it.</span>
+<span class="sd">        If the class is register or StackVar try to resolve the value from the registers dictionary</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="n">pu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_util</span>
+        <span class="k">if</span> <span class="n">stackvar2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="c"># resolve stackvar2</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cpu</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">registers</span><span class="o">.</span><span class="n">resolve_current_register_value</span><span class="p">(</span><span class="n">stackvar2</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">var_assign2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_var_assignment_action</span><span class="p">(</span><span class="n">var_assign2</span><span class="p">)</span>
+        <span class="c"># val2 is not register, has to be a different type</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">ParseUtil</span><span class="o">.</span><span class="n">get_fst_match</span><span class="p">(</span><span class="n">val2</span><span class="p">,</span> <span class="n">remaining_types</span><span class="p">)</span>
+        <span class="c"># no match found</span>
+        <span class="k">if</span> <span class="n">res</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="c"># check for register</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_register</span><span class="p">(</span><span class="n">val2</span><span class="p">)</span>
+            <span class="c"># not register</span>
+            <span class="k">if</span> <span class="n">res</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="c"># try to match as hex</span>
+                <span class="n">int_val_of_hex</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_hex</span><span class="p">(</span><span class="n">val2</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">int_val_of_hex</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="n">res</span> <span class="o">=</span> <span class="n">int_val_of_hex</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c"># nothing at all matched</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s">&#39;Error: Seems like a value has not been mapped to a type appeared on the right side: </span><span class="si">%s</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">val2</span><span class="p">)</span>
+                    <span class="c"># use string representation of val2</span>
+                    <span class="n">res</span> <span class="o">=</span> <span class="n">val2</span>
+            <span class="c"># is register</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c"># resolve register</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cpu</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">registers</span><span class="o">.</span><span class="n">resolve_current_register_value</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+                <span class="c"># double resolution needed, register can point to a stack variable pointing anywhere else</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">StackVar</span><span class="p">):</span>
+                    <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cpu</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">registers</span><span class="o">.</span><span class="n">resolve_current_register_value</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+                
+        <span class="k">return</span> <span class="n">res</span> 
+
+    <span class="k">def</span> <span class="nf">_var_assignment_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var_assign</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Defines how to handle the `VarAssignment`</span>
+<span class="sd">         </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        var_assign: VarAssignment</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">var_assign</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

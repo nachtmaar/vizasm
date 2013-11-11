@@ -1,0 +1,576 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>objcruntime Package &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">objcruntime Package</a><ul>
+<li><a class="reference internal" href="#module-vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup"><tt class="docutils literal"><span class="pre">IVarRefLookup</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime"><tt class="docutils literal"><span class="pre">ObjectiveCRuntime</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/vizasm.analysis.asm.cpu.objcruntime.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="objcruntime-package">
+<h1>objcruntime Package<a class="headerlink" href="#objcruntime-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup">
+<span id="ivarreflookup-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">IVarRefLookup</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 10.04.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup.IVarRefLookup">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup.</tt><tt class="descname">IVarRefLookup</tt><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/objcruntime/IVarRefLookup.html#IVarRefLookup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup.IVarRefLookup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt>, <a class="reference internal" href="vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Resetable.Resetable" title="vizasm.analysis.asm.cpu.Resetable.Resetable"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.asm.cpu.Resetable.Resetable</span></tt></a></p>
+<p>Models the instance variable cache of a class.</p>
+<p>A dictionary helper for the <cite>IVar</cite> class to look up the <cite>ivar_ref</cite> from an <cite>ivar_class</cite>.</p>
+<p>Cause every time a message is sent to an ivar_ref like Object3, an ivar_class like AppDelegate.obj3 is read,</p>
+<p>but this will create a new ivar_class and the ivar_ref has to be looked up in this class.</p>
+<p>The ivar_ref will be stored after a VarAssignment is read which links to an ivar_class. At this moment, the ivar_ref</p>
+<p>seems to be stored in the return register.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>__ivar_ref_dict: dict</strong> :</p>
+<blockquote class="last">
+<div><p>dictionary to look up the ivar_ref from an ivar_class (see IVar)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup.IVarRefLookup.get_ivar_ref" title="vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup.IVarRefLookup.get_ivar_ref"><tt class="xref py py-obj docutils literal"><span class="pre">get_ivar_ref</span></tt></a>(ivar_class)</td>
+<td>Get the ivar_ref for the ivar_class</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup.IVarRefLookup.get_ivar_ref_dict" title="vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup.IVarRefLookup.get_ivar_ref_dict"><tt class="xref py py-obj docutils literal"><span class="pre">get_ivar_ref_dict</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup.IVarRefLookup.reset" title="vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup.IVarRefLookup.reset"><tt class="xref py py-obj docutils literal"><span class="pre">reset</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup.IVarRefLookup.set_ivar_ref" title="vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup.IVarRefLookup.set_ivar_ref"><tt class="xref py py-obj docutils literal"><span class="pre">set_ivar_ref</span></tt></a>(ivar_class,&nbsp;ivar_ref)</td>
+<td>Link ivar_class to ivar_ref</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup.IVarRefLookup.set_ivar_ref_dict" title="vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup.IVarRefLookup.set_ivar_ref_dict"><tt class="xref py py-obj docutils literal"><span class="pre">set_ivar_ref_dict</span></tt></a>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup.IVarRefLookup.get_ivar_ref">
+<tt class="descname">get_ivar_ref</tt><big>(</big><em>ivar_class</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/objcruntime/IVarRefLookup.html#IVarRefLookup.get_ivar_ref"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup.IVarRefLookup.get_ivar_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the ivar_ref for the ivar_class</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup.IVarRefLookup.get_ivar_ref_dict">
+<tt class="descname">get_ivar_ref_dict</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/objcruntime/IVarRefLookup.html#IVarRefLookup.get_ivar_ref_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup.IVarRefLookup.get_ivar_ref_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup.IVarRefLookup.ivar_ref_dict">
+<tt class="descname">ivar_ref_dict</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup.IVarRefLookup.ivar_ref_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup.IVarRefLookup.reset">
+<tt class="descname">reset</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/objcruntime/IVarRefLookup.html#IVarRefLookup.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup.IVarRefLookup.reset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup.IVarRefLookup.set_ivar_ref">
+<tt class="descname">set_ivar_ref</tt><big>(</big><em>ivar_class</em>, <em>ivar_ref</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/objcruntime/IVarRefLookup.html#IVarRefLookup.set_ivar_ref"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup.IVarRefLookup.set_ivar_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Link ivar_class to ivar_ref</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup.IVarRefLookup.set_ivar_ref_dict">
+<tt class="descname">set_ivar_ref_dict</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/objcruntime/IVarRefLookup.html#IVarRefLookup.set_ivar_ref_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup.IVarRefLookup.set_ivar_ref_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime">
+<span id="objectivecruntime-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">ObjectiveCRuntime</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 17.09.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.</tt><tt class="descname">ObjectiveCRuntime</tt><big>(</big><em>cpu</em>, <em>superclass_dict</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/objcruntime/ObjectiveCRuntime.html#ObjectiveCRuntime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt>, <a class="reference internal" href="vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Resetable.Resetable" title="vizasm.analysis.asm.cpu.Resetable.Resetable"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.asm.cpu.Resetable.Resetable</span></tt></a></p>
+<p>Models the objective-c runtime.</p>
+<p>It keeps track of seen instance variables and their values
+and handles calls to super as well as all msgSend stuff
+(objc_msgSend).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>_cpu: Cpu</strong> :</p>
+<p><strong>_ivar_lookup: IVarRefLookup</strong> :</p>
+<blockquote>
+<div><p>Dictionary helper to look up instance variables</p>
+</div></blockquote>
+<p><strong>_superclass_dict: dict&lt;ObjcClass, ObjcClass&gt;, optional (default {})</strong> :</p>
+<blockquote class="last">
+<div><p>dictionary holding the base classes of the classes</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.create_and_store_method_selector_arguments" title="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.create_and_store_method_selector_arguments"><tt class="xref py py-obj docutils literal"><span class="pre">create_and_store_method_selector_arguments</span></tt></a>(...)</td>
+<td>Create and store the arguments for the <cite>method_selector</cite>.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.create_method_selector_arg" title="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.create_method_selector_arg"><tt class="xref py py-obj docutils literal"><span class="pre">create_method_selector_arg</span></tt></a>(number)</td>
+<td>Create a method argument for the current method selector.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.get_cpu" title="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.get_cpu"><tt class="xref py py-obj docutils literal"><span class="pre">get_cpu</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.get_current_selector_check_sel_type" title="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.get_current_selector_check_sel_type"><tt class="xref py py-obj docutils literal"><span class="pre">get_current_selector_check_sel_type</span></tt></a>([...])</td>
+<td>Return the current selector and check the type of the selector.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.get_ivar_lookup" title="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.get_ivar_lookup"><tt class="xref py py-obj docutils literal"><span class="pre">get_ivar_lookup</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.get_superclass_dict" title="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.get_superclass_dict"><tt class="xref py py-obj docutils literal"><span class="pre">get_superclass_dict</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.msg_send_from_destination" title="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.msg_send_from_destination"><tt class="xref py py-obj docutils literal"><span class="pre">msg_send_from_destination</span></tt></a>(destination,&nbsp;selector)</td>
+<td>Create a MsgSend from the given <cite>destination</cite> and <cite>selector</cite>.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.read_msg_send" title="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.read_msg_send"><tt class="xref py py-obj docutils literal"><span class="pre">read_msg_send</span></tt></a>(imp,&nbsp;destination)</td>
+<td>Read a msg_send and store it .</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.read_return_important_objc_call" title="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.read_return_important_objc_call"><tt class="xref py py-obj docutils literal"><span class="pre">read_return_important_objc_call</span></tt></a>(imp,&nbsp;...)</td>
+<td>Read a line which seems to return something and store it in the return register.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.read_selector" title="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.read_selector"><tt class="xref py py-obj docutils literal"><span class="pre">read_selector</span></tt></a>(selector,&nbsp;destination)</td>
+<td>Called is a <cite>Selector</cite>.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.reset" title="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.reset"><tt class="xref py py-obj docutils literal"><span class="pre">reset</span></tt></a>()</td>
+<td>Reset the objective-c runtime</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.set_cpu" title="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.set_cpu"><tt class="xref py py-obj docutils literal"><span class="pre">set_cpu</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.set_ivar_lookup" title="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.set_ivar_lookup"><tt class="xref py py-obj docutils literal"><span class="pre">set_ivar_lookup</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.set_superclass" title="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.set_superclass"><tt class="xref py py-obj docutils literal"><span class="pre">set_superclass</span></tt></a>(ivar_ref)</td>
+<td>Set the superclass for the <cite>ivar_ref</cite> from the <cite>superclass_dict</cite>.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.set_superclass_dict" title="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.set_superclass_dict"><tt class="xref py py-obj docutils literal"><span class="pre">set_superclass_dict</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.store_self_cmd_for_stack_fetching_cpu" title="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.store_self_cmd_for_stack_fetching_cpu"><tt class="xref py py-obj docutils literal"><span class="pre">store_self_cmd_for_stack_fetching_cpu</span></tt></a>(...)</td>
+<td>Store self and _cmd in the appropriate place if the</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.cpu">
+<tt class="descname">cpu</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.cpu" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.create_and_store_method_selector_arguments">
+<tt class="descname">create_and_store_method_selector_arguments</tt><big>(</big><em>method_selector</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/objcruntime/ObjectiveCRuntime.html#ObjectiveCRuntime.create_and_store_method_selector_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.create_and_store_method_selector_arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and store the arguments for the <cite>method_selector</cite>.
+There will be as many arguments created as the <cite>Selector</cite> needs.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>method_selector: Selector</strong> :</p>
+<blockquote>
+<div><p>the <cite>Selector</cite> describing the method that is currently being read by the <cite>Cpu</cite></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><strong>SelectorOverloadedException</strong> :</p>
+<blockquote class="last">
+<div><p>if selector has more arguments than it needs</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.create_method_selector_arg">
+<em class="property">static </em><tt class="descname">create_method_selector_arg</tt><big>(</big><em>number</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/objcruntime/ObjectiveCRuntime.html#ObjectiveCRuntime.create_method_selector_arg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.create_method_selector_arg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a method argument for the current method selector. See <cite>method_selector</cite>. 
+The method arguments are stored as instance of <cite>MethodSelectorArgument</cite> named with the suffix <cite>Cpu.METHOD_ARGUMENTS_PREFIX</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>number: int</strong> :</p>
+<blockquote>
+<div><p>the number to append to the argument name</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first last"><strong>MethodSelectorArgument</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.get_cpu">
+<tt class="descname">get_cpu</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/objcruntime/ObjectiveCRuntime.html#ObjectiveCRuntime.get_cpu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.get_cpu" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.get_current_selector_check_sel_type">
+<tt class="descname">get_current_selector_check_sel_type</tt><big>(</big><em>objc_msgSend_stret=False</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/objcruntime/ObjectiveCRuntime.html#ObjectiveCRuntime.get_current_selector_check_sel_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.get_current_selector_check_sel_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the current selector and check the type of the selector.
+If not correct, raise ObjcRuntimeSelectorWrongTypeException.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>objc_msgSend_stret: bool, optional (default is False)</strong> :</p>
+<blockquote>
+<div><p>indicate an objc_msgSend_stret</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>selector: Selector</strong> :</p>
+<blockquote>
+<div><p>The selector currently stored in the register specified by <cite>selector_registers</cite>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><strong>ObjcRuntimeCouldNotGetSelector</strong> :</p>
+<blockquote>
+<div><p>raised if the value of the selector register could not be detected</p>
+</div></blockquote>
+<p><strong>ObjcRuntimeSelectorWrongTypeException</strong> :</p>
+<blockquote class="last">
+<div><p>raised if the type of selector is not Selector</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.get_ivar_lookup">
+<tt class="descname">get_ivar_lookup</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/objcruntime/ObjectiveCRuntime.html#ObjectiveCRuntime.get_ivar_lookup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.get_ivar_lookup" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.get_superclass_dict">
+<tt class="descname">get_superclass_dict</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/objcruntime/ObjectiveCRuntime.html#ObjectiveCRuntime.get_superclass_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.get_superclass_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.ivar_lookup">
+<tt class="descname">ivar_lookup</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.ivar_lookup" title="Permalink to this definition">¶</a></dt>
+<dd><p>_ivar_lookup(IVarRefLookup) &#8211; Dictionary helper to look up instance variables</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.msg_send_from_destination">
+<tt class="descname">msg_send_from_destination</tt><big>(</big><em>destination</em>, <em>selector</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/objcruntime/ObjectiveCRuntime.html#ObjectiveCRuntime.msg_send_from_destination"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.msg_send_from_destination" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a MsgSend from the given <cite>destination</cite> and <cite>selector</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>selector: Selector</strong> :</p>
+<p><strong>destination:</strong> :</p>
+<blockquote>
+<div><p>to which object to send the message</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>msg_send: MsgSend</strong> :</p>
+<blockquote class="last">
+<div><p>the created <cite>MsgSend</cite></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.read_msg_send">
+<tt class="descname">read_msg_send</tt><big>(</big><em>imp</em>, <em>destination</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/objcruntime/ObjectiveCRuntime.html#ObjectiveCRuntime.read_msg_send"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.read_msg_send" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a msg_send and store it .</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>MsgSend</strong> :</p>
+<blockquote>
+<div><p>the <cite>MsgSend</cite> created</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><strong>ObjcRuntimeCouldNotGetSelector</strong> :</p>
+<blockquote>
+<div><p>if the value of the destination register could not be resolved</p>
+</div></blockquote>
+<p><strong>ObjcRuntimeSelectorWrongTypeException</strong> :</p>
+<blockquote class="last">
+<div><p>if the selector has not the right class. Has to be: <cite>Selector</cite></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.read_return_important_objc_call">
+<tt class="descname">read_return_important_objc_call</tt><big>(</big><em>imp</em>, <em>destination</em>, <em>return_register</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/objcruntime/ObjectiveCRuntime.html#ObjectiveCRuntime.read_return_important_objc_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.read_return_important_objc_call" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a line which seems to return something and store it in the return register.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><strong>is return important</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.read_selector">
+<tt class="descname">read_selector</tt><big>(</big><em>selector</em>, <em>destination</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/objcruntime/ObjectiveCRuntime.html#ObjectiveCRuntime.read_selector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.read_selector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called is a <cite>Selector</cite>. 
+Create a <cite>MsgSend</cite> and store it in the <a href="#id1"><span class="problematic" id="id2">`</span></a>MethodCall.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>MsgSend</strong> :</p>
+<blockquote class="last">
+<div><p>the created <a href="#id3"><span class="problematic" id="id4">`</span></a>MsgSend</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.reset">
+<tt class="descname">reset</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/objcruntime/ObjectiveCRuntime.html#ObjectiveCRuntime.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the objective-c runtime</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.set_cpu">
+<tt class="descname">set_cpu</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/objcruntime/ObjectiveCRuntime.html#ObjectiveCRuntime.set_cpu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.set_cpu" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.set_ivar_lookup">
+<tt class="descname">set_ivar_lookup</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/objcruntime/ObjectiveCRuntime.html#ObjectiveCRuntime.set_ivar_lookup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.set_ivar_lookup" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.set_superclass">
+<tt class="descname">set_superclass</tt><big>(</big><em>ivar_ref</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/objcruntime/ObjectiveCRuntime.html#ObjectiveCRuntime.set_superclass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.set_superclass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the superclass for the <cite>ivar_ref</cite> from the <cite>superclass_dict</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><strong>ivar_ref: MsgSend</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.set_superclass_dict">
+<tt class="descname">set_superclass_dict</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/objcruntime/ObjectiveCRuntime.html#ObjectiveCRuntime.set_superclass_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.set_superclass_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.store_self_cmd_for_stack_fetching_cpu">
+<tt class="descname">store_self_cmd_for_stack_fetching_cpu</tt><big>(</big><em>objc_class</em>, <em>selector</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/objcruntime/ObjectiveCRuntime.html#ObjectiveCRuntime.store_self_cmd_for_stack_fetching_cpu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.store_self_cmd_for_stack_fetching_cpu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Store self and _cmd in the appropriate place if the
+<cite>Cpu</cite> fetches all of its arguments from stack</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.superclass_dict">
+<tt class="descname">superclass_dict</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.superclass_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>_superclass_dict(dict&lt;ObjcClass, ObjcClass&gt;, optional (default {})) &#8211; dictionary holding the base classes of the classes</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="vizasm.analysis.asm.cpu.objcruntime.exceptions.html">exceptions Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.asm.cpu.objcruntime.exceptions.html#module-vizasm.analysis.asm.cpu.objcruntime.exceptions.ObjcRuntimeCouldNotGetSelector"><tt class="docutils literal"><span class="pre">ObjcRuntimeCouldNotGetSelector</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.asm.cpu.objcruntime.exceptions.html#module-vizasm.analysis.asm.cpu.objcruntime.exceptions.ObjcRuntimeCouldNotReadMsgSendException"><tt class="docutils literal"><span class="pre">ObjcRuntimeCouldNotReadMsgSendException</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.asm.cpu.objcruntime.exceptions.html#module-vizasm.analysis.asm.cpu.objcruntime.exceptions.ObjcRuntimeSelectorWrongTypeException"><tt class="docutils literal"><span class="pre">ObjcRuntimeSelectorWrongTypeException</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

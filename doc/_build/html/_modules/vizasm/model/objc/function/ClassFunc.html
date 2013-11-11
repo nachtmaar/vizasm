@@ -1,0 +1,160 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm.model.objc.function.ClassFunc &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vizasm.model.objc.function.ClassFunc</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 21.04.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.function.Function</span> <span class="kn">import</span> <span class="n">Function</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.object.nsobject.NSObjectInterface</span> <span class="kn">import</span> \
+    <span class="n">NSObjectInterface</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.object.nsobject.objcclass.ObjcClass</span> <span class="kn">import</span> <span class="n">ObjcClass</span>
+
+<div class="viewcode-block" id="ClassFunc"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.ClassFunc.ClassFunc">[docs]</a><span class="k">class</span> <span class="nc">ClassFunc</span><span class="p">(</span><span class="n">Function</span><span class="p">,</span> <span class="n">NSObjectInterface</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    Represents a class function. </span>
+<span class="sd">    A `ClassFunc` has additionally a class to which it belongs.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    __class_of_func: ObjcClass</span>
+<span class="sd">        The class to which the function belongs.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">class_of_func</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">func_arguments</span><span class="p">,</span> <span class="n">is_static</span> <span class="o">=</span> <span class="bp">False</span><span class="p">):</span>
+        <span class="n">Function</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">func_arguments</span><span class="p">,</span> <span class="n">is_static</span> <span class="o">=</span> <span class="n">is_static</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__class_of_func</span> <span class="o">=</span> <span class="n">class_of_func</span>
+
+<div class="viewcode-block" id="ClassFunc.get_class_of_func"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.ClassFunc.ClassFunc.get_class_of_func">[docs]</a>    <span class="k">def</span> <span class="nf">get_class_of_func</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class_of_func</span>
+</div>
+<div class="viewcode-block" id="ClassFunc.set_class_of_func"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.ClassFunc.ClassFunc.set_class_of_func">[docs]</a>    <span class="k">def</span> <span class="nf">set_class_of_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__class_of_func</span> <span class="o">=</span> <span class="n">value</span>
+</div>
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">.</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_class_of_func</span><span class="p">(),</span> <span class="n">Function</span><span class="o">.</span><span class="n">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">ClassFunc</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span> <span class="ow">is</span> <span class="n">other</span> <span class="ow">or</span> <span class="p">(</span><span class="n">Function</span><span class="o">.</span><span class="n">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">class_of_func</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">class_of_func</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    
+    <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="n">Function</span><span class="o">.</span><span class="n">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">class_of_func</span><span class="p">))</span>
+    
+    <span class="n">class_of_func</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_class_of_func</span><span class="p">,</span> <span class="n">set_class_of_func</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;__class_of_func(ObjcClass) -- the class to which the function belongs.&quot;</span><span class="p">)</span>
+
+    
+<span class="c">#####################################################################################</span>
+<span class="c"># NSObjectInterface                                                                 #</span>
+<span class="c">#####################################################################################</span>
+<div class="viewcode-block" id="ClassFunc.get_nsobject"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.ClassFunc.ClassFunc.get_nsobject">[docs]</a>    <span class="k">def</span> <span class="nf">get_nsobject</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_class_of_func</span><span class="p">()</span>
+        </div></div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">class_of_func</span> <span class="o">=</span> <span class="n">ObjcClass</span><span class="p">(</span><span class="s">&#39;AppDelegate&#39;</span><span class="p">)</span>
+    <span class="n">function</span> <span class="o">=</span> <span class="s">&#39;function&#39;</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;1&#39;</span><span class="p">,</span> <span class="s">&#39;2&#39;</span><span class="p">,</span> <span class="s">&#39;3&#39;</span><span class="p">]</span>
+    <span class="n">classfunc</span> <span class="o">=</span> <span class="n">ClassFunc</span><span class="p">(</span><span class="n">class_of_func</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">classfunc</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

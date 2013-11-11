@@ -1,0 +1,393 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm.model.objc.function.MsgSend &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vizasm.model.objc.function.MsgSend</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 01.04.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.arguments.Selector</span> <span class="kn">import</span> <span class="n">Selector</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.function.FunctionInterface</span> <span class="kn">import</span> <span class="n">FunctionInterface</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.function.MsgSendInterface</span> <span class="kn">import</span> <span class="n">MsgSendInterface</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.object.nsobject.NSObjectInterface</span> <span class="kn">import</span> \
+    <span class="n">NSObjectInterface</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.object.nsobject.objcclass.ObjcClass</span> <span class="kn">import</span> <span class="n">ObjcClass</span>
+
+<div class="viewcode-block" id="MsgSend"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.MsgSend.MsgSend">[docs]</a><span class="k">class</span> <span class="nc">MsgSend</span><span class="p">(</span><span class="n">FunctionInterface</span><span class="p">,</span> <span class="n">NSObjectInterface</span><span class="p">,</span> <span class="n">MsgSendInterface</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    Represents a MsgSend in objective-c like e.g. [NSUserDefaults standardUserdefaults]</span>
+<span class="sd">    or [[[NSUserDefaults standardUserDefaults] objectForKey:aKey] setValueForKey:aKey value:value]</span>
+<span class="sd">    </span>
+<span class="sd">    Alloc init stuff like [[Object3 alloc] init] or [[Object3] new] is reformatted to Object3*.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    __msg_receiver: FunctionInterface</span>
+<span class="sd">        the class to which the message(s) will be sent</span>
+<span class="sd">    __selectors: list&lt;Selector&gt;</span>
+<span class="sd">        the selector(s) to send to the class (default [])</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg_send_class</span><span class="p">,</span> <span class="n">selectors</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">is_static</span> <span class="o">=</span> <span class="bp">False</span><span class="p">):</span>
+        <span class="n">FunctionInterface</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">is_static</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">selectors</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">selectors</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__selectors</span> <span class="o">=</span> <span class="n">selectors</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__msg_receiver</span> <span class="o">=</span> <span class="n">msg_send_class</span>
+        
+    <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">selectors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__unfilled_selector_names_for_eq</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">get_msg_receiver</span><span class="p">(),</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">selectors</span><span class="p">)))</span>
+    
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">MsgSend</span><span class="p">):</span>
+            <span class="c"># Networkx node equality. Let method calls link to corresponding method implementations and vice versa\n</span>
+            <span class="c"># achieve &quot;-[MainClass selfMethod:]&quot;  == &quot;[MainClass selfMethod:n/a]&quot; == &quot;[MainClass selfMethod:5]&quot;</span>
+            <span class="n">s_sels</span><span class="p">,</span> <span class="n">o_sels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__unfilled_selector_names_for_eq</span><span class="p">(),</span> <span class="n">other</span><span class="o">.</span><span class="n">__unfilled_selector_names_for_eq</span><span class="p">()</span>
+            <span class="k">return</span> <span class="bp">self</span> <span class="ow">is</span> <span class="n">other</span> <span class="ow">or</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">get_msg_receiver</span><span class="p">(),</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">s_sels</span><span class="p">)))</span> <span class="o">==</span> <span class="p">((</span><span class="n">other</span><span class="o">.</span><span class="n">get_msg_receiver</span><span class="p">(),</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">o_sels</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    
+    <span class="k">def</span> <span class="nf">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span> <span class="o">==</span> <span class="n">other</span>    
+    
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_msg_receiver</span><span class="p">()</span><span class="o">.</span><span class="n">__str__</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_selectors</span><span class="p">())</span> <span class="ow">is</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">&#39;[</span><span class="si">%s</span><span class="s"> n/a]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">res</span><span class="p">)</span>
+        <span class="n">selectors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selectors</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_init</span><span class="p">():</span>
+            <span class="c"># leave alloc and init or new out</span>
+            <span class="n">selectors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">selectors_without_init</span><span class="p">()</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">*&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">res</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">sel</span> <span class="ow">in</span> <span class="n">selectors</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="s">&#39;[</span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">sel</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="s">&#39;[</span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">sel</span><span class="o">.</span><span class="n">get_obj_name</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">res</span>
+    
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">(</span><span class="si">%s</span><span class="s">: </span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_msg_receiver</span><span class="p">()</span><span class="o">.</span><span class="n">__repr__</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selectors</span><span class="p">()</span><span class="o">.</span><span class="n">__repr__</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_static</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return an iterator over the `Selector`s &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selectors</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__unfilled_selector_names_for_eq</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return the unfilled selector names and leave alloc and init or new out&#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">sel</span><span class="o">.</span><span class="n">selector_name</span> <span class="k">for</span> <span class="n">sel</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">selectors_without_init</span><span class="p">()]</span>
+    
+<div class="viewcode-block" id="MsgSend.unfilled_args_name"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.MsgSend.MsgSend.unfilled_args_name">[docs]</a>    <span class="k">def</span> <span class="nf">unfilled_args_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Get a string representation without filling the `Selector` with its arguments &#39;&#39;&#39;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_msg_receiver</span><span class="p">())</span>
+        <span class="k">for</span> <span class="n">sel</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">selectors</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="s">&#39;[</span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">sel</span><span class="o">.</span><span class="n">selector_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span>
+    </div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="MsgSend.create_from_msgsend"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.MsgSend.MsgSend.create_from_msgsend">[docs]</a>    <span class="k">def</span> <span class="nf">create_from_msgsend</span><span class="p">(</span><span class="n">msg_send</span><span class="p">,</span> <span class="n">selector</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Create a MsgSend from existing MsgSend.</span>
+<span class="sd">        This method makes a deep copy of the parameters `msg_send` and `selector`.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        msg_send: MsgSend</span>
+<span class="sd">        selector: Selector</span>
+<span class="sd">         </span>
+<span class="sd">        Returns:</span>
+<span class="sd">        MsgSend</span>
+<span class="sd">            `MsgSend` created from the parameters</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">msg_send</span><span class="p">,</span> <span class="n">MsgSend</span><span class="p">):</span>
+            <span class="n">receiver</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">msg_send</span><span class="o">.</span><span class="n">get_msg_receiver</span><span class="p">())</span>
+            <span class="n">selectors</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">msg_send</span><span class="o">.</span><span class="n">get_selectors</span><span class="p">())</span>
+            <span class="n">selectors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">selector</span><span class="p">)</span>   
+            <span class="k">return</span> <span class="n">MsgSend</span><span class="p">(</span><span class="n">receiver</span><span class="p">,</span> <span class="n">selectors</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    </div>
+<div class="viewcode-block" id="MsgSend.get_selectors"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.MsgSend.MsgSend.get_selectors">[docs]</a>    <span class="k">def</span> <span class="nf">get_selectors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__selectors</span>
+</div>
+<div class="viewcode-block" id="MsgSend.set_selectors"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.MsgSend.MsgSend.set_selectors">[docs]</a>    <span class="k">def</span> <span class="nf">set_selectors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__selectors</span> <span class="o">=</span> <span class="n">value</span>
+        </div>
+<div class="viewcode-block" id="MsgSend.get_class"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.MsgSend.MsgSend.get_class">[docs]</a>    <span class="k">def</span> <span class="nf">get_class</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_objc_name</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="MsgSend.get_msg_receiver"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.MsgSend.MsgSend.get_msg_receiver">[docs]</a>    <span class="k">def</span> <span class="nf">get_msg_receiver</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__msg_receiver</span>
+</div>
+<div class="viewcode-block" id="MsgSend.set_msg_receiver"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.MsgSend.MsgSend.set_msg_receiver">[docs]</a>    <span class="k">def</span> <span class="nf">set_msg_receiver</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__msg_receiver</span> <span class="o">=</span> <span class="n">value</span>
+    </div>
+<div class="viewcode-block" id="MsgSend.get_first_selector"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.MsgSend.MsgSend.get_first_selector">[docs]</a>    <span class="k">def</span> <span class="nf">get_first_selector</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Returns the first selector. None if not exisiting. &#39;&#39;&#39;</span>
+        <span class="n">selectors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selectors</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">selectors</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">selectors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        </div>
+    <span class="k">def</span> <span class="nf">__selector_contains_same_msgsend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return if the selector has a MsgSend as an argument that has the same ObjcClass &#39;&#39;&#39;</span>    
+        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">selector</span><span class="o">.</span><span class="n">get_arguments</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">MsgSend</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="o">.</span><span class="n">get_msg_receiver</span><span class="p">(),</span> <span class="n">ObjcClass</span><span class="p">)</span> <span class="ow">and</span> <span class="n">arg</span><span class="o">.</span><span class="n">get_msg_receiver</span><span class="p">()</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_msg_receiver</span><span class="p">():</span>
+                <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    
+<div class="viewcode-block" id="MsgSend.fst_selector"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.MsgSend.MsgSend.fst_selector">[docs]</a>    <span class="k">def</span> <span class="nf">fst_selector</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Returns the first selector. None if not available &#39;&#39;&#39;</span>
+        <span class="n">selectors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selectors</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">selectors</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">selectors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    </div>
+<div class="viewcode-block" id="MsgSend.fst_sel_is_alloc"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.MsgSend.MsgSend.fst_sel_is_alloc">[docs]</a>    <span class="k">def</span> <span class="nf">fst_sel_is_alloc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Check if the first selector is alloc &#39;&#39;&#39;</span>
+        <span class="n">selectors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selectors</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">selectors</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">selectors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">is_alloc</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="MsgSend.fst_sel_is_new"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.MsgSend.MsgSend.fst_sel_is_new">[docs]</a>    <span class="k">def</span> <span class="nf">fst_sel_is_new</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Check if the first selector is new &#39;&#39;&#39;</span>
+        <span class="n">selectors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selectors</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">selectors</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">selectors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">is_new</span><span class="p">()</span>
+        </div>
+<div class="viewcode-block" id="MsgSend.fst_sel_does_retain"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.MsgSend.MsgSend.fst_sel_does_retain">[docs]</a>    <span class="k">def</span> <span class="nf">fst_sel_does_retain</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Check if the first selector increments the retain count &#39;&#39;&#39;</span>
+        <span class="n">selector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fst_selector</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">selector</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">selector</span><span class="o">.</span><span class="n">does_retain</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    </div>
+<div class="viewcode-block" id="MsgSend.lst_sel_does_retain"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.MsgSend.MsgSend.lst_sel_does_retain">[docs]</a>    <span class="k">def</span> <span class="nf">lst_sel_does_retain</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Check if the first selector increments the retain count &#39;&#39;&#39;</span>
+        <span class="n">selectors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">selectors</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">selectors</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">selectors</span><span class="p">[</span><span class="n">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">does_retain</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    </div>
+<div class="viewcode-block" id="MsgSend.fst_sel_does_release"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.MsgSend.MsgSend.fst_sel_does_release">[docs]</a>    <span class="k">def</span> <span class="nf">fst_sel_does_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Check if the first selector decrements the retain count &#39;&#39;&#39;</span>
+        <span class="n">selector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fst_selector</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">selector</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">selector</span><span class="o">.</span><span class="n">does_release</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    </div>
+<div class="viewcode-block" id="MsgSend.lst_sel_does_release"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.MsgSend.MsgSend.lst_sel_does_release">[docs]</a>    <span class="k">def</span> <span class="nf">lst_sel_does_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Check if the last selector decrements the retain count &#39;&#39;&#39;</span>
+        <span class="n">selectors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">selectors</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">selectors</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">selectors</span><span class="p">[</span><span class="n">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">does_release</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    </div>
+<div class="viewcode-block" id="MsgSend.cnt_init_selectors"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.MsgSend.MsgSend.cnt_init_selectors">[docs]</a>    <span class="k">def</span> <span class="nf">cnt_init_selectors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return the number of init selectors.</span>
+<span class="sd">            Returns:</span>
+<span class="sd">                0 -- no init selectors</span>
+<span class="sd">                1 -- selector is new</span>
+<span class="sd">                2 -- selectors are alloc and init</span>
+<span class="sd">        &#39;&#39;&#39;</span> 
+        <span class="n">selectors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selectors</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">selectors</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">selectors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">is_alloc</span><span class="p">()</span> <span class="ow">and</span> <span class="n">selectors</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">is_init</span><span class="p">():</span>
+                <span class="k">return</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">selectors</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">:</span>
+            <span class="k">if</span> <span class="n">selectors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">is_new</span><span class="p">():</span>
+                <span class="k">return</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    </div>
+<div class="viewcode-block" id="MsgSend.has_init"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.MsgSend.MsgSend.has_init">[docs]</a>    <span class="k">def</span> <span class="nf">has_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return if the first so selectors are alloc and init (order is important!) or new&#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cnt_init_selectors</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    </div>
+<div class="viewcode-block" id="MsgSend.selectors_without_init"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.MsgSend.MsgSend.selectors_without_init">[docs]</a>    <span class="k">def</span> <span class="nf">selectors_without_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Return the selectors without any init selectors.</span>
+<span class="sd">        See  `cnt_init_selectors()`.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list&lt;Selector&gt;</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">sels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">selectors</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_init</span><span class="p">():</span>
+            <span class="n">sels</span> <span class="o">=</span> <span class="n">sels</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">cnt_init_selectors</span><span class="p">():]</span>
+        <span class="k">return</span> <span class="n">sels</span>
+    
+    
+<span class="c">#####################################################################################</span>
+<span class="c"># FunctionInterface                                                                 #</span>
+<span class="c">#####################################################################################    </span>
+</div>
+<div class="viewcode-block" id="MsgSend.get_arguments"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.MsgSend.MsgSend.get_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">get_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selectors</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="MsgSend.get_function_name"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.MsgSend.MsgSend.get_function_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_function_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__str__</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="MsgSend.is_c_function"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.MsgSend.MsgSend.is_c_function">[docs]</a>    <span class="k">def</span> <span class="nf">is_c_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">FunctionInterface</span><span class="o">.</span><span class="n">is_c_function</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="MsgSend.is_objc_function"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.MsgSend.MsgSend.is_objc_function">[docs]</a>    <span class="k">def</span> <span class="nf">is_objc_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">True</span>
+</div>
+<div class="viewcode-block" id="MsgSend.cnt_needs_arguments"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.MsgSend.MsgSend.cnt_needs_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">cnt_needs_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">sel</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selectors</span><span class="p">():</span>
+            <span class="n">res</span> <span class="o">+=</span> <span class="n">sel</span><span class="o">.</span><span class="n">cnt_needs_arguments</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">res</span>
+</div>
+<div class="viewcode-block" id="MsgSend.cnt_has_arguments"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.MsgSend.MsgSend.cnt_has_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">cnt_has_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">sel</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selectors</span><span class="p">():</span>
+            <span class="n">res</span> <span class="o">+=</span> <span class="n">sel</span><span class="o">.</span><span class="n">cnt_has_arguments</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">res</span>
+
+<span class="c">#####################################################################################</span>
+<span class="c"># NSObjectInterface                                                                 #</span>
+<span class="c">#####################################################################################</span></div>
+<div class="viewcode-block" id="MsgSend.get_nsobject"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.MsgSend.MsgSend.get_nsobject">[docs]</a>    <span class="k">def</span> <span class="nf">get_nsobject</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_msg_receiver</span><span class="p">()</span>
+    
+<span class="c">#####################################################################################</span>
+<span class="c"># MsgSendInterface                                                                  #</span>
+<span class="c">#####################################################################################    </span></div>
+<div class="viewcode-block" id="MsgSend.create_msg_send"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.MsgSend.MsgSend.create_msg_send">[docs]</a>    <span class="k">def</span> <span class="nf">create_msg_send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Create a `MsgSend` with the specified `selector`.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        selector: Selector</span>
+<span class="sd">            the `Selector` with which the `MsgSend` shall be created.</span>
+<span class="sd">            </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        MsgSend</span>
+<span class="sd">            the created `MsgSend` </span>
+<span class="sd">        &#39;&#39;&#39;</span> 
+        <span class="k">return</span> <span class="n">MsgSend</span><span class="o">.</span><span class="n">create_from_msgsend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">)</span>
+        </div>
+    <span class="n">selectors</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_selectors</span><span class="p">,</span> <span class="n">set_selectors</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;__selectors(list) -- the selector(s) to send to the class (default [])&quot;</span><span class="p">)</span>
+    <span class="n">msg_receiver</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_msg_receiver</span><span class="p">,</span> <span class="n">set_msg_receiver</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;__msg_receiver(ObjClass) -- the class to which the message(s) will be sent&quot;</span><span class="p">)</span>
+        </div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">vizasm.model.objc.function.MethodImplementation</span> <span class="kn">import</span> <span class="n">MethodImplementation</span>
+
+    <span class="n">objcclass</span> <span class="o">=</span> <span class="n">ObjcClass</span><span class="p">(</span><span class="s">&#39;NSUserDefaults&#39;</span><span class="p">)</span>
+    <span class="n">sel1</span> <span class="o">=</span> <span class="n">Selector</span><span class="p">(</span><span class="s">&#39;standardUserDefaults&#39;</span><span class="p">)</span>
+    <span class="n">sel2</span> <span class="o">=</span> <span class="n">Selector</span><span class="p">(</span><span class="s">&#39;objectForKey:&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;aKey&#39;</span><span class="p">])</span>
+    <span class="n">sel3</span> <span class="o">=</span> <span class="n">Selector</span><span class="p">(</span><span class="s">&#39;setValueForKey:value:&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;aKey&#39;</span><span class="p">,</span> <span class="s">&#39;value&#39;</span><span class="p">])</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="n">MsgSend</span><span class="p">(</span><span class="n">objcclass</span><span class="p">,</span> <span class="p">[</span><span class="n">sel1</span><span class="p">,</span> <span class="n">sel2</span><span class="p">,</span> <span class="n">sel3</span><span class="p">])</span> 
+    <span class="k">print</span> <span class="n">msg</span>   
+    <span class="n">msg2</span> <span class="o">=</span> <span class="n">MsgSend</span><span class="p">(</span><span class="n">objcclass</span><span class="p">,</span> <span class="p">[</span><span class="n">Selector</span><span class="p">(</span><span class="s">&#39;alloc&#39;</span><span class="p">),</span> <span class="n">Selector</span><span class="p">(</span><span class="s">&#39;init&#39;</span><span class="p">),</span> <span class="n">Selector</span><span class="p">(</span><span class="s">&#39;httpsConnection&#39;</span><span class="p">)])</span>
+    <span class="k">print</span> <span class="n">msg2</span>   
+    <span class="n">msg2</span> <span class="o">=</span> <span class="n">MsgSend</span><span class="p">(</span><span class="n">objcclass</span><span class="p">,</span> <span class="p">[</span><span class="n">Selector</span><span class="p">(</span><span class="s">&#39;new&#39;</span><span class="p">),</span> <span class="n">Selector</span><span class="p">(</span><span class="s">&#39;httpsConnection&#39;</span><span class="p">)])</span>
+    <span class="k">print</span> <span class="n">msg2</span>   
+    <span class="n">msg4</span> <span class="o">=</span> <span class="n">MsgSend</span><span class="p">(</span><span class="n">objcclass</span><span class="p">,</span> <span class="p">[</span><span class="n">Selector</span><span class="p">(</span><span class="s">&#39;alloc&#39;</span><span class="p">),</span> <span class="n">Selector</span><span class="p">(</span><span class="s">&#39;init&#39;</span><span class="p">)])</span>
+    <span class="k">print</span> <span class="n">msg4</span>
+     
+    <span class="n">msg3</span> <span class="o">=</span> <span class="n">MsgSend</span><span class="o">.</span><span class="n">create_from_msgsend</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">sel1</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">msg3</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

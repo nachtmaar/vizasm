@@ -1,0 +1,176 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm.model.objc.function.FunctionInterface &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vizasm.model.objc.function.FunctionInterface</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 07.08.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<div class="viewcode-block" id="FunctionInterface"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.FunctionInterface.FunctionInterface">[docs]</a><span class="k">class</span> <span class="nc">FunctionInterface</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Interface for a function.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    _is_static: bool</span>
+<span class="sd">        check if the function is static </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">is_static</span> <span class="o">=</span> <span class="bp">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_static</span> <span class="o">=</span> <span class="n">is_static</span>
+
+<div class="viewcode-block" id="FunctionInterface.get_is_static"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.FunctionInterface.FunctionInterface.get_is_static">[docs]</a>    <span class="k">def</span> <span class="nf">get_is_static</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_static</span>
+</div>
+<div class="viewcode-block" id="FunctionInterface.set_is_static"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.FunctionInterface.FunctionInterface.set_is_static">[docs]</a>    <span class="k">def</span> <span class="nf">set_is_static</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_static</span> <span class="o">=</span> <span class="n">value</span>
+</div>
+    <span class="n">is_static</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_is_static</span><span class="p">,</span> <span class="n">set_is_static</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;_is_static(bool) -- check if the function is static&quot;</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Use to iterate over the function arguments &#39;&#39;&#39;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Get the number of arguments the function has &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cnt_has_arguments</span><span class="p">()</span>
+    
+<div class="viewcode-block" id="FunctionInterface.get_arguments"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.FunctionInterface.FunctionInterface.get_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">get_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get the arguments.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        arguments: list&lt;object&gt;</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    </div>
+<div class="viewcode-block" id="FunctionInterface.get_function_name"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.FunctionInterface.FunctionInterface.get_function_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_function_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Get the function name &#39;&#39;&#39;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    </div>
+<div class="viewcode-block" id="FunctionInterface.is_c_function"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.FunctionInterface.FunctionInterface.is_c_function">[docs]</a>    <span class="k">def</span> <span class="nf">is_c_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Returns if the function is a c function &#39;&#39;&#39;</span>
+        <span class="kn">from</span> <span class="nn">vizasm.model.objc.function.Function</span> <span class="kn">import</span> <span class="n">Function</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Function</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="FunctionInterface.is_objc_function"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.FunctionInterface.FunctionInterface.is_objc_function">[docs]</a>    <span class="k">def</span> <span class="nf">is_objc_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Returns if the function is an objective c function &#39;&#39;&#39;</span>
+        <span class="kn">from</span> <span class="nn">vizasm.model.objc.function.MsgSend</span> <span class="kn">import</span> <span class="n">MsgSend</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">MsgSend</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="FunctionInterface.cnt_needs_arguments"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.FunctionInterface.FunctionInterface.cnt_needs_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">cnt_needs_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Returns the number of arguments the function needs &#39;&#39;&#39;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    </div>
+<div class="viewcode-block" id="FunctionInterface.cnt_has_arguments"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.FunctionInterface.FunctionInterface.cnt_has_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">cnt_has_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Returns the number of arguments the function has &#39;&#39;&#39;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    </div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="FunctionInterface.is_function"><a class="viewcode-back" href="../../../../../vizasm.model.objc.Function.html#vizasm.model.objc.function.FunctionInterface.FunctionInterface.is_function">[docs]</a>    <span class="k">def</span> <span class="nf">is_function</span><span class="p">(</span><span class="n">function</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Check if the given `function` is a subclass of `FunctionInterface` &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">FunctionInterface</span><span class="p">)</span>
+    
+    
+        </div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,868 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm_networkx Package &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">vizasm_networkx Package</a><ul>
+<li><a class="reference internal" href="#module-vizasm.vizasm_networkx.AddMethodCallToGraphInterface"><tt class="docutils literal"><span class="pre">AddMethodCallToGraphInterface</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.vizasm_networkx.AttributeDictInterface"><tt class="docutils literal"><span class="pre">AttributeDictInterface</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.vizasm_networkx.AttributeNodeInterface"><tt class="docutils literal"><span class="pre">AttributeNodeInterface</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.vizasm_networkx.GexfConstants"><tt class="docutils literal"><span class="pre">GexfConstants</span></tt> Module</a><ul>
+<li><a class="reference internal" href="#see-also">See Also</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.vizasm_networkx.Graph"><tt class="docutils literal"><span class="pre">Graph</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.vizasm_networkx.GraphUtil"><tt class="docutils literal"><span class="pre">GraphUtil</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.vizasm_networkx.NodeAttributes"><tt class="docutils literal"><span class="pre">NodeAttributes</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/vizasm.vizasm_networkx.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="vizasm-networkx-package">
+<h1>vizasm_networkx Package<a class="headerlink" href="#vizasm-networkx-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-vizasm.vizasm_networkx.AddMethodCallToGraphInterface">
+<span id="addmethodcalltographinterface-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">AddMethodCallToGraphInterface</span></tt> Module<a class="headerlink" href="#module-vizasm.vizasm_networkx.AddMethodCallToGraphInterface" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 19.04.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.vizasm_networkx.AddMethodCallToGraphInterface.AddMethodCallToGraphInterface">
+<em class="property">class </em><tt class="descclassname">vizasm.vizasm_networkx.AddMethodCallToGraphInterface.</tt><tt class="descname">AddMethodCallToGraphInterface</tt><a class="reference internal" href="_modules/vizasm/vizasm_networkx/AddMethodCallToGraphInterface.html#AddMethodCallToGraphInterface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.vizasm_networkx.AddMethodCallToGraphInterface.AddMethodCallToGraphInterface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interface for adding a <cite>MethodCall</cite> to a graph.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.vizasm_networkx.AddMethodCallToGraphInterface.AddMethodCallToGraphInterface.add_to_graph" title="vizasm.vizasm_networkx.AddMethodCallToGraphInterface.AddMethodCallToGraphInterface.add_to_graph"><tt class="xref py py-obj docutils literal"><span class="pre">add_to_graph</span></tt></a>(graph[,&nbsp;...])</td>
+<td>Add the contents of the <cite>MethodCall</cite> to a graph.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.vizasm_networkx.AddMethodCallToGraphInterface.AddMethodCallToGraphInterface.add_to_graph">
+<tt class="descname">add_to_graph</tt><big>(</big><em>graph</em>, <em>methodcall_sender_attr_dict=None</em>, <em>methodcall_calls_attr_list_dict=None</em>, <em>sender_methodcall_edge_attr_dict=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/vizasm_networkx/AddMethodCallToGraphInterface.html#AddMethodCallToGraphInterface.add_to_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.vizasm_networkx.AddMethodCallToGraphInterface.AddMethodCallToGraphInterface.add_to_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add the contents of the <cite>MethodCall</cite> to a graph.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>graph</strong> : Graph</p>
+<p><strong>methodcall_sender_attr_dict: dict&lt;object&gt;, optional</strong> :</p>
+<blockquote>
+<div><p>dictionary of attributes for the sender of a <a href="#id1"><span class="problematic" id="id2">`</span></a>MethodCall</p>
+</div></blockquote>
+<p><strong>methodcall_calls_attr_list_dict: list&lt;dict&lt;object&gt;&gt;, optional</strong> :</p>
+<blockquote>
+<div><p>list of attribute dictionaries for the calls of a <cite>MethodCall
+each dict in the list is supposed for the corresponding call of the `MethodCall</cite></p>
+</div></blockquote>
+<p><strong>sender_methodcall_edge_attr_dict: dict&lt;object&gt; optional</strong> :</p>
+<blockquote class="last">
+<div><p>dictionary specifying the edge between the sender and the methodcall</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.vizasm_networkx.AttributeDictInterface">
+<span id="attributedictinterface-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">AttributeDictInterface</span></tt> Module<a class="headerlink" href="#module-vizasm.vizasm_networkx.AttributeDictInterface" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 30.07.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.vizasm_networkx.AttributeDictInterface.AttributeDictInterface">
+<em class="property">class </em><tt class="descclassname">vizasm.vizasm_networkx.AttributeDictInterface.</tt><tt class="descname">AttributeDictInterface</tt><a class="reference internal" href="_modules/vizasm/vizasm_networkx/AttributeDictInterface.html#AttributeDictInterface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.vizasm_networkx.AttributeDictInterface.AttributeDictInterface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interface for a class that can describe itself with a dict of attributes</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.vizasm_networkx.AttributeDictInterface.AttributeDictInterface.attribute_dictionary" title="vizasm.vizasm_networkx.AttributeDictInterface.AttributeDictInterface.attribute_dictionary"><tt class="xref py py-obj docutils literal"><span class="pre">attribute_dictionary</span></tt></a>()</td>
+<td>Return dictionary of attributes</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.vizasm_networkx.AttributeDictInterface.AttributeDictInterface.attribute_dictionary">
+<tt class="descname">attribute_dictionary</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/vizasm_networkx/AttributeDictInterface.html#AttributeDictInterface.attribute_dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.vizasm_networkx.AttributeDictInterface.AttributeDictInterface.attribute_dictionary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return dictionary of attributes</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.vizasm_networkx.AttributeNodeInterface">
+<span id="attributenodeinterface-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">AttributeNodeInterface</span></tt> Module<a class="headerlink" href="#module-vizasm.vizasm_networkx.AttributeNodeInterface" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 09.06.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface">
+<em class="property">class </em><tt class="descclassname">vizasm.vizasm_networkx.AttributeNodeInterface.</tt><tt class="descname">AttributeNodeInterface</tt><a class="reference internal" href="_modules/vizasm/vizasm_networkx/AttributeNodeInterface.html#AttributeNodeInterface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interface for customizing a node in the gexf file format</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>__gexf_viz_attr_dict: dict</strong> :</p>
+<blockquote class="last">
+<div><p>dictionary holding the specified attributes of the viz extension</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><tt class="xref py py-obj docutils literal"><span class="pre">http</span></tt></dt>
+<dd>//gexf.net/format/viz.html</dd>
+</dl>
+</div>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.get_gexf_viz_attr_dict" title="vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.get_gexf_viz_attr_dict"><tt class="xref py py-obj docutils literal"><span class="pre">get_gexf_viz_attr_dict</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.get_size" title="vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.get_size"><tt class="xref py py-obj docutils literal"><span class="pre">get_size</span></tt></a>()</td>
+<td>Returns the subdictionary with the size key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.get_viz_color_dict" title="vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.get_viz_color_dict"><tt class="xref py py-obj docutils literal"><span class="pre">get_viz_color_dict</span></tt></a>()</td>
+<td>Returns the subdictionary with the color key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.node_color_blue" title="vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.node_color_blue"><tt class="xref py py-obj docutils literal"><span class="pre">node_color_blue</span></tt></a>()</td>
+<td>Blue part of rgb color</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.node_color_green" title="vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.node_color_green"><tt class="xref py py-obj docutils literal"><span class="pre">node_color_green</span></tt></a>()</td>
+<td>Green part of rgb color</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.node_color_red" title="vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.node_color_red"><tt class="xref py py-obj docutils literal"><span class="pre">node_color_red</span></tt></a>()</td>
+<td>Red part of rgb color</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.node_color_transparency" title="vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.node_color_transparency"><tt class="xref py py-obj docutils literal"><span class="pre">node_color_transparency</span></tt></a>()</td>
+<td>Transparency of the node</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.node_size" title="vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.node_size"><tt class="xref py py-obj docutils literal"><span class="pre">node_size</span></tt></a>()</td>
+<td>Node Size</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.set_gexf_viz_attr_dict" title="vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.set_gexf_viz_attr_dict"><tt class="xref py py-obj docutils literal"><span class="pre">set_gexf_viz_attr_dict</span></tt></a>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.get_gexf_viz_attr_dict">
+<tt class="descname">get_gexf_viz_attr_dict</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/vizasm_networkx/AttributeNodeInterface.html#AttributeNodeInterface.get_gexf_viz_attr_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.get_gexf_viz_attr_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.get_size">
+<tt class="descname">get_size</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/vizasm_networkx/AttributeNodeInterface.html#AttributeNodeInterface.get_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.get_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the subdictionary with the size key keeping structure of the dictionary</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.get_viz_color_dict">
+<tt class="descname">get_viz_color_dict</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/vizasm_networkx/AttributeNodeInterface.html#AttributeNodeInterface.get_viz_color_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.get_viz_color_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the subdictionary with the color key keeping structure of the dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.gexf_viz_attr_dict">
+<tt class="descname">gexf_viz_attr_dict</tt><a class="headerlink" href="#vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.gexf_viz_attr_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>__gexf_viz_attr_dict: dict &#8211; dictionary holding the specified attributes of the viz extension</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.node_color_blue">
+<tt class="descname">node_color_blue</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/vizasm_networkx/AttributeNodeInterface.html#AttributeNodeInterface.node_color_blue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.node_color_blue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Blue part of rgb color</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>blue: int</strong> :</p>
+<blockquote class="last">
+<div><p>b in {0, 1, ..., 255}</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.node_color_green">
+<tt class="descname">node_color_green</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/vizasm_networkx/AttributeNodeInterface.html#AttributeNodeInterface.node_color_green"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.node_color_green" title="Permalink to this definition">¶</a></dt>
+<dd><p>Green part of rgb color</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>green: int</strong> :</p>
+<blockquote class="last">
+<div><p>g in {0, 1, ..., 255}</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.node_color_red">
+<tt class="descname">node_color_red</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/vizasm_networkx/AttributeNodeInterface.html#AttributeNodeInterface.node_color_red"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.node_color_red" title="Permalink to this definition">¶</a></dt>
+<dd><p>Red part of rgb color</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>red: int</strong> :</p>
+<blockquote class="last">
+<div><p>r in {0, 1, ..., 255}</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.node_color_transparency">
+<tt class="descname">node_color_transparency</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/vizasm_networkx/AttributeNodeInterface.html#AttributeNodeInterface.node_color_transparency"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.node_color_transparency" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transparency of the node</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>transparancy: double</strong> :</p>
+<blockquote class="last">
+<div><p>t in [0, 1]</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.node_size">
+<tt class="descname">node_size</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/vizasm_networkx/AttributeNodeInterface.html#AttributeNodeInterface.node_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.node_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Node Size</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>size: double</strong> :</p>
+<blockquote class="last">
+<div><p>default is 1.0</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.set_gexf_viz_attr_dict">
+<tt class="descname">set_gexf_viz_attr_dict</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/vizasm_networkx/AttributeNodeInterface.html#AttributeNodeInterface.set_gexf_viz_attr_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.set_gexf_viz_attr_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.vizasm_networkx.GexfConstants">
+<span id="gexfconstants-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">GexfConstants</span></tt> Module<a class="headerlink" href="#module-vizasm.vizasm_networkx.GexfConstants" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 28.07.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<p>Holds constants for the gexf file format and the viz extension.</p>
+<div class="section" id="see-also">
+<h3>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://gexf.net/format/viz.html">http://gexf.net/format/viz.html</a></p>
+</div>
+</div>
+<div class="section" id="module-vizasm.vizasm_networkx.Graph">
+<span id="graph-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">Graph</span></tt> Module<a class="headerlink" href="#module-vizasm.vizasm_networkx.Graph" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 19.10.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.vizasm_networkx.Graph.Graph">
+<em class="property">class </em><tt class="descclassname">vizasm.vizasm_networkx.Graph.</tt><tt class="descname">Graph</tt><big>(</big><em>data=None</em>, <em>**attr</em><big>)</big><a class="reference internal" href="_modules/vizasm/vizasm_networkx/Graph.html#Graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.vizasm_networkx.Graph.Graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">networkx.classes.multidigraph.MultiDiGraph</span></tt></p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.vizasm_networkx.Graph.Graph.add_attributes" title="vizasm.vizasm_networkx.Graph.Graph.add_attributes"><tt class="xref py py-obj docutils literal"><span class="pre">add_attributes</span></tt></a>(n,&nbsp;attribs)</td>
+<td>Add the attribute from the dictionary for <cite>Node</cite> n.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_cycle</span></tt>(nodes,&nbsp;**attr)</td>
+<td>Add a cycle.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_edge</span></tt>(u,&nbsp;v[,&nbsp;key,&nbsp;attr_dict])</td>
+<td>Add an edge between u and v.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_edges_from</span></tt>(ebunch[,&nbsp;attr_dict])</td>
+<td>Add all the edges in ebunch.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.vizasm_networkx.Graph.Graph.add_node" title="vizasm.vizasm_networkx.Graph.Graph.add_node"><tt class="xref py py-obj docutils literal"><span class="pre">add_node</span></tt></a>(n[,&nbsp;attr_dict])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_nodes_from</span></tt>(nodes,&nbsp;**attr)</td>
+<td>Add multiple nodes.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_path</span></tt>(nodes,&nbsp;**attr)</td>
+<td>Add a path.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_star</span></tt>(nodes,&nbsp;**attr)</td>
+<td>Add a star.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_weighted_edges_from</span></tt>(ebunch[,&nbsp;weight])</td>
+<td>Add all the edges in ebunch as weighted edges with specified weights.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">adjacency_iter</span></tt>()</td>
+<td>Return an iterator of (node, adjacency dict) tuples for all nodes.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">adjacency_list</span></tt>()</td>
+<td>Return an adjacency list representation of the graph.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">clear</span></tt>()</td>
+<td>Remove all nodes and edges from the graph.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">copy</span></tt>()</td>
+<td>Return a copy of the graph.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">degree</span></tt>([nbunch,&nbsp;weight])</td>
+<td>Return the degree of a node or nodes.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">degree_iter</span></tt>([nbunch,&nbsp;weight])</td>
+<td>Return an iterator for (node, degree).</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">edges</span></tt>([nbunch,&nbsp;data,&nbsp;keys])</td>
+<td>Return a list of edges.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">edges_iter</span></tt>([nbunch,&nbsp;data,&nbsp;keys])</td>
+<td>Return an iterator over the edges.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_edge_data</span></tt>(u,&nbsp;v[,&nbsp;key,&nbsp;default])</td>
+<td>Return the attribute dictionary associated with edge (u,v).</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">has_edge</span></tt>(u,&nbsp;v[,&nbsp;key])</td>
+<td>Return True if the graph has an edge between nodes u and v.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">has_node</span></tt>(n)</td>
+<td>Return True if the graph contains the node n.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">has_predecessor</span></tt>(u,&nbsp;v)</td>
+<td>Return True if node u has predecessor v.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">has_successor</span></tt>(u,&nbsp;v)</td>
+<td>Return True if node u has successor v.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">in_degree</span></tt>([nbunch,&nbsp;weight])</td>
+<td>Return the in-degree of a node or nodes.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">in_degree_iter</span></tt>([nbunch,&nbsp;weight])</td>
+<td>Return an iterator for (node, in-degree).</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">in_edges</span></tt>([nbunch,&nbsp;keys,&nbsp;data])</td>
+<td>Return a list of the incoming edges.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">in_edges_iter</span></tt>([nbunch,&nbsp;data,&nbsp;keys])</td>
+<td>Return an iterator over the incoming edges.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_directed</span></tt>()</td>
+<td>Return True if graph is directed, False otherwise.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_multigraph</span></tt>()</td>
+<td>Return True if graph is a multigraph, False otherwise.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">nbunch_iter</span></tt>([nbunch])</td>
+<td>Return an iterator of nodes contained in nbunch that are also in the graph.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">neighbors</span></tt>(n)</td>
+<td>Return a list of successor nodes of n.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">neighbors_iter</span></tt>(n)</td>
+<td>Return an iterator over successor nodes of n.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">nodes</span></tt>([data])</td>
+<td>Return a list of the nodes in the graph.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">nodes_iter</span></tt>([data])</td>
+<td>Return an iterator over the nodes.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">nodes_with_selfloops</span></tt>()</td>
+<td>Return a list of nodes with self loops.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">number_of_edges</span></tt>([u,&nbsp;v])</td>
+<td>Return the number of edges between two nodes.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">number_of_nodes</span></tt>()</td>
+<td>Return the number of nodes in the graph.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">number_of_selfloops</span></tt>()</td>
+<td>Return the number of selfloop edges.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">order</span></tt>()</td>
+<td>Return the number of nodes in the graph.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">out_degree</span></tt>([nbunch,&nbsp;weight])</td>
+<td>Return the out-degree of a node or nodes.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">out_degree_iter</span></tt>([nbunch,&nbsp;weight])</td>
+<td>Return an iterator for (node, out-degree).</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">out_edges</span></tt>([nbunch,&nbsp;keys,&nbsp;data])</td>
+<td>Return a list of the outgoing edges.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">out_edges_iter</span></tt>([nbunch,&nbsp;data,&nbsp;keys])</td>
+<td>Return an iterator over the edges.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">predecessors</span></tt>(n)</td>
+<td>Return a list of predecessor nodes of n.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">predecessors_iter</span></tt>(n)</td>
+<td>Return an iterator over predecessor nodes of n.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">remove_edge</span></tt>(u,&nbsp;v[,&nbsp;key])</td>
+<td>Remove an edge between u and v.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">remove_edges_from</span></tt>(ebunch)</td>
+<td>Remove all edges specified in ebunch.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">remove_node</span></tt>(n)</td>
+<td>Remove node n.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">remove_nodes_from</span></tt>(nbunch)</td>
+<td>Remove multiple nodes.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">reverse</span></tt>([copy])</td>
+<td>Return the reverse of the graph.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">selfloop_edges</span></tt>([data,&nbsp;keys])</td>
+<td>Return a list of selfloop edges.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">size</span></tt>([weight])</td>
+<td>Return the number of edges.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">subgraph</span></tt>(nbunch)</td>
+<td>Return the subgraph induced on nodes in nbunch.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">successors</span></tt>(n)</td>
+<td>Return a list of successor nodes of n.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">successors_iter</span></tt>(n)</td>
+<td>Return an iterator over successor nodes of n.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">to_directed</span></tt>()</td>
+<td>Return a directed copy of the graph.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">to_undirected</span></tt>([reciprocal])</td>
+<td>Return an undirected representation of the digraph.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.vizasm_networkx.Graph.Graph.add_attributes">
+<tt class="descname">add_attributes</tt><big>(</big><em>n</em>, <em>attribs</em><big>)</big><a class="reference internal" href="_modules/vizasm/vizasm_networkx/Graph.html#Graph.add_attributes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.vizasm_networkx.Graph.Graph.add_attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add the attribute from the dictionary for <cite>Node</cite> n.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>n: Node</strong> :</p>
+<p class="last"><strong>attribs: dict</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.vizasm_networkx.Graph.Graph.add_node">
+<tt class="descname">add_node</tt><big>(</big><em>n</em>, <em>attr_dict=None</em>, <em>**attr</em><big>)</big><a class="reference internal" href="_modules/vizasm/vizasm_networkx/Graph.html#Graph.add_node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.vizasm_networkx.Graph.Graph.add_node" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.vizasm_networkx.GraphUtil">
+<span id="graphutil-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">GraphUtil</span></tt> Module<a class="headerlink" href="#module-vizasm.vizasm_networkx.GraphUtil" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 28.07.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.vizasm_networkx.GraphUtil.GraphUtil">
+<em class="property">class </em><tt class="descclassname">vizasm.vizasm_networkx.GraphUtil.</tt><tt class="descname">GraphUtil</tt><a class="reference internal" href="_modules/vizasm/vizasm_networkx/GraphUtil.html#GraphUtil"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.vizasm_networkx.GraphUtil.GraphUtil" title="Permalink to this definition">¶</a></dt>
+<dd><p>Utility for a graph</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.vizasm_networkx.GraphUtil.GraphUtil.edge_weight_attr_dict" title="vizasm.vizasm_networkx.GraphUtil.GraphUtil.edge_weight_attr_dict"><tt class="xref py py-obj docutils literal"><span class="pre">edge_weight_attr_dict</span></tt></a>(weight)</td>
+<td>Returns a dictionary specifying the weight of an edge.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.vizasm_networkx.GraphUtil.GraphUtil.get_size" title="vizasm.vizasm_networkx.GraphUtil.GraphUtil.get_size"><tt class="xref py py-obj docutils literal"><span class="pre">get_size</span></tt></a>(viz_dict)</td>
+<td>Returns the subdictionary with the size key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.vizasm_networkx.GraphUtil.GraphUtil.get_viz_color_dict" title="vizasm.vizasm_networkx.GraphUtil.GraphUtil.get_viz_color_dict"><tt class="xref py py-obj docutils literal"><span class="pre">get_viz_color_dict</span></tt></a>(viz_dict)</td>
+<td>Returns the subdictionary with the color key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.vizasm_networkx.GraphUtil.GraphUtil.subdict_kstruct_with_key" title="vizasm.vizasm_networkx.GraphUtil.GraphUtil.subdict_kstruct_with_key"><tt class="xref py py-obj docutils literal"><span class="pre">subdict_kstruct_with_key</span></tt></a>(attr_dict,&nbsp;key)</td>
+<td>Return a dictionary only containing the entry with the specified key, but keeping the structure.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.vizasm_networkx.GraphUtil.GraphUtil.subdict_kstruct_with_keys" title="vizasm.vizasm_networkx.GraphUtil.GraphUtil.subdict_kstruct_with_keys"><tt class="xref py py-obj docutils literal"><span class="pre">subdict_kstruct_with_keys</span></tt></a>(attr_dict,&nbsp;key_list)</td>
+<td>Return a dictionary only containing the entry with the specified keys, but keeping the structure.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.vizasm_networkx.GraphUtil.GraphUtil.update_color" title="vizasm.vizasm_networkx.GraphUtil.GraphUtil.update_color"><tt class="xref py py-obj docutils literal"><span class="pre">update_color</span></tt></a>(viz_dict,&nbsp;update_dict)</td>
+<td>Update the color without overwriting/erasing the size attribute</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.vizasm_networkx.GraphUtil.GraphUtil.viz_dict" title="vizasm.vizasm_networkx.GraphUtil.GraphUtil.viz_dict"><tt class="xref py py-obj docutils literal"><span class="pre">viz_dict</span></tt></a>([transparency,&nbsp;red,&nbsp;green,&nbsp;blue,&nbsp;size])</td>
+<td>Returns an attribute dictionary that can be directly used for a node in networkx.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.vizasm_networkx.GraphUtil.GraphUtil.write_gexf" title="vizasm.vizasm_networkx.GraphUtil.GraphUtil.write_gexf"><tt class="xref py py-obj docutils literal"><span class="pre">write_gexf</span></tt></a>(graph,&nbsp;graph_filepath)</td>
+<td>Write the graph to the specified file</td>
+</tr>
+</tbody>
+</table>
+<dl class="staticmethod">
+<dt id="vizasm.vizasm_networkx.GraphUtil.GraphUtil.edge_weight_attr_dict">
+<em class="property">static </em><tt class="descname">edge_weight_attr_dict</tt><big>(</big><em>weight</em><big>)</big><a class="reference internal" href="_modules/vizasm/vizasm_networkx/GraphUtil.html#GraphUtil.edge_weight_attr_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.vizasm_networkx.GraphUtil.GraphUtil.edge_weight_attr_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary specifying the weight of an edge.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>weight: float</strong> :</p>
+<blockquote>
+<div><p>weight of the edge</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first last"><strong>edge_attr_dict: dict</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="vizasm.vizasm_networkx.GraphUtil.GraphUtil.get_size">
+<em class="property">static </em><tt class="descname">get_size</tt><big>(</big><em>viz_dict</em><big>)</big><a class="reference internal" href="_modules/vizasm/vizasm_networkx/GraphUtil.html#GraphUtil.get_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.vizasm_networkx.GraphUtil.GraphUtil.get_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the subdictionary with the size key keeping structure of the dictionary</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="vizasm.vizasm_networkx.GraphUtil.GraphUtil.get_viz_color_dict">
+<em class="property">static </em><tt class="descname">get_viz_color_dict</tt><big>(</big><em>viz_dict</em><big>)</big><a class="reference internal" href="_modules/vizasm/vizasm_networkx/GraphUtil.html#GraphUtil.get_viz_color_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.vizasm_networkx.GraphUtil.GraphUtil.get_viz_color_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the subdictionary with the color key keeping structure of the dictionary</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="vizasm.vizasm_networkx.GraphUtil.GraphUtil.subdict_kstruct_with_key">
+<em class="property">static </em><tt class="descname">subdict_kstruct_with_key</tt><big>(</big><em>attr_dict</em>, <em>key</em><big>)</big><a class="reference internal" href="_modules/vizasm/vizasm_networkx/GraphUtil.html#GraphUtil.subdict_kstruct_with_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.vizasm_networkx.GraphUtil.GraphUtil.subdict_kstruct_with_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a dictionary only containing the entry with the specified key,
+but keeping the structure. 
+Meaning that structure above the key will be still present in the returned subdict.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>attr_dict: dict</strong> :</p>
+<p class="last"><strong>key: hashable</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="vizasm.vizasm_networkx.GraphUtil.GraphUtil.subdict_kstruct_with_keys">
+<em class="property">static </em><tt class="descname">subdict_kstruct_with_keys</tt><big>(</big><em>attr_dict</em>, <em>key_list</em><big>)</big><a class="reference internal" href="_modules/vizasm/vizasm_networkx/GraphUtil.html#GraphUtil.subdict_kstruct_with_keys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.vizasm_networkx.GraphUtil.GraphUtil.subdict_kstruct_with_keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a dictionary only containing the entry with the specified keys,
+but keeping the structure. 
+Meaning that structure above the keys will be still present in the returned subdict.</p>
+<p>If no keys are given, an empty dict will be returned.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>attr_dict: dict</strong> :</p>
+<p class="last"><strong>key_list: list</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="vizasm.vizasm_networkx.GraphUtil.GraphUtil.update_color">
+<em class="property">static </em><tt class="descname">update_color</tt><big>(</big><em>viz_dict</em>, <em>update_dict</em><big>)</big><a class="reference internal" href="_modules/vizasm/vizasm_networkx/GraphUtil.html#GraphUtil.update_color"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.vizasm_networkx.GraphUtil.GraphUtil.update_color" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the color without overwriting/erasing the size attribute</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="vizasm.vizasm_networkx.GraphUtil.GraphUtil.viz_dict">
+<em class="property">static </em><tt class="descname">viz_dict</tt><big>(</big><em>transparency=1.0</em>, <em>red=255</em>, <em>green=219</em>, <em>blue=73</em>, <em>size=1.0</em><big>)</big><a class="reference internal" href="_modules/vizasm/vizasm_networkx/GraphUtil.html#GraphUtil.viz_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.vizasm_networkx.GraphUtil.GraphUtil.viz_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an attribute dictionary that can be directly used for a node in networkx.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>transparency: double</strong> :</p>
+<blockquote>
+<div><p>value in [0, 1]</p>
+</div></blockquote>
+<p><strong>red, green, blue: int, optional (default is yellow)</strong> :</p>
+<blockquote>
+<div><p>value in {0, ..., 255}</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>dict: dict</strong> :</p>
+<blockquote class="last">
+<div><p>dictionary of attributes according to the gexf extension Visualization 
+Example: {&#8216;viz&#8217;: {&#8216;color&#8217;: {&#8216;a&#8217;: 1.0, &#8216;r&#8217;: 0, &#8216;b&#8217;: 0, &#8216;g&#8217;: 0}, &#8216;size&#8217;: 1.0}}</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="vizasm.vizasm_networkx.GraphUtil.GraphUtil.write_gexf">
+<em class="property">static </em><tt class="descname">write_gexf</tt><big>(</big><em>graph</em>, <em>graph_filepath</em><big>)</big><a class="reference internal" href="_modules/vizasm/vizasm_networkx/GraphUtil.html#GraphUtil.write_gexf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.vizasm_networkx.GraphUtil.GraphUtil.write_gexf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write the graph to the specified file</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.vizasm_networkx.NodeAttributes">
+<span id="nodeattributes-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">NodeAttributes</span></tt> Module<a class="headerlink" href="#module-vizasm.vizasm_networkx.NodeAttributes" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 27.07.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<p>This module describes the attributes a node has in the graph (prefixed with NATTR) 
+as well as the values of some attributes (prefixed with NVAL).</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

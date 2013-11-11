@@ -1,0 +1,193 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="../../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 10.04.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.Resetable</span> <span class="kn">import</span> <span class="n">Resetable</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.x86.ParseUtil_x86</span> <span class="kn">import</span> <span class="n">ParseUtil_x86</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.arguments.Selector</span> <span class="kn">import</span> <span class="n">Selector</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.function.MsgSend</span> <span class="kn">import</span> <span class="n">MsgSend</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.object.nsobject.objcclass.ObjcClass</span> <span class="kn">import</span> <span class="n">ObjcClass</span>
+<span class="kn">from</span> <span class="nn">vizasm.util</span> <span class="kn">import</span> <span class="n">Util</span>
+
+
+<div class="viewcode-block" id="IVarRefLookup"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.objcruntime.html#vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup.IVarRefLookup">[docs]</a><span class="k">class</span> <span class="nc">IVarRefLookup</span><span class="p">(</span><span class="nb">object</span><span class="p">,</span> <span class="n">Resetable</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    Models the instance variable cache of a class.</span>
+<span class="sd">    </span>
+<span class="sd">    A dictionary helper for the `IVar` class to look up the `ivar_ref` from an `ivar_class`.</span>
+<span class="sd">    </span>
+<span class="sd">    Cause every time a message is sent to an ivar_ref like Object3, an ivar_class like AppDelegate.obj3 is read,</span>
+<span class="sd">    </span>
+<span class="sd">    but this will create a new ivar_class and the ivar_ref has to be looked up in this class.</span>
+<span class="sd">    </span>
+<span class="sd">    The ivar_ref will be stored after a VarAssignment is read which links to an ivar_class. At this moment, the ivar_ref</span>
+<span class="sd">     </span>
+<span class="sd">    seems to be stored in the return register.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    __ivar_ref_dict: dict</span>
+<span class="sd">        dictionary to look up the ivar_ref from an ivar_class (see IVar) </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+<span class="c">#####################################################################################</span>
+<span class="c"># Resetable                                                                         #</span>
+<span class="c">#####################################################################################    </span>
+
+<div class="viewcode-block" id="IVarRefLookup.reset"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.objcruntime.html#vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup.IVarRefLookup.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__ivar_ref_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        
+<span class="c">#####################################################################################</span>
+<span class="c"># Implementation                                                                    #</span>
+<span class="c">#####################################################################################</span>
+</div>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">Util</span><span class="o">.</span><span class="n">pretty_format_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ivar_ref_dict</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">(</span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">Util</span><span class="o">.</span><span class="n">pretty_format_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ivar_ref_dict</span><span class="p">,</span> <span class="bp">True</span><span class="p">))</span>
+    
+<div class="viewcode-block" id="IVarRefLookup.get_ivar_ref_dict"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.objcruntime.html#vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup.IVarRefLookup.get_ivar_ref_dict">[docs]</a>    <span class="k">def</span> <span class="nf">get_ivar_ref_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ivar_ref_dict</span>
+</div>
+<div class="viewcode-block" id="IVarRefLookup.set_ivar_ref_dict"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.objcruntime.html#vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup.IVarRefLookup.set_ivar_ref_dict">[docs]</a>    <span class="k">def</span> <span class="nf">set_ivar_ref_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__ivar_ref_dict</span> <span class="o">=</span> <span class="n">value</span>
+</div>
+    <span class="n">ivar_ref_dict</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_ivar_ref_dict</span><span class="p">,</span> <span class="n">set_ivar_ref_dict</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;__ivar_ref_dict(dict) -- dictionary to look up the ivar_ref from an ivar_class (see IVar)&quot;</span><span class="p">)</span>
+    
+<div class="viewcode-block" id="IVarRefLookup.set_ivar_ref"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.objcruntime.html#vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup.IVarRefLookup.set_ivar_ref">[docs]</a>    <span class="k">def</span> <span class="nf">set_ivar_ref</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ivar_class</span><span class="p">,</span> <span class="n">ivar_ref</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Link ivar_class to ivar_ref &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_ivar_ref_dict</span><span class="p">()[</span><span class="n">ivar_class</span><span class="p">]</span> <span class="o">=</span> <span class="n">ivar_ref</span>
+        </div>
+<div class="viewcode-block" id="IVarRefLookup.get_ivar_ref"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.objcruntime.html#vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup.IVarRefLookup.get_ivar_ref">[docs]</a>    <span class="k">def</span> <span class="nf">get_ivar_ref</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ivar_class</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Get the ivar_ref for the ivar_class </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_ivar_ref_dict</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="n">ivar_class</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">value</span>
+        <span class="k">return</span> <span class="bp">None</span>
+        </div></div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.x86.Cpu_x86</span> <span class="kn">import</span> <span class="n">Cpu_x86</span>
+    <span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.x86.Register_x86</span> <span class="kn">import</span> <span class="n">Register_x86</span> <span class="k">as</span> <span class="n">reg</span>
+    <span class="n">cpu</span> <span class="o">=</span> <span class="n">Cpu_x86</span><span class="p">({})</span>
+    <span class="n">pu</span> <span class="o">=</span> <span class="n">ParseUtil_x86</span><span class="p">(</span><span class="n">cpu</span><span class="p">,</span> <span class="n">reg</span><span class="p">)</span>
+    <span class="n">il</span> <span class="o">=</span> <span class="n">IVarRefLookup</span><span class="p">()</span>
+    <span class="n">ivar_class</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_ivar</span><span class="p">(</span><span class="s">&#39;[ds:_OBJC_IVAR_$_AppDelegate.obj3] &#39;</span><span class="p">)</span>
+    <span class="n">ivar_ref</span> <span class="o">=</span> <span class="n">MsgSend</span><span class="p">(</span><span class="n">ObjcClass</span><span class="p">(</span><span class="s">&#39;Object3&#39;</span><span class="p">),</span> <span class="p">[</span><span class="n">Selector</span><span class="p">(</span><span class="s">&#39;alloc&#39;</span><span class="p">),</span> <span class="n">Selector</span><span class="p">(</span><span class="s">&#39;init&#39;</span><span class="p">)])</span>
+    <span class="n">il</span><span class="o">.</span><span class="n">set_ivar_ref</span><span class="p">(</span><span class="n">ivar_class</span><span class="p">,</span> <span class="n">ivar_ref</span><span class="p">)</span>
+    <span class="n">ivar_class2</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_ivar</span><span class="p">(</span><span class="s">&#39;[ds:_OBJC_IVAR_$_AppDelegate.obj3] &#39;</span><span class="p">)</span>
+    
+    <span class="k">print</span> <span class="s">&#39;an equal key should get the same ivar_ref&#39;</span>
+    <span class="k">print</span> <span class="n">il</span><span class="o">.</span><span class="n">get_ivar_ref</span><span class="p">(</span><span class="n">ivar_class2</span><span class="p">)</span> 
+    
+    <span class="k">print</span> <span class="s">&#39;hashes should be equal: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">ivar_class</span><span class="o">.</span><span class="n">__hash__</span><span class="p">()</span> <span class="o">==</span> <span class="n">ivar_class2</span><span class="o">.</span><span class="n">__hash__</span><span class="p">())</span>
+    
+    <span class="k">print</span> <span class="s">&#39;ivar lookup: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">il</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

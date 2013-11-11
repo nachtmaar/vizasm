@@ -1,0 +1,2494 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>filter Package &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">filter Package</a><ul>
+<li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">filter</span></tt> Package</a></li>
+<li><a class="reference internal" href="#module-vizasm.analysis.security.filter.BackgroundTasksFilter"><tt class="docutils literal"><span class="pre">BackgroundTasksFilter</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.analysis.security.filter.CFStreamSSLLevelFilter"><tt class="docutils literal"><span class="pre">CFStreamSSLLevelFilter</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.analysis.security.filter.CookiePolicyFilter"><tt class="docutils literal"><span class="pre">CookiePolicyFilter</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.analysis.security.filter.CustomFilter"><tt class="docutils literal"><span class="pre">CustomFilter</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.analysis.security.filter.DataProtectionFilter"><tt class="docutils literal"><span class="pre">DataProtectionFilter</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.analysis.security.filter.FormatStringFilter"><tt class="docutils literal"><span class="pre">FormatStringFilter</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.analysis.security.filter.FrameworkClassFilter"><tt class="docutils literal"><span class="pre">FrameworkClassFilter</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.analysis.security.filter.GeoLocationFilter"><tt class="docutils literal"><span class="pre">GeoLocationFilter</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.analysis.security.filter.IPCFilter"><tt class="docutils literal"><span class="pre">IPCFilter</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.analysis.security.filter.KeyChainFilter"><tt class="docutils literal"><span class="pre">KeyChainFilter</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.analysis.security.filter.NSStreamSSLLevelFilter"><tt class="docutils literal"><span class="pre">NSStreamSSLLevelFilter</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.analysis.security.filter.NSUserDefaultsFilter"><tt class="docutils literal"><span class="pre">NSUserDefaultsFilter</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.analysis.security.filter.RandomFuncFilter"><tt class="docutils literal"><span class="pre">RandomFuncFilter</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.analysis.security.filter.SQLiteFilter"><tt class="docutils literal"><span class="pre">SQLiteFilter</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.analysis.security.filter.SeatBeltFilter"><tt class="docutils literal"><span class="pre">SeatBeltFilter</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.analysis.security.filter.SecurityFilter"><tt class="docutils literal"><span class="pre">SecurityFilter</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.analysis.security.filter.UIPasteBoardFilter"><tt class="docutils literal"><span class="pre">UIPasteBoardFilter</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.analysis.security.filter.UntrustedSSLCertsFilter"><tt class="docutils literal"><span class="pre">UntrustedSSLCertsFilter</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/vizasm.analysis.security.filter.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="filter-package">
+<h1>filter Package<a class="headerlink" href="#filter-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">filter</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-vizasm.analysis.security.filter"></span></div>
+<div class="section" id="module-vizasm.analysis.security.filter.BackgroundTasksFilter">
+<span id="backgroundtasksfilter-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">BackgroundTasksFilter</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.security.filter.BackgroundTasksFilter" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 16.09.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.security.filter.BackgroundTasksFilter.BackgroundTasksFilter">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.security.filter.BackgroundTasksFilter.</tt><tt class="descname">BackgroundTasksFilter</tt><big>(</big><em>name=None</em>, <em>methodcall=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/BackgroundTasksFilter.html#BackgroundTasksFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.BackgroundTasksFilter.BackgroundTasksFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.security.filter.SecurityFilter.SecurityFilter</span></tt></a></p>
+<p>Check for background tasks.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_to_graph</span></tt>(graph[,&nbsp;...])</td>
+<td>This method adds the <cite>SecurityFilter</cite> to the graph and configures its attributes.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">attribute_dictionary</span></tt>()</td>
+<td>Merge viz attributes and filter description and return the dictionary</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_call</span></tt>()</td>
+<td>Filter on a method call.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_definition</span></tt>()</td>
+<td>Filter on the method definition.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_ios_filter</span></tt>()</td>
+<td>Return if <cite>SecurityFilters</cite> is only for iOS</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.filter.BackgroundTasksFilter.BackgroundTasksFilter.config_mac_filter" title="vizasm.analysis.security.filter.BackgroundTasksFilter.BackgroundTasksFilter.config_mac_filter"><tt class="xref py py-obj docutils literal"><span class="pre">config_mac_filter</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">description</span></tt>()</td>
+<td>The full description of the filter</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">filter</span></tt>()</td>
+<td>Filter the <cite>MethodCall</cite> according to the filter and replace the old one with the filtered one.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.BackgroundTasksFilter.BackgroundTasksFilter.filter_method_call" title="vizasm.analysis.security.filter.BackgroundTasksFilter.BackgroundTasksFilter.filter_method_call"><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_call</span></tt></a>(function)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_definition</span></tt>(method)</td>
+<td>Filter on the method definition.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_gexf_viz_attr_dict</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_methodcall</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_size</span></tt>()</td>
+<td>Returns the subdictionary with the size key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_viz_color_dict</span></tt>()</td>
+<td>Returns the subdictionary with the color key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_blue</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_green</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_red</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_transparency</span></tt>()</td>
+<td>Transparency of the node</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_size</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_gexf_viz_attr_dict</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_methodcall</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_name</span></tt>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.BackgroundTasksFilter.BackgroundTasksFilter.config_mac_filter">
+<tt class="descname">config_mac_filter</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/BackgroundTasksFilter.html#BackgroundTasksFilter.config_mac_filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.BackgroundTasksFilter.BackgroundTasksFilter.config_mac_filter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.BackgroundTasksFilter.BackgroundTasksFilter.filter_method_call">
+<tt class="descname">filter_method_call</tt><big>(</big><em>function</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/BackgroundTasksFilter.html#BackgroundTasksFilter.filter_method_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.BackgroundTasksFilter.BackgroundTasksFilter.filter_method_call" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.security.filter.CFStreamSSLLevelFilter">
+<span id="cfstreamssllevelfilter-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">CFStreamSSLLevelFilter</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.security.filter.CFStreamSSLLevelFilter" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 09.09.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.security.filter.CFStreamSSLLevelFilter.CFStreamSSLLevelFilter">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.security.filter.CFStreamSSLLevelFilter.</tt><tt class="descname">CFStreamSSLLevelFilter</tt><big>(</big><em>name=None</em>, <em>methodcall=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/CFStreamSSLLevelFilter.html#CFStreamSSLLevelFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.CFStreamSSLLevelFilter.CFStreamSSLLevelFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.security.filter.SecurityFilter.SecurityFilter</span></tt></a></p>
+<p>Check the SSL level of a CFStream.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_to_graph</span></tt>(graph[,&nbsp;...])</td>
+<td>This method adds the <cite>SecurityFilter</cite> to the graph and configures its attributes.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">attribute_dictionary</span></tt>()</td>
+<td>Merge viz attributes and filter description and return the dictionary</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_call</span></tt>()</td>
+<td>Filter on a method call.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_definition</span></tt>()</td>
+<td>Filter on the method definition.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_ios_filter</span></tt>()</td>
+<td>Return if <cite>SecurityFilters</cite> is only for iOS</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_mac_filter</span></tt>()</td>
+<td>Return if <cite>SecurityFilters</cite> is only for mac</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">description</span></tt>()</td>
+<td>The full description of the filter</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">filter</span></tt>()</td>
+<td>Filter the <cite>MethodCall</cite> according to the filter and replace the old one with the filtered one.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.CFStreamSSLLevelFilter.CFStreamSSLLevelFilter.filter_method_call" title="vizasm.analysis.security.filter.CFStreamSSLLevelFilter.CFStreamSSLLevelFilter.filter_method_call"><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_call</span></tt></a>(function)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_definition</span></tt>(method)</td>
+<td>Filter on the method definition.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_gexf_viz_attr_dict</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_methodcall</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_size</span></tt>()</td>
+<td>Returns the subdictionary with the size key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_viz_color_dict</span></tt>()</td>
+<td>Returns the subdictionary with the color key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_blue</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_green</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_red</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_transparency</span></tt>()</td>
+<td>Transparency of the node</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_size</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_gexf_viz_attr_dict</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_methodcall</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_name</span></tt>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="vizasm.analysis.security.filter.CFStreamSSLLevelFilter.CFStreamSSLLevelFilter.CFSTREAM_LEVELS">
+<tt class="descname">CFSTREAM_LEVELS</tt><em class="property"> = ['kCFStreamSocketSecurityLevelNone', 'kCFStreamSocketSecurityLevelTLSv1,', 'kCFStreamSocketSecurityLevelSSLv2', 'kCFStreamSocketSecurityLevelSSLv3', 'kCFStreamSocketSecurityLevelNegotiatedSSL']</em><a class="headerlink" href="#vizasm.analysis.security.filter.CFStreamSSLLevelFilter.CFStreamSSLLevelFilter.CFSTREAM_LEVELS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.CFStreamSSLLevelFilter.CFStreamSSLLevelFilter.filter_method_call">
+<tt class="descname">filter_method_call</tt><big>(</big><em>function</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/CFStreamSSLLevelFilter.html#CFStreamSSLLevelFilter.filter_method_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.CFStreamSSLLevelFilter.CFStreamSSLLevelFilter.filter_method_call" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.security.filter.CookiePolicyFilter">
+<span id="cookiepolicyfilter-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">CookiePolicyFilter</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.security.filter.CookiePolicyFilter" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 16.09.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.security.filter.CookiePolicyFilter.CookiePolicyFilter">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.security.filter.CookiePolicyFilter.</tt><tt class="descname">CookiePolicyFilter</tt><big>(</big><em>name=None</em>, <em>methodcall=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/CookiePolicyFilter.html#CookiePolicyFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.CookiePolicyFilter.CookiePolicyFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.security.filter.SecurityFilter.SecurityFilter</span></tt></a></p>
+<p>Check if a special cookie policy has been set</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_to_graph</span></tt>(graph[,&nbsp;...])</td>
+<td>This method adds the <cite>SecurityFilter</cite> to the graph and configures its attributes.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">attribute_dictionary</span></tt>()</td>
+<td>Merge viz attributes and filter description and return the dictionary</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_call</span></tt>()</td>
+<td>Filter on a method call.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_definition</span></tt>()</td>
+<td>Filter on the method definition.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_ios_filter</span></tt>()</td>
+<td>Return if <cite>SecurityFilters</cite> is only for iOS</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_mac_filter</span></tt>()</td>
+<td>Return if <cite>SecurityFilters</cite> is only for mac</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">description</span></tt>()</td>
+<td>The full description of the filter</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">filter</span></tt>()</td>
+<td>Filter the <cite>MethodCall</cite> according to the filter and replace the old one with the filtered one.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.CookiePolicyFilter.CookiePolicyFilter.filter_method_call" title="vizasm.analysis.security.filter.CookiePolicyFilter.CookiePolicyFilter.filter_method_call"><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_call</span></tt></a>(function)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_definition</span></tt>(method)</td>
+<td>Filter on the method definition.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_gexf_viz_attr_dict</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_methodcall</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_size</span></tt>()</td>
+<td>Returns the subdictionary with the size key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_viz_color_dict</span></tt>()</td>
+<td>Returns the subdictionary with the color key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_blue</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_green</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_red</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_transparency</span></tt>()</td>
+<td>Transparency of the node</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_size</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_gexf_viz_attr_dict</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_methodcall</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_name</span></tt>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="vizasm.analysis.security.filter.CookiePolicyFilter.CookiePolicyFilter.COOKIE_POLICIES">
+<tt class="descname">COOKIE_POLICIES</tt><em class="property"> = {0: 'NSHTTPCookieAcceptPolicyAlways', 1: 'NSHTTPCookieAcceptPolicyNever', 2: 'NSHTTPCookieAcceptPolicyOnlyFromMainDocumentDomain'}</em><a class="headerlink" href="#vizasm.analysis.security.filter.CookiePolicyFilter.CookiePolicyFilter.COOKIE_POLICIES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.CookiePolicyFilter.CookiePolicyFilter.filter_method_call">
+<tt class="descname">filter_method_call</tt><big>(</big><em>function</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/CookiePolicyFilter.html#CookiePolicyFilter.filter_method_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.CookiePolicyFilter.CookiePolicyFilter.filter_method_call" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.security.filter.CustomFilter">
+<span id="customfilter-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">CustomFilter</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.security.filter.CustomFilter" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 30.10.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.security.filter.CustomFilter.CustomFilter">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.security.filter.CustomFilter.</tt><tt class="descname">CustomFilter</tt><big>(</big><em>name=None</em>, <em>methodcall=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/CustomFilter.html#CustomFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.CustomFilter.CustomFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.security.filter.SecurityFilter.SecurityFilter</span></tt></a></p>
+<p>Template for a custom filter</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_to_graph</span></tt>(graph[,&nbsp;...])</td>
+<td>This method adds the <cite>SecurityFilter</cite> to the graph and configures its attributes.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">attribute_dictionary</span></tt>()</td>
+<td>Merge viz attributes and filter description and return the dictionary</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.CustomFilter.CustomFilter.config_filter_method_call" title="vizasm.analysis.security.filter.CustomFilter.CustomFilter.config_filter_method_call"><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_call</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.filter.CustomFilter.CustomFilter.config_filter_method_definition" title="vizasm.analysis.security.filter.CustomFilter.CustomFilter.config_filter_method_definition"><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_definition</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.CustomFilter.CustomFilter.config_ios_filter" title="vizasm.analysis.security.filter.CustomFilter.CustomFilter.config_ios_filter"><tt class="xref py py-obj docutils literal"><span class="pre">config_ios_filter</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.filter.CustomFilter.CustomFilter.config_mac_filter" title="vizasm.analysis.security.filter.CustomFilter.CustomFilter.config_mac_filter"><tt class="xref py py-obj docutils literal"><span class="pre">config_mac_filter</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">description</span></tt>()</td>
+<td>The full description of the filter</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">filter</span></tt>()</td>
+<td>Filter the <cite>MethodCall</cite> according to the filter and replace the old one with the filtered one.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.CustomFilter.CustomFilter.filter_method_call" title="vizasm.analysis.security.filter.CustomFilter.CustomFilter.filter_method_call"><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_call</span></tt></a>(function)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.filter.CustomFilter.CustomFilter.filter_method_definition" title="vizasm.analysis.security.filter.CustomFilter.CustomFilter.filter_method_definition"><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_definition</span></tt></a>(method)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_gexf_viz_attr_dict</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_methodcall</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_size</span></tt>()</td>
+<td>Returns the subdictionary with the size key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_viz_color_dict</span></tt>()</td>
+<td>Returns the subdictionary with the color key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.filter.CustomFilter.CustomFilter.node_color_blue" title="vizasm.analysis.security.filter.CustomFilter.CustomFilter.node_color_blue"><tt class="xref py py-obj docutils literal"><span class="pre">node_color_blue</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.CustomFilter.CustomFilter.node_color_green" title="vizasm.analysis.security.filter.CustomFilter.CustomFilter.node_color_green"><tt class="xref py py-obj docutils literal"><span class="pre">node_color_green</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.filter.CustomFilter.CustomFilter.node_color_red" title="vizasm.analysis.security.filter.CustomFilter.CustomFilter.node_color_red"><tt class="xref py py-obj docutils literal"><span class="pre">node_color_red</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_transparency</span></tt>()</td>
+<td>Transparency of the node</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_size</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_gexf_viz_attr_dict</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_methodcall</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_name</span></tt>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.CustomFilter.CustomFilter.config_filter_method_call">
+<tt class="descname">config_filter_method_call</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/CustomFilter.html#CustomFilter.config_filter_method_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.CustomFilter.CustomFilter.config_filter_method_call" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.CustomFilter.CustomFilter.config_filter_method_definition">
+<tt class="descname">config_filter_method_definition</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/CustomFilter.html#CustomFilter.config_filter_method_definition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.CustomFilter.CustomFilter.config_filter_method_definition" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.CustomFilter.CustomFilter.config_ios_filter">
+<tt class="descname">config_ios_filter</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/CustomFilter.html#CustomFilter.config_ios_filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.CustomFilter.CustomFilter.config_ios_filter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.CustomFilter.CustomFilter.config_mac_filter">
+<tt class="descname">config_mac_filter</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/CustomFilter.html#CustomFilter.config_mac_filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.CustomFilter.CustomFilter.config_mac_filter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.CustomFilter.CustomFilter.filter_method_call">
+<tt class="descname">filter_method_call</tt><big>(</big><em>function</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/CustomFilter.html#CustomFilter.filter_method_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.CustomFilter.CustomFilter.filter_method_call" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.CustomFilter.CustomFilter.filter_method_definition">
+<tt class="descname">filter_method_definition</tt><big>(</big><em>method</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/CustomFilter.html#CustomFilter.filter_method_definition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.CustomFilter.CustomFilter.filter_method_definition" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.CustomFilter.CustomFilter.node_color_blue">
+<tt class="descname">node_color_blue</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/CustomFilter.html#CustomFilter.node_color_blue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.CustomFilter.CustomFilter.node_color_blue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.CustomFilter.CustomFilter.node_color_green">
+<tt class="descname">node_color_green</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/CustomFilter.html#CustomFilter.node_color_green"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.CustomFilter.CustomFilter.node_color_green" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.CustomFilter.CustomFilter.node_color_red">
+<tt class="descname">node_color_red</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/CustomFilter.html#CustomFilter.node_color_red"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.CustomFilter.CustomFilter.node_color_red" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.security.filter.DataProtectionFilter">
+<span id="dataprotectionfilter-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">DataProtectionFilter</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.security.filter.DataProtectionFilter" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 16.09.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.security.filter.DataProtectionFilter.DataProtectionFilter">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.security.filter.DataProtectionFilter.</tt><tt class="descname">DataProtectionFilter</tt><big>(</big><em>name=None</em>, <em>methodcall=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/DataProtectionFilter.html#DataProtectionFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.DataProtectionFilter.DataProtectionFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.security.filter.SecurityFilter.SecurityFilter</span></tt></a></p>
+<p>Check if data is protected.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_to_graph</span></tt>(graph[,&nbsp;...])</td>
+<td>This method adds the <cite>SecurityFilter</cite> to the graph and configures its attributes.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">attribute_dictionary</span></tt>()</td>
+<td>Merge viz attributes and filter description and return the dictionary</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_call</span></tt>()</td>
+<td>Filter on a method call.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_definition</span></tt>()</td>
+<td>Filter on the method definition.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_ios_filter</span></tt>()</td>
+<td>Return if <cite>SecurityFilters</cite> is only for iOS</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.filter.DataProtectionFilter.DataProtectionFilter.config_mac_filter" title="vizasm.analysis.security.filter.DataProtectionFilter.DataProtectionFilter.config_mac_filter"><tt class="xref py py-obj docutils literal"><span class="pre">config_mac_filter</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">description</span></tt>()</td>
+<td>The full description of the filter</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">filter</span></tt>()</td>
+<td>Filter the <cite>MethodCall</cite> according to the filter and replace the old one with the filtered one.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.DataProtectionFilter.DataProtectionFilter.filter_method_call" title="vizasm.analysis.security.filter.DataProtectionFilter.DataProtectionFilter.filter_method_call"><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_call</span></tt></a>(function)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_definition</span></tt>(method)</td>
+<td>Filter on the method definition.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_gexf_viz_attr_dict</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_methodcall</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_size</span></tt>()</td>
+<td>Returns the subdictionary with the size key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_viz_color_dict</span></tt>()</td>
+<td>Returns the subdictionary with the color key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_blue</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_green</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_red</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_transparency</span></tt>()</td>
+<td>Transparency of the node</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_size</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_gexf_viz_attr_dict</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_methodcall</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_name</span></tt>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="vizasm.analysis.security.filter.DataProtectionFilter.DataProtectionFilter.NS_DATA_WRITING_FILE_PROTECTIONS_OPTIONS">
+<tt class="descname">NS_DATA_WRITING_FILE_PROTECTIONS_OPTIONS</tt><em class="property"> = {268435456: 'NSDataWritingFileProtectionNone', 536870912: 'NSDataWritingFileProtectionComplete', 4026531840: 'NSDataWritingFileProtectionMask', 805306368: 'NSDataWritingFileProtectionCompleteUnlessOpen', 1073741824: 'NSDataWritingFileProtectionCompleteUntilFirstUserAuthentication'}</em><a class="headerlink" href="#vizasm.analysis.security.filter.DataProtectionFilter.DataProtectionFilter.NS_DATA_WRITING_FILE_PROTECTIONS_OPTIONS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.security.filter.DataProtectionFilter.DataProtectionFilter.NS_FILEMANAGER_PROTECTIONS_OPTIONS">
+<tt class="descname">NS_FILEMANAGER_PROTECTIONS_OPTIONS</tt><em class="property"> = ['NSFileProtectionNone', 'NSFileProtectionComplete', 'NSFileProtectionCompleteUnlessOpen', 'NSFileProtectionCompleteUntilFirstUserAuthentication']</em><a class="headerlink" href="#vizasm.analysis.security.filter.DataProtectionFilter.DataProtectionFilter.NS_FILEMANAGER_PROTECTIONS_OPTIONS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.DataProtectionFilter.DataProtectionFilter.config_mac_filter">
+<tt class="descname">config_mac_filter</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/DataProtectionFilter.html#DataProtectionFilter.config_mac_filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.DataProtectionFilter.DataProtectionFilter.config_mac_filter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.DataProtectionFilter.DataProtectionFilter.filter_method_call">
+<tt class="descname">filter_method_call</tt><big>(</big><em>function</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/DataProtectionFilter.html#DataProtectionFilter.filter_method_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.DataProtectionFilter.DataProtectionFilter.filter_method_call" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.security.filter.FormatStringFilter">
+<span id="formatstringfilter-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">FormatStringFilter</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.security.filter.FormatStringFilter" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 20.04.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.security.filter.FormatStringFilter.FormatStringFilter">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.security.filter.FormatStringFilter.</tt><tt class="descname">FormatStringFilter</tt><big>(</big><em>name=None</em>, <em>methodcall=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/FormatStringFilter.html#FormatStringFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.FormatStringFilter.FormatStringFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.security.filter.SecurityFilter.SecurityFilter</span></tt></a></p>
+<p>Check for exploitable log function</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_to_graph</span></tt>(graph[,&nbsp;...])</td>
+<td>This method adds the <cite>SecurityFilter</cite> to the graph and configures its attributes.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">attribute_dictionary</span></tt>()</td>
+<td>Merge viz attributes and filter description and return the dictionary</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_call</span></tt>()</td>
+<td>Filter on a method call.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_definition</span></tt>()</td>
+<td>Filter on the method definition.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_ios_filter</span></tt>()</td>
+<td>Return if <cite>SecurityFilters</cite> is only for iOS</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_mac_filter</span></tt>()</td>
+<td>Return if <cite>SecurityFilters</cite> is only for mac</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">description</span></tt>()</td>
+<td>The full description of the filter</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">filter</span></tt>()</td>
+<td>Filter the <cite>MethodCall</cite> according to the filter and replace the old one with the filtered one.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.FormatStringFilter.FormatStringFilter.filter_method_call" title="vizasm.analysis.security.filter.FormatStringFilter.FormatStringFilter.filter_method_call"><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_call</span></tt></a>(function)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_definition</span></tt>(method)</td>
+<td>Filter on the method definition.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_gexf_viz_attr_dict</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_methodcall</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_size</span></tt>()</td>
+<td>Returns the subdictionary with the size key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_viz_color_dict</span></tt>()</td>
+<td>Returns the subdictionary with the color key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.filter.FormatStringFilter.FormatStringFilter.node_color_blue" title="vizasm.analysis.security.filter.FormatStringFilter.FormatStringFilter.node_color_blue"><tt class="xref py py-obj docutils literal"><span class="pre">node_color_blue</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.FormatStringFilter.FormatStringFilter.node_color_green" title="vizasm.analysis.security.filter.FormatStringFilter.FormatStringFilter.node_color_green"><tt class="xref py py-obj docutils literal"><span class="pre">node_color_green</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.filter.FormatStringFilter.FormatStringFilter.node_color_red" title="vizasm.analysis.security.filter.FormatStringFilter.FormatStringFilter.node_color_red"><tt class="xref py py-obj docutils literal"><span class="pre">node_color_red</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_transparency</span></tt>()</td>
+<td>Transparency of the node</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_size</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_gexf_viz_attr_dict</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_methodcall</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_name</span></tt>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="vizasm.analysis.security.filter.FormatStringFilter.FormatStringFilter.FORMAT_STRING_ARG_IDX">
+<tt class="descname">FORMAT_STRING_ARG_IDX</tt><em class="property"> = {'vsnprintf': 2, 'vprintf': 0, 'vasprintf': 1, 'snprintf': 2, 'asprintf': 1, 'NSLog': 0, 'fprintf': 1, 'vfprintf': 1, 'printf': 0, 'dprintf': 1, 'vdprintf': 1, 'vsprintf': 1, 'sprintf': 1}</em><a class="headerlink" href="#vizasm.analysis.security.filter.FormatStringFilter.FormatStringFilter.FORMAT_STRING_ARG_IDX" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.FormatStringFilter.FormatStringFilter.filter_method_call">
+<tt class="descname">filter_method_call</tt><big>(</big><em>function</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/FormatStringFilter.html#FormatStringFilter.filter_method_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.FormatStringFilter.FormatStringFilter.filter_method_call" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.FormatStringFilter.FormatStringFilter.node_color_blue">
+<tt class="descname">node_color_blue</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/FormatStringFilter.html#FormatStringFilter.node_color_blue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.FormatStringFilter.FormatStringFilter.node_color_blue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.FormatStringFilter.FormatStringFilter.node_color_green">
+<tt class="descname">node_color_green</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/FormatStringFilter.html#FormatStringFilter.node_color_green"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.FormatStringFilter.FormatStringFilter.node_color_green" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.FormatStringFilter.FormatStringFilter.node_color_red">
+<tt class="descname">node_color_red</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/FormatStringFilter.html#FormatStringFilter.node_color_red"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.FormatStringFilter.FormatStringFilter.node_color_red" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.security.filter.FrameworkClassFilter">
+<span id="frameworkclassfilter-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">FrameworkClassFilter</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.security.filter.FrameworkClassFilter" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 14.09.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.security.filter.FrameworkClassFilter.FrameworkClassFilter">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.security.filter.FrameworkClassFilter.</tt><tt class="descname">FrameworkClassFilter</tt><big>(</big><em>name=None</em>, <em>methodcall=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/FrameworkClassFilter.html#FrameworkClassFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.FrameworkClassFilter.FrameworkClassFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.security.filter.SecurityFilter.SecurityFilter</span></tt></a></p>
+<p>Filter classes that belong to the Apple framework. Currently only working on x86_64 platform.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_to_graph</span></tt>(graph[,&nbsp;...])</td>
+<td>This method adds the <cite>SecurityFilter</cite> to the graph and configures its attributes.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">attribute_dictionary</span></tt>()</td>
+<td>Merge viz attributes and filter description and return the dictionary</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_call</span></tt>()</td>
+<td>Filter on a method call.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_definition</span></tt>()</td>
+<td>Filter on the method definition.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.FrameworkClassFilter.FrameworkClassFilter.config_ios_filter" title="vizasm.analysis.security.filter.FrameworkClassFilter.FrameworkClassFilter.config_ios_filter"><tt class="xref py py-obj docutils literal"><span class="pre">config_ios_filter</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_mac_filter</span></tt>()</td>
+<td>Return if <cite>SecurityFilters</cite> is only for mac</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">description</span></tt>()</td>
+<td>The full description of the filter</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">filter</span></tt>()</td>
+<td>Filter the <cite>MethodCall</cite> according to the filter and replace the old one with the filtered one.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.FrameworkClassFilter.FrameworkClassFilter.filter_method_call" title="vizasm.analysis.security.filter.FrameworkClassFilter.FrameworkClassFilter.filter_method_call"><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_call</span></tt></a>(function)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_definition</span></tt>(method)</td>
+<td>Filter on the method definition.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_gexf_viz_attr_dict</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_methodcall</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_size</span></tt>()</td>
+<td>Returns the subdictionary with the size key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_viz_color_dict</span></tt>()</td>
+<td>Returns the subdictionary with the color key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_blue</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_green</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_red</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_transparency</span></tt>()</td>
+<td>Transparency of the node</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_size</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_gexf_viz_attr_dict</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_methodcall</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_name</span></tt>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.FrameworkClassFilter.FrameworkClassFilter.config_ios_filter">
+<tt class="descname">config_ios_filter</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/FrameworkClassFilter.html#FrameworkClassFilter.config_ios_filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.FrameworkClassFilter.FrameworkClassFilter.config_ios_filter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.FrameworkClassFilter.FrameworkClassFilter.filter_method_call">
+<tt class="descname">filter_method_call</tt><big>(</big><em>function</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/FrameworkClassFilter.html#FrameworkClassFilter.filter_method_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.FrameworkClassFilter.FrameworkClassFilter.filter_method_call" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.security.filter.GeoLocationFilter">
+<span id="geolocationfilter-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">GeoLocationFilter</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.security.filter.GeoLocationFilter" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 16.09.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.security.filter.GeoLocationFilter.GeoLocationFilter">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.security.filter.GeoLocationFilter.</tt><tt class="descname">GeoLocationFilter</tt><big>(</big><em>name=None</em>, <em>methodcall=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/GeoLocationFilter.html#GeoLocationFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.GeoLocationFilter.GeoLocationFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.security.filter.SecurityFilter.SecurityFilter</span></tt></a></p>
+<p>Check which geo information are retrieved and which accuracy level is set.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_to_graph</span></tt>(graph[,&nbsp;...])</td>
+<td>This method adds the <cite>SecurityFilter</cite> to the graph and configures its attributes.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">attribute_dictionary</span></tt>()</td>
+<td>Merge viz attributes and filter description and return the dictionary</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_call</span></tt>()</td>
+<td>Filter on a method call.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_definition</span></tt>()</td>
+<td>Filter on the method definition.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_ios_filter</span></tt>()</td>
+<td>Return if <cite>SecurityFilters</cite> is only for iOS</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_mac_filter</span></tt>()</td>
+<td>Return if <cite>SecurityFilters</cite> is only for mac</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">description</span></tt>()</td>
+<td>The full description of the filter</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">filter</span></tt>()</td>
+<td>Filter the <cite>MethodCall</cite> according to the filter and replace the old one with the filtered one.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.GeoLocationFilter.GeoLocationFilter.filter_method_call" title="vizasm.analysis.security.filter.GeoLocationFilter.GeoLocationFilter.filter_method_call"><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_call</span></tt></a>(function)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_definition</span></tt>(method)</td>
+<td>Filter on the method definition.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_gexf_viz_attr_dict</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_methodcall</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_size</span></tt>()</td>
+<td>Returns the subdictionary with the size key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_viz_color_dict</span></tt>()</td>
+<td>Returns the subdictionary with the color key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_blue</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_green</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_red</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_transparency</span></tt>()</td>
+<td>Transparency of the node</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_size</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_gexf_viz_attr_dict</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_methodcall</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_name</span></tt>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="vizasm.analysis.security.filter.GeoLocationFilter.GeoLocationFilter.LOCATION_ACCURACY_LEVELS">
+<tt class="descname">LOCATION_ACCURACY_LEVELS</tt><em class="property"> = ['kCLLocationAccuracyBestForNavigation', 'kCLLocationAccuracyBest', 'kCLLocationAccuracyNearestTenMeters', 'kCLLocationAccuracyHundredMeters', 'kCLLocationAccuracyKilometer', 'kCLLocationAccuracyThreeKilometers']</em><a class="headerlink" href="#vizasm.analysis.security.filter.GeoLocationFilter.GeoLocationFilter.LOCATION_ACCURACY_LEVELS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.GeoLocationFilter.GeoLocationFilter.filter_method_call">
+<tt class="descname">filter_method_call</tt><big>(</big><em>function</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/GeoLocationFilter.html#GeoLocationFilter.filter_method_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.GeoLocationFilter.GeoLocationFilter.filter_method_call" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.security.filter.IPCFilter">
+<span id="ipcfilter-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">IPCFilter</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.security.filter.IPCFilter" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 09.09.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.security.filter.IPCFilter.IPCFilter">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.security.filter.IPCFilter.</tt><tt class="descname">IPCFilter</tt><big>(</big><em>name=None</em>, <em>methodcall=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/IPCFilter.html#IPCFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.IPCFilter.IPCFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.security.filter.SecurityFilter.SecurityFilter</span></tt></a></p>
+<p>Interprocess communication filter</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_to_graph</span></tt>(graph[,&nbsp;...])</td>
+<td>This method adds the <cite>SecurityFilter</cite> to the graph and configures its attributes.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">attribute_dictionary</span></tt>()</td>
+<td>Merge viz attributes and filter description and return the dictionary</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_call</span></tt>()</td>
+<td>Filter on a method call.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.filter.IPCFilter.IPCFilter.config_filter_method_definition" title="vizasm.analysis.security.filter.IPCFilter.IPCFilter.config_filter_method_definition"><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_definition</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_ios_filter</span></tt>()</td>
+<td>Return if <cite>SecurityFilters</cite> is only for iOS</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_mac_filter</span></tt>()</td>
+<td>Return if <cite>SecurityFilters</cite> is only for mac</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">description</span></tt>()</td>
+<td>The full description of the filter</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">filter</span></tt>()</td>
+<td>Filter the <cite>MethodCall</cite> according to the filter and replace the old one with the filtered one.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.IPCFilter.IPCFilter.filter_method_call" title="vizasm.analysis.security.filter.IPCFilter.IPCFilter.filter_method_call"><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_call</span></tt></a>(function)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.filter.IPCFilter.IPCFilter.filter_method_definition" title="vizasm.analysis.security.filter.IPCFilter.IPCFilter.filter_method_definition"><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_definition</span></tt></a>(method)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_gexf_viz_attr_dict</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_methodcall</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_size</span></tt>()</td>
+<td>Returns the subdictionary with the size key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_viz_color_dict</span></tt>()</td>
+<td>Returns the subdictionary with the color key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_blue</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_green</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_red</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_transparency</span></tt>()</td>
+<td>Transparency of the node</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_size</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_gexf_viz_attr_dict</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_methodcall</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_name</span></tt>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.IPCFilter.IPCFilter.config_filter_method_definition">
+<tt class="descname">config_filter_method_definition</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/IPCFilter.html#IPCFilter.config_filter_method_definition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.IPCFilter.IPCFilter.config_filter_method_definition" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.IPCFilter.IPCFilter.filter_method_call">
+<tt class="descname">filter_method_call</tt><big>(</big><em>function</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/IPCFilter.html#IPCFilter.filter_method_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.IPCFilter.IPCFilter.filter_method_call" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.IPCFilter.IPCFilter.filter_method_definition">
+<tt class="descname">filter_method_definition</tt><big>(</big><em>method</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/IPCFilter.html#IPCFilter.filter_method_definition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.IPCFilter.IPCFilter.filter_method_definition" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.security.filter.KeyChainFilter">
+<span id="keychainfilter-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">KeyChainFilter</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.security.filter.KeyChainFilter" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 16.09.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.security.filter.KeyChainFilter.KeyChainFilter">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.security.filter.KeyChainFilter.</tt><tt class="descname">KeyChainFilter</tt><big>(</big><em>name=None</em>, <em>methodcall=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/KeyChainFilter.html#KeyChainFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.KeyChainFilter.KeyChainFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.security.filter.SecurityFilter.SecurityFilter</span></tt></a></p>
+<p>Check for Keychain usage.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_to_graph</span></tt>(graph[,&nbsp;...])</td>
+<td>This method adds the <cite>SecurityFilter</cite> to the graph and configures its attributes.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">attribute_dictionary</span></tt>()</td>
+<td>Merge viz attributes and filter description and return the dictionary</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_call</span></tt>()</td>
+<td>Filter on a method call.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_definition</span></tt>()</td>
+<td>Filter on the method definition.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_ios_filter</span></tt>()</td>
+<td>Return if <cite>SecurityFilters</cite> is only for iOS</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_mac_filter</span></tt>()</td>
+<td>Return if <cite>SecurityFilters</cite> is only for mac</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">description</span></tt>()</td>
+<td>The full description of the filter</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">filter</span></tt>()</td>
+<td>Filter the <cite>MethodCall</cite> according to the filter and replace the old one with the filtered one.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.KeyChainFilter.KeyChainFilter.filter_method_call" title="vizasm.analysis.security.filter.KeyChainFilter.KeyChainFilter.filter_method_call"><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_call</span></tt></a>(function)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_definition</span></tt>(method)</td>
+<td>Filter on the method definition.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_gexf_viz_attr_dict</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_methodcall</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_size</span></tt>()</td>
+<td>Returns the subdictionary with the size key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_viz_color_dict</span></tt>()</td>
+<td>Returns the subdictionary with the color key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_blue</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_green</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_red</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_transparency</span></tt>()</td>
+<td>Transparency of the node</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_size</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_gexf_viz_attr_dict</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_methodcall</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_name</span></tt>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.KeyChainFilter.KeyChainFilter.filter_method_call">
+<tt class="descname">filter_method_call</tt><big>(</big><em>function</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/KeyChainFilter.html#KeyChainFilter.filter_method_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.KeyChainFilter.KeyChainFilter.filter_method_call" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.security.filter.NSStreamSSLLevelFilter">
+<span id="nsstreamssllevelfilter-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">NSStreamSSLLevelFilter</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.security.filter.NSStreamSSLLevelFilter" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 09.09.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.security.filter.NSStreamSSLLevelFilter.NSStreamSSLLevelFilter">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.security.filter.NSStreamSSLLevelFilter.</tt><tt class="descname">NSStreamSSLLevelFilter</tt><big>(</big><em>name=None</em>, <em>methodcall=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/NSStreamSSLLevelFilter.html#NSStreamSSLLevelFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.NSStreamSSLLevelFilter.NSStreamSSLLevelFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.security.filter.SecurityFilter.SecurityFilter</span></tt></a></p>
+<p>Check the SSL level of a NSStream.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_to_graph</span></tt>(graph[,&nbsp;...])</td>
+<td>This method adds the <cite>SecurityFilter</cite> to the graph and configures its attributes.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">attribute_dictionary</span></tt>()</td>
+<td>Merge viz attributes and filter description and return the dictionary</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_call</span></tt>()</td>
+<td>Filter on a method call.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_definition</span></tt>()</td>
+<td>Filter on the method definition.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_ios_filter</span></tt>()</td>
+<td>Return if <cite>SecurityFilters</cite> is only for iOS</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_mac_filter</span></tt>()</td>
+<td>Return if <cite>SecurityFilters</cite> is only for mac</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">description</span></tt>()</td>
+<td>The full description of the filter</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">filter</span></tt>()</td>
+<td>Filter the <cite>MethodCall</cite> according to the filter and replace the old one with the filtered one.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.NSStreamSSLLevelFilter.NSStreamSSLLevelFilter.filter_method_call" title="vizasm.analysis.security.filter.NSStreamSSLLevelFilter.NSStreamSSLLevelFilter.filter_method_call"><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_call</span></tt></a>(function)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_definition</span></tt>(method)</td>
+<td>Filter on the method definition.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_gexf_viz_attr_dict</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_methodcall</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_size</span></tt>()</td>
+<td>Returns the subdictionary with the size key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_viz_color_dict</span></tt>()</td>
+<td>Returns the subdictionary with the color key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_blue</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_green</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_red</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_transparency</span></tt>()</td>
+<td>Transparency of the node</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_size</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_gexf_viz_attr_dict</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_methodcall</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_name</span></tt>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="vizasm.analysis.security.filter.NSStreamSSLLevelFilter.NSStreamSSLLevelFilter.NSSTREAM_SSL_LEVELS">
+<tt class="descname">NSSTREAM_SSL_LEVELS</tt><em class="property"> = ['NSStreamSocketSecurityLevelNone', 'NSStreamSocketSecurityLevelTLSv1', 'NSStreamSocketSecurityLevelSSLv2', 'NSStreamSocketSecurityLevelSSLv3', 'NSStreamSocketSecurityLevelNegotiatedSSL']</em><a class="headerlink" href="#vizasm.analysis.security.filter.NSStreamSSLLevelFilter.NSStreamSSLLevelFilter.NSSTREAM_SSL_LEVELS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.NSStreamSSLLevelFilter.NSStreamSSLLevelFilter.filter_method_call">
+<tt class="descname">filter_method_call</tt><big>(</big><em>function</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/NSStreamSSLLevelFilter.html#NSStreamSSLLevelFilter.filter_method_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.NSStreamSSLLevelFilter.NSStreamSSLLevelFilter.filter_method_call" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.security.filter.NSUserDefaultsFilter">
+<span id="nsuserdefaultsfilter-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">NSUserDefaultsFilter</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.security.filter.NSUserDefaultsFilter" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 29.07.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.security.filter.NSUserDefaultsFilter.NSUserDefaultsFilter">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.security.filter.NSUserDefaultsFilter.</tt><tt class="descname">NSUserDefaultsFilter</tt><big>(</big><em>name=None</em>, <em>methodcall=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/NSUserDefaultsFilter.html#NSUserDefaultsFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.NSUserDefaultsFilter.NSUserDefaultsFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.security.filter.SecurityFilter.SecurityFilter</span></tt></a></p>
+<p>Filter all NSUserDefault access</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_to_graph</span></tt>(graph[,&nbsp;...])</td>
+<td>This method adds the <cite>SecurityFilter</cite> to the graph and configures its attributes.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">attribute_dictionary</span></tt>()</td>
+<td>Merge viz attributes and filter description and return the dictionary</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_call</span></tt>()</td>
+<td>Filter on a method call.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_definition</span></tt>()</td>
+<td>Filter on the method definition.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_ios_filter</span></tt>()</td>
+<td>Return if <cite>SecurityFilters</cite> is only for iOS</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_mac_filter</span></tt>()</td>
+<td>Return if <cite>SecurityFilters</cite> is only for mac</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">description</span></tt>()</td>
+<td>The full description of the filter</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">filter</span></tt>()</td>
+<td>Filter the <cite>MethodCall</cite> according to the filter and replace the old one with the filtered one.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.NSUserDefaultsFilter.NSUserDefaultsFilter.filter_method_call" title="vizasm.analysis.security.filter.NSUserDefaultsFilter.NSUserDefaultsFilter.filter_method_call"><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_call</span></tt></a>(filter_me)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_definition</span></tt>(method)</td>
+<td>Filter on the method definition.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_gexf_viz_attr_dict</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_methodcall</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_size</span></tt>()</td>
+<td>Returns the subdictionary with the size key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_viz_color_dict</span></tt>()</td>
+<td>Returns the subdictionary with the color key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.filter.NSUserDefaultsFilter.NSUserDefaultsFilter.node_color_blue" title="vizasm.analysis.security.filter.NSUserDefaultsFilter.NSUserDefaultsFilter.node_color_blue"><tt class="xref py py-obj docutils literal"><span class="pre">node_color_blue</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.NSUserDefaultsFilter.NSUserDefaultsFilter.node_color_green" title="vizasm.analysis.security.filter.NSUserDefaultsFilter.NSUserDefaultsFilter.node_color_green"><tt class="xref py py-obj docutils literal"><span class="pre">node_color_green</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.filter.NSUserDefaultsFilter.NSUserDefaultsFilter.node_color_red" title="vizasm.analysis.security.filter.NSUserDefaultsFilter.NSUserDefaultsFilter.node_color_red"><tt class="xref py py-obj docutils literal"><span class="pre">node_color_red</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_transparency</span></tt>()</td>
+<td>Transparency of the node</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_size</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_gexf_viz_attr_dict</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_methodcall</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_name</span></tt>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.NSUserDefaultsFilter.NSUserDefaultsFilter.filter_method_call">
+<tt class="descname">filter_method_call</tt><big>(</big><em>filter_me</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/NSUserDefaultsFilter.html#NSUserDefaultsFilter.filter_method_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.NSUserDefaultsFilter.NSUserDefaultsFilter.filter_method_call" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.NSUserDefaultsFilter.NSUserDefaultsFilter.node_color_blue">
+<tt class="descname">node_color_blue</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/NSUserDefaultsFilter.html#NSUserDefaultsFilter.node_color_blue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.NSUserDefaultsFilter.NSUserDefaultsFilter.node_color_blue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.NSUserDefaultsFilter.NSUserDefaultsFilter.node_color_green">
+<tt class="descname">node_color_green</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/NSUserDefaultsFilter.html#NSUserDefaultsFilter.node_color_green"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.NSUserDefaultsFilter.NSUserDefaultsFilter.node_color_green" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.NSUserDefaultsFilter.NSUserDefaultsFilter.node_color_red">
+<tt class="descname">node_color_red</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/NSUserDefaultsFilter.html#NSUserDefaultsFilter.node_color_red"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.NSUserDefaultsFilter.NSUserDefaultsFilter.node_color_red" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.security.filter.RandomFuncFilter">
+<span id="randomfuncfilter-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">RandomFuncFilter</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.security.filter.RandomFuncFilter" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 22.04.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.security.filter.RandomFuncFilter.RandomFuncFilter">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.security.filter.RandomFuncFilter.</tt><tt class="descname">RandomFuncFilter</tt><big>(</big><em>name=None</em>, <em>methodcall=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/RandomFuncFilter.html#RandomFuncFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.RandomFuncFilter.RandomFuncFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.security.filter.SecurityFilter.SecurityFilter</span></tt></a></p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_to_graph</span></tt>(graph[,&nbsp;...])</td>
+<td>This method adds the <cite>SecurityFilter</cite> to the graph and configures its attributes.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">attribute_dictionary</span></tt>()</td>
+<td>Merge viz attributes and filter description and return the dictionary</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_call</span></tt>()</td>
+<td>Filter on a method call.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_definition</span></tt>()</td>
+<td>Filter on the method definition.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_ios_filter</span></tt>()</td>
+<td>Return if <cite>SecurityFilters</cite> is only for iOS</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_mac_filter</span></tt>()</td>
+<td>Return if <cite>SecurityFilters</cite> is only for mac</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">description</span></tt>()</td>
+<td>The full description of the filter</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">filter</span></tt>()</td>
+<td>Filter the <cite>MethodCall</cite> according to the filter and replace the old one with the filtered one.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.RandomFuncFilter.RandomFuncFilter.filter_method_call" title="vizasm.analysis.security.filter.RandomFuncFilter.RandomFuncFilter.filter_method_call"><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_call</span></tt></a>(filter_me)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_definition</span></tt>(method)</td>
+<td>Filter on the method definition.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_gexf_viz_attr_dict</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_methodcall</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_size</span></tt>()</td>
+<td>Returns the subdictionary with the size key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_viz_color_dict</span></tt>()</td>
+<td>Returns the subdictionary with the color key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.filter.RandomFuncFilter.RandomFuncFilter.node_color_blue" title="vizasm.analysis.security.filter.RandomFuncFilter.RandomFuncFilter.node_color_blue"><tt class="xref py py-obj docutils literal"><span class="pre">node_color_blue</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.RandomFuncFilter.RandomFuncFilter.node_color_green" title="vizasm.analysis.security.filter.RandomFuncFilter.RandomFuncFilter.node_color_green"><tt class="xref py py-obj docutils literal"><span class="pre">node_color_green</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.filter.RandomFuncFilter.RandomFuncFilter.node_color_red" title="vizasm.analysis.security.filter.RandomFuncFilter.RandomFuncFilter.node_color_red"><tt class="xref py py-obj docutils literal"><span class="pre">node_color_red</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_transparency</span></tt>()</td>
+<td>Transparency of the node</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_size</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_gexf_viz_attr_dict</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_methodcall</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_name</span></tt>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="vizasm.analysis.security.filter.RandomFuncFilter.RandomFuncFilter.RAND_FUNCS">
+<tt class="descname">RAND_FUNCS</tt><em class="property"> = ['rand', 'random', 'arc4random']</em><a class="headerlink" href="#vizasm.analysis.security.filter.RandomFuncFilter.RandomFuncFilter.RAND_FUNCS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.RandomFuncFilter.RandomFuncFilter.filter_method_call">
+<tt class="descname">filter_method_call</tt><big>(</big><em>filter_me</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/RandomFuncFilter.html#RandomFuncFilter.filter_method_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.RandomFuncFilter.RandomFuncFilter.filter_method_call" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.RandomFuncFilter.RandomFuncFilter.node_color_blue">
+<tt class="descname">node_color_blue</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/RandomFuncFilter.html#RandomFuncFilter.node_color_blue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.RandomFuncFilter.RandomFuncFilter.node_color_blue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.RandomFuncFilter.RandomFuncFilter.node_color_green">
+<tt class="descname">node_color_green</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/RandomFuncFilter.html#RandomFuncFilter.node_color_green"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.RandomFuncFilter.RandomFuncFilter.node_color_green" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.RandomFuncFilter.RandomFuncFilter.node_color_red">
+<tt class="descname">node_color_red</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/RandomFuncFilter.html#RandomFuncFilter.node_color_red"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.RandomFuncFilter.RandomFuncFilter.node_color_red" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.security.filter.SQLiteFilter">
+<span id="sqlitefilter-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">SQLiteFilter</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.security.filter.SQLiteFilter" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 12.09.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.security.filter.SQLiteFilter.SQLiteFilter">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.security.filter.SQLiteFilter.</tt><tt class="descname">SQLiteFilter</tt><big>(</big><em>name=None</em>, <em>methodcall=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/SQLiteFilter.html#SQLiteFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.SQLiteFilter.SQLiteFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.security.filter.SecurityFilter.SecurityFilter</span></tt></a></p>
+<p>Sqlite3 filter</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_to_graph</span></tt>(graph[,&nbsp;...])</td>
+<td>This method adds the <cite>SecurityFilter</cite> to the graph and configures its attributes.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">attribute_dictionary</span></tt>()</td>
+<td>Merge viz attributes and filter description and return the dictionary</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_call</span></tt>()</td>
+<td>Filter on a method call.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_definition</span></tt>()</td>
+<td>Filter on the method definition.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_ios_filter</span></tt>()</td>
+<td>Return if <cite>SecurityFilters</cite> is only for iOS</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_mac_filter</span></tt>()</td>
+<td>Return if <cite>SecurityFilters</cite> is only for mac</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">description</span></tt>()</td>
+<td>The full description of the filter</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">filter</span></tt>()</td>
+<td>Filter the <cite>MethodCall</cite> according to the filter and replace the old one with the filtered one.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.SQLiteFilter.SQLiteFilter.filter_method_call" title="vizasm.analysis.security.filter.SQLiteFilter.SQLiteFilter.filter_method_call"><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_call</span></tt></a>(function)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_definition</span></tt>(method)</td>
+<td>Filter on the method definition.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_gexf_viz_attr_dict</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_methodcall</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_size</span></tt>()</td>
+<td>Returns the subdictionary with the size key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_viz_color_dict</span></tt>()</td>
+<td>Returns the subdictionary with the color key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_blue</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_green</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_red</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_transparency</span></tt>()</td>
+<td>Transparency of the node</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_size</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_gexf_viz_attr_dict</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_methodcall</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_name</span></tt>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.SQLiteFilter.SQLiteFilter.filter_method_call">
+<tt class="descname">filter_method_call</tt><big>(</big><em>function</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/SQLiteFilter.html#SQLiteFilter.filter_method_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.SQLiteFilter.SQLiteFilter.filter_method_call" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.security.filter.SeatBeltFilter">
+<span id="seatbeltfilter-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">SeatBeltFilter</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.security.filter.SeatBeltFilter" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 08.09.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.security.filter.SeatBeltFilter.SeatBeltFilter">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.security.filter.SeatBeltFilter.</tt><tt class="descname">SeatBeltFilter</tt><big>(</big><em>name=None</em>, <em>methodcall=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/SeatBeltFilter.html#SeatBeltFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.SeatBeltFilter.SeatBeltFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.security.filter.SecurityFilter.SecurityFilter</span></tt></a></p>
+<p>Check if a special sandbox profile has been set.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_to_graph</span></tt>(graph[,&nbsp;...])</td>
+<td>This method adds the <cite>SecurityFilter</cite> to the graph and configures its attributes.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">attribute_dictionary</span></tt>()</td>
+<td>Merge viz attributes and filter description and return the dictionary</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_call</span></tt>()</td>
+<td>Filter on a method call.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_definition</span></tt>()</td>
+<td>Filter on the method definition.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_ios_filter</span></tt>()</td>
+<td>Return if <cite>SecurityFilters</cite> is only for iOS</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_mac_filter</span></tt>()</td>
+<td>Return if <cite>SecurityFilters</cite> is only for mac</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">description</span></tt>()</td>
+<td>The full description of the filter</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">filter</span></tt>()</td>
+<td>Filter the <cite>MethodCall</cite> according to the filter and replace the old one with the filtered one.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.SeatBeltFilter.SeatBeltFilter.filter_method_call" title="vizasm.analysis.security.filter.SeatBeltFilter.SeatBeltFilter.filter_method_call"><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_call</span></tt></a>(function)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_definition</span></tt>(method)</td>
+<td>Filter on the method definition.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_gexf_viz_attr_dict</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_methodcall</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_size</span></tt>()</td>
+<td>Returns the subdictionary with the size key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_viz_color_dict</span></tt>()</td>
+<td>Returns the subdictionary with the color key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_blue</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_green</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_red</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_transparency</span></tt>()</td>
+<td>Transparency of the node</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_size</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_gexf_viz_attr_dict</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_methodcall</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_name</span></tt>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="vizasm.analysis.security.filter.SeatBeltFilter.SeatBeltFilter.SANDBOX_PROFILES_OFFICIAL">
+<tt class="descname">SANDBOX_PROFILES_OFFICIAL</tt><em class="property"> = {'kSBXProfileNoWriteExceptTemporary': 'write-tmp-only', 'kSBXProfileNoWrite': 'nowrite', 'kSBXProfileNoNetwork': 'nonet', 'kSBXProfilePureComputation': 'pure-computation', 'kSBXProfileNoInternet': 'nointernet'}</em><a class="headerlink" href="#vizasm.analysis.security.filter.SeatBeltFilter.SeatBeltFilter.SANDBOX_PROFILES_OFFICIAL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.SeatBeltFilter.SeatBeltFilter.filter_method_call">
+<tt class="descname">filter_method_call</tt><big>(</big><em>function</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/SeatBeltFilter.html#SeatBeltFilter.filter_method_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.SeatBeltFilter.SeatBeltFilter.filter_method_call" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.security.filter.SecurityFilter">
+<span id="securityfilter-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">SecurityFilter</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.security.filter.SecurityFilter" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 20.04.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.security.filter.SecurityFilter.</tt><tt class="descname">SecurityFilter</tt><big>(</big><em>name=None</em>, <em>methodcall=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/SecurityFilter.html#SecurityFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt>, <a class="reference internal" href="vizasm.vizasm_networkx.html#vizasm.vizasm_networkx.AddMethodCallToGraphInterface.AddMethodCallToGraphInterface" title="vizasm.vizasm_networkx.AddMethodCallToGraphInterface.AddMethodCallToGraphInterface"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.vizasm_networkx.AddMethodCallToGraphInterface.AddMethodCallToGraphInterface</span></tt></a>, <a class="reference internal" href="vizasm.vizasm_networkx.html#vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface" title="vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface</span></tt></a>, <a class="reference internal" href="vizasm.vizasm_networkx.html#vizasm.vizasm_networkx.AttributeDictInterface.AttributeDictInterface" title="vizasm.vizasm_networkx.AttributeDictInterface.AttributeDictInterface"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.vizasm_networkx.AttributeDictInterface.AttributeDictInterface</span></tt></a></p>
+<p>BaseClass for a security filter.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>_methodcall: MethodCall</strong> :</p>
+<blockquote>
+<div><p>the MethodCall to analyze</p>
+</div></blockquote>
+<p><strong>_name: string, optional</strong> :</p>
+<blockquote>
+<div><p>the name of the SecurityFilter is used for the node representation in the graph.
+If no name is given, the class name will be used instead.</p>
+</div></blockquote>
+<p><strong>&#8212;&#8211;</strong> :</p>
+<p><strong>Subclasses need to overwrite the following methods:</strong> :</p>
+<blockquote class="last">
+<div><p>filter_method_call or filter_method_definition
+<a href="#id6"><span class="problematic" id="id7">config_</span></a> methods
+_description</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.add_to_graph" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.add_to_graph"><tt class="xref py py-obj docutils literal"><span class="pre">add_to_graph</span></tt></a>(graph[,&nbsp;...])</td>
+<td>This method adds the <cite>SecurityFilter</cite> to the graph and configures its attributes.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.attribute_dictionary" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.attribute_dictionary"><tt class="xref py py-obj docutils literal"><span class="pre">attribute_dictionary</span></tt></a>()</td>
+<td>Merge viz attributes and filter description and return the dictionary</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.config_filter_method_call" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.config_filter_method_call"><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_call</span></tt></a>()</td>
+<td>Filter on a method call.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.config_filter_method_definition" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.config_filter_method_definition"><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_definition</span></tt></a>()</td>
+<td>Filter on the method definition.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.config_ios_filter" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.config_ios_filter"><tt class="xref py py-obj docutils literal"><span class="pre">config_ios_filter</span></tt></a>()</td>
+<td>Return if <cite>SecurityFilters</cite> is only for iOS</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.config_mac_filter" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.config_mac_filter"><tt class="xref py py-obj docutils literal"><span class="pre">config_mac_filter</span></tt></a>()</td>
+<td>Return if <cite>SecurityFilters</cite> is only for mac</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.description" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.description"><tt class="xref py py-obj docutils literal"><span class="pre">description</span></tt></a>()</td>
+<td>The full description of the filter</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.filter" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.filter"><tt class="xref py py-obj docutils literal"><span class="pre">filter</span></tt></a>()</td>
+<td>Filter the <cite>MethodCall</cite> according to the filter and replace the old one with the filtered one.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.filter_method_call" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.filter_method_call"><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_call</span></tt></a>(function)</td>
+<td>This method is used for the filtering and shall be overwritten by any subclass.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.filter_method_definition" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.filter_method_definition"><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_definition</span></tt></a>(method)</td>
+<td>Filter on the method definition.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_gexf_viz_attr_dict</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.get_methodcall" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.get_methodcall"><tt class="xref py py-obj docutils literal"><span class="pre">get_methodcall</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.get_name" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.get_name"><tt class="xref py py-obj docutils literal"><span class="pre">get_name</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_size</span></tt>()</td>
+<td>Returns the subdictionary with the size key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_viz_color_dict</span></tt>()</td>
+<td>Returns the subdictionary with the color key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.node_color_blue" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.node_color_blue"><tt class="xref py py-obj docutils literal"><span class="pre">node_color_blue</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.node_color_green" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.node_color_green"><tt class="xref py py-obj docutils literal"><span class="pre">node_color_green</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.node_color_red" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.node_color_red"><tt class="xref py py-obj docutils literal"><span class="pre">node_color_red</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_transparency</span></tt>()</td>
+<td>Transparency of the node</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.node_size" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.node_size"><tt class="xref py py-obj docutils literal"><span class="pre">node_size</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_gexf_viz_attr_dict</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.set_methodcall" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.set_methodcall"><tt class="xref py py-obj docutils literal"><span class="pre">set_methodcall</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.set_name" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.set_name"><tt class="xref py py-obj docutils literal"><span class="pre">set_name</span></tt></a>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.add_to_graph">
+<tt class="descname">add_to_graph</tt><big>(</big><em>graph</em>, <em>methodcall_sender_attr_dict=None</em>, <em>methodcall_calls_attr_list_dict=None</em>, <em>sender_methodcall_edge_attr_dict=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/SecurityFilter.html#SecurityFilter.add_to_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.add_to_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method adds the <cite>SecurityFilter</cite> to the graph and configures its attributes.</p>
+<p>Moreover it configures the attributes for the sender and call nodes of the <cite>MethodCall</cite>.
+But the supplied attribute dictionaries may overwrite attributes specified here.</p>
+<p>The nodes, as well as the edges between them, are configured with the same color as the <cite>SecurityFilter</cite>.
+The weight of the edges are the sizes of the nodes.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.attribute_dictionary">
+<tt class="descname">attribute_dictionary</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/SecurityFilter.html#SecurityFilter.attribute_dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.attribute_dictionary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Merge viz attributes and filter description and return the dictionary</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.config_filter_method_call">
+<tt class="descname">config_filter_method_call</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/SecurityFilter.html#SecurityFilter.config_filter_method_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.config_filter_method_call" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter on a method call. A function call being made inside a method implementation.
+You can filter for method calls and method definition at the same time!</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.config_filter_method_definition">
+<tt class="descname">config_filter_method_definition</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/SecurityFilter.html#SecurityFilter.config_filter_method_definition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.config_filter_method_definition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter on the method definition.
+This means that all calls that are made in this method, will be kept.</p>
+<p>If you successfully filter on a method, no further filtering for method calls will be done.</p>
+<p>E.g. on &#8220;- (BOOL)application:(UIApplication <a href="#id2"><span class="problematic" id="id3">*</span></a>)application didFinishLaunchingWithOptions:(NSDictionary <a href="#id4"><span class="problematic" id="id5">*</span></a>)launchOptions)&#8221; (in the original source)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.config_ios_filter">
+<tt class="descname">config_ios_filter</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/SecurityFilter.html#SecurityFilter.config_ios_filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.config_ios_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return if <cite>SecurityFilters</cite> is only for iOS</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.config_mac_filter">
+<tt class="descname">config_mac_filter</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/SecurityFilter.html#SecurityFilter.config_mac_filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.config_mac_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return if <cite>SecurityFilters</cite> is only for mac</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.description">
+<tt class="descname">description</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/SecurityFilter.html#SecurityFilter.description"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.description" title="Permalink to this definition">¶</a></dt>
+<dd><p>The full description of the filter</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.filter">
+<tt class="descname">filter</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/SecurityFilter.html#SecurityFilter.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter the <cite>MethodCall</cite> according to the filter and replace the old one with the filtered one.</p>
+<p>Define with the  <cite>config_</cite> methods if you want to filter on the method calls or the method definition (or both).</p>
+<p>If filtering on the method definition is successful, all function calls will be kept.
+Otherwise the function calls will be filtered.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.filter_method_call">
+<tt class="descname">filter_method_call</tt><big>(</big><em>function</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/SecurityFilter.html#SecurityFilter.filter_method_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.filter_method_call" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method is used for the filtering and shall be overwritten by any subclass.
+It should return false for all the objects that shall be filtered out.
+The objects for which true is returned are the ones that will be kept.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>function: FunctionInterface</strong> :</p>
+<blockquote>
+<div><p>the <cite>FunctionInterface</cite> to filter</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>True</strong> :</p>
+<blockquote>
+<div><p>if the object shall be kept</p>
+</div></blockquote>
+<p><strong>False</strong> :</p>
+<blockquote class="last">
+<div><p>if the object is not of any relevance</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.filter_method_definition">
+<tt class="descname">filter_method_definition</tt><big>(</big><em>method</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/SecurityFilter.html#SecurityFilter.filter_method_definition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.filter_method_definition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter on the method definition.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><strong>method: MsgSend</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.get_methodcall">
+<tt class="descname">get_methodcall</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/SecurityFilter.html#SecurityFilter.get_methodcall"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.get_methodcall" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.get_name">
+<tt class="descname">get_name</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/SecurityFilter.html#SecurityFilter.get_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.get_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.methodcall">
+<tt class="descname">methodcall</tt><a class="headerlink" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.methodcall" title="Permalink to this definition">¶</a></dt>
+<dd><p>_methodcall(MethodCall) &#8211; the MethodCall to analyze</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.name">
+<tt class="descname">name</tt><a class="headerlink" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>_name(string) &#8211; the name of the SecurityFilter is used for the node representation in the graph.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.node_color_blue">
+<tt class="descname">node_color_blue</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/SecurityFilter.html#SecurityFilter.node_color_blue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.node_color_blue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.node_color_green">
+<tt class="descname">node_color_green</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/SecurityFilter.html#SecurityFilter.node_color_green"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.node_color_green" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.node_color_red">
+<tt class="descname">node_color_red</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/SecurityFilter.html#SecurityFilter.node_color_red"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.node_color_red" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.node_size">
+<tt class="descname">node_size</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/SecurityFilter.html#SecurityFilter.node_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.node_size" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.set_methodcall">
+<tt class="descname">set_methodcall</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/SecurityFilter.html#SecurityFilter.set_methodcall"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.set_methodcall" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.set_name">
+<tt class="descname">set_name</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/SecurityFilter.html#SecurityFilter.set_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter.set_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.security.filter.UIPasteBoardFilter">
+<span id="uipasteboardfilter-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">UIPasteBoardFilter</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.security.filter.UIPasteBoardFilter" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 09.09.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.security.filter.UIPasteBoardFilter.UIPasteBoardFilter">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.security.filter.UIPasteBoardFilter.</tt><tt class="descname">UIPasteBoardFilter</tt><big>(</big><em>name=None</em>, <em>methodcall=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/UIPasteBoardFilter.html#UIPasteBoardFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.UIPasteBoardFilter.UIPasteBoardFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.security.filter.SecurityFilter.SecurityFilter</span></tt></a></p>
+<p>UIPasteBoard filter</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_to_graph</span></tt>(graph[,&nbsp;...])</td>
+<td>This method adds the <cite>SecurityFilter</cite> to the graph and configures its attributes.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">attribute_dictionary</span></tt>()</td>
+<td>Merge viz attributes and filter description and return the dictionary</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_call</span></tt>()</td>
+<td>Filter on a method call.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_definition</span></tt>()</td>
+<td>Filter on the method definition.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_ios_filter</span></tt>()</td>
+<td>Return if <cite>SecurityFilters</cite> is only for iOS</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.filter.UIPasteBoardFilter.UIPasteBoardFilter.config_mac_filter" title="vizasm.analysis.security.filter.UIPasteBoardFilter.UIPasteBoardFilter.config_mac_filter"><tt class="xref py py-obj docutils literal"><span class="pre">config_mac_filter</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">description</span></tt>()</td>
+<td>The full description of the filter</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">filter</span></tt>()</td>
+<td>Filter the <cite>MethodCall</cite> according to the filter and replace the old one with the filtered one.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.UIPasteBoardFilter.UIPasteBoardFilter.filter_method_call" title="vizasm.analysis.security.filter.UIPasteBoardFilter.UIPasteBoardFilter.filter_method_call"><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_call</span></tt></a>(function)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_definition</span></tt>(method)</td>
+<td>Filter on the method definition.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_gexf_viz_attr_dict</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_methodcall</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_size</span></tt>()</td>
+<td>Returns the subdictionary with the size key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_viz_color_dict</span></tt>()</td>
+<td>Returns the subdictionary with the color key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_blue</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_green</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_red</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_transparency</span></tt>()</td>
+<td>Transparency of the node</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_size</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_gexf_viz_attr_dict</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_methodcall</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_name</span></tt>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.UIPasteBoardFilter.UIPasteBoardFilter.config_mac_filter">
+<tt class="descname">config_mac_filter</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/UIPasteBoardFilter.html#UIPasteBoardFilter.config_mac_filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.UIPasteBoardFilter.UIPasteBoardFilter.config_mac_filter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.UIPasteBoardFilter.UIPasteBoardFilter.filter_method_call">
+<tt class="descname">filter_method_call</tt><big>(</big><em>function</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/UIPasteBoardFilter.html#UIPasteBoardFilter.filter_method_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.UIPasteBoardFilter.UIPasteBoardFilter.filter_method_call" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.security.filter.UntrustedSSLCertsFilter">
+<span id="untrustedsslcertsfilter-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">UntrustedSSLCertsFilter</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.security.filter.UntrustedSSLCertsFilter" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 20.04.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.security.filter.UntrustedSSLCertsFilter.UntrustedSSLCertsFilter">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.security.filter.UntrustedSSLCertsFilter.</tt><tt class="descname">UntrustedSSLCertsFilter</tt><big>(</big><em>name=None</em>, <em>methodcall=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/UntrustedSSLCertsFilter.html#UntrustedSSLCertsFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.UntrustedSSLCertsFilter.UntrustedSSLCertsFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.analysis.security.filter.SecurityFilter.SecurityFilter" title="vizasm.analysis.security.filter.SecurityFilter.SecurityFilter"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.security.filter.SecurityFilter.SecurityFilter</span></tt></a></p>
+<p>Check if invalid SSL certificates are being accepted.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_to_graph</span></tt>(graph[,&nbsp;...])</td>
+<td>This method adds the <cite>SecurityFilter</cite> to the graph and configures its attributes.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">attribute_dictionary</span></tt>()</td>
+<td>Merge viz attributes and filter description and return the dictionary</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.UntrustedSSLCertsFilter.UntrustedSSLCertsFilter.config_filter_method_call" title="vizasm.analysis.security.filter.UntrustedSSLCertsFilter.UntrustedSSLCertsFilter.config_filter_method_call"><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_call</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.filter.UntrustedSSLCertsFilter.UntrustedSSLCertsFilter.config_filter_method_definition" title="vizasm.analysis.security.filter.UntrustedSSLCertsFilter.UntrustedSSLCertsFilter.config_filter_method_definition"><tt class="xref py py-obj docutils literal"><span class="pre">config_filter_method_definition</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_ios_filter</span></tt>()</td>
+<td>Return if <cite>SecurityFilters</cite> is only for iOS</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">config_mac_filter</span></tt>()</td>
+<td>Return if <cite>SecurityFilters</cite> is only for mac</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">description</span></tt>()</td>
+<td>The full description of the filter</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">filter</span></tt>()</td>
+<td>Filter the <cite>MethodCall</cite> according to the filter and replace the old one with the filtered one.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.UntrustedSSLCertsFilter.UntrustedSSLCertsFilter.filter_method_call" title="vizasm.analysis.security.filter.UntrustedSSLCertsFilter.UntrustedSSLCertsFilter.filter_method_call"><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_call</span></tt></a>(filter_me)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.filter.UntrustedSSLCertsFilter.UntrustedSSLCertsFilter.filter_method_definition" title="vizasm.analysis.security.filter.UntrustedSSLCertsFilter.UntrustedSSLCertsFilter.filter_method_definition"><tt class="xref py py-obj docutils literal"><span class="pre">filter_method_definition</span></tt></a>(method)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_gexf_viz_attr_dict</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_methodcall</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_size</span></tt>()</td>
+<td>Returns the subdictionary with the size key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_viz_color_dict</span></tt>()</td>
+<td>Returns the subdictionary with the color key keeping structure of the dictionary</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.filter.UntrustedSSLCertsFilter.UntrustedSSLCertsFilter.node_color_blue" title="vizasm.analysis.security.filter.UntrustedSSLCertsFilter.UntrustedSSLCertsFilter.node_color_blue"><tt class="xref py py-obj docutils literal"><span class="pre">node_color_blue</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.security.filter.UntrustedSSLCertsFilter.UntrustedSSLCertsFilter.node_color_green" title="vizasm.analysis.security.filter.UntrustedSSLCertsFilter.UntrustedSSLCertsFilter.node_color_green"><tt class="xref py py-obj docutils literal"><span class="pre">node_color_green</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.security.filter.UntrustedSSLCertsFilter.UntrustedSSLCertsFilter.node_color_red" title="vizasm.analysis.security.filter.UntrustedSSLCertsFilter.UntrustedSSLCertsFilter.node_color_red"><tt class="xref py py-obj docutils literal"><span class="pre">node_color_red</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_color_transparency</span></tt>()</td>
+<td>Transparency of the node</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">node_size</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_gexf_viz_attr_dict</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_methodcall</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_name</span></tt>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.UntrustedSSLCertsFilter.UntrustedSSLCertsFilter.config_filter_method_call">
+<tt class="descname">config_filter_method_call</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/UntrustedSSLCertsFilter.html#UntrustedSSLCertsFilter.config_filter_method_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.UntrustedSSLCertsFilter.UntrustedSSLCertsFilter.config_filter_method_call" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.UntrustedSSLCertsFilter.UntrustedSSLCertsFilter.config_filter_method_definition">
+<tt class="descname">config_filter_method_definition</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/UntrustedSSLCertsFilter.html#UntrustedSSLCertsFilter.config_filter_method_definition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.UntrustedSSLCertsFilter.UntrustedSSLCertsFilter.config_filter_method_definition" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.UntrustedSSLCertsFilter.UntrustedSSLCertsFilter.filter_method_call">
+<tt class="descname">filter_method_call</tt><big>(</big><em>filter_me</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/UntrustedSSLCertsFilter.html#UntrustedSSLCertsFilter.filter_method_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.UntrustedSSLCertsFilter.UntrustedSSLCertsFilter.filter_method_call" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.UntrustedSSLCertsFilter.UntrustedSSLCertsFilter.filter_method_definition">
+<tt class="descname">filter_method_definition</tt><big>(</big><em>method</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/UntrustedSSLCertsFilter.html#UntrustedSSLCertsFilter.filter_method_definition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.UntrustedSSLCertsFilter.UntrustedSSLCertsFilter.filter_method_definition" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.UntrustedSSLCertsFilter.UntrustedSSLCertsFilter.node_color_blue">
+<tt class="descname">node_color_blue</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/UntrustedSSLCertsFilter.html#UntrustedSSLCertsFilter.node_color_blue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.UntrustedSSLCertsFilter.UntrustedSSLCertsFilter.node_color_blue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.UntrustedSSLCertsFilter.UntrustedSSLCertsFilter.node_color_green">
+<tt class="descname">node_color_green</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/UntrustedSSLCertsFilter.html#UntrustedSSLCertsFilter.node_color_green"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.UntrustedSSLCertsFilter.UntrustedSSLCertsFilter.node_color_green" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.security.filter.UntrustedSSLCertsFilter.UntrustedSSLCertsFilter.node_color_red">
+<tt class="descname">node_color_red</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/UntrustedSSLCertsFilter.html#UntrustedSSLCertsFilter.node_color_red"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.UntrustedSSLCertsFilter.UntrustedSSLCertsFilter.node_color_red" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="vizasm.analysis.security.filter.util.html">util Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.util.html#id1"><tt class="docutils literal"><span class="pre">util</span></tt> Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.util.html#module-vizasm.analysis.security.filter.util.MethodCallFilterUtil"><tt class="docutils literal"><span class="pre">MethodCallFilterUtil</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.util.html#module-vizasm.analysis.security.filter.util.MethodDefFilterUtil"><tt class="docutils literal"><span class="pre">MethodDefFilterUtil</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.util.html#module-vizasm.analysis.security.filter.util.Util"><tt class="docutils literal"><span class="pre">Util</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

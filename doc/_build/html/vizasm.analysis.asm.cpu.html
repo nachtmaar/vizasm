@@ -1,0 +1,2487 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>cpu Package &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">cpu Package</a><ul>
+<li><a class="reference internal" href="#module-vizasm.analysis.asm.cpu.AsmRegEx"><tt class="docutils literal"><span class="pre">AsmRegEx</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.analysis.asm.cpu.AssignmentMatchingSystem"><tt class="docutils literal"><span class="pre">AssignmentMatchingSystem</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.analysis.asm.cpu.CRuntime"><tt class="docutils literal"><span class="pre">CRuntime</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.analysis.asm.cpu.CallingConventionsInterface"><tt class="docutils literal"><span class="pre">CallingConventionsInterface</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.analysis.asm.cpu.Cpu"><tt class="docutils literal"><span class="pre">Cpu</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.analysis.asm.cpu.ParseUtil"><tt class="docutils literal"><span class="pre">ParseUtil</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.analysis.asm.cpu.Resetable"><tt class="docutils literal"><span class="pre">Resetable</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/vizasm.analysis.asm.cpu.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="cpu-package">
+<h1>cpu Package<a class="headerlink" href="#cpu-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-vizasm.analysis.asm.cpu.AsmRegEx">
+<span id="asmregex-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">AsmRegEx</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.asm.cpu.AsmRegEx" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 20.03.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.asm.cpu.AsmRegEx.</tt><tt class="descname">AsmRegEx</tt><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AsmRegEx.html#AsmRegEx"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vizasm.html#vizasm.RegEx.RegEx" title="vizasm.RegEx.RegEx"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.RegEx.RegEx</span></tt></a></p>
+<p>Contains regular expressions (mostly in verbose mode) used for analyzing the assembler file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>RE_SELECTOR</strong> :</p>
+<blockquote>
+<div><p>match e.g. &#8220;&#64;selector(objectForKey:)&#8221;</p>
+</div></blockquote>
+<p><strong>RE_BASIC_BLOCK</strong> :</p>
+<blockquote>
+<div><p>match e.g. &#8221;; Basic Block Input Regs: rax rdx rsi rdi -  Killed Regs: rax rcx rdx rsp rbp rsi rdi r8&#8221;</p>
+</div></blockquote>
+<p><strong>RE_METH_IMPL</strong> :</p>
+<blockquote>
+<div><p>match e.g. &#8220;<a href="#id5"><span class="problematic" id="id6">methImpl_AppDelegate_applicationDidFinishLaunching_</span></a>&#8221;
+or &#8220;methImpl_static_Segment_demangleNoSuffix&#8221;</p>
+</div></blockquote>
+<p><strong>RE_CATEGORY</strong> :</p>
+<blockquote>
+<div><p>match category method like e.g. &#8220;+[NSURLRequest(AnyHttpsCert) allowsAnyHTTPSCertificateForHost:]_100002120:&#8221; (static category method) or &#8220;-[NSURLRequest(AnyHttpsCert) initWithURL:cachePolicy:timeoutInterval:]_100002060:&#8221; (class category method)</p>
+</div></blockquote>
+<p><strong>RE_HEX_VALUE</strong> :</p>
+<blockquote>
+<div><p>match e.g. &#8220;OxFF or 0xff&#8221; or &#8220;#0xFF&#8221; (arm)</p>
+</div></blockquote>
+<p><strong>SEARCH_NOP</strong> :</p>
+<blockquote>
+<div><p>use to search for nop command</p>
+</div></blockquote>
+<p><strong>RE_MATCH_ENTRYPOINT</strong> :</p>
+<blockquote>
+<div><p>use to identify entry point in asm file</p>
+</div></blockquote>
+<p><strong>RE_OWN_C_METHOD_DEF</strong> :</p>
+<blockquote>
+<div><p>match .e.g &#8220;// cFunction(int, int, int)&#8221;</p>
+</div></blockquote>
+<p><strong>RE_OWN_C_METHOD_CALLED</strong> :</p>
+<blockquote>
+<div><p>match e.g. &#8220;cFunction(int, int, int)&#8221;</p>
+</div></blockquote>
+<p><strong>RE_SUB</strong> :</p>
+<blockquote>
+<div><p>match e.g. &#8220;sub_1001bc366:&#8221;</p>
+</div></blockquote>
+<p><strong>RE_CALLED_SUB</strong> :</p>
+<blockquote>
+<div><p>match e.g. &#8220;sub_1001bc366&#8221;</p>
+</div></blockquote>
+<p><strong>RE_C_METHOD</strong> :</p>
+<blockquote>
+<div><p>match e.g. &#8220;_CGPointMake_10002c4e0_1:&#8221;</p>
+</div></blockquote>
+<p><strong>RE_CALLED_C_METHOD</strong> :</p>
+<blockquote>
+<div><p>match e.g. &#8220;_CGPointMake_10002c4e0_1&#8221;</p>
+</div></blockquote>
+<p><strong>RE_CLASS_PARENT</strong> :</p>
+<blockquote>
+<div><p>match e.g. &#8220;Class Object1 (parent class: SuperObject)&#8221;</p>
+</div></blockquote>
+<p><strong>RE_FORMAT_STRING</strong> :</p>
+<blockquote>
+<div><p>match e.g. &#64;&#8221;&#8220;%s%d&#8217; but not &#8216;&#64;&#8221;%%&#8221;&#8217; and not &#8216;&#64;&#8221;Defaults&#8221;&#8217;. The string must contain a format argument like e.g. %&#64;</p>
+</div></blockquote>
+<p><strong>RE_STRING</strong> :</p>
+<blockquote class="last">
+<div><p>match e.g. &#8216;&#64;&#8221;defaults&#8221;&#8217;</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">compiled_re</span></tt>(regex[,&nbsp;flags])</td>
+<td>Returns a compiled regex pattern object</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">compiled_vre</span></tt>(regex[,&nbsp;flags])</td>
+<td>Returns a compiled regex pattern object</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.is_entrypoint" title="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.is_entrypoint"><tt class="xref py py-obj docutils literal"><span class="pre">is_entrypoint</span></tt></a>(asmline)</td>
+<td>Check if line is entry point in asm file (See <cite>AsmRegEx.RE_MATCH_ENTRYPOINT</cite>)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.is_method_implementation" title="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.is_method_implementation"><tt class="xref py py-obj docutils literal"><span class="pre">is_method_implementation</span></tt></a>(asmline)</td>
+<td>Indicates if a line is a <cite>CategoryClass</cite> or method implementation.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.method_implementation_is_static" title="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.method_implementation_is_static"><tt class="xref py py-obj docutils literal"><span class="pre">method_implementation_is_static</span></tt></a>(...)</td>
+<td>Returns if the method is static</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_BASIC_BLOCK">
+<tt class="descname">RE_BASIC_BLOCK</tt><em class="property"> = '\n Basic\\ Block\\ Input\\ Regs\\:\\s*   # ; Basic Block Input Regs: \n (?P&lt;input_regs&gt;[\\w &lt;&gt;]+)                 # rax rdx rsi rdi\n \\s+-\\s+                          #  -  \n Killed\\ Regs\\:\\s*                # Killed Regs: \n (?P&lt;killed_regs&gt;[\\w ]+)                   # rax rcx rdx rsp rbp rsi rdi r8\n \\s*\n'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_BASIC_BLOCK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_BASIC_BLOCK_INPUT_REGS">
+<tt class="descname">RE_BASIC_BLOCK_INPUT_REGS</tt><em class="property"> = 'input_regs'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_BASIC_BLOCK_INPUT_REGS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_BASIC_BLOCK_KILLED_REGS">
+<tt class="descname">RE_BASIC_BLOCK_KILLED_REGS</tt><em class="property"> = 'killed_regs'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_BASIC_BLOCK_KILLED_REGS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_CALLED_C_METHOD">
+<tt class="descname">RE_CALLED_C_METHOD</tt><em class="property"> = '\n    _+              # _ \n    (?P&lt;c_method_name&gt;\\S+)     # CGPointMake_10002c4e0_1\n    $'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_CALLED_C_METHOD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_CALLED_C_METHOD_GR_NAME">
+<tt class="descname">RE_CALLED_C_METHOD_GR_NAME</tt><em class="property"> = 'c_method_name'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_CALLED_C_METHOD_GR_NAME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_CALLED_SUB">
+<tt class="descname">RE_CALLED_SUB</tt><em class="property"> = '\n    (?P&lt;subname&gt;\n    sub[_]         # sub_\n    \\S+)           # 1001bc366\n    $'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_CALLED_SUB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_CALLED_SUB_GR_SUBNAME">
+<tt class="descname">RE_CALLED_SUB_GR_SUBNAME</tt><em class="property"> = 'subname'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_CALLED_SUB_GR_SUBNAME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_CATEGORY">
+<tt class="descname">RE_CATEGORY</tt><em class="property"> = '\n (?P&lt;selector_type&gt;[+]|-)+      # starts with + or -\n \\[                  # [ \n (?P&lt;on_class&gt;\\w+)         # NSURLRequest\n \\((?P&lt;class&gt;\\w+)\\)     # AnyHttpsCert\n \\s+                 # whitespace\n (?P&lt;selector&gt;[\\w:]+)      # initWithURL:cachePolicy:timeoutInterval:\n \\]                  # ]\n _\\S+:               # _100002060: \n'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_CATEGORY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_CATEGORY_CLASS">
+<tt class="descname">RE_CATEGORY_CLASS</tt><em class="property"> = 'class'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_CATEGORY_CLASS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_CATEGORY_ON_CLASS">
+<tt class="descname">RE_CATEGORY_ON_CLASS</tt><em class="property"> = 'on_class'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_CATEGORY_ON_CLASS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_CATEGORY_SELECTOR">
+<tt class="descname">RE_CATEGORY_SELECTOR</tt><em class="property"> = 'selector'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_CATEGORY_SELECTOR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_CATEGORY_STATIC_SYMBOL">
+<tt class="descname">RE_CATEGORY_STATIC_SYMBOL</tt><em class="property"> = 'selector_type'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_CATEGORY_STATIC_SYMBOL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_CATEGORY_SYMBOL_NON_STATIC">
+<tt class="descname">RE_CATEGORY_SYMBOL_NON_STATIC</tt><em class="property"> = '-'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_CATEGORY_SYMBOL_NON_STATIC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_CATEGORY_SYMBOL_STATIC">
+<tt class="descname">RE_CATEGORY_SYMBOL_STATIC</tt><em class="property"> = '+'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_CATEGORY_SYMBOL_STATIC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_CLASS_PARENT">
+<tt class="descname">RE_CLASS_PARENT</tt><em class="property"> = '\n Class\\s+             # Class\n (?P&lt;class&gt;\\w+)\\s+       # Object1\n \\(parent\\s+class[:]\\s+ # (parent class:  \n (?P&lt;parent&gt;\\w+)          # SuperObject)\n \\)\n '</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_CLASS_PARENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_CLASS_PARENT_GR_CLASS">
+<tt class="descname">RE_CLASS_PARENT_GR_CLASS</tt><em class="property"> = 'class'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_CLASS_PARENT_GR_CLASS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_CLASS_PARENT_GR_PARENT">
+<tt class="descname">RE_CLASS_PARENT_GR_PARENT</tt><em class="property"> = 'parent'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_CLASS_PARENT_GR_PARENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_C_METHOD">
+<tt class="descname">RE_C_METHOD</tt><em class="property"> = '^\\s+\n    _+              # _ \n    (?P&lt;c_method_name&gt;\\S+)     # CGPointMake_10002c4e0_1\n    [:]$'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_C_METHOD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_C_METHOD_GR_NAME">
+<tt class="descname">RE_C_METHOD_GR_NAME</tt><em class="property"> = 'c_method_name'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_C_METHOD_GR_NAME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_C_STRING">
+<tt class="descname">RE_C_STRING</tt><em class="property"> = '\n    &quot;(?P&lt;c_string&gt;.*)&quot;\n    '</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_C_STRING" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_C_STRING_GR_NAME">
+<tt class="descname">RE_C_STRING_GR_NAME</tt><em class="property"> = 'c_string'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_C_STRING_GR_NAME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_FORMAT_STRING">
+<tt class="descname">RE_FORMAT_STRING</tt><em class="property"> = '\n (?P&lt;objc_string&gt;&#64;?)&quot;                         # &#64;&quot; or &quot;\n (?P&lt;format_string&gt;\n  (?:\n  [^%]                       # match all but %\n  |                          # or\n  %%)                        # %% (escaped %)\n  *(?:%.*)                   # at least one (or more) % followed by alphanumeric or &#64; is needed \n  )\n &quot;                          # &quot;\n'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_FORMAT_STRING" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_FORMAT_STRING_GR_OBJC_STRING">
+<tt class="descname">RE_FORMAT_STRING_GR_OBJC_STRING</tt><em class="property"> = 'objc_string'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_FORMAT_STRING_GR_OBJC_STRING" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_FORMAT_STRING_GR_STRING">
+<tt class="descname">RE_FORMAT_STRING_GR_STRING</tt><em class="property"> = 'format_string'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_FORMAT_STRING_GR_STRING" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_HEX_VALUE">
+<tt class="descname">RE_HEX_VALUE</tt><em class="property"> = '\n \\#?               # optional with leading &quot;#&quot; (arm)\n (?P&lt;hex_value&gt;\n 0x[0-9a-zA-Z]+    # 0xFF\n )     \n '</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_HEX_VALUE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_HEX_VALUE_GR_HEX_VALUE">
+<tt class="descname">RE_HEX_VALUE_GR_HEX_VALUE</tt><em class="property"> = 'hex_value'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_HEX_VALUE_GR_HEX_VALUE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_MATCH_ENTRYPOINT">
+<tt class="descname">RE_MATCH_ENTRYPOINT</tt><em class="property"> = '\\s*EntryPoint:\\s*'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_MATCH_ENTRYPOINT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_METH_IMPL">
+<tt class="descname">RE_METH_IMPL</tt><em class="property"> = '\n    ^\\s+                                   # only whitespace at the beginning \n    (methImpl|method|meth)[_]              # methImpl_ or method_ or meth_\n    (?P&lt;static&gt;static)?_?                      # static_\n    (?P&lt;class&gt;([A-Za-z0-9]+[_]*))             # AppDelegate\n    [_]                                    # _\n    (?P&lt;selector&gt;([A-Za-z0-9]+[_]*)+)            # applicationDidFinishLaunching_\n    '</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_METH_IMPL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_METH_IMPL_GR_CLASS">
+<tt class="descname">RE_METH_IMPL_GR_CLASS</tt><em class="property"> = 'class'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_METH_IMPL_GR_CLASS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_METH_IMPL_GR_SELECTOR">
+<tt class="descname">RE_METH_IMPL_GR_SELECTOR</tt><em class="property"> = 'selector'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_METH_IMPL_GR_SELECTOR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_METH_IMPL_GR_STATIC">
+<tt class="descname">RE_METH_IMPL_GR_STATIC</tt><em class="property"> = 'static'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_METH_IMPL_GR_STATIC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_OWN_C_METHOD_BASE">
+<tt class="descname">RE_OWN_C_METHOD_BASE</tt><em class="property"> = '\n    \\s*\n    (?P&lt;name&gt;[^&#64;]*) # match all but &#64;selector(...) - cFunction\n    [(]           # (\n    (?P&lt;args&gt;.*)    # int, int, int\n    [)]           # )\n    '</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_OWN_C_METHOD_BASE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_OWN_C_METHOD_BASE_GR_ARGS">
+<tt class="descname">RE_OWN_C_METHOD_BASE_GR_ARGS</tt><em class="property"> = 'args'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_OWN_C_METHOD_BASE_GR_ARGS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_OWN_C_METHOD_BASE_GR_NAME">
+<tt class="descname">RE_OWN_C_METHOD_BASE_GR_NAME</tt><em class="property"> = 'name'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_OWN_C_METHOD_BASE_GR_NAME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_OWN_C_METHOD_CALLED">
+<tt class="descname">RE_OWN_C_METHOD_CALLED</tt><em class="property"> = '[;]\n    \\s*\n    (?P&lt;name&gt;[^&#64;]*) # match all but &#64;selector(...) - cFunction\n    [(]           # (\n    (?P&lt;args&gt;.*)    # int, int, int\n    [)]           # )\n    '</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_OWN_C_METHOD_CALLED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_OWN_C_METHOD_DEF">
+<tt class="descname">RE_OWN_C_METHOD_DEF</tt><em class="property"> = '[/]{2}\n    \\s*\n    (?P&lt;name&gt;[^&#64;]*) # match all but &#64;selector(...) - cFunction\n    [(]           # (\n    (?P&lt;args&gt;.*)    # int, int, int\n    [)]           # )\n    '</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_OWN_C_METHOD_DEF" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_SELECTOR">
+<tt class="descname">RE_SELECTOR</tt><em class="property"> = '\n &#64;selector\\(            # &#64;selector(\n (?P&lt;selector&gt;[\\w:]+)         # objectForKey:\n \\)                     # )\n '</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_SELECTOR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_SELECTOR_GR_SELECTOR">
+<tt class="descname">RE_SELECTOR_GR_SELECTOR</tt><em class="property"> = 'selector'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_SELECTOR_GR_SELECTOR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_STRING">
+<tt class="descname">RE_STRING</tt><em class="property"> = '\n &#64;&quot;                         # &#64;&quot;\n (?P&lt;string&gt;.*)                 # defaults\n &quot;                          # &quot;\n'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_STRING" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_STRING_GR_STRING">
+<tt class="descname">RE_STRING_GR_STRING</tt><em class="property"> = 'string'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_STRING_GR_STRING" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_SUB">
+<tt class="descname">RE_SUB</tt><em class="property"> = '^\\s+\n    (?P&lt;subname&gt;\n    sub[_]         # sub_\n    \\S+)           # 1001bc366\n    [:]$'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_SUB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_SUB_GR_SUBNAME">
+<tt class="descname">RE_SUB_GR_SUBNAME</tt><em class="property"> = 'subname'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.RE_SUB_GR_SUBNAME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.SEARCH_NOP">
+<tt class="descname">SEARCH_NOP</tt><em class="property"> = 'nop'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.SEARCH_NOP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.is_entrypoint">
+<em class="property">static </em><tt class="descname">is_entrypoint</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AsmRegEx.html#AsmRegEx.is_entrypoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.is_entrypoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if line is entry point in asm file (See <cite>AsmRegEx.RE_MATCH_ENTRYPOINT</cite>)</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.is_method_implementation">
+<em class="property">static </em><tt class="descname">is_method_implementation</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AsmRegEx.html#AsmRegEx.is_method_implementation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.is_method_implementation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indicates if a line is a <cite>CategoryClass</cite> or method implementation.
+See <cite>AsmRegEx.RE_CATEGORY</cite> and <cite>AsmRegEx.RE_METH_IMPL</cite>.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.method_implementation_is_static">
+<em class="property">static </em><tt class="descname">method_implementation_is_static</tt><big>(</big><em>re_meth_impl_gr_static_val</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AsmRegEx.html#AsmRegEx.method_implementation_is_static"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.method_implementation_is_static" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns if the method is static</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.asm.cpu.AssignmentMatchingSystem">
+<span id="assignmentmatchingsystem-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">AssignmentMatchingSystem</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.asm.cpu.AssignmentMatchingSystem" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 24.08.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.asm.cpu.AssignmentMatchingSystem.</tt><tt class="descname">AssignmentMatchingSystem</tt><big>(</big><em>cpu</em>, <em>parse_util</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AssignmentMatchingSystem.html#AssignmentMatchingSystem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt>, <a class="reference internal" href="#vizasm.analysis.asm.cpu.Resetable.Resetable" title="vizasm.analysis.asm.cpu.Resetable.Resetable"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.asm.cpu.Resetable.Resetable</span></tt></a></p>
+<p>The AssignmentMatchingSystem is the base class for a system that reads a line of assembler code in which an assignment is being made.</p>
+<p>The system has to parse the values with the help of the <cite>parse_util</cite> and wrap them into the appropriate class.</p>
+<p>The system also has to recognize stack operations (push and pop).</p>
+<p>The left and right object of the assignment can be accessed via <cite>lobject</cite> and <cite>robject</cite> but only if an assignment has been made.</p>
+<p>If a stack push has been read, the stack can be adjusted with <cite>process_stack_push</cite>.
+Reading a stack fetch will store the fetched argument in <cite>robject</cite>.</p>
+<p>If you want to use an estimation for the number of arguments a function takes (not objective-c function)
+you have to keep track of register and stack usage via <cite>reg_usage_since_last_call</cite> and <a href="#id1"><span class="problematic" id="id2">`</span></a>stack_usage_since_last_call.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>_cpu: Cpu</strong> :</p>
+<p><strong>__parse_util: ParseUtil</strong> :</p>
+<blockquote>
+<div><p>the <cite>ParseUtil</cite> to use for splitting and parsing the line</p>
+</div></blockquote>
+<p><strong>_lobject: object</strong> :</p>
+<blockquote>
+<div><p>the left value of the assignment matched to a type</p>
+</div></blockquote>
+<p><strong>_robject: object</strong> :</p>
+<blockquote>
+<div><p>the right value of the assignment matched to a type</p>
+</div></blockquote>
+<p><strong>_is_stack_fetch: bool (default is False)</strong> :</p>
+<blockquote>
+<div><p>indicates if the assignment is a fetch from the stack
+e.g. &#8220;mov        rax, qword [ss:rbp-0x70+arg_8]&#8221;</p>
+</div></blockquote>
+<p><strong>_is_stack_push: bool (default is False)</strong> :</p>
+<blockquote>
+<div><p>indicates if the assignment is a stack push operation. x86_64 example: &#8220;mov dword [ss:rsp], 0x7&#8221;.</p>
+</div></blockquote>
+<p><strong>_stack_push_objects: list&lt;object&gt; (default is [])</strong> :</p>
+<blockquote>
+<div><p>the objects being pushed onto the stack</p>
+</div></blockquote>
+<p><strong>_stack_address: int (default is None)</strong> :</p>
+<blockquote>
+<div><p>the stack address</p>
+</div></blockquote>
+<p><strong>`: set&lt;Register&gt;</strong> :</p>
+<blockquote>
+<div><p>use to store the registers that have been used 
+to store any value since the last call statement</p>
+</div></blockquote>
+<p><strong>_stack_usage_since_last_call: set&lt;object&gt;</strong> :</p>
+<blockquote>
+<div><p>use to store the stack arguments that have been used to 
+store any value since the last call statement</p>
+</div></blockquote>
+<p><strong>c_func_heuristic: bool</strong> :</p>
+<blockquote class="last">
+<div><p>if enabled use heuristic to determine arguments for c function calls</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.add_reg_arg_since_last_call" title="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.add_reg_arg_since_last_call"><tt class="xref py py-obj docutils literal"><span class="pre">add_reg_arg_since_last_call</span></tt></a>(reg,&nbsp;robject)</td>
+<td>Add a <cite>Register</cite> to <cite>reg_usage_since_last_call</cite> if the</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.clear_usage_since_last_call" title="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.clear_usage_since_last_call"><tt class="xref py py-obj docutils literal"><span class="pre">clear_usage_since_last_call</span></tt></a>()</td>
+<td>The <cite>Cpu</cite> uses this after a new call has been read</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_c_func_heuristic" title="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_c_func_heuristic"><tt class="xref py py-obj docutils literal"><span class="pre">get_c_func_heuristic</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_cpu" title="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_cpu"><tt class="xref py py-obj docutils literal"><span class="pre">get_cpu</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_is_stack_fetch" title="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_is_stack_fetch"><tt class="xref py py-obj docutils literal"><span class="pre">get_is_stack_fetch</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_is_stack_push" title="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_is_stack_push"><tt class="xref py py-obj docutils literal"><span class="pre">get_is_stack_push</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_lobject" title="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_lobject"><tt class="xref py py-obj docutils literal"><span class="pre">get_lobject</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_parse_util" title="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_parse_util"><tt class="xref py py-obj docutils literal"><span class="pre">get_parse_util</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_reg_args_since_last_call" title="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_reg_args_since_last_call"><tt class="xref py py-obj docutils literal"><span class="pre">get_reg_args_since_last_call</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_robject" title="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_robject"><tt class="xref py py-obj docutils literal"><span class="pre">get_robject</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_stack_address" title="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_stack_address"><tt class="xref py py-obj docutils literal"><span class="pre">get_stack_address</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_stack_args_since_last_call" title="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_stack_args_since_last_call"><tt class="xref py py-obj docutils literal"><span class="pre">get_stack_args_since_last_call</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_stack_push_objects" title="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_stack_push_objects"><tt class="xref py py-obj docutils literal"><span class="pre">get_stack_push_objects</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_usage_since_last_call" title="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_usage_since_last_call"><tt class="xref py py-obj docutils literal"><span class="pre">get_usage_since_last_call</span></tt></a>()</td>
+<td>Get the registers and stack usage since the last call.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.number_of_arguments_since_last_call" title="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.number_of_arguments_since_last_call"><tt class="xref py py-obj docutils literal"><span class="pre">number_of_arguments_since_last_call</span></tt></a>()</td>
+<td>Get the number of arguments that have been seen since the last call.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.process_stack_push" title="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.process_stack_push"><tt class="xref py py-obj docutils literal"><span class="pre">process_stack_push</span></tt></a>()</td>
+<td>Push the objects onto the stack</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.read_assignment" title="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.read_assignment"><tt class="xref py py-obj docutils literal"><span class="pre">read_assignment</span></tt></a>(asmline)</td>
+<td>Read an assignment and try to split it.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.reset" title="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.reset"><tt class="xref py py-obj docutils literal"><span class="pre">reset</span></tt></a>()</td>
+<td>Use to reset the system after an assignment has been read.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_c_func_heuristic" title="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_c_func_heuristic"><tt class="xref py py-obj docutils literal"><span class="pre">set_c_func_heuristic</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_cpu" title="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_cpu"><tt class="xref py py-obj docutils literal"><span class="pre">set_cpu</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_is_stack_fetch" title="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_is_stack_fetch"><tt class="xref py py-obj docutils literal"><span class="pre">set_is_stack_fetch</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_is_stack_push" title="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_is_stack_push"><tt class="xref py py-obj docutils literal"><span class="pre">set_is_stack_push</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_lobject" title="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_lobject"><tt class="xref py py-obj docutils literal"><span class="pre">set_lobject</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_parse_util" title="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_parse_util"><tt class="xref py py-obj docutils literal"><span class="pre">set_parse_util</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_reg_args_since_last_call" title="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_reg_args_since_last_call"><tt class="xref py py-obj docutils literal"><span class="pre">set_reg_args_since_last_call</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_robject" title="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_robject"><tt class="xref py py-obj docutils literal"><span class="pre">set_robject</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_stack_address" title="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_stack_address"><tt class="xref py py-obj docutils literal"><span class="pre">set_stack_address</span></tt></a>(value)</td>
+<td>Set the stack address.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_stack_args_since_last_call" title="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_stack_args_since_last_call"><tt class="xref py py-obj docutils literal"><span class="pre">set_stack_args_since_last_call</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_stack_push_objects" title="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_stack_push_objects"><tt class="xref py py-obj docutils literal"><span class="pre">set_stack_push_objects</span></tt></a>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.add_reg_arg_since_last_call">
+<tt class="descname">add_reg_arg_since_last_call</tt><big>(</big><em>reg</em>, <em>robject</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AssignmentMatchingSystem.html#AssignmentMatchingSystem.add_reg_arg_since_last_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.add_reg_arg_since_last_call" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a <cite>Register</cite> to <cite>reg_usage_since_last_call</cite> if the 
+register is specified as an register holding method arguments.</p>
+<p>See <cite>CallingConventionsInterface.arguments_registers</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><strong>reg: Register</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.c_func_heuristic">
+<tt class="descname">c_func_heuristic</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.c_func_heuristic" title="Permalink to this definition">¶</a></dt>
+<dd><p>c_func_heuristic(bool) &#8211; if enabled use heuristic to determine arguments for c function calls</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.clear_usage_since_last_call">
+<tt class="descname">clear_usage_since_last_call</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AssignmentMatchingSystem.html#AssignmentMatchingSystem.clear_usage_since_last_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.clear_usage_since_last_call" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <cite>Cpu</cite> uses this after a new call has been read 
+to reset the register and stack usage since the last call</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.cpu">
+<tt class="descname">cpu</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.cpu" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_c_func_heuristic">
+<tt class="descname">get_c_func_heuristic</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AssignmentMatchingSystem.html#AssignmentMatchingSystem.get_c_func_heuristic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_c_func_heuristic" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_cpu">
+<tt class="descname">get_cpu</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AssignmentMatchingSystem.html#AssignmentMatchingSystem.get_cpu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_cpu" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_is_stack_fetch">
+<tt class="descname">get_is_stack_fetch</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AssignmentMatchingSystem.html#AssignmentMatchingSystem.get_is_stack_fetch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_is_stack_fetch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_is_stack_push">
+<tt class="descname">get_is_stack_push</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AssignmentMatchingSystem.html#AssignmentMatchingSystem.get_is_stack_push"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_is_stack_push" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_lobject">
+<tt class="descname">get_lobject</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AssignmentMatchingSystem.html#AssignmentMatchingSystem.get_lobject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_lobject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_parse_util">
+<tt class="descname">get_parse_util</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AssignmentMatchingSystem.html#AssignmentMatchingSystem.get_parse_util"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_parse_util" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_reg_args_since_last_call">
+<tt class="descname">get_reg_args_since_last_call</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AssignmentMatchingSystem.html#AssignmentMatchingSystem.get_reg_args_since_last_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_reg_args_since_last_call" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_robject">
+<tt class="descname">get_robject</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AssignmentMatchingSystem.html#AssignmentMatchingSystem.get_robject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_robject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_stack_address">
+<tt class="descname">get_stack_address</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AssignmentMatchingSystem.html#AssignmentMatchingSystem.get_stack_address"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_stack_address" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_stack_args_since_last_call">
+<tt class="descname">get_stack_args_since_last_call</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AssignmentMatchingSystem.html#AssignmentMatchingSystem.get_stack_args_since_last_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_stack_args_since_last_call" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_stack_push_objects">
+<tt class="descname">get_stack_push_objects</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AssignmentMatchingSystem.html#AssignmentMatchingSystem.get_stack_push_objects"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_stack_push_objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_usage_since_last_call">
+<tt class="descname">get_usage_since_last_call</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AssignmentMatchingSystem.html#AssignmentMatchingSystem.get_usage_since_last_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.get_usage_since_last_call" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the registers and stack usage since the last call.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><strong>set&lt;object&gt;</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.is_stack_fetch">
+<tt class="descname">is_stack_fetch</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.is_stack_fetch" title="Permalink to this definition">¶</a></dt>
+<dd><p>_is_stack_fetch(bool) &#8211; indicates if the assignment is a fetch from the stack e.g. &#8220;mov        rax, qword [ss:rbp-0x70+arg_8]&#8221;</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.is_stack_push">
+<tt class="descname">is_stack_push</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.is_stack_push" title="Permalink to this definition">¶</a></dt>
+<dd><p>_is_stack_push: bool (default is False) &#8211; indicates if the assignment is a stack push operation. x86_64 example: &#8220;mov dword [ss:rsp], 0x7&#8221;.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.lobject">
+<tt class="descname">lobject</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.lobject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.number_of_arguments_since_last_call">
+<tt class="descname">number_of_arguments_since_last_call</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AssignmentMatchingSystem.html#AssignmentMatchingSystem.number_of_arguments_since_last_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.number_of_arguments_since_last_call" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the number of arguments that have been seen since the last call.
+For the arguments going over <cite>Register`s only count
+the ones specified by `CallingConventionsInterface.arguments_registers</cite> and 
+only take as much as they are still in the given order.
+If the <cite>Cpu</cite> gets its arguments from stack, only take these into account</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.parse_util">
+<tt class="descname">parse_util</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.parse_util" title="Permalink to this definition">¶</a></dt>
+<dd><p>__parse_util(ParseUtil) &#8211; the <cite>ParseUtil</cite> to use for splitting and parsing the line</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.process_stack_push">
+<tt class="descname">process_stack_push</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AssignmentMatchingSystem.html#AssignmentMatchingSystem.process_stack_push"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.process_stack_push" title="Permalink to this definition">¶</a></dt>
+<dd><p>Push the objects onto the stack</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.read_assignment">
+<tt class="descname">read_assignment</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AssignmentMatchingSystem.html#AssignmentMatchingSystem.read_assignment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.read_assignment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read an assignment and try to split it.</p>
+<p>Call this first to reset the <cite>AssignmentMatchingSystem</cite> 
+or do it at your own!</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>asmline</strong> : string</p>
+<blockquote class="last">
+<div><p>line of assembler</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.reg_usage_since_last_call">
+<tt class="descname">reg_usage_since_last_call</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.reg_usage_since_last_call" title="Permalink to this definition">¶</a></dt>
+<dd><p>reg_usage_since_last_call(set&lt;Register&gt;) &#8211; use to store the registers that have been used to store any value since the last call statement</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.reset">
+<tt class="descname">reset</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AssignmentMatchingSystem.html#AssignmentMatchingSystem.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use to reset the system after an assignment has been read.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.robject">
+<tt class="descname">robject</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.robject" title="Permalink to this definition">¶</a></dt>
+<dd><p>_robject(object) &#8211; the right value of the assignment matched to a type</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_c_func_heuristic">
+<tt class="descname">set_c_func_heuristic</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AssignmentMatchingSystem.html#AssignmentMatchingSystem.set_c_func_heuristic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_c_func_heuristic" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_cpu">
+<tt class="descname">set_cpu</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AssignmentMatchingSystem.html#AssignmentMatchingSystem.set_cpu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_cpu" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_is_stack_fetch">
+<tt class="descname">set_is_stack_fetch</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AssignmentMatchingSystem.html#AssignmentMatchingSystem.set_is_stack_fetch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_is_stack_fetch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_is_stack_push">
+<tt class="descname">set_is_stack_push</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AssignmentMatchingSystem.html#AssignmentMatchingSystem.set_is_stack_push"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_is_stack_push" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_lobject">
+<tt class="descname">set_lobject</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AssignmentMatchingSystem.html#AssignmentMatchingSystem.set_lobject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_lobject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_parse_util">
+<tt class="descname">set_parse_util</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AssignmentMatchingSystem.html#AssignmentMatchingSystem.set_parse_util"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_parse_util" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_reg_args_since_last_call">
+<tt class="descname">set_reg_args_since_last_call</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AssignmentMatchingSystem.html#AssignmentMatchingSystem.set_reg_args_since_last_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_reg_args_since_last_call" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_robject">
+<tt class="descname">set_robject</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AssignmentMatchingSystem.html#AssignmentMatchingSystem.set_robject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_robject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_stack_address">
+<tt class="descname">set_stack_address</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AssignmentMatchingSystem.html#AssignmentMatchingSystem.set_stack_address"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_stack_address" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the stack address.
+If address is given as string version of the hex address it will be converted to int</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_stack_args_since_last_call">
+<tt class="descname">set_stack_args_since_last_call</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AssignmentMatchingSystem.html#AssignmentMatchingSystem.set_stack_args_since_last_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_stack_args_since_last_call" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_stack_push_objects">
+<tt class="descname">set_stack_push_objects</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/AssignmentMatchingSystem.html#AssignmentMatchingSystem.set_stack_push_objects"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.set_stack_push_objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.stack_address">
+<tt class="descname">stack_address</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.stack_address" title="Permalink to this definition">¶</a></dt>
+<dd><p>_stack_address: int (default is None) &#8211; the stack address</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.stack_push_objects">
+<tt class="descname">stack_push_objects</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.stack_push_objects" title="Permalink to this definition">¶</a></dt>
+<dd><p>_stack_push_objects: list&lt;object&gt; (default is []) &#8211; the objects being pushed onto the stack</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.stack_usage_since_last_call">
+<tt class="descname">stack_usage_since_last_call</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.AssignmentMatchingSystem.AssignmentMatchingSystem.stack_usage_since_last_call" title="Permalink to this definition">¶</a></dt>
+<dd><p>stack_usage_since_last_call(set&lt;object&gt;) &#8211; use to store the stack arguments that have been used to store any value since the last call statement</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.asm.cpu.CRuntime">
+<span id="cruntime-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">CRuntime</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.asm.cpu.CRuntime" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 18.09.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.asm.cpu.CRuntime.CRuntime">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.asm.cpu.CRuntime.</tt><tt class="descname">CRuntime</tt><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/CRuntime.html#CRuntime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.CRuntime.CRuntime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Manages c specific stuff</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.CRuntime.CRuntime.create_and_store_c_func_arguments" title="vizasm.analysis.asm.cpu.CRuntime.CRuntime.create_and_store_c_func_arguments"><tt class="xref py py-obj docutils literal"><span class="pre">create_and_store_c_func_arguments</span></tt></a>(method)</td>
+<td>Create and store the arguments for the function.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.CRuntime.CRuntime.create_and_store_c_func_arguments">
+<tt class="descname">create_and_store_c_func_arguments</tt><big>(</big><em>method</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/CRuntime.html#CRuntime.create_and_store_c_func_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.CRuntime.CRuntime.create_and_store_c_func_arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and store the arguments for the function.
+Cause you dont know how many the function takes, create as much as registers are available
+to store it.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><strong>method: Function</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.asm.cpu.CallingConventionsInterface">
+<span id="callingconventionsinterface-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">CallingConventionsInterface</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.asm.cpu.CallingConventionsInterface" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 28.08.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.asm.cpu.CallingConventionsInterface.</tt><tt class="descname">CallingConventionsInterface</tt><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/CallingConventionsInterface.html#CallingConventionsInterface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the calling conventions of the <cite>Cpu</cite></p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.arguments_registers" title="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.arguments_registers"><tt class="xref py py-obj docutils literal"><span class="pre">arguments_registers</span></tt></a>()</td>
+<td>List of <cite>Register</cite> which specifies where the arguments are being stored.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.arguments_registers_in_sequence" title="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.arguments_registers_in_sequence"><tt class="xref py py-obj docutils literal"><span class="pre">arguments_registers_in_sequence</span></tt></a>()</td>
+<td>Return True if the <cite>destination_register</cite>, <cite>selector_register</cite>,</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.destination_register" title="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.destination_register"><tt class="xref py py-obj docutils literal"><span class="pre">destination_register</span></tt></a>()</td>
+<td>Returns the <cite>Register</cite> in which the destination for the selector is stored</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.exclude_argument_regs" title="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.exclude_argument_regs"><tt class="xref py py-obj docutils literal"><span class="pre">exclude_argument_regs</span></tt></a>()</td>
+<td>Return a list&lt;Register&gt; from which you know,</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.fetches_all_arguments_from_stack" title="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.fetches_all_arguments_from_stack"><tt class="xref py py-obj docutils literal"><span class="pre">fetches_all_arguments_from_stack</span></tt></a>()</td>
+<td>Return True if all arguments are popped from the stack rather than taking them from registers</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.floating_arg_registers" title="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.floating_arg_registers"><tt class="xref py py-obj docutils literal"><span class="pre">floating_arg_registers</span></tt></a>()</td>
+<td>The registers which hold the floating-point-numbers</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.frame_pointer_register" title="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.frame_pointer_register"><tt class="xref py py-obj docutils literal"><span class="pre">frame_pointer_register</span></tt></a>()</td>
+<td>Return the frame pointer register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.next_reg_for_spret" title="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.next_reg_for_spret"><tt class="xref py py-obj docutils literal"><span class="pre">next_reg_for_spret</span></tt></a>(register)</td>
+<td>If an objc_msgSend_stret is detected, the specified <cite>Register</cite> for the destination and selector do not match anymore</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.next_regs_for_spret" title="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.next_regs_for_spret"><tt class="xref py py-obj docutils literal"><span class="pre">next_regs_for_spret</span></tt></a>(reg_list)</td>
+<td>Same as <cite>next_reg_for_spret</cite>, but do it for the whole list of <cite>Register</cite></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.nslog_arg_registers" title="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.nslog_arg_registers"><tt class="xref py py-obj docutils literal"><span class="pre">nslog_arg_registers</span></tt></a>()</td>
+<td>List of registers which hold the arguments for NSLog</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.reg_list" title="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.reg_list"><tt class="xref py py-obj docutils literal"><span class="pre">reg_list</span></tt></a>(regs)</td>
+<td>Implement this method by calling <cite>_reg_list</cite> with the register type (<cite>reg_typereg_type</cite>).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.return_reg_is_fst_arg_reg" title="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.return_reg_is_fst_arg_reg"><tt class="xref py py-obj docutils literal"><span class="pre">return_reg_is_fst_arg_reg</span></tt></a>()</td>
+<td>Check if the return register is also the first argument register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.return_register" title="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.return_register"><tt class="xref py py-obj docutils literal"><span class="pre">return_register</span></tt></a>()</td>
+<td>The register which holds the return value</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.selector_arg_registers" title="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.selector_arg_registers"><tt class="xref py py-obj docutils literal"><span class="pre">selector_arg_registers</span></tt></a>()</td>
+<td>The registers(list&lt;Register&gt;) where the arguments for the selector are stored.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.selector_register" title="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.selector_register"><tt class="xref py py-obj docutils literal"><span class="pre">selector_register</span></tt></a>()</td>
+<td>Returns the <cite>Register</cite> in which the selector is stored</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.stack_pointer_register" title="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.stack_pointer_register"><tt class="xref py py-obj docutils literal"><span class="pre">stack_pointer_register</span></tt></a>()</td>
+<td>Return the stack pointer as instance of Register. E.g. &#8220;rsp&#8221; on x86_64.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.stret_selector_arg_registers" title="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.stret_selector_arg_registers"><tt class="xref py py-obj docutils literal"><span class="pre">stret_selector_arg_registers</span></tt></a>()</td>
+<td>The registers (list&lt;Register&gt;) where the arguments for the selector are stored.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.arguments_registers">
+<tt class="descname">arguments_registers</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/CallingConventionsInterface.html#CallingConventionsInterface.arguments_registers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.arguments_registers" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of <cite>Register</cite> which specifies where the arguments are being stored.
+If the <cite>Cpu</cite> fetches its arguments from stack an empty list will be returned.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.arguments_registers_in_sequence">
+<tt class="descname">arguments_registers_in_sequence</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/CallingConventionsInterface.html#CallingConventionsInterface.arguments_registers_in_sequence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.arguments_registers_in_sequence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if the <cite>destination_register</cite>, <cite>selector_register</cite>,
+and the <cite>selector_arg_registers</cite> are specified one behind the other in <cite>arguments_registers</cite>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.destination_register">
+<tt class="descname">destination_register</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/CallingConventionsInterface.html#CallingConventionsInterface.destination_register"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.destination_register" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <cite>Register</cite> in which the destination for the selector is stored</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.exclude_argument_regs">
+<tt class="descname">exclude_argument_regs</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/CallingConventionsInterface.html#CallingConventionsInterface.exclude_argument_regs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.exclude_argument_regs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list&lt;Register&gt; from which you know, 
+that they will not be used to hold arguments for a function call</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.fetches_all_arguments_from_stack">
+<tt class="descname">fetches_all_arguments_from_stack</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/CallingConventionsInterface.html#CallingConventionsInterface.fetches_all_arguments_from_stack"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.fetches_all_arguments_from_stack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if all arguments are popped from the stack rather than taking them from registers</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.floating_arg_registers">
+<tt class="descname">floating_arg_registers</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/CallingConventionsInterface.html#CallingConventionsInterface.floating_arg_registers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.floating_arg_registers" title="Permalink to this definition">¶</a></dt>
+<dd><p>The registers which hold the floating-point-numbers</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.frame_pointer_register">
+<tt class="descname">frame_pointer_register</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/CallingConventionsInterface.html#CallingConventionsInterface.frame_pointer_register"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.frame_pointer_register" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the frame pointer register</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.next_reg_for_spret">
+<tt class="descname">next_reg_for_spret</tt><big>(</big><em>register</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/CallingConventionsInterface.html#CallingConventionsInterface.next_reg_for_spret"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.next_reg_for_spret" title="Permalink to this definition">¶</a></dt>
+<dd><p>If an objc_msgSend_stret is detected, the specified <cite>Register</cite> for the destination and selector do not match anymore
+due to the fact that the first argument register is needed for the return address of the structure.
+This means that all <cite>Register</cite> get shifted right.
+At least if <cite>arguments_registers_in_sequence</cite>. Otherwise you have to implement this yourself!</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><strong>register: Register</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.next_regs_for_spret">
+<tt class="descname">next_regs_for_spret</tt><big>(</big><em>reg_list</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/CallingConventionsInterface.html#CallingConventionsInterface.next_regs_for_spret"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.next_regs_for_spret" title="Permalink to this definition">¶</a></dt>
+<dd><p>Same as <cite>next_reg_for_spret</cite>, but do it for the whole list of <cite>Register</cite></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.nslog_arg_registers">
+<tt class="descname">nslog_arg_registers</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/CallingConventionsInterface.html#CallingConventionsInterface.nslog_arg_registers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.nslog_arg_registers" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of registers which hold the arguments for NSLog</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.reg_list">
+<tt class="descname">reg_list</tt><big>(</big><em>regs</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/CallingConventionsInterface.html#CallingConventionsInterface.reg_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.reg_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implement this method by calling <cite>_reg_list</cite> with the register type (<cite>reg_typereg_type</cite>).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><strong>regs: list&lt;string&gt;</strong> :</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><strong>list&lt;reg_type&gt;</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.return_reg_is_fst_arg_reg">
+<tt class="descname">return_reg_is_fst_arg_reg</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/CallingConventionsInterface.html#CallingConventionsInterface.return_reg_is_fst_arg_reg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.return_reg_is_fst_arg_reg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the return register is also the first argument register</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.return_register">
+<tt class="descname">return_register</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/CallingConventionsInterface.html#CallingConventionsInterface.return_register"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.return_register" title="Permalink to this definition">¶</a></dt>
+<dd><p>The register which holds the return value</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.selector_arg_registers">
+<tt class="descname">selector_arg_registers</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/CallingConventionsInterface.html#CallingConventionsInterface.selector_arg_registers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.selector_arg_registers" title="Permalink to this definition">¶</a></dt>
+<dd><p>The registers(list&lt;Register&gt;) where the arguments for the selector are stored. 
+If the selector needs more arguments, the remaining ones are taken from the stack</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.selector_register">
+<tt class="descname">selector_register</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/CallingConventionsInterface.html#CallingConventionsInterface.selector_register"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.selector_register" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <cite>Register</cite> in which the selector is stored</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.stack_pointer_register">
+<tt class="descname">stack_pointer_register</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/CallingConventionsInterface.html#CallingConventionsInterface.stack_pointer_register"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.stack_pointer_register" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the stack pointer as instance of Register. E.g. &#8220;rsp&#8221; on x86_64.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.stret_selector_arg_registers">
+<tt class="descname">stret_selector_arg_registers</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/CallingConventionsInterface.html#CallingConventionsInterface.stret_selector_arg_registers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface.stret_selector_arg_registers" title="Permalink to this definition">¶</a></dt>
+<dd><p>The registers (list&lt;Register&gt;) where the arguments for the selector are stored. 
+They are only used for a objc_msgSend_stret(). A message with a structure as return value.
+The first parameters will be used as an address where the structure is returned.
+So the first <cite>Register</cite> of <cite>selector_arg_registers</cite> will be cut off.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.asm.cpu.Cpu">
+<span id="cpu-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">Cpu</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.asm.cpu.Cpu" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 26.03.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.asm.cpu.Cpu.</tt><tt class="descname">Cpu</tt><big>(</big><em>assignment_matching_system</em>, <em>parse_util</em>, <em>_register_class</em>, <em>superclass_dict=None</em>, <em>objc_runtime=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Cpu.html#Cpu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt>, <a class="reference internal" href="#vizasm.analysis.asm.cpu.CRuntime.CRuntime" title="vizasm.analysis.asm.cpu.CRuntime.CRuntime"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.asm.cpu.CRuntime.CRuntime</span></tt></a>, <a class="reference internal" href="#vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface" title="vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.asm.cpu.CallingConventionsInterface.CallingConventionsInterface</span></tt></a>, <a class="reference internal" href="#vizasm.analysis.asm.cpu.Resetable.Resetable" title="vizasm.analysis.asm.cpu.Resetable.Resetable"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.asm.cpu.Resetable.Resetable</span></tt></a></p>
+<p>The <cite>Cpu</cite> is the heart of VizAsm.</p>
+<p>It reads and interprets the asm file (use <cite>read_line</cite>).
+and keeps track of the <cite>StackFrame</cite> and the <a href="#id3"><span class="problematic" id="id4">`</span></a>Register`s.</p>
+<p>It stores the method calls that have been made in the <cite>MethodCall</cite> 
+(stores the calls for a single method implementation).</p>
+<p>Every time you read a new method implementation, you should <cite>reset</cite> the <cite>Cpu</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>_memory: Memory</strong> :</p>
+<blockquote>
+<div><p>the memory of the cpu</p>
+</div></blockquote>
+<p><strong>_objc_runtime: ObjectiveCRuntime, optional (default is ObjectiveCRuntime)</strong> :</p>
+<blockquote>
+<div><p>the objective-c runtime</p>
+</div></blockquote>
+<p><strong>__assignment_matching_system: AssignmentMatchingSystem</strong> :</p>
+<blockquote>
+<div><p>the system to read assignments</p>
+</div></blockquote>
+<p><strong>_parse_util: ParseUtil</strong> :</p>
+<blockquote>
+<div><p>utility for parsing the asm file</p>
+</div></blockquote>
+<p><strong>_register_class: classobj</strong> :</p>
+<blockquote>
+<div><p>subclass of Register (only the reference!). 
+this class reference is used to create the correct register subclass depending on the cpu architecture.</p>
+</div></blockquote>
+<p><strong>_linenumber: int</strong> :</p>
+<blockquote>
+<div><p>the current line number in the asm file. Given as parameter in <cite>read_line</cite>.</p>
+</div></blockquote>
+<p><strong>__address: int</strong> :</p>
+<blockquote>
+<div><p>the address of the current asm line</p>
+</div></blockquote>
+<p><strong>_method: FunctionInterface</strong> :</p>
+<blockquote>
+<div><p>the method which is currently being analyzed</p>
+</div></blockquote>
+<p><strong>__method_call: MethodCall</strong> :</p>
+<blockquote>
+<div><p>This is the actual output of the <cite>Cpu</cite>. It stores the messages that have been read.</p>
+</div></blockquote>
+<p><strong>c_func_heuristic: bool</strong> :</p>
+<blockquote class="last">
+<div><p>if enabled use heuristic to determine arguments for c function calls</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<dl class="docutils">
+<dt>Subclasses need to implement <cite>CallingConventionsInterface</cite> as well as:</dt>
+<dd>create_and_store_method_selector_arguments
+ignore_hex_addr_call</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">arguments_registers</span></tt>()</td>
+<td>List of <cite>Register</cite> which specifies where the arguments are being stored.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">arguments_registers_in_sequence</span></tt>()</td>
+<td>Return True if the <cite>destination_register</cite>, <cite>selector_register</cite>,</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">create_and_store_c_func_arguments</span></tt>(method)</td>
+<td>Create and store the arguments for the function.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">destination_register</span></tt>()</td>
+<td>Returns the <cite>Register</cite> in which the destination for the selector is stored</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">exclude_argument_regs</span></tt>()</td>
+<td>Return a list&lt;Register&gt; from which you know,</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">fetches_all_arguments_from_stack</span></tt>()</td>
+<td>Return True if all arguments are popped from the stack rather than taking them from registers</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">floating_arg_registers</span></tt>()</td>
+<td>The registers which hold the floating-point-numbers</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">frame_pointer_register</span></tt>()</td>
+<td>Return the frame pointer register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.get_address" title="vizasm.analysis.asm.cpu.Cpu.Cpu.get_address"><tt class="xref py py-obj docutils literal"><span class="pre">get_address</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.get_assignment_matching_system" title="vizasm.analysis.asm.cpu.Cpu.Cpu.get_assignment_matching_system"><tt class="xref py py-obj docutils literal"><span class="pre">get_assignment_matching_system</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.get_c_func_heuristic" title="vizasm.analysis.asm.cpu.Cpu.Cpu.get_c_func_heuristic"><tt class="xref py py-obj docutils literal"><span class="pre">get_c_func_heuristic</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.get_current_destination" title="vizasm.analysis.asm.cpu.Cpu.Cpu.get_current_destination"><tt class="xref py py-obj docutils literal"><span class="pre">get_current_destination</span></tt></a>([objc_msgSend_stret])</td>
+<td>Return the current destination.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.get_line_number" title="vizasm.analysis.asm.cpu.Cpu.Cpu.get_line_number"><tt class="xref py py-obj docutils literal"><span class="pre">get_line_number</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.get_memory" title="vizasm.analysis.asm.cpu.Cpu.Cpu.get_memory"><tt class="xref py py-obj docutils literal"><span class="pre">get_memory</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.get_method" title="vizasm.analysis.asm.cpu.Cpu.Cpu.get_method"><tt class="xref py py-obj docutils literal"><span class="pre">get_method</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.get_method_call" title="vizasm.analysis.asm.cpu.Cpu.Cpu.get_method_call"><tt class="xref py py-obj docutils literal"><span class="pre">get_method_call</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.get_method_selector_reg_value" title="vizasm.analysis.asm.cpu.Cpu.Cpu.get_method_selector_reg_value"><tt class="xref py py-obj docutils literal"><span class="pre">get_method_selector_reg_value</span></tt></a>()</td>
+<td>Get the value for the register where the selector of the current method is stored.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.get_objc_runtime" title="vizasm.analysis.asm.cpu.Cpu.Cpu.get_objc_runtime"><tt class="xref py py-obj docutils literal"><span class="pre">get_objc_runtime</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.get_parse_util" title="vizasm.analysis.asm.cpu.Cpu.Cpu.get_parse_util"><tt class="xref py py-obj docutils literal"><span class="pre">get_parse_util</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.get_register_class" title="vizasm.analysis.asm.cpu.Cpu.Cpu.get_register_class"><tt class="xref py py-obj docutils literal"><span class="pre">get_register_class</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.get_selfref_reg_value" title="vizasm.analysis.asm.cpu.Cpu.Cpu.get_selfref_reg_value"><tt class="xref py py-obj docutils literal"><span class="pre">get_selfref_reg_value</span></tt></a>()</td>
+<td>Get the value for the register where the self reference of the current method is stored.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.ignore_hex_addr_call" title="vizasm.analysis.asm.cpu.Cpu.Cpu.ignore_hex_addr_call"><tt class="xref py py-obj docutils literal"><span class="pre">ignore_hex_addr_call</span></tt></a>()</td>
+<td>Return True if you want to ignore calls to hex addresses</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.is_32_bits" title="vizasm.analysis.asm.cpu.Cpu.Cpu.is_32_bits"><tt class="xref py py-obj docutils literal"><span class="pre">is_32_bits</span></tt></a>()</td>
+<td>Check if is 32 bit <cite>Cpu</cite></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.is_64_bits" title="vizasm.analysis.asm.cpu.Cpu.Cpu.is_64_bits"><tt class="xref py py-obj docutils literal"><span class="pre">is_64_bits</span></tt></a>()</td>
+<td>Check if is 64 bit <cite>Cpu</cite></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">next_reg_for_spret</span></tt>(register)</td>
+<td>If an objc_msgSend_stret is detected, the specified <cite>Register</cite> for the destination and selector do not match anymore</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">next_regs_for_spret</span></tt>(reg_list)</td>
+<td>Same as <cite>next_reg_for_spret</cite>, but do it for the whole list of <cite>Register</cite></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">nslog_arg_registers</span></tt>()</td>
+<td>List of registers which hold the arguments for NSLog</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.pointer_size" title="vizasm.analysis.asm.cpu.Cpu.Cpu.pointer_size"><tt class="xref py py-obj docutils literal"><span class="pre">pointer_size</span></tt></a>()</td>
+<td>Return the pointer size in bytes</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.read_line" title="vizasm.analysis.asm.cpu.Cpu.Cpu.read_line"><tt class="xref py py-obj docutils literal"><span class="pre">read_line</span></tt></a>(asmline[,&nbsp;linenr])</td>
+<td>Read a line of the asm file and process the information to keep track of the registers and stack.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">reg_list</span></tt>(regs)</td>
+<td>Implement this method by calling <cite>_reg_list</cite> with the register type (<cite>reg_typereg_type</cite>).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.reset" title="vizasm.analysis.asm.cpu.Cpu.Cpu.reset"><tt class="xref py py-obj docutils literal"><span class="pre">reset</span></tt></a>()</td>
+<td>Reset the <cite>Cpu</cite> and make it ready to analyze the next method implementation</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">return_reg_is_fst_arg_reg</span></tt>()</td>
+<td>Check if the return register is also the first argument register</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">return_register</span></tt>()</td>
+<td>The register which holds the return value</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">selector_arg_registers</span></tt>()</td>
+<td>The registers(list&lt;Register&gt;) where the arguments for the selector are stored.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">selector_register</span></tt>()</td>
+<td>Returns the <cite>Register</cite> in which the selector is stored</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.set_address" title="vizasm.analysis.asm.cpu.Cpu.Cpu.set_address"><tt class="xref py py-obj docutils literal"><span class="pre">set_address</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.set_assignment_matching_system" title="vizasm.analysis.asm.cpu.Cpu.Cpu.set_assignment_matching_system"><tt class="xref py py-obj docutils literal"><span class="pre">set_assignment_matching_system</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.set_c_func_heuristic" title="vizasm.analysis.asm.cpu.Cpu.Cpu.set_c_func_heuristic"><tt class="xref py py-obj docutils literal"><span class="pre">set_c_func_heuristic</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.set_line_number" title="vizasm.analysis.asm.cpu.Cpu.Cpu.set_line_number"><tt class="xref py py-obj docutils literal"><span class="pre">set_line_number</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.set_memory" title="vizasm.analysis.asm.cpu.Cpu.Cpu.set_memory"><tt class="xref py py-obj docutils literal"><span class="pre">set_memory</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.set_method" title="vizasm.analysis.asm.cpu.Cpu.Cpu.set_method"><tt class="xref py py-obj docutils literal"><span class="pre">set_method</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.set_method_call" title="vizasm.analysis.asm.cpu.Cpu.Cpu.set_method_call"><tt class="xref py py-obj docutils literal"><span class="pre">set_method_call</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.set_method_selector_reg_value" title="vizasm.analysis.asm.cpu.Cpu.Cpu.set_method_selector_reg_value"><tt class="xref py py-obj docutils literal"><span class="pre">set_method_selector_reg_value</span></tt></a>(value)</td>
+<td>Set the value for the register where the selector of the current method is stored.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.set_objc_runtime" title="vizasm.analysis.asm.cpu.Cpu.Cpu.set_objc_runtime"><tt class="xref py py-obj docutils literal"><span class="pre">set_objc_runtime</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.set_parse_util" title="vizasm.analysis.asm.cpu.Cpu.Cpu.set_parse_util"><tt class="xref py py-obj docutils literal"><span class="pre">set_parse_util</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.set_register_class" title="vizasm.analysis.asm.cpu.Cpu.Cpu.set_register_class"><tt class="xref py py-obj docutils literal"><span class="pre">set_register_class</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.set_selfref_reg_value" title="vizasm.analysis.asm.cpu.Cpu.Cpu.set_selfref_reg_value"><tt class="xref py py-obj docutils literal"><span class="pre">set_selfref_reg_value</span></tt></a>(value)</td>
+<td>Set the value for the register where the self reference of the current method is stored</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">stack_pointer_register</span></tt>()</td>
+<td>Return the stack pointer as instance of Register. E.g. &#8220;rsp&#8221; on x86_64.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">stret_selector_arg_registers</span></tt>()</td>
+<td>The registers (list&lt;Register&gt;) where the arguments for the selector are stored.</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.address">
+<tt class="descname">address</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.address" title="Permalink to this definition">¶</a></dt>
+<dd><p>__address(int) &#8211; the address of the current asm line</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.assignment_matching_system">
+<tt class="descname">assignment_matching_system</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.assignment_matching_system" title="Permalink to this definition">¶</a></dt>
+<dd><p>__assignment_matching_system(AssignmentMatchingSystem) &#8211; the system to read assignments</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.c_func_heuristic">
+<tt class="descname">c_func_heuristic</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.c_func_heuristic" title="Permalink to this definition">¶</a></dt>
+<dd><p>c_func_heuristic(bool) &#8211; if enabled use heuristic to determine arguments for c function calls</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.get_address">
+<tt class="descname">get_address</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Cpu.html#Cpu.get_address"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.get_address" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.get_assignment_matching_system">
+<tt class="descname">get_assignment_matching_system</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Cpu.html#Cpu.get_assignment_matching_system"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.get_assignment_matching_system" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.get_c_func_heuristic">
+<tt class="descname">get_c_func_heuristic</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Cpu.html#Cpu.get_c_func_heuristic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.get_c_func_heuristic" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.get_current_destination">
+<tt class="descname">get_current_destination</tt><big>(</big><em>objc_msgSend_stret=False</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Cpu.html#Cpu.get_current_destination"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.get_current_destination" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the current destination.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>objc_msgSend_stret: bool, optional (default is False)</strong> :</p>
+<blockquote>
+<div><p>indicate an objc_msgSend_stret</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>destination</strong> :</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><strong>CpuCouldNotGetDestination</strong> :</p>
+<blockquote class="last">
+<div><p>raised if the value of the destination could not be detected</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.get_line_number">
+<tt class="descname">get_line_number</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Cpu.html#Cpu.get_line_number"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.get_line_number" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.get_memory">
+<tt class="descname">get_memory</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Cpu.html#Cpu.get_memory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.get_memory" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.get_method">
+<tt class="descname">get_method</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Cpu.html#Cpu.get_method"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.get_method" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.get_method_call">
+<tt class="descname">get_method_call</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Cpu.html#Cpu.get_method_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.get_method_call" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.get_method_selector_reg_value">
+<tt class="descname">get_method_selector_reg_value</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Cpu.html#Cpu.get_method_selector_reg_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.get_method_selector_reg_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the value for the register where the selector of the current method is stored.
+If the argument is on stack, do not pop it.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.get_objc_runtime">
+<tt class="descname">get_objc_runtime</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Cpu.html#Cpu.get_objc_runtime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.get_objc_runtime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.get_parse_util">
+<tt class="descname">get_parse_util</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Cpu.html#Cpu.get_parse_util"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.get_parse_util" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.get_register_class">
+<tt class="descname">get_register_class</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Cpu.html#Cpu.get_register_class"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.get_register_class" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.get_selfref_reg_value">
+<tt class="descname">get_selfref_reg_value</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Cpu.html#Cpu.get_selfref_reg_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.get_selfref_reg_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the value for the register where the self reference of the current method is stored.
+If the argument is on stack, do not pop it.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.ignore_hex_addr_call">
+<tt class="descname">ignore_hex_addr_call</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Cpu.html#Cpu.ignore_hex_addr_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.ignore_hex_addr_call" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if you want to ignore calls to hex addresses</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.is_32_bits">
+<tt class="descname">is_32_bits</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Cpu.html#Cpu.is_32_bits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.is_32_bits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if is 32 bit <cite>Cpu</cite></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.is_64_bits">
+<tt class="descname">is_64_bits</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Cpu.html#Cpu.is_64_bits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.is_64_bits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if is 64 bit <cite>Cpu</cite></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.line_number">
+<tt class="descname">line_number</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.line_number" title="Permalink to this definition">¶</a></dt>
+<dd><p>the current line number in the asm file. Given as parameter in <cite>read_line</cite>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.memory">
+<tt class="descname">memory</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.memory" title="Permalink to this definition">¶</a></dt>
+<dd><p>memory(Memory) &#8211; the memory of the cpu</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.method">
+<tt class="descname">method</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.method" title="Permalink to this definition">¶</a></dt>
+<dd><p>_method(FunctionInterface) &#8211; the method which is currently being analyzed</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.method_call">
+<tt class="descname">method_call</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.method_call" title="Permalink to this definition">¶</a></dt>
+<dd><p>__method_call(MethodCall) &#8211; this is the actual output of the <cite>Cpu</cite>. It stores the messages that have been read.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.objc_runtime">
+<tt class="descname">objc_runtime</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.objc_runtime" title="Permalink to this definition">¶</a></dt>
+<dd><p>_objc_runtime(ObjectiveCRuntime) &#8211; the objective-c runtime</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.parse_util">
+<tt class="descname">parse_util</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.parse_util" title="Permalink to this definition">¶</a></dt>
+<dd><p>_parse_util(ParseUtil) &#8211; utility for parsing the asm file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.pointer_size">
+<tt class="descname">pointer_size</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Cpu.html#Cpu.pointer_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.pointer_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the pointer size in bytes</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.read_line">
+<tt class="descname">read_line</tt><big>(</big><em>asmline</em>, <em>linenr=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Cpu.html#Cpu.read_line"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.read_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a line of the asm file and process the information
+to keep track of the registers and stack.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>asmline: string</strong> :</p>
+<blockquote>
+<div><p>a line of assembler</p>
+</div></blockquote>
+<p><strong>linenr: int, optional</strong> :</p>
+<blockquote>
+<div><p>the current line number in the file. 
+If not given, it will not be used in the output.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><strong>CpuException</strong> :</p>
+<blockquote class="last">
+<div><p>if any underlying exception has been raised</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.register_class">
+<tt class="descname">register_class</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.register_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>_register_clas(classobj) &#8211; 
+subclass of Register (only the reference!). 
+This class reference is used to create the correct register subclass depending on the cpu architecture</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.reset">
+<tt class="descname">reset</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Cpu.html#Cpu.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the <cite>Cpu</cite> and make it ready to analyze the next method implementation</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.set_address">
+<tt class="descname">set_address</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Cpu.html#Cpu.set_address"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.set_address" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.set_assignment_matching_system">
+<tt class="descname">set_assignment_matching_system</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Cpu.html#Cpu.set_assignment_matching_system"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.set_assignment_matching_system" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.set_c_func_heuristic">
+<tt class="descname">set_c_func_heuristic</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Cpu.html#Cpu.set_c_func_heuristic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.set_c_func_heuristic" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.set_line_number">
+<tt class="descname">set_line_number</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Cpu.html#Cpu.set_line_number"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.set_line_number" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.set_memory">
+<tt class="descname">set_memory</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Cpu.html#Cpu.set_memory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.set_memory" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.set_method">
+<tt class="descname">set_method</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Cpu.html#Cpu.set_method"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.set_method" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.set_method_call">
+<tt class="descname">set_method_call</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Cpu.html#Cpu.set_method_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.set_method_call" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.set_method_selector_reg_value">
+<tt class="descname">set_method_selector_reg_value</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Cpu.html#Cpu.set_method_selector_reg_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.set_method_selector_reg_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the value for the register where the selector of the current method is stored.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.set_objc_runtime">
+<tt class="descname">set_objc_runtime</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Cpu.html#Cpu.set_objc_runtime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.set_objc_runtime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.set_parse_util">
+<tt class="descname">set_parse_util</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Cpu.html#Cpu.set_parse_util"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.set_parse_util" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.set_register_class">
+<tt class="descname">set_register_class</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Cpu.html#Cpu.set_register_class"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.set_register_class" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.Cpu.Cpu.set_selfref_reg_value">
+<tt class="descname">set_selfref_reg_value</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Cpu.html#Cpu.set_selfref_reg_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Cpu.Cpu.set_selfref_reg_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the value for the register where the self reference of the current method is stored</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.asm.cpu.ParseUtil">
+<span id="parseutil-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">ParseUtil</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.asm.cpu.ParseUtil" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 23.08.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.asm.cpu.ParseUtil.</tt><tt class="descname">ParseUtil</tt><big>(</big><em>cpu</em>, <em>register_class</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Base class for parsing an assembler line and turning it into the appropriate class.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>cpu: Cpu</strong> :</p>
+<p><strong>register_class: classobj</strong> :</p>
+<blockquote class="last">
+<div><p>the class to wrap around a register string</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.get_address_from_asmline" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.get_address_from_asmline"><tt class="xref py py-obj docutils literal"><span class="pre">get_address_from_asmline</span></tt></a>(asmline)</td>
+<td>Get the hex address of the current line.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.get_cpu" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.get_cpu"><tt class="xref py py-obj docutils literal"><span class="pre">get_cpu</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.get_fst_match" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.get_fst_match"><tt class="xref py py-obj docutils literal"><span class="pre">get_fst_match</span></tt></a>(asmline,&nbsp;functionlist)</td>
+<td>Get the first function (lazy) that matches on the given input argument.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.get_fst_match_bool_list" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.get_fst_match_bool_list"><tt class="xref py py-obj docutils literal"><span class="pre">get_fst_match_bool_list</span></tt></a>(asmline,&nbsp;functionlist)</td>
+<td>Get the first function (lazy) that matches on the given input argument.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.get_register_class" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.get_register_class"><tt class="xref py py-obj docutils literal"><span class="pre">get_register_class</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_any_method_implementation" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_any_method_implementation"><tt class="xref py py-obj docutils literal"><span class="pre">parse_any_method_implementation</span></tt></a>(asmline)</td>
+<td>Parse (lazy) <cite>parse_meth_impl</cite>, <cite>ParseUtil.parse_own_c_method_def</cite>, <cite>parse_c_method_name</cite>, category,.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_c_method_name" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_c_method_name"><tt class="xref py py-obj docutils literal"><span class="pre">parse_c_method_name</span></tt></a>(asmline)</td>
+<td>Check if is <cite>RE_SUB</cite> or <cite>RE_C_METHOD</cite> and return the appropriate name if available.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_c_string" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_c_string"><tt class="xref py py-obj docutils literal"><span class="pre">parse_c_string</span></tt></a>(asmline)</td>
+<td>Create a <cite>CString</cite> from a c string like e.g. &#8220;defaults&#8221;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_call_instruction" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_call_instruction"><tt class="xref py py-obj docutils literal"><span class="pre">parse_call_instruction</span></tt></a>(asmline)</td>
+<td>Check if the line is a call instruction like &#8220;call&#8221; (x86) or &#8220;blx&#8221; (arm)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_called_method_name" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_called_method_name"><tt class="xref py py-obj docutils literal"><span class="pre">parse_called_method_name</span></tt></a>(asmline)</td>
+<td>Check if <cite>asmline</cite> is a c method being called.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_category" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_category"><tt class="xref py py-obj docutils literal"><span class="pre">parse_category</span></tt></a>(asmline)</td>
+<td>Parse a category method implementation.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_format_string" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_format_string"><tt class="xref py py-obj docutils literal"><span class="pre">parse_format_string</span></tt></a>(asmline)</td>
+<td>Create a <cite>FormatString</cite> from e.g. &#64;&#8221;%s%d&#8221;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_hex" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_hex"><tt class="xref py py-obj docutils literal"><span class="pre">parse_hex</span></tt></a>(asmline)</td>
+<td>Parse a line containing a hex value and convert it to an int.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_imp" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_imp"><tt class="xref py py-obj docutils literal"><span class="pre">parse_imp</span></tt></a>(asmline)</td>
+<td>Create a subclass of <cite>Imp</cite> like <cite>ImpStub</cite> or <cite>ImpGot</cite> from the asm line.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_imp_got" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_imp_got"><tt class="xref py py-obj docutils literal"><span class="pre">parse_imp_got</span></tt></a>(asmline)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_imp_stub" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_imp_stub"><tt class="xref py py-obj docutils literal"><span class="pre">parse_imp_stub</span></tt></a>(asmline)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_ivar" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_ivar"><tt class="xref py py-obj docutils literal"><span class="pre">parse_ivar</span></tt></a>(asmline)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_meth_impl" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_meth_impl"><tt class="xref py py-obj docutils literal"><span class="pre">parse_meth_impl</span></tt></a>(asmline)</td>
+<td>Parse a method implementation like e.g.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_nsstring" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_nsstring"><tt class="xref py py-obj docutils literal"><span class="pre">parse_nsstring</span></tt></a>(asmline)</td>
+<td>Create a <cite>NSString</cite> from e.g. &#64;&#8221;defaults&#8221;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_objc_class" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_objc_class"><tt class="xref py py-obj docutils literal"><span class="pre">parse_objc_class</span></tt></a>(asmline)</td>
+<td>Create ObjcClass from classref ([ds:objc_classref_Object1])</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_objc_class_from_classref" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_objc_class_from_classref"><tt class="xref py py-obj docutils literal"><span class="pre">parse_objc_class_from_classref</span></tt></a>(asmline)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_objc_class_from_framework_class" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_objc_class_from_framework_class"><tt class="xref py py-obj docutils literal"><span class="pre">parse_objc_class_from_framework_class</span></tt></a>(asmline)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_own_c_method_called" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_own_c_method_called"><tt class="xref py py-obj docutils literal"><span class="pre">parse_own_c_method_called</span></tt></a>(asmline)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_own_c_method_def" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_own_c_method_def"><tt class="xref py py-obj docutils literal"><span class="pre">parse_own_c_method_def</span></tt></a>(asmline)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_register" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_register"><tt class="xref py py-obj docutils literal"><span class="pre">parse_register</span></tt></a>(register)</td>
+<td>Parse a register.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_selector" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_selector"><tt class="xref py py-obj docutils literal"><span class="pre">parse_selector</span></tt></a>(asmline)</td>
+<td>If annotated by Hopper, the <cite>Selector</cite> will be created from this.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_stack_access" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_stack_access"><tt class="xref py py-obj docutils literal"><span class="pre">parse_stack_access</span></tt></a>(asmline)</td>
+<td>Parse a stack access like e.g.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_stackvar" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_stackvar"><tt class="xref py py-obj docutils literal"><span class="pre">parse_stackvar</span></tt></a>(asmline)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_string" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_string"><tt class="xref py py-obj docutils literal"><span class="pre">parse_string</span></tt></a>(asmline)</td>
+<td>Parse a string and return the appropriate string class.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_var_assignment" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_var_assignment"><tt class="xref py py-obj docutils literal"><span class="pre">parse_var_assignment</span></tt></a>(asmline)</td>
+<td>Wrapper for <cite>parse_var_assignment_with_ivar_ref_from_asmline</cite>.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_var_assignment_with_ivar_ref_from_asmline" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_var_assignment_with_ivar_ref_from_asmline"><tt class="xref py py-obj docutils literal"><span class="pre">parse_var_assignment_with_ivar_ref_from_asmline</span></tt></a>(asmline)</td>
+<td>Create a VarAssignment from a line of assembler (like e.g. &#8220;[ds:rax+rcx]&#8221;, x86_64 example)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_var_assignment_without_ivar_ref_from_asmline" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_var_assignment_without_ivar_ref_from_asmline"><tt class="xref py py-obj docutils literal"><span class="pre">parse_var_assignment_without_ivar_ref_from_asmline</span></tt></a>(asmline)</td>
+<td>Create a VarAssignment from asmline like e.g. &#8220;[ds:rax+rcx] (x86_64 example) &#8220;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.set_cpu" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.set_cpu"><tt class="xref py py-obj docutils literal"><span class="pre">set_cpu</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.set_register_class" title="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.set_register_class"><tt class="xref py py-obj docutils literal"><span class="pre">set_register_class</span></tt></a>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.cpu">
+<tt class="descname">cpu</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.cpu" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.get_address_from_asmline">
+<em class="property">static </em><tt class="descname">get_address_from_asmline</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.get_address_from_asmline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.get_address_from_asmline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the hex address of the current line. This is the first number of the line.
+Return it as int or None if not available.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.get_cpu">
+<tt class="descname">get_cpu</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.get_cpu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.get_cpu" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.get_fst_match">
+<em class="property">static </em><tt class="descname">get_fst_match</tt><big>(</big><em>asmline</em>, <em>functionlist</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.get_fst_match"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.get_fst_match" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the first function (lazy) that matches on the given input argument.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>asmline: string</strong> :</p>
+<blockquote>
+<div><p>the argument to apply on the functions</p>
+</div></blockquote>
+<p><strong>functionlist: list&lt;functionrefs&gt;</strong> :</p>
+<blockquote class="last">
+<div><p>the functions on which to apply the input argument</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.get_fst_match_bool_list">
+<em class="property">static </em><tt class="descname">get_fst_match_bool_list</tt><big>(</big><em>asmline</em>, <em>functionlist</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.get_fst_match_bool_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.get_fst_match_bool_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the first function (lazy) that matches on the given input argument.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>asmline: string</strong> :</p>
+<blockquote>
+<div><p>the argument to apply on the functions</p>
+</div></blockquote>
+<p><strong>functionlist: list&lt;functionrefs&gt;</strong> :</p>
+<blockquote>
+<div><p>the functions on which to apply the input argument</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>tuple&lt;list&lt;bool&gt;, object&gt;</strong> :</p>
+<blockquote class="last">
+<div><p>Return a list where the function that matched has a True entry and the rest False.
+The second argument of the tuple is the return value of the function that matched.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.get_register_class">
+<tt class="descname">get_register_class</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.get_register_class"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.get_register_class" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_any_method_implementation">
+<em class="property">static </em><tt class="descname">parse_any_method_implementation</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.parse_any_method_implementation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_any_method_implementation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse (lazy) <cite>parse_meth_impl</cite>, <cite>ParseUtil.parse_own_c_method_def</cite>, <cite>parse_c_method_name</cite>, category,.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>tuple&lt;list&lt;bool&gt;, object&gt;</strong> :</p>
+<blockquote class="last">
+<div><p>Return a list where the function that matched has a True entry and the rest False.
+The second argument of the tuple is the return value of the function that matched.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_c_method_name">
+<em class="property">static </em><tt class="descname">parse_c_method_name</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.parse_c_method_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_c_method_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if is <cite>RE_SUB</cite> or <cite>RE_C_METHOD</cite> and return the appropriate name if available.
+Otherwise None.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>Function</strong> :</p>
+<blockquote>
+<div><p>if <cite>RE_C_METHOD</cite> matches</p>
+</div></blockquote>
+<p><strong>Sub</strong> :</p>
+<blockquote class="last">
+<div><p>if <cite>RE_SUB</cite> matches</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_c_string">
+<tt class="descname">parse_c_string</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.parse_c_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_c_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a <cite>CString</cite> from a c string like e.g. &#8220;defaults&#8221;</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_call_instruction">
+<tt class="descname">parse_call_instruction</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.parse_call_instruction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_call_instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the line is a call instruction like &#8220;call&#8221; (x86) or &#8220;blx&#8221; (arm)
+and return what is called as string.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_called_method_name">
+<em class="property">static </em><tt class="descname">parse_called_method_name</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.parse_called_method_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_called_method_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if <cite>asmline</cite> is a c method being called.
+Check for <cite>RE_CALLED_SUB</cite> and <cite>RE_CALLED_C_METHOD</cite> and return the appropriate name if available.
+Otherwise None.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>Function</strong> :</p>
+<blockquote>
+<div><p>if <cite>RE_C_METHOD</cite> matches</p>
+</div></blockquote>
+<p><strong>Sub</strong> :</p>
+<blockquote class="last">
+<div><p>if <cite>RE_SUB</cite> matches</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_category">
+<em class="property">static </em><tt class="descname">parse_category</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.parse_category"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_category" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse a category method implementation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><strong>MethodImplementation</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_format_string">
+<tt class="descname">parse_format_string</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.parse_format_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_format_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a <cite>FormatString</cite> from e.g. &#64;&#8221;%s%d&#8221;</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_hex">
+<tt class="descname">parse_hex</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.parse_hex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_hex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse a line containing a hex value and convert it to an int.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>asmline: string</strong> :</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>int: int</strong> :</p>
+<blockquote>
+<div><p>hex value converted to int</p>
+</div></blockquote>
+<p><strong>None</strong> :</p>
+<blockquote class="last">
+<div><p>if regular expression did not classify as hex value</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_imp">
+<tt class="descname">parse_imp</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.parse_imp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_imp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a subclass of <cite>Imp</cite> like <cite>ImpStub</cite> or <cite>ImpGot</cite> from the asm line.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_imp_got">
+<tt class="descname">parse_imp_got</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.parse_imp_got"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_imp_got" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_imp_stub">
+<tt class="descname">parse_imp_stub</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.parse_imp_stub"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_imp_stub" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_ivar">
+<tt class="descname">parse_ivar</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.parse_ivar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_ivar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_meth_impl">
+<em class="property">static </em><tt class="descname">parse_meth_impl</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.parse_meth_impl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_meth_impl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse a method implementation like e.g. &#8220;<a href="#id7"><span class="problematic" id="id8">methImpl_AppDelegate_applicationDidFinishLaunching_</span></a>&#8221;.</p>
+<p>For more details see <cite>RE_METH_IMPL</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><strong>MethodImplementation</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_nsstring">
+<tt class="descname">parse_nsstring</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.parse_nsstring"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_nsstring" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a <cite>NSString</cite> from e.g. &#64;&#8221;defaults&#8221;</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_objc_class">
+<tt class="descname">parse_objc_class</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.parse_objc_class"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_objc_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create ObjcClass from classref ([ds:objc_classref_Object1]) 
+or from frameworkclass e.g. ([ds:bind__OBJC_CLASS_$_NSUserDefaults]) 
+Returns None if no class matches.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_objc_class_from_classref">
+<tt class="descname">parse_objc_class_from_classref</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.parse_objc_class_from_classref"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_objc_class_from_classref" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_objc_class_from_framework_class">
+<tt class="descname">parse_objc_class_from_framework_class</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.parse_objc_class_from_framework_class"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_objc_class_from_framework_class" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_own_c_method_called">
+<em class="property">static </em><tt class="descname">parse_own_c_method_called</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.parse_own_c_method_called"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_own_c_method_called" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_own_c_method_def">
+<em class="property">static </em><tt class="descname">parse_own_c_method_def</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.parse_own_c_method_def"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_own_c_method_def" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_register">
+<tt class="descname">parse_register</tt><big>(</big><em>register</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.parse_register"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_register" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse a register.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>register_type: type</strong> :</p>
+<blockquote>
+<div><p>the type of the register to create. If non given, a string is used for the register representation.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>register: `register_type`</strong> :</p>
+<blockquote>
+<div><p>the register wrapped in <cite>register_type</cite></p>
+</div></blockquote>
+<p><strong>None</strong> :</p>
+<blockquote class="last">
+<div><p>if regular expression did not classify as register</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_selector">
+<tt class="descname">parse_selector</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.parse_selector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_selector" title="Permalink to this definition">¶</a></dt>
+<dd><p>If annotated by Hopper, the <cite>Selector</cite> will be created from this.
+Otherwise implement this method yourself!</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_stack_access">
+<tt class="descname">parse_stack_access</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.parse_stack_access"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_stack_access" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse a stack access like e.g. &#8220;[sp, #0x8]&#8221; or &#8220;[r7, #0x8]&#8221; or &#8220;[sp] (arm).
+The latter should lead to an address of 0x0.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>tuple&lt;string, string&gt;</strong> :</p>
+<blockquote class="last">
+<div><p>Return the stack pointer name as well as the stack address as hex string.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_stackvar">
+<tt class="descname">parse_stackvar</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.parse_stackvar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_stackvar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_string">
+<tt class="descname">parse_string</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.parse_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse a string and return the appropriate string class.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>FormatString, NSString or string</strong> :</p>
+<p><strong>None</strong> :</p>
+<blockquote class="last">
+<div><p>if nothing matches</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_var_assignment">
+<tt class="descname">parse_var_assignment</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.parse_var_assignment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_var_assignment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper for <cite>parse_var_assignment_with_ivar_ref_from_asmline</cite>.
+Ignores nop operations e.g. &#8220;nop        dword [ds:rax+0x0]&#8221;</p>
+<p>Create a VarAssignment from a line of assembler (like e.g. &#8220;[ds:rax+rcx]&#8221;, x86_64 example</p>
+<p>If the asmline has the form of &#8220;[ds:rdx+rsi], rax&#8221; the ivar_ref will be resolved.
+But the part after the comma can be left out.</p>
+<p>Based on this method (more general <cite>parse_var_assignment_with_ivar_ref_from_asmline</cite>), the <cite>Cpu</cite> keeps an instance variable cache. See <cite>IVarRefLookup</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>asmline: string</strong> :</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>VarAssignment</strong> :</p>
+<blockquote>
+<div><p>the VarAssignment with ivar_ref set (if possible)</p>
+</div></blockquote>
+<p><strong>None</strong> :</p>
+<blockquote>
+<div><p>if no VarAssignment</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><strong>VarAssignmentResolveSelfrefRegisterException</strong> :</p>
+<blockquote>
+<div><p>if the value cannot be resolved</p>
+</div></blockquote>
+<p><strong>VarAssignmentResolveIvarRegisterException</strong> :</p>
+<blockquote>
+<div><p>if the value cannot be resolved</p>
+</div></blockquote>
+<p><strong>VarAssignmentIvarRegisterWrongTypeException</strong> :</p>
+<blockquote class="last">
+<div><p>if the type of the ivar_reg is not <cite>IVar</cite></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_var_assignment_with_ivar_ref_from_asmline">
+<tt class="descname">parse_var_assignment_with_ivar_ref_from_asmline</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.parse_var_assignment_with_ivar_ref_from_asmline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_var_assignment_with_ivar_ref_from_asmline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a VarAssignment from a line of assembler (like e.g. &#8220;[ds:rax+rcx]&#8221;, x86_64 example)</p>
+<p>If the asmline has the form of &#8220;[ds:rdx+rsi], rax&#8221; the ivar_ref will be resolved.
+But the part after the comma can be left out.</p>
+<p>Based on this method the <cite>Cpu</cite> keeps an instance variable cache. See <cite>IVarRefLookup</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>asmline: string</strong> :</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>VarAssignment</strong> :</p>
+<blockquote>
+<div><p>the VarAssignment with ivar_ref set (if possible)</p>
+</div></blockquote>
+<p><strong>None</strong> :</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><strong>VarAssignmentResolveSelfrefRegisterException</strong> :</p>
+<blockquote>
+<div><p>if the value cannot be resolved</p>
+</div></blockquote>
+<p><strong>VarAssignmentResolveIvarRegisterException</strong> :</p>
+<blockquote>
+<div><p>if the value cannot be resolved</p>
+</div></blockquote>
+<p><strong>VarAssignmentIvarRegisterWrongTypeException</strong> :</p>
+<blockquote class="last">
+<div><p>if the type of the ivar_reg is not <cite>IVar</cite></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_var_assignment_without_ivar_ref_from_asmline">
+<tt class="descname">parse_var_assignment_without_ivar_ref_from_asmline</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.parse_var_assignment_without_ivar_ref_from_asmline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_var_assignment_without_ivar_ref_from_asmline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a VarAssignment from asmline like e.g. &#8220;[ds:rax+rcx] (x86_64 example) &#8220;</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>asmline: String</strong> :</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>VarAssignment</strong> :</p>
+<blockquote>
+<div><p>the VarAssignment without ivar_ref set (None if no VarAssignment)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><strong>VarAssignmentResolveSelfrefRegisterException</strong> :</p>
+<blockquote>
+<div><p>if the value cannot be resolved</p>
+</div></blockquote>
+<p><strong>VarAssignmentResolveIvarRegisterException</strong> :</p>
+<blockquote>
+<div><p>if the value cannot be resolved and <cite>resolve_ivar_value</cite> is true</p>
+</div></blockquote>
+<p><strong>VarAssignmentIvarRegisterWrongTypeException</strong> :</p>
+<blockquote class="last">
+<div><p>if the type of the ivar_reg is not <cite>IVar and `resolve_ivar_value</cite> is true</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.register_class">
+<tt class="descname">register_class</tt><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.register_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>register_class(classobj) &#8211; the class to wrap around a register string</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.set_cpu">
+<tt class="descname">set_cpu</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.set_cpu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.set_cpu" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.set_register_class">
+<tt class="descname">set_register_class</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/ParseUtil.html#ParseUtil.set_register_class"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.set_register_class" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.asm.cpu.Resetable">
+<span id="resetable-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">Resetable</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.asm.cpu.Resetable" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 18.09.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.asm.cpu.Resetable.Resetable">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.asm.cpu.Resetable.</tt><tt class="descname">Resetable</tt><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Resetable.html#Resetable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Resetable.Resetable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interface for classes that can reset themselves</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.Resetable.Resetable.reset" title="vizasm.analysis.asm.cpu.Resetable.Resetable.reset"><tt class="xref py py-obj docutils literal"><span class="pre">reset</span></tt></a>()</td>
+<td>Reset the class</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.Resetable.Resetable.reset">
+<tt class="descname">reset</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/Resetable.html#Resetable.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.Resetable.Resetable.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the class</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="vizasm.analysis.asm.cpu.arm.html">arm Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.asm.cpu.arm.html#module-vizasm.analysis.asm.cpu.arm.AsmRegEx_arm"><tt class="docutils literal"><span class="pre">AsmRegEx_arm</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.asm.cpu.arm.html#module-vizasm.analysis.asm.cpu.arm.Asm_arm"><tt class="docutils literal"><span class="pre">Asm_arm</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.asm.cpu.arm.html#module-vizasm.analysis.asm.cpu.arm.Cpu_arm"><tt class="docutils literal"><span class="pre">Cpu_arm</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.asm.cpu.arm.html#module-vizasm.analysis.asm.cpu.arm.ObjcRuntime_arm"><tt class="docutils literal"><span class="pre">ObjcRuntime_arm</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.asm.cpu.arm.html#module-vizasm.analysis.asm.cpu.arm.ParseUtil_arm"><tt class="docutils literal"><span class="pre">ParseUtil_arm</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.asm.cpu.arm.html#module-vizasm.analysis.asm.cpu.arm.Register_Arm"><tt class="docutils literal"><span class="pre">Register_Arm</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vizasm.analysis.asm.cpu.exceptions.html">exceptions Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.asm.cpu.exceptions.html#module-vizasm.analysis.asm.cpu.exceptions.CpuCouldNotGetDestination"><tt class="docutils literal"><span class="pre">CpuCouldNotGetDestination</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.asm.cpu.exceptions.html#module-vizasm.analysis.asm.cpu.exceptions.CpuCouldNotGetSelfref"><tt class="docutils literal"><span class="pre">CpuCouldNotGetSelfref</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.asm.cpu.exceptions.html#module-vizasm.analysis.asm.cpu.exceptions.CpuCouldNotReadNSLogException"><tt class="docutils literal"><span class="pre">CpuCouldNotReadNSLogException</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.asm.cpu.exceptions.html#module-vizasm.analysis.asm.cpu.exceptions.CpuException"><tt class="docutils literal"><span class="pre">CpuException</span></tt> Module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vizasm.analysis.asm.cpu.memory.html">memory Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.asm.cpu.memory.html#module-vizasm.analysis.asm.cpu.memory.Memory"><tt class="docutils literal"><span class="pre">Memory</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.asm.cpu.memory.html#module-vizasm.analysis.asm.cpu.memory.MemoryLookupException"><tt class="docutils literal"><span class="pre">MemoryLookupException</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.asm.cpu.memory.html#module-vizasm.analysis.asm.cpu.memory.Registers"><tt class="docutils literal"><span class="pre">Registers</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.asm.cpu.memory.html#module-vizasm.analysis.asm.cpu.memory.StackFrame"><tt class="docutils literal"><span class="pre">StackFrame</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vizasm.analysis.asm.cpu.objcruntime.html">objcruntime Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.asm.cpu.objcruntime.html#module-vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup"><tt class="docutils literal"><span class="pre">IVarRefLookup</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.asm.cpu.objcruntime.html#module-vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime"><tt class="docutils literal"><span class="pre">ObjectiveCRuntime</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.asm.cpu.objcruntime.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="vizasm.analysis.asm.cpu.objcruntime.exceptions.html">exceptions Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.analysis.asm.cpu.objcruntime.exceptions.html#module-vizasm.analysis.asm.cpu.objcruntime.exceptions.ObjcRuntimeCouldNotGetSelector"><tt class="docutils literal"><span class="pre">ObjcRuntimeCouldNotGetSelector</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.analysis.asm.cpu.objcruntime.exceptions.html#module-vizasm.analysis.asm.cpu.objcruntime.exceptions.ObjcRuntimeCouldNotReadMsgSendException"><tt class="docutils literal"><span class="pre">ObjcRuntimeCouldNotReadMsgSendException</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.analysis.asm.cpu.objcruntime.exceptions.html#module-vizasm.analysis.asm.cpu.objcruntime.exceptions.ObjcRuntimeSelectorWrongTypeException"><tt class="docutils literal"><span class="pre">ObjcRuntimeSelectorWrongTypeException</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vizasm.analysis.asm.cpu.x86.html">x86 Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.asm.cpu.x86.html#module-vizasm.analysis.asm.cpu.x86.ASM_x86"><tt class="docutils literal"><span class="pre">ASM_x86</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.asm.cpu.x86.html#module-vizasm.analysis.asm.cpu.x86.AsmRegEx_x86"><tt class="docutils literal"><span class="pre">AsmRegEx_x86</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.asm.cpu.x86.html#module-vizasm.analysis.asm.cpu.x86.Cpu_x86"><tt class="docutils literal"><span class="pre">Cpu_x86</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.asm.cpu.x86.html#module-vizasm.analysis.asm.cpu.x86.ObjcRuntime_x86"><tt class="docutils literal"><span class="pre">ObjcRuntime_x86</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.asm.cpu.x86.html#module-vizasm.analysis.asm.cpu.x86.ParseUtil_x86"><tt class="docutils literal"><span class="pre">ParseUtil_x86</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.asm.cpu.x86.html#module-vizasm.analysis.asm.cpu.x86.Register_x86"><tt class="docutils literal"><span class="pre">Register_x86</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vizasm.analysis.asm.cpu.x86_64.html">x86_64 Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.asm.cpu.x86_64.html#module-vizasm.analysis.asm.cpu.x86_64.ASM_x86_64"><tt class="docutils literal"><span class="pre">ASM_x86_64</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.asm.cpu.x86_64.html#module-vizasm.analysis.asm.cpu.x86_64.AsmRegEx_x86_64"><tt class="docutils literal"><span class="pre">AsmRegEx_x86_64</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.asm.cpu.x86_64.html#module-vizasm.analysis.asm.cpu.x86_64.Cpu_x86_64"><tt class="docutils literal"><span class="pre">Cpu_x86_64</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.asm.cpu.x86_64.html#module-vizasm.analysis.asm.cpu.x86_64.ObjcRuntime_x86_64"><tt class="docutils literal"><span class="pre">ObjcRuntime_x86_64</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.asm.cpu.x86_64.html#module-vizasm.analysis.asm.cpu.x86_64.ParseUtil_x86_64"><tt class="docutils literal"><span class="pre">ParseUtil_x86_64</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.asm.cpu.x86_64.html#module-vizasm.analysis.asm.cpu.x86_64.Register_x86_64"><tt class="docutils literal"><span class="pre">Register_x86_64</span></tt> Module</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

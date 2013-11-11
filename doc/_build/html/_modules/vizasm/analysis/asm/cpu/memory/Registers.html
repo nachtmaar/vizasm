@@ -1,0 +1,254 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm.analysis.asm.cpu.memory.Registers &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="../../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vizasm.analysis.asm.cpu.memory.Registers</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 07.04.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.Resetable</span> <span class="kn">import</span> <span class="n">Resetable</span>
+<span class="kn">from</span> <span class="nn">vizasm.hopper.hopannotate</span> <span class="kn">import</span> <span class="n">hopanno</span>
+<span class="kn">from</span> <span class="nn">vizasm.util</span> <span class="kn">import</span> <span class="n">Util</span>
+<span class="kn">from</span> <span class="nn">vizasm.util.Log</span> <span class="kn">import</span> <span class="n">log</span>
+
+
+<div class="viewcode-block" id="Registers"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.memory.html#vizasm.analysis.asm.cpu.memory.Registers.Registers">[docs]</a><span class="k">class</span> <span class="nc">Registers</span><span class="p">(</span><span class="nb">object</span><span class="p">,</span> <span class="n">Resetable</span><span class="p">):</span>
+    <span class="sd">r&#39;&#39;&#39; </span>
+<span class="sd">    Represents the registers of a cpu.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    __registers: dict</span>
+<span class="sd">        registers of the CPU</span>
+<span class="sd">    __cpu: Cpu</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+<span class="c">#####################################################################################</span>
+<span class="c"># Resetable                                                                         #</span>
+<span class="c">#####################################################################################    </span>
+
+<div class="viewcode-block" id="Registers.reset"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.memory.html#vizasm.analysis.asm.cpu.memory.Registers.Registers.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__registers</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+<span class="c">#####################################################################################</span>
+<span class="c"># Implementation                                                                    #</span>
+<span class="c">#####################################################################################</span>
+        </div>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cpu</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__cpu</span> <span class="o">=</span> <span class="n">cpu</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">Util</span><span class="o">.</span><span class="n">pretty_format_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">registers</span><span class="p">))</span>
+    
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">(</span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">Util</span><span class="o">.</span><span class="n">pretty_format_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">registers</span><span class="p">,</span> <span class="bp">True</span><span class="p">))</span>
+    
+<div class="viewcode-block" id="Registers.get_cpu"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.memory.html#vizasm.analysis.asm.cpu.memory.Registers.Registers.get_cpu">[docs]</a>    <span class="k">def</span> <span class="nf">get_cpu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cpu</span>
+</div>
+<div class="viewcode-block" id="Registers.set_cpu"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.memory.html#vizasm.analysis.asm.cpu.memory.Registers.Registers.set_cpu">[docs]</a>    <span class="k">def</span> <span class="nf">set_cpu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__cpu</span> <span class="o">=</span> <span class="n">value</span>
+        </div>
+<div class="viewcode-block" id="Registers.get_registers"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.memory.html#vizasm.analysis.asm.cpu.memory.Registers.Registers.get_registers">[docs]</a>    <span class="k">def</span> <span class="nf">get_registers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__registers</span>
+</div>
+<div class="viewcode-block" id="Registers.get_value_for_register"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.memory.html#vizasm.analysis.asm.cpu.memory.Registers.Registers.get_value_for_register">[docs]</a>    <span class="k">def</span> <span class="nf">get_value_for_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">register</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        Return the value which is currently stored in the register.</span>
+<span class="sd">        If register is not in dict, None will be returned</span>
+<span class="sd">        &#39;&#39;&#39;</span>  
+        <span class="k">if</span> <span class="n">register</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_registers</span><span class="p">():</span>  
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_registers</span><span class="p">()[</span><span class="n">register</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    </div>
+    <span class="k">def</span> <span class="nf">_set_value_for_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">register</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Set the value for the specified register &#39;&#39;&#39;</span> 
+        <span class="k">if</span> <span class="bp">None</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="n">register</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+            <span class="c"># log</span>
+            <span class="n">log_msg</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s"> = </span><span class="si">%s</span><span class="s">&#39;</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">log_msg</span><span class="p">,</span> <span class="n">register</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+            
+            <span class="c"># store value for register</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_registers</span><span class="p">()[</span><span class="n">register</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+            
+<div class="viewcode-block" id="Registers.set_value_for_register"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.memory.html#vizasm.analysis.asm.cpu.memory.Registers.Registers.set_value_for_register">[docs]</a>    <span class="k">def</span> <span class="nf">set_value_for_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">register</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Set the value for the specified register and annotate the assignment  &#39;&#39;&#39;</span> 
+        
+        <span class="k">if</span> <span class="bp">None</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="n">register</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_value_for_register</span><span class="p">(</span><span class="n">register</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+            <span class="c"># annotate hopper</span>
+            <span class="n">hopanno</span><span class="o">.</span><span class="n">annotate_assignment</span><span class="p">(</span><span class="n">register</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cpu</span><span class="o">.</span><span class="n">address</span><span class="p">)</span>
+            </div>
+<div class="viewcode-block" id="Registers.set_value_for_register_ann_method_ead"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.memory.html#vizasm.analysis.asm.cpu.memory.Registers.Registers.set_value_for_register_ann_method_ead">[docs]</a>    <span class="k">def</span> <span class="nf">set_value_for_register_ann_method_ead</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">register</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Set the value for the specified register and annotate the method head &#39;&#39;&#39;</span> 
+        <span class="k">if</span> <span class="bp">None</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="n">register</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_value_for_register</span><span class="p">(</span><span class="n">register</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+            <span class="c"># annotate hopper</span>
+            <span class="n">log_msg</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s"> = </span><span class="si">%s</span><span class="s">&#39;</span>
+            <span class="n">hopanno</span><span class="o">.</span><span class="n">annotate_assignment_method_head</span><span class="p">(</span><span class="n">log_msg</span> <span class="o">%</span> <span class="p">(</span><span class="n">register</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+        </div>
+<div class="viewcode-block" id="Registers.resolve_current_register_value"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.memory.html#vizasm.analysis.asm.cpu.memory.Registers.Registers.resolve_current_register_value">[docs]</a>    <span class="k">def</span> <span class="nf">resolve_current_register_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">register</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Resolve the current register value. </span>
+<span class="sd">        If the register has an entry in the registers dictionary this will be returned.</span>
+<span class="sd">        Otherwise the register will be returned</span>
+<span class="sd">            </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        register: string</span>
+<span class="sd">            the register for which to look up the value</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">current_reg_val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_value_for_register</span><span class="p">(</span><span class="n">register</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">current_reg_val</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">current_reg_val</span>
+        <span class="k">return</span> <span class="n">register</span>      
+    </div>
+<div class="viewcode-block" id="Registers.delete_element"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.memory.html#vizasm.analysis.asm.cpu.memory.Registers.Registers.delete_element">[docs]</a>    <span class="k">def</span> <span class="nf">delete_element</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Delete an element from the registers dictionary.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        key</span>
+<span class="sd">            any key of the dictionary</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        True</span>
+<span class="sd">            if the entry could be deleted</span>
+<span class="sd">        False</span>
+<span class="sd">            otherwise</span>
+<span class="sd">        </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">registers</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    </div>
+<div class="viewcode-block" id="Registers.delete_elements"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.memory.html#vizasm.analysis.asm.cpu.memory.Registers.Registers.delete_elements">[docs]</a>    <span class="k">def</span> <span class="nf">delete_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">killed_regs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Read a list of killed regs and delete them.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        input_regs: list&lt;string&gt;</span>
+<span class="sd">            e.g. [&#39;rax&#39;, &#39;rcx&#39;, &#39;rdx&#39;, &#39;rsp&#39; ,&#39;rbp&#39;, &#39;rsi&#39;, &#39;rdi&#39;, &#39;r8&#39;]</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        True</span>
+<span class="sd">            if all registers could be deleted</span>
+<span class="sd">        False</span>
+<span class="sd">            otherwise</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">killed_all_regs</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">if</span> <span class="n">killed_regs</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">killed_reg</span> <span class="ow">in</span> <span class="n">killed_regs</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete_element</span><span class="p">(</span><span class="n">killed_reg</span><span class="p">):</span>
+                    <span class="n">killed_all_regs</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="n">killed_all_regs</span>
+        </div>
+    <span class="n">registers</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_registers</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;__registers(dict) -- registers of the CPU&quot;</span><span class="p">)</span>
+    <span class="n">cpu</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_cpu</span><span class="p">,</span> <span class="n">set_cpu</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;__cpu(Cpu)&quot;</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

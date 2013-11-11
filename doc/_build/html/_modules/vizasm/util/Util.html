@@ -1,0 +1,374 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm.util.Util &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vizasm.util.Util</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 30.03.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span>
+<span class="kn">from</span> <span class="nn">vizasm.util.ModuleClassNameException</span> <span class="kn">import</span> <span class="n">ModuleClassNameException</span><span class="p">,</span> \
+    <span class="n">ModuleNotSameClassNameException</span>
+<span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+
+<div class="viewcode-block" id="filter_not_none"><a class="viewcode-back" href="../../../vizasm.util.html#vizasm.util.Util.filter_not_none">[docs]</a><span class="k">def</span> <span class="nf">filter_not_none</span><span class="p">(</span><span class="n">sequence</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">,</span> <span class="n">sequence</span><span class="p">)</span>    
+</div>
+<div class="viewcode-block" id="get_fst_not_none"><a class="viewcode-back" href="../../../vizasm.util.html#vizasm.util.Util.get_fst_not_none">[docs]</a><span class="k">def</span> <span class="nf">get_fst_not_none</span><span class="p">(</span><span class="n">sequence</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Get the first object that is not None.</span>
+<span class="sd">    Returns None if nothing found &#39;&#39;&#39;</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">filter_not_none</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">res</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="bp">None</span>
+</div>
+<div class="viewcode-block" id="random_rgb_val"><a class="viewcode-back" href="../../../vizasm.util.html#vizasm.util.Util.random_rgb_val">[docs]</a><span class="k">def</span> <span class="nf">random_rgb_val</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39; Returns a random int in {0,...,255} &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="surrounding_elements_from_list"><a class="viewcode-back" href="../../../vizasm.util.html#vizasm.util.Util.surrounding_elements_from_list">[docs]</a><span class="k">def</span> <span class="nf">surrounding_elements_from_list</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">split_idx</span><span class="p">,</span> <span class="n">cnt_sur_lines</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Returns the surrounding lists (before and after) the given index.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    l: list</span>
+<span class="sd">    split_idx: int</span>
+<span class="sd">        the index at which to split in lines before and lines after</span>
+<span class="sd">    cnt_sur_lines: int</span>
+<span class="sd">        the number of lines before and after</span>
+<span class="sd">        </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    surrounding lines: (list, list)</span>
+<span class="sd">        tuple of surrounding lists</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">lines_before</span><span class="p">,</span> <span class="n">lines_after</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span> 
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">split_idx</span><span class="p">:</span>
+            <span class="n">lines_before</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">split_idx</span><span class="p">:</span>
+            <span class="n">lines_after</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+    <span class="n">lines_before</span> <span class="o">=</span> <span class="n">lines_before</span><span class="p">[</span><span class="o">-</span><span class="n">cnt_sur_lines</span><span class="p">:]</span>
+    <span class="n">lines_after</span> <span class="o">=</span> <span class="n">lines_after</span><span class="p">[:</span><span class="n">cnt_sur_lines</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">lines_before</span><span class="p">,</span> <span class="n">lines_after</span>
+</div>
+<div class="viewcode-block" id="strlist_to_str"><a class="viewcode-back" href="../../../vizasm.util.html#vizasm.util.Util.strlist_to_str">[docs]</a><span class="k">def</span> <span class="nf">strlist_to_str</span><span class="p">(</span><span class="n">strlist</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Make a string out of a list of strings and add newlines. &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">strlist</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="append_syspath"><a class="viewcode-back" href="../../../vizasm.util.html#vizasm.util.Util.append_syspath">[docs]</a><span class="k">def</span> <span class="nf">append_syspath</span><span class="p">(</span><span class="n">file_str</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Append file to system path.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    file_str: str</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">print</span> <span class="s">&#39;appending </span><span class="si">%s</span><span class="s"> to sys path&#39;</span> <span class="o">%</span> <span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">file_str</span><span class="p">))</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">file_str</span><span class="p">)))</span>
+    </div>
+<div class="viewcode-block" id="modulename_from_fqn"><a class="viewcode-back" href="../../../vizasm.util.html#vizasm.util.Util.modulename_from_fqn">[docs]</a><span class="k">def</span> <span class="nf">modulename_from_fqn</span><span class="p">(</span><span class="n">fqn</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Get the module name from the fully qualified name.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fqn: str</span>
+<span class="sd">        </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    module_name: str</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">fqn</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="remove_py_extension"><a class="viewcode-back" href="../../../vizasm.util.html#vizasm.util.Util.remove_py_extension">[docs]</a><span class="k">def</span> <span class="nf">remove_py_extension</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Remove the &quot;.py&quot; extension from the file path or filename.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    file_path: str</span>
+<span class="sd">        the filename or file_path</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">remove_file_extension</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s">&#39;py&#39;</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="remove_file_extension"><a class="viewcode-back" href="../../../vizasm.util.html#vizasm.util.Util.remove_file_extension">[docs]</a><span class="k">def</span> <span class="nf">remove_file_extension</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">file_extension</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Remove the file extension from the file_path or filename.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    file_path: str</span>
+<span class="sd">        the filename or file_path</span>
+<span class="sd">    file_extension: str</span>
+<span class="sd">        file extension, not starting with a &quot;.&quot;</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">file_path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">file_extension</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    </div>
+<div class="viewcode-block" id="class_for_filepath"><a class="viewcode-back" href="../../../vizasm.util.html#vizasm.util.Util.class_for_filepath">[docs]</a><span class="k">def</span> <span class="nf">class_for_filepath</span><span class="p">(</span><span class="n">fqn</span><span class="p">,</span> <span class="n">class_name</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Return the class reference (not instantiated yet)</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fqn: string</span>
+<span class="sd">        fully qualified name</span>
+<span class="sd">    class_name: str</span>
+<span class="sd">        the name of the class to be loaded</span>
+<span class="sd">        </span>
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ModuleClassNameException</span>
+<span class="sd">        if the module does not have the specified class</span>
+<span class="sd">    ImportError:</span>
+<span class="sd">        if the fqn could not be imported</span>
+<span class="sd">     &#39;&#39;&#39;</span>
+    <span class="nb">__import__</span><span class="p">(</span><span class="n">fqn</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">fqn</span><span class="p">],</span> <span class="n">class_name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">fqn</span><span class="p">],</span> <span class="n">class_name</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="n">ModuleClassNameException</span><span class="p">(</span><span class="n">fqn</span><span class="p">,</span> <span class="n">class_name</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="class_for_fqn_mod_eq_class"><a class="viewcode-back" href="../../../vizasm.util.html#vizasm.util.Util.class_for_fqn_mod_eq_class">[docs]</a><span class="k">def</span> <span class="nf">class_for_fqn_mod_eq_class</span><span class="p">(</span><span class="n">fqn</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    Get the class for the specified fully qualified name.</span>
+<span class="sd">    The classname is assumed to be the same like the module name from the fqn. </span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    _______</span>
+<span class="sd">    class: class</span>
+<span class="sd">    </span>
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ModuleNotSameClassNameException</span>
+<span class="sd">        if the module does not have the same name like the class</span>
+<span class="sd">    ImportError:</span>
+<span class="sd">        if the fqn could not be imported</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">class_for_filepath</span><span class="p">(</span><span class="n">fqn</span><span class="p">,</span> <span class="n">modulename_from_fqn</span><span class="p">(</span><span class="n">fqn</span><span class="p">))</span>
+    <span class="k">except</span> <span class="n">ModuleClassNameException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">ModuleNotSameClassNameException</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">class_name</span><span class="p">),</span> <span class="bp">None</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="is_iterable"><a class="viewcode-back" href="../../../vizasm.util.html#vizasm.util.Util.is_iterable">[docs]</a><span class="k">def</span> <span class="nf">is_iterable</span><span class="p">(</span><span class="n">iterable</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Check if `iterable` is iterable &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="is_iterable_no_string"><a class="viewcode-back" href="../../../vizasm.util.html#vizasm.util.Util.is_iterable_no_string">[docs]</a><span class="k">def</span> <span class="nf">is_iterable_no_string</span><span class="p">(</span><span class="n">iterable</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Check if `iterable` is iterable and no python string &#39;&#39;&#39;</span>
+    <span class="kn">from</span> <span class="nn">vizasm.model</span> <span class="kn">import</span> <span class="n">ModelUtil</span>
+    <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">ModelUtil</span><span class="o">.</span><span class="n">is_python_string</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="ignore_case_find"><a class="viewcode-back" href="../../../vizasm.util.html#vizasm.util.Util.ignore_case_find">[docs]</a><span class="k">def</span> <span class="nf">ignore_case_find</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">search_str</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Check if `name` contains `search_str` by ignoring case &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">name</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">search_str</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">search_str</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span>
+</div>
+<div class="viewcode-block" id="hex_string_without_0x"><a class="viewcode-back" href="../../../vizasm.util.html#vizasm.util.Util.hex_string_without_0x">[docs]</a><span class="k">def</span> <span class="nf">hex_string_without_0x</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Return a string representation of the number and cut off the &quot;0x&quot; prefix.</span>
+<span class="sd">    Returns None if something went wrong.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    number: number</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c"># cut off the 0x prefix and use upper case for rest of address </span>
+        <span class="k">return</span> <span class="nb">hex</span><span class="p">(</span><span class="n">number</span><span class="p">)[</span><span class="mi">2</span><span class="p">:]</span>
+    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    </div>
+<div class="viewcode-block" id="str2int"><a class="viewcode-back" href="../../../vizasm.util.html#vizasm.util.Util.str2int">[docs]</a><span class="k">def</span> <span class="nf">str2int</span><span class="p">(</span><span class="n">int_str</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Convert the string to an int.</span>
+<span class="sd">    If not possible, return none &#39;&#39;&#39;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">int_str</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    </div>
+<div class="viewcode-block" id="hex2int"><a class="viewcode-back" href="../../../vizasm.util.html#vizasm.util.Util.hex2int">[docs]</a><span class="k">def</span> <span class="nf">hex2int</span><span class="p">(</span><span class="n">hex_str</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Convert the string (with or without 0x prefix) to hex.</span>
+<span class="sd">    If not possible, return none &#39;&#39;&#39;</span>
+    <span class="n">zx_prefix</span> <span class="o">=</span> <span class="s">&#39;0x&#39;</span>
+    <span class="k">if</span> <span class="n">hex_str</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">zx_prefix</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">hex_str</span> <span class="o">=</span> <span class="n">zx_prefix</span> <span class="o">+</span> <span class="n">hex_str</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">hex_str</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+</div>
+<div class="viewcode-block" id="pretty_format_dict"><a class="viewcode-back" href="../../../vizasm.util.html#vizasm.util.Util.pretty_format_dict">[docs]</a><span class="k">def</span> <span class="nf">pretty_format_dict</span><span class="p">(</span><span class="n">dictionary</span><span class="p">,</span> <span class="n">use_repr_for_value</span> <span class="o">=</span> <span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Pretty print dictionary into multiple lines, each one containing one key and value.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dictionary: dict</span>
+<span class="sd">    use_repr_for_value: bool, optional (default is False)</span>
+<span class="sd">        if enabled use repr() instead of str() for formatting of dict values </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">value_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">use_repr_for_value</span> <span class="k">else</span> <span class="nb">repr</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">+=</span> <span class="s">&#39;(</span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">) </span><span class="se">\n</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value_str</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">res</span>    
+</div>
+<div class="viewcode-block" id="format_dict_as_table"><a class="viewcode-back" href="../../../vizasm.util.html#vizasm.util.Util.format_dict_as_table">[docs]</a><span class="k">def</span> <span class="nf">format_dict_as_table</span><span class="p">(</span><span class="n">dictionary</span><span class="p">,</span> <span class="n">columnname1</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">columnname2</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">v_delimiter</span> <span class="o">=</span> <span class="s">&#39;-&#39;</span><span class="p">,</span> <span class="n">h_delimiter</span> <span class="o">=</span> <span class="s">&#39;|&#39;</span><span class="p">,</span> <span class="n">column_delimiter</span> <span class="o">=</span> <span class="s">&#39;+&#39;</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Format a dictionary as table.</span>
+<span class="sd">    If all of the column names are None, no header will be printed!</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ---------</span>
+<span class="sd">    dictionary: dict</span>
+<span class="sd">        the dictionary to print as table</span>
+<span class="sd">    columnname1: string, optional (default is &#39;&#39;) </span>
+<span class="sd">        name of the first column (will be printed in the header)</span>
+<span class="sd">    columnname2: string, optional (default is &#39;&#39;) </span>
+<span class="sd">        name of the first column (will be printed in the header)</span>
+<span class="sd">    h_delimiter: string, optional (default is &#39;-&#39;)</span>
+<span class="sd">        the horizontal delimiter char</span>
+<span class="sd">    v_delimiter: string, optional (default is &#39;|&#39;)</span>
+<span class="sd">        the vertical delimiter char</span>
+<span class="sd">    column_delimiter: string, optional (default is &#39;+&#39;)</span>
+<span class="sd">        the column delimiter char</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+
+    <span class="n">print_header</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="n">column_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="k">for</span> <span class="n">column_name</span> <span class="ow">in</span> <span class="p">(</span><span class="n">columnname1</span><span class="p">,</span> <span class="n">columnname2</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">columnname1</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">columnname1</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">columnname2</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">columnname2</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+        
+    <span class="n">cn1_len</span> <span class="p">,</span> <span class="n">cn2_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">columnname1</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">columnname2</span><span class="p">)</span>
+    <span class="c"># get max width</span>
+    <span class="n">max_width_key</span><span class="p">,</span> <span class="n">max_width_val</span> <span class="o">=</span> <span class="n">cn1_len</span><span class="p">,</span> <span class="n">cn2_len</span>
+    
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">key_len</span><span class="p">,</span> <span class="n">val_len</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">))</span>
+        <span class="n">max_width_key</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_width_key</span><span class="p">,</span> <span class="n">cn1_len</span><span class="p">,</span> <span class="n">key_len</span><span class="p">)</span>
+        <span class="n">max_width_val</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_width_val</span><span class="p">,</span> <span class="n">cn2_len</span><span class="p">,</span> <span class="n">val_len</span><span class="p">)</span>
+        
+    <span class="n">delimiter_line</span> <span class="o">=</span> <span class="n">column_delimiter</span> <span class="o">+</span> <span class="n">v_delimiter</span> <span class="o">*</span> <span class="p">(</span><span class="n">max_width_key</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">column_delimiter</span> <span class="o">+</span> <span class="n">v_delimiter</span> <span class="o">*</span> <span class="p">(</span><span class="n">max_width_val</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">column_delimiter</span> <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span>
+    
+    <span class="c"># only print header if not all columnnames are None</span>
+    <span class="n">indent_string</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s"> {0:&lt;</span><span class="si">%d</span><span class="s">} </span><span class="si">%s</span><span class="s"> {1:&lt;</span><span class="si">%d</span><span class="s">} </span><span class="si">%s</span><span class="s"> </span><span class="se">\n</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">h_delimiter</span><span class="p">,</span> <span class="n">max_width_key</span><span class="p">,</span> <span class="n">h_delimiter</span><span class="p">,</span> <span class="n">max_width_val</span><span class="p">,</span> <span class="n">h_delimiter</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">print_header</span><span class="p">:</span>
+        <span class="n">res</span> <span class="o">+=</span> <span class="n">delimiter_line</span>
+        <span class="n">res</span> <span class="o">+=</span> <span class="n">indent_string</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">columnname1</span><span class="p">,</span> <span class="n">columnname2</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">+=</span> <span class="n">delimiter_line</span>
+
+    <span class="c"># actual dictionary formatting</span>
+    <span class="k">if</span> <span class="n">dictionary</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">res</span> <span class="o">+=</span> <span class="n">indent_string</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">+=</span> <span class="n">delimiter_line</span>
+    <span class="k">return</span> <span class="n">res</span>   
+</div>
+<div class="viewcode-block" id="sorted_dict_values_it"><a class="viewcode-back" href="../../../vizasm.util.html#vizasm.util.Util.sorted_dict_values_it">[docs]</a><span class="k">def</span> <span class="nf">sorted_dict_values_it</span><span class="p">(</span><span class="n">dictionary</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Get a list of sorted dict values &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">dictionary</span><span class="o">.</span><span class="n">iteritems</span><span class="p">()))</span> 
+</div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">surrounding_elements_from_list</span><span class="p">((</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

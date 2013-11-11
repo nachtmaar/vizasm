@@ -1,0 +1,707 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>imp Package &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">imp Package</a><ul>
+<li><a class="reference internal" href="#module-vizasm.model.asm.imp.Imp"><tt class="docutils literal"><span class="pre">Imp</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.model.asm.imp.ImpGot"><tt class="docutils literal"><span class="pre">ImpGot</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.model.asm.imp.ImpStub"><tt class="docutils literal"><span class="pre">ImpStub</span></tt> Module</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/vizasm.model.asm.imp.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="imp-package">
+<h1>imp Package<a class="headerlink" href="#imp-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-vizasm.model.asm.imp.Imp">
+<span id="imp-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">Imp</span></tt> Module<a class="headerlink" href="#module-vizasm.model.asm.imp.Imp" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 02.04.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.model.asm.imp.Imp.Imp">
+<em class="property">class </em><tt class="descclassname">vizasm.model.asm.imp.Imp.</tt><tt class="descname">Imp</tt><big>(</big><em>imp</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/imp/Imp.html#Imp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.imp.Imp.Imp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vizasm.model.asm.html#vizasm.model.asm.Value.Value" title="vizasm.model.asm.Value.Value"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.model.asm.Value.Value</span></tt></a></p>
+<p>Base class for <cite>ImpStub</cite> and <cite>ImpGot</cite>.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.asm.imp.Imp.Imp.does_release" title="vizasm.model.asm.imp.Imp.Imp.does_release"><tt class="xref py py-obj docutils literal"><span class="pre">does_release</span></tt></a>()</td>
+<td>Check if the ImpStub is releasing Object (release, autorelease ,...)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.asm.imp.Imp.Imp.does_retain" title="vizasm.model.asm.imp.Imp.Imp.does_retain"><tt class="xref py py-obj docutils literal"><span class="pre">does_retain</span></tt></a>()</td>
+<td>Check if ImpStub is retaining Object</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.asm.imp.Imp.Imp.get_imp" title="vizasm.model.asm.imp.Imp.Imp.get_imp"><tt class="xref py py-obj docutils literal"><span class="pre">get_imp</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_obj_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_value</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.asm.imp.Imp.Imp.is_any_msg_send" title="vizasm.model.asm.imp.Imp.Imp.is_any_msg_send"><tt class="xref py py-obj docutils literal"><span class="pre">is_any_msg_send</span></tt></a>()</td>
+<td>Check if ImpStub is any objc_msgSend</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.asm.imp.Imp.Imp.is_any_msg_send_stret" title="vizasm.model.asm.imp.Imp.Imp.is_any_msg_send_stret"><tt class="xref py py-obj docutils literal"><span class="pre">is_any_msg_send_stret</span></tt></a>()</td>
+<td>Check if ImpStub is any objc_msgSend_stret</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.asm.imp.Imp.Imp.is_any_msg_send_super" title="vizasm.model.asm.imp.Imp.Imp.is_any_msg_send_super"><tt class="xref py py-obj docutils literal"><span class="pre">is_any_msg_send_super</span></tt></a>()</td>
+<td>Check if ImpStub is any objc_msgSendSuper</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.asm.imp.Imp.Imp.is_autorelease" title="vizasm.model.asm.imp.Imp.Imp.is_autorelease"><tt class="xref py py-obj docutils literal"><span class="pre">is_autorelease</span></tt></a>()</td>
+<td>Check if ImpStub is autorelease</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.asm.imp.Imp.Imp.is_msg_send" title="vizasm.model.asm.imp.Imp.Imp.is_msg_send"><tt class="xref py py-obj docutils literal"><span class="pre">is_msg_send</span></tt></a>()</td>
+<td>Check if ImpStub is objc_msgSend</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.asm.imp.Imp.Imp.is_msg_send_fpret" title="vizasm.model.asm.imp.Imp.Imp.is_msg_send_fpret"><tt class="xref py py-obj docutils literal"><span class="pre">is_msg_send_fpret</span></tt></a>()</td>
+<td>Check if ImpStub is objc_msgSend_fpret.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.asm.imp.Imp.Imp.is_msg_send_stret" title="vizasm.model.asm.imp.Imp.Imp.is_msg_send_stret"><tt class="xref py py-obj docutils literal"><span class="pre">is_msg_send_stret</span></tt></a>()</td>
+<td>Check if ImpStub is objc_msgSend_stret.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.asm.imp.Imp.Imp.is_msg_send_super" title="vizasm.model.asm.imp.Imp.Imp.is_msg_send_super"><tt class="xref py py-obj docutils literal"><span class="pre">is_msg_send_super</span></tt></a>()</td>
+<td>Check if ImpStub is objc_msgSendSuper(2)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.asm.imp.Imp.Imp.is_msg_send_super_stret" title="vizasm.model.asm.imp.Imp.Imp.is_msg_send_super_stret"><tt class="xref py py-obj docutils literal"><span class="pre">is_msg_send_super_stret</span></tt></a>()</td>
+<td>Check if ImpStub is objc_msgSendSuper_stret(2).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.asm.imp.Imp.Imp.is_release" title="vizasm.model.asm.imp.Imp.Imp.is_release"><tt class="xref py py-obj docutils literal"><span class="pre">is_release</span></tt></a>()</td>
+<td>Check if ImpStub is release</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.asm.imp.Imp.Imp.is_retain" title="vizasm.model.asm.imp.Imp.Imp.is_retain"><tt class="xref py py-obj docutils literal"><span class="pre">is_retain</span></tt></a>()</td>
+<td>Check if ImpStub is retain</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.asm.imp.Imp.Imp.is_return_important" title="vizasm.model.asm.imp.Imp.Imp.is_return_important"><tt class="xref py py-obj docutils literal"><span class="pre">is_return_important</span></tt></a>()</td>
+<td>Indicate if Imp is important for analyzing the return value of a call (rax = [NSUserDefaults retain])</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_obj_name</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_value</span></tt>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="vizasm.model.asm.imp.Imp.Imp.AUTORELEASE">
+<tt class="descname">AUTORELEASE</tt><em class="property"> = 'autoreleaseReturnValue'</em><a class="headerlink" href="#vizasm.model.asm.imp.Imp.Imp.AUTORELEASE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.model.asm.imp.Imp.Imp.MSG_SEND">
+<tt class="descname">MSG_SEND</tt><em class="property"> = 'objc_msgSend'</em><a class="headerlink" href="#vizasm.model.asm.imp.Imp.Imp.MSG_SEND" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.model.asm.imp.Imp.Imp.MSG_SEND_FPRET">
+<tt class="descname">MSG_SEND_FPRET</tt><em class="property"> = 'objc_msgSend_fpret'</em><a class="headerlink" href="#vizasm.model.asm.imp.Imp.Imp.MSG_SEND_FPRET" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.model.asm.imp.Imp.Imp.MSG_SEND_STRET">
+<tt class="descname">MSG_SEND_STRET</tt><em class="property"> = 'objc_msgSend_stret'</em><a class="headerlink" href="#vizasm.model.asm.imp.Imp.Imp.MSG_SEND_STRET" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.model.asm.imp.Imp.Imp.MSG_SEND_SUPER">
+<tt class="descname">MSG_SEND_SUPER</tt><em class="property"> = 'objc_msgSendSuper'</em><a class="headerlink" href="#vizasm.model.asm.imp.Imp.Imp.MSG_SEND_SUPER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.model.asm.imp.Imp.Imp.MSG_SEND_SUPER_STRET">
+<tt class="descname">MSG_SEND_SUPER_STRET</tt><em class="property"> = 'objc_msgSendSuper_stret'</em><a class="headerlink" href="#vizasm.model.asm.imp.Imp.Imp.MSG_SEND_SUPER_STRET" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.model.asm.imp.Imp.Imp.RELEASE">
+<tt class="descname">RELEASE</tt><em class="property"> = 'objc_release'</em><a class="headerlink" href="#vizasm.model.asm.imp.Imp.Imp.RELEASE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.model.asm.imp.Imp.Imp.RETAIN">
+<tt class="descname">RETAIN</tt><em class="property"> = 'objc_retain'</em><a class="headerlink" href="#vizasm.model.asm.imp.Imp.Imp.RETAIN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.model.asm.imp.Imp.Imp.RETAIN_AUTORELEASE">
+<tt class="descname">RETAIN_AUTORELEASE</tt><em class="property"> = 'objc_retainAutorelease'</em><a class="headerlink" href="#vizasm.model.asm.imp.Imp.Imp.RETAIN_AUTORELEASE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.model.asm.imp.Imp.Imp.RETAIN_AUTORELEASED_RETURN_VALUE">
+<tt class="descname">RETAIN_AUTORELEASED_RETURN_VALUE</tt><em class="property"> = 'objc_retainAutoreleasedReturnValue'</em><a class="headerlink" href="#vizasm.model.asm.imp.Imp.Imp.RETAIN_AUTORELEASED_RETURN_VALUE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.model.asm.imp.Imp.Imp.RETAIN_FUNCTIONS">
+<tt class="descname">RETAIN_FUNCTIONS</tt><em class="property"> = ('objc_retain', 'objc_retainAutorelease', 'objc_retainAutoreleasedReturnValue')</em><a class="headerlink" href="#vizasm.model.asm.imp.Imp.Imp.RETAIN_FUNCTIONS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.imp.Imp.Imp.does_release">
+<tt class="descname">does_release</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/imp/Imp.html#Imp.does_release"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.imp.Imp.Imp.does_release" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the ImpStub is releasing Object (release, autorelease ,...)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.imp.Imp.Imp.does_retain">
+<tt class="descname">does_retain</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/imp/Imp.html#Imp.does_retain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.imp.Imp.Imp.does_retain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if ImpStub is retaining Object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.imp.Imp.Imp.get_imp">
+<tt class="descname">get_imp</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/imp/Imp.html#Imp.get_imp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.imp.Imp.Imp.get_imp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.model.asm.imp.Imp.Imp.imp">
+<tt class="descname">imp</tt><a class="headerlink" href="#vizasm.model.asm.imp.Imp.Imp.imp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.imp.Imp.Imp.is_any_msg_send">
+<tt class="descname">is_any_msg_send</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/imp/Imp.html#Imp.is_any_msg_send"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.imp.Imp.Imp.is_any_msg_send" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if ImpStub is any objc_msgSend</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.imp.Imp.Imp.is_any_msg_send_stret">
+<tt class="descname">is_any_msg_send_stret</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/imp/Imp.html#Imp.is_any_msg_send_stret"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.imp.Imp.Imp.is_any_msg_send_stret" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if ImpStub is any objc_msgSend_stret</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.imp.Imp.Imp.is_any_msg_send_super">
+<tt class="descname">is_any_msg_send_super</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/imp/Imp.html#Imp.is_any_msg_send_super"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.imp.Imp.Imp.is_any_msg_send_super" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if ImpStub is any objc_msgSendSuper</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.imp.Imp.Imp.is_autorelease">
+<tt class="descname">is_autorelease</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/imp/Imp.html#Imp.is_autorelease"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.imp.Imp.Imp.is_autorelease" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if ImpStub is autorelease</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.imp.Imp.Imp.is_msg_send">
+<tt class="descname">is_msg_send</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/imp/Imp.html#Imp.is_msg_send"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.imp.Imp.Imp.is_msg_send" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if ImpStub is objc_msgSend</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.imp.Imp.Imp.is_msg_send_fpret">
+<tt class="descname">is_msg_send_fpret</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/imp/Imp.html#Imp.is_msg_send_fpret"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.imp.Imp.Imp.is_msg_send_fpret" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if ImpStub is objc_msgSend_fpret.
+This is a message with float return value</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.imp.Imp.Imp.is_msg_send_stret">
+<tt class="descname">is_msg_send_stret</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/imp/Imp.html#Imp.is_msg_send_stret"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.imp.Imp.Imp.is_msg_send_stret" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if ImpStub is objc_msgSend_stret.
+This is a message with a data-structure return value</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.imp.Imp.Imp.is_msg_send_super">
+<tt class="descname">is_msg_send_super</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/imp/Imp.html#Imp.is_msg_send_super"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.imp.Imp.Imp.is_msg_send_super" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if ImpStub is objc_msgSendSuper(2)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.imp.Imp.Imp.is_msg_send_super_stret">
+<tt class="descname">is_msg_send_super_stret</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/imp/Imp.html#Imp.is_msg_send_super_stret"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.imp.Imp.Imp.is_msg_send_super_stret" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if ImpStub is objc_msgSendSuper_stret(2).
+This is a message send to super with a data-structure return value</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.imp.Imp.Imp.is_release">
+<tt class="descname">is_release</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/imp/Imp.html#Imp.is_release"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.imp.Imp.Imp.is_release" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if ImpStub is release</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.imp.Imp.Imp.is_retain">
+<tt class="descname">is_retain</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/imp/Imp.html#Imp.is_retain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.imp.Imp.Imp.is_retain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if ImpStub is retain</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.imp.Imp.Imp.is_return_important">
+<tt class="descname">is_return_important</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/imp/Imp.html#Imp.is_return_important"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.imp.Imp.Imp.is_return_important" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indicate if Imp is important for analyzing the return value of a call (rax = [NSUserDefaults retain])</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.model.asm.imp.ImpGot">
+<span id="impgot-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">ImpGot</span></tt> Module<a class="headerlink" href="#module-vizasm.model.asm.imp.ImpGot" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 02.04.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.model.asm.imp.ImpGot.ImpGot">
+<em class="property">class </em><tt class="descclassname">vizasm.model.asm.imp.ImpGot.</tt><tt class="descname">ImpGot</tt><big>(</big><em>imp_stub</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/imp/ImpGot.html#ImpGot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.imp.ImpGot.ImpGot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.model.asm.imp.Imp.Imp" title="vizasm.model.asm.imp.Imp.Imp"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.model.asm.imp.Imp.Imp</span></tt></a></p>
+<p>Imp got examples:</p>
+<dl class="docutils">
+<dt>imp___got__</dt>
+<dd>imp___got__NSStreamSocketSecurityLevelKey
+imp___got__NSStreamSocketSecurityLevelNone
+imp___got__NSURLAuthenticationMethodServerTrust
+imp___got__kSecRandomDefault
+imp___got__CGAffineTransformIdentity
+imp___got__CGPointZero
+imp___got__CGRectNull
+imp___got__CGRectZero
+imp___got__CGSizeZero
+imp___got__NSDefaultRunLoopMode
+imp___got__NSFileSize
+imp___got__NSFileSystemFreeSize
+imp___got__NSFontAttributeName
+imp___got__NSInternalInconsistencyException
+imp___got__NSLocalizedDescriptionKey
+imp___got__NSParagraphStyleAttributeName
+imp___got__QTMovieDidEndNotification
+imp___got__QTMovieEditableAttribute
+imp___got__QTMovieLoopsAttribute
+imp___got__QTMovieOpenAsyncRequiredAttribute
+imp___got__free
+imp___got__glGetProgramInfoLog
+imp___got__glGetProgramiv
+imp___got__glGetShaderInfoLog
+imp___got__glGetShaderiv
+imp___got__kUTTypeJPEG
+imp___got__kUTTypePNG
+imp___got__objc_autoreleasePoolPush
+imp___got__objc_msgSend
+imp___got__objc_release
+imp___got__objc_retain</dd>
+<dt>imp___got___</dt>
+<dd>imp___got___DefaultRuneLocale
+imp___got___NSConcreteStackBlock</dd>
+<dt>imp___got____</dt>
+<dd>imp___got____gxx_personality_v0
+imp___got____objc_personality_v0
+imp___got____stack_chk_guard
+imp___got____stderrp
+imp___got____stdinp
+imp___got____stdoutp</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">does_release</span></tt>()</td>
+<td>Check if the ImpStub is releasing Object (release, autorelease ,...)</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">does_retain</span></tt>()</td>
+<td>Check if ImpStub is retaining Object</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_imp</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_obj_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_value</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_any_msg_send</span></tt>()</td>
+<td>Check if ImpStub is any objc_msgSend</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_any_msg_send_stret</span></tt>()</td>
+<td>Check if ImpStub is any objc_msgSend_stret</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_any_msg_send_super</span></tt>()</td>
+<td>Check if ImpStub is any objc_msgSendSuper</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_autorelease</span></tt>()</td>
+<td>Check if ImpStub is autorelease</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_msg_send</span></tt>()</td>
+<td>Check if ImpStub is objc_msgSend</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_msg_send_fpret</span></tt>()</td>
+<td>Check if ImpStub is objc_msgSend_fpret.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_msg_send_stret</span></tt>()</td>
+<td>Check if ImpStub is objc_msgSend_stret.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_msg_send_super</span></tt>()</td>
+<td>Check if ImpStub is objc_msgSendSuper(2)</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_msg_send_super_stret</span></tt>()</td>
+<td>Check if ImpStub is objc_msgSendSuper_stret(2).</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_release</span></tt>()</td>
+<td>Check if ImpStub is release</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_retain</span></tt>()</td>
+<td>Check if ImpStub is retain</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_return_important</span></tt>()</td>
+<td>Indicate if Imp is important for analyzing the return value of a call (rax = [NSUserDefaults retain])</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_obj_name</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_value</span></tt>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.model.asm.imp.ImpStub">
+<span id="impstub-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">ImpStub</span></tt> Module<a class="headerlink" href="#module-vizasm.model.asm.imp.ImpStub" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 02.04.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.model.asm.imp.ImpStub.ImpStub">
+<em class="property">class </em><tt class="descclassname">vizasm.model.asm.imp.ImpStub.</tt><tt class="descname">ImpStub</tt><big>(</big><em>imp_stub</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/imp/ImpStub.html#ImpStub"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.imp.ImpStub.ImpStub" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vizasm.model.asm.imp.Imp.Imp" title="vizasm.model.asm.imp.Imp.Imp"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.model.asm.imp.Imp.Imp</span></tt></a></p>
+<dl class="docutils">
+<dt>Represents implementation stubs like e.g.:</dt>
+<dd><p class="first">imp___stubs
+imp___stubs__NSApplicationMain
+imp___stubs__objc_msgSend</p>
+<p>imp___stubs__objc_retain
+imp___stubs__objc_retainAutorelease
+imp___stubs__objc_retainAutoreleasedReturnValue</p>
+<p>imp___stubs__objc_release
+imp___stubs__objc_autoreleaseReturnValue</p>
+<p class="last">imp___stubs__NSLog
+imp___stubs__objc_setProperty_atomic
+imp___stubs__objc_getProperty
+imp___stubs__objc_storeStrong</p>
+</dd>
+<dt>and implementation gots like e.g.:</dt>
+<dd>imp___got__objc_msgSend</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>imp_stub</strong> :</p>
+<blockquote class="last">
+<div><p>mapped to value of <cite>Value</cite></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">does_release</span></tt>()</td>
+<td>Check if the ImpStub is releasing Object (release, autorelease ,...)</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">does_retain</span></tt>()</td>
+<td>Check if ImpStub is retaining Object</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_imp</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_obj_name</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_value</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_any_msg_send</span></tt>()</td>
+<td>Check if ImpStub is any objc_msgSend</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_any_msg_send_stret</span></tt>()</td>
+<td>Check if ImpStub is any objc_msgSend_stret</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_any_msg_send_super</span></tt>()</td>
+<td>Check if ImpStub is any objc_msgSendSuper</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.asm.imp.ImpStub.ImpStub.is_any_printf" title="vizasm.model.asm.imp.ImpStub.ImpStub.is_any_printf"><tt class="xref py py-obj docutils literal"><span class="pre">is_any_printf</span></tt></a>()</td>
+<td>Check if ImpStub is any printf</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_autorelease</span></tt>()</td>
+<td>Check if ImpStub is autorelease</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.asm.imp.ImpStub.ImpStub.is_format_string_log" title="vizasm.model.asm.imp.ImpStub.ImpStub.is_format_string_log"><tt class="xref py py-obj docutils literal"><span class="pre">is_format_string_log</span></tt></a>()</td>
+<td>Check if ImpStub is NSLog or printf</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.asm.imp.ImpStub.ImpStub.is_get_property" title="vizasm.model.asm.imp.ImpStub.ImpStub.is_get_property"><tt class="xref py py-obj docutils literal"><span class="pre">is_get_property</span></tt></a>()</td>
+<td>Check if ImpStub is get_property</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_msg_send</span></tt>()</td>
+<td>Check if ImpStub is objc_msgSend</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_msg_send_fpret</span></tt>()</td>
+<td>Check if ImpStub is objc_msgSend_fpret.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_msg_send_stret</span></tt>()</td>
+<td>Check if ImpStub is objc_msgSend_stret.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_msg_send_super</span></tt>()</td>
+<td>Check if ImpStub is objc_msgSendSuper(2)</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_msg_send_super_stret</span></tt>()</td>
+<td>Check if ImpStub is objc_msgSendSuper_stret(2).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.asm.imp.ImpStub.ImpStub.is_nslog" title="vizasm.model.asm.imp.ImpStub.ImpStub.is_nslog"><tt class="xref py py-obj docutils literal"><span class="pre">is_nslog</span></tt></a>()</td>
+<td>Check if ImpStub is NSLog</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.asm.imp.ImpStub.ImpStub.is_printf" title="vizasm.model.asm.imp.ImpStub.ImpStub.is_printf"><tt class="xref py py-obj docutils literal"><span class="pre">is_printf</span></tt></a>()</td>
+<td>Check if ImpStub is print</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_release</span></tt>()</td>
+<td>Check if ImpStub is release</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_retain</span></tt>()</td>
+<td>Check if ImpStub is retain</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_return_important</span></tt>()</td>
+<td>Indicate if Imp is important for analyzing the return value of a call (rax = [NSUserDefaults retain])</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.asm.imp.ImpStub.ImpStub.is_set_property" title="vizasm.model.asm.imp.ImpStub.ImpStub.is_set_property"><tt class="xref py py-obj docutils literal"><span class="pre">is_set_property</span></tt></a>()</td>
+<td>Check if ImpStub is autorelease</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.model.asm.imp.ImpStub.ImpStub.is_store_strong" title="vizasm.model.asm.imp.ImpStub.ImpStub.is_store_strong"><tt class="xref py py-obj docutils literal"><span class="pre">is_store_strong</span></tt></a>()</td>
+<td>Check if ImpStub is store_strong</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_obj_name</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_value</span></tt>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="vizasm.model.asm.imp.ImpStub.ImpStub.GET_PROPERTY">
+<tt class="descname">GET_PROPERTY</tt><em class="property"> = 'objc_getProperty'</em><a class="headerlink" href="#vizasm.model.asm.imp.ImpStub.ImpStub.GET_PROPERTY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.model.asm.imp.ImpStub.ImpStub.NSLOG">
+<tt class="descname">NSLOG</tt><em class="property"> = 'NSLog'</em><a class="headerlink" href="#vizasm.model.asm.imp.ImpStub.ImpStub.NSLOG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.model.asm.imp.ImpStub.ImpStub.PRINTF">
+<tt class="descname">PRINTF</tt><em class="property"> = 'printf'</em><a class="headerlink" href="#vizasm.model.asm.imp.ImpStub.ImpStub.PRINTF" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.model.asm.imp.ImpStub.ImpStub.SET_PROPERTY">
+<tt class="descname">SET_PROPERTY</tt><em class="property"> = 'objc_setProperty'</em><a class="headerlink" href="#vizasm.model.asm.imp.ImpStub.ImpStub.SET_PROPERTY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.model.asm.imp.ImpStub.ImpStub.STORE_STRONG">
+<tt class="descname">STORE_STRONG</tt><em class="property"> = 'objc_storeStrong'</em><a class="headerlink" href="#vizasm.model.asm.imp.ImpStub.ImpStub.STORE_STRONG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.imp.ImpStub.ImpStub.is_any_printf">
+<tt class="descname">is_any_printf</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/imp/ImpStub.html#ImpStub.is_any_printf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.imp.ImpStub.ImpStub.is_any_printf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if ImpStub is any printf</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.imp.ImpStub.ImpStub.is_format_string_log">
+<tt class="descname">is_format_string_log</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/imp/ImpStub.html#ImpStub.is_format_string_log"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.imp.ImpStub.ImpStub.is_format_string_log" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if ImpStub is NSLog or printf</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.imp.ImpStub.ImpStub.is_get_property">
+<tt class="descname">is_get_property</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/imp/ImpStub.html#ImpStub.is_get_property"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.imp.ImpStub.ImpStub.is_get_property" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if ImpStub is get_property</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.imp.ImpStub.ImpStub.is_nslog">
+<tt class="descname">is_nslog</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/imp/ImpStub.html#ImpStub.is_nslog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.imp.ImpStub.ImpStub.is_nslog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if ImpStub is NSLog</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.imp.ImpStub.ImpStub.is_printf">
+<tt class="descname">is_printf</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/imp/ImpStub.html#ImpStub.is_printf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.imp.ImpStub.ImpStub.is_printf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if ImpStub is print</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.imp.ImpStub.ImpStub.is_set_property">
+<tt class="descname">is_set_property</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/imp/ImpStub.html#ImpStub.is_set_property"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.imp.ImpStub.ImpStub.is_set_property" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if ImpStub is autorelease</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.model.asm.imp.ImpStub.ImpStub.is_store_strong">
+<tt class="descname">is_store_strong</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/asm/imp/ImpStub.html#ImpStub.is_store_strong"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.asm.imp.ImpStub.ImpStub.is_store_strong" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if ImpStub is store_strong</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

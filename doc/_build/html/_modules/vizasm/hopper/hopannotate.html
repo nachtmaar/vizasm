@@ -1,0 +1,392 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm.hopper.hopannotate &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vizasm.hopper.hopannotate</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 19.08.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">from</span> <span class="nn">vizasm.hopper.HopperAnnotationInterface</span> <span class="kn">import</span> <span class="n">HopperAnnotationInterface</span> <span class="k">as</span> <span class="n">hai</span>
+
+<div class="viewcode-block" id="HopperAnnotater"><a class="viewcode-back" href="../../../vizasm.hopper.html#vizasm.hopper.hopannotate.HopperAnnotater">[docs]</a><span class="k">class</span> <span class="nc">HopperAnnotater</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    This class is used for annotating Hopper.</span>
+<span class="sd">    Be sure to set `seg`. This is the bridge to Hopper needed for annotation.</span>
+<span class="sd">    Set it before you annotate anything.</span>
+<span class="sd">    </span>
+<span class="sd">    The first time this module gets imported, an instance of `HopperAnnotater` will be created and stored in `hopanno`.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    __cur_meth_impl_start: int</span>
+<span class="sd">        The address of the method implementation. Has to be set externally.</span>
+<span class="sd">    __seg: Segment (see Hopper scripting api)</span>
+<span class="sd">        object of Hopper which holds the function for annotation</span>
+<span class="sd">    __not_annotated_registers_list: list&lt;tuple&lt;str, int&gt;&gt;</span>
+<span class="sd">        if the annotation of registers is enabled, </span>
+<span class="sd">        all registers that will be annotated are stored in this list and annotated if `clear()` gets called. </span>
+<span class="sd">        Messages with None address, will be annotated at the method head.</span>
+<span class="sd">    __annotate_calls: bool, optional (default is False)</span>
+<span class="sd">        enable annotation of calls</span>
+<span class="sd">    __annotate_assignments: bool, optional (default is False)</span>
+<span class="sd">        enable annotation of registers</span>
+<span class="sd">    __ann_method_head: bool, optional (default is False)</span>
+<span class="sd">        write a summary to the beginning of the method implementation.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seg</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">annotate_calls</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span> <span class="n">ann_method_head</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span> <span class="n">annotate_assignments</span> <span class="o">=</span> <span class="bp">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__cur_meth_impl_start</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__seg</span> <span class="o">=</span> <span class="n">seg</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__not_annotated_registers_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__annotate_calls</span> <span class="o">=</span> <span class="n">annotate_calls</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">__annotate_assignments</span> <span class="o">=</span> <span class="n">annotate_assignments</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__ann_method_head</span> <span class="o">=</span> <span class="n">ann_method_head</span> 
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> 
+    
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">(</span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">seg</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">annotate_calls</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ann_method_head</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">annotate_registers</span><span class="p">)</span>
+
+<div class="viewcode-block" id="HopperAnnotater.is_hopper_annotation_enabled"><a class="viewcode-back" href="../../../vizasm.hopper.html#vizasm.hopper.hopannotate.HopperAnnotater.is_hopper_annotation_enabled">[docs]</a>    <span class="k">def</span> <span class="nf">is_hopper_annotation_enabled</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Check if annotation is enabled.</span>
+<span class="sd">        To enable it, set the `seg` value.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">seg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span>
+    </div>
+<div class="viewcode-block" id="HopperAnnotater.get_ann_method_head"><a class="viewcode-back" href="../../../vizasm.hopper.html#vizasm.hopper.hopannotate.HopperAnnotater.get_ann_method_head">[docs]</a>    <span class="k">def</span> <span class="nf">get_ann_method_head</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ann_method_head</span>
+</div>
+<div class="viewcode-block" id="HopperAnnotater.get_not_annotated_registers_list"><a class="viewcode-back" href="../../../vizasm.hopper.html#vizasm.hopper.hopannotate.HopperAnnotater.get_not_annotated_registers_list">[docs]</a>    <span class="k">def</span> <span class="nf">get_not_annotated_registers_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__not_annotated_registers_list</span>
+</div>
+<div class="viewcode-block" id="HopperAnnotater.set_not_annotated_registers_list"><a class="viewcode-back" href="../../../vizasm.hopper.html#vizasm.hopper.hopannotate.HopperAnnotater.set_not_annotated_registers_list">[docs]</a>    <span class="k">def</span> <span class="nf">set_not_annotated_registers_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__not_annotated_registers_list</span> <span class="o">=</span> <span class="n">value</span>
+</div>
+<div class="viewcode-block" id="HopperAnnotater.set_ann_method_head"><a class="viewcode-back" href="../../../vizasm.hopper.html#vizasm.hopper.hopannotate.HopperAnnotater.set_ann_method_head">[docs]</a>    <span class="k">def</span> <span class="nf">set_ann_method_head</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__ann_method_head</span> <span class="o">=</span> <span class="n">value</span>
+    </div>
+<div class="viewcode-block" id="HopperAnnotater.get_seg"><a class="viewcode-back" href="../../../vizasm.hopper.html#vizasm.hopper.hopannotate.HopperAnnotater.get_seg">[docs]</a>    <span class="k">def</span> <span class="nf">get_seg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__seg</span>
+</div>
+<div class="viewcode-block" id="HopperAnnotater.set_seg"><a class="viewcode-back" href="../../../vizasm.hopper.html#vizasm.hopper.hopannotate.HopperAnnotater.set_seg">[docs]</a>    <span class="k">def</span> <span class="nf">set_seg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__seg</span> <span class="o">=</span> <span class="n">value</span>
+</div>
+<div class="viewcode-block" id="HopperAnnotater.get_cur_meth_impl_start"><a class="viewcode-back" href="../../../vizasm.hopper.html#vizasm.hopper.hopannotate.HopperAnnotater.get_cur_meth_impl_start">[docs]</a>    <span class="k">def</span> <span class="nf">get_cur_meth_impl_start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cur_meth_impl_start</span>
+</div>
+<div class="viewcode-block" id="HopperAnnotater.set_cur_meth_impl_start"><a class="viewcode-back" href="../../../vizasm.hopper.html#vizasm.hopper.hopannotate.HopperAnnotater.set_cur_meth_impl_start">[docs]</a>    <span class="k">def</span> <span class="nf">set_cur_meth_impl_start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__cur_meth_impl_start</span> <span class="o">=</span> <span class="n">value</span>
+    </div>
+<div class="viewcode-block" id="HopperAnnotater.get_annotate_calls"><a class="viewcode-back" href="../../../vizasm.hopper.html#vizasm.hopper.hopannotate.HopperAnnotater.get_annotate_calls">[docs]</a>    <span class="k">def</span> <span class="nf">get_annotate_calls</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__annotate_calls</span>
+</div>
+<div class="viewcode-block" id="HopperAnnotater.set_annotate_calls"><a class="viewcode-back" href="../../../vizasm.hopper.html#vizasm.hopper.hopannotate.HopperAnnotater.set_annotate_calls">[docs]</a>    <span class="k">def</span> <span class="nf">set_annotate_calls</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__annotate_calls</span> <span class="o">=</span> <span class="n">value</span>
+</div>
+<div class="viewcode-block" id="HopperAnnotater.get_annotate_registers"><a class="viewcode-back" href="../../../vizasm.hopper.html#vizasm.hopper.hopannotate.HopperAnnotater.get_annotate_registers">[docs]</a>    <span class="k">def</span> <span class="nf">get_annotate_registers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__annotate_assignments</span>
+    </div>
+<div class="viewcode-block" id="HopperAnnotater.set_annotate_registers"><a class="viewcode-back" href="../../../vizasm.hopper.html#vizasm.hopper.hopannotate.HopperAnnotater.set_annotate_registers">[docs]</a>    <span class="k">def</span> <span class="nf">set_annotate_registers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__annotate_assignments</span> <span class="o">=</span> <span class="n">value</span>
+        </div>
+<div class="viewcode-block" id="HopperAnnotater.annotate_from_methodcall"><a class="viewcode-back" href="../../../vizasm.hopper.html#vizasm.hopper.hopannotate.HopperAnnotater.annotate_from_methodcall">[docs]</a>    <span class="k">def</span> <span class="nf">annotate_from_methodcall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">methodcall</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Annotate the calls stored in the `MethodCall`.</span>
+<span class="sd">        If `ann_method_head` write a summary of the calls to the beginning of the method implementation.</span>
+<span class="sd">        </span>
+<span class="sd">        The hopper representation will be used if available (see `HopperAnnotationInterface`)</span>
+<span class="sd">         </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        methodcall: MethodCall</span>
+<span class="sd">            the `MethodCall` to annotate</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_hopper_annotation_enabled</span><span class="p">()</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">annotate_calls</span><span class="p">:</span>
+            <span class="n">methods</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+            <span class="k">for</span> <span class="n">methodcallitem</span> <span class="ow">in</span> <span class="n">methodcall</span><span class="p">:</span>
+                <span class="n">int_addr</span> <span class="o">=</span> <span class="n">methodcallitem</span><span class="o">.</span><span class="n">address</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="n">hai</span><span class="o">.</span><span class="n">try_get_hopper_string</span><span class="p">(</span><span class="n">methodcallitem</span><span class="o">.</span><span class="n">call</span><span class="p">)</span>
+                <span class="n">methods</span> <span class="o">+=</span> <span class="n">msg</span> <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">int_addr</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+    
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ann_method_head</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">cur_meth_impl_start</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">head_msg</span> <span class="o">=</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span> <span class="o">+</span> <span class="n">methodcall</span><span class="o">.</span><span class="n">format_head</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span> <span class="o">+</span> <span class="n">methods</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">annotate_method_head_beginning</span><span class="p">(</span><span class="n">head_msg</span><span class="p">)</span>
+            </div>
+<div class="viewcode-block" id="HopperAnnotater.annotate_assignment"><a class="viewcode-back" href="../../../vizasm.hopper.html#vizasm.hopper.hopannotate.HopperAnnotater.annotate_assignment">[docs]</a>    <span class="k">def</span> <span class="nf">annotate_assignment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lval</span><span class="p">,</span> <span class="n">rval</span><span class="p">,</span> <span class="n">address</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Annotate the current assignments (if enabled)</span>
+<span class="sd">        E.g. annotate the current register value.</span>
+<span class="sd">        </span>
+<span class="sd">        The messages will not get annotated instantly.</span>
+<span class="sd">        They will be collected and annotated at once if `clear()` gets called.</span>
+<span class="sd">        Seems to improve performance. </span>
+<span class="sd">        </span>
+<span class="sd">        The hopper representation will be used if available (see `HopperAnnotationInterface`)</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        lval: object</span>
+<span class="sd">            left value of the assignment</span>
+<span class="sd">        rval: object</span>
+<span class="sd">            right value of the assignment</span>
+<span class="sd">        address: int</span>
+<span class="sd">        &#39;&#39;&#39;</span> 
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_hopper_annotation_enabled</span><span class="p">():</span>
+            <span class="n">register_hop</span><span class="p">,</span> <span class="n">value_hop</span> <span class="o">=</span> <span class="n">hai</span><span class="o">.</span><span class="n">try_get_hopper_string</span><span class="p">(</span><span class="n">lval</span><span class="p">),</span> <span class="n">hai</span><span class="o">.</span><span class="n">try_get_hopper_string</span><span class="p">(</span><span class="n">rval</span><span class="p">)</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s"> = </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">register_hop</span><span class="p">,</span> <span class="n">value_hop</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">annotate_other_assignment</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">address</span><span class="p">)</span>
+            </div>
+<div class="viewcode-block" id="HopperAnnotater.annotate_other_assignment"><a class="viewcode-back" href="../../../vizasm.hopper.html#vizasm.hopper.hopannotate.HopperAnnotater.annotate_other_assignment">[docs]</a>    <span class="k">def</span> <span class="nf">annotate_other_assignment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">address</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Annotate the current assignment (if enabled).</span>
+<span class="sd">        E.g. annotate the current register value.</span>
+<span class="sd">        </span>
+<span class="sd">        The messages will not get annotated instantly.</span>
+<span class="sd">        They will be collected and annotated at once if `clear()` gets called.</span>
+<span class="sd">        Seems to improve performance. </span>
+<span class="sd">        </span>
+<span class="sd">        The hopper representation will be used if available (see `HopperAnnotationInterface`)</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        address: int</span>
+<span class="sd">        msg: string</span>
+<span class="sd">        &#39;&#39;&#39;</span> 
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_hopper_annotation_enabled</span><span class="p">():</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="n">hai</span><span class="o">.</span><span class="n">try_get_hopper_string</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">annotate_registers</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">not_annotated_registers_list</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">msg</span><span class="p">,</span> <span class="n">address</span><span class="p">))</span>
+    </div>
+<div class="viewcode-block" id="HopperAnnotater.annotate_assignment_method_head"><a class="viewcode-back" href="../../../vizasm.hopper.html#vizasm.hopper.hopannotate.HopperAnnotater.annotate_assignment_method_head">[docs]</a>    <span class="k">def</span> <span class="nf">annotate_assignment_method_head</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>    
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Annotate the current assignment at the method head.</span>
+<span class="sd">        </span>
+<span class="sd">        The messages will not get annotated instantly.</span>
+<span class="sd">        They will be collected and annotated at once if `clear()` gets called.</span>
+<span class="sd">        Seems to improve performance. </span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        msg: string</span>
+<span class="sd">        &#39;&#39;&#39;</span> 
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_hopper_annotation_enabled</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">not_annotated_registers_list</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">msg</span><span class="p">,</span> <span class="bp">None</span><span class="p">))</span>
+        </div>
+<div class="viewcode-block" id="HopperAnnotater.annotate"><a class="viewcode-back" href="../../../vizasm.hopper.html#vizasm.hopper.hopannotate.HopperAnnotater.annotate">[docs]</a>    <span class="k">def</span> <span class="nf">annotate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">address</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        Annotate the specified message at given address if not None.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        msg: str</span>
+<span class="sd">        address: int</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_hopper_annotation_enabled</span><span class="p">()</span> <span class="ow">and</span> <span class="n">address</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">seg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">seg</span>
+            <span class="n">comment</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="n">seg</span><span class="o">.</span><span class="n">setCommentAtAddress</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">comment</span><span class="p">)</span>
+            </div>
+<div class="viewcode-block" id="HopperAnnotater.annotate_inline"><a class="viewcode-back" href="../../../vizasm.hopper.html#vizasm.hopper.hopannotate.HopperAnnotater.annotate_inline">[docs]</a>    <span class="k">def</span> <span class="nf">annotate_inline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">address</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">keep_orig_msg</span> <span class="o">=</span> <span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        Annotate the specified message inline at given address if not None.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        msg: str</span>
+<span class="sd">        address: int</span>
+<span class="sd">        keep_orig_msg: bool, optional (default is False)</span>
+<span class="sd">            if True keep the original message in new comment</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_hopper_annotation_enabled</span><span class="p">()</span> <span class="ow">and</span> <span class="n">address</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">seg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">seg</span>
+            <span class="n">old_comment</span> <span class="o">=</span> <span class="n">seg</span><span class="o">.</span><span class="n">getInlineCommentAtAddress</span><span class="p">(</span><span class="n">address</span><span class="p">)</span> <span class="k">if</span> <span class="n">keep_orig_msg</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="k">else</span> <span class="bp">None</span>
+            <span class="n">comment</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">old_comment</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">comment</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s"> - </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">comment</span><span class="p">,</span> <span class="n">old_comment</span><span class="p">)</span>
+            <span class="n">seg</span><span class="o">.</span><span class="n">setInlineCommentAtAddress</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">comment</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="HopperAnnotater.annotate_method_head_beginning"><a class="viewcode-back" href="../../../vizasm.hopper.html#vizasm.hopper.hopannotate.HopperAnnotater.annotate_method_head_beginning">[docs]</a>    <span class="k">def</span> <span class="nf">annotate_method_head_beginning</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Annotate at beginning of the meth_impl head.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        msg: str</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__annotate_method_head</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="HopperAnnotater.annotate_method_head_end"><a class="viewcode-back" href="../../../vizasm.hopper.html#vizasm.hopper.hopannotate.HopperAnnotater.annotate_method_head_end">[docs]</a>    <span class="k">def</span> <span class="nf">annotate_method_head_end</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Annotate at end of the meth_impl head.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        msg: str</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__annotate_method_head</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+    </div>
+    <span class="k">def</span> <span class="nf">__annotate_method_head</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Annotate the head of the meth_impl.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        msg: str</span>
+<span class="sd">        end: bool</span>
+<span class="sd">            if true annotate at end of head, otherwise at the beginning</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_hopper_annotation_enabled</span><span class="p">()</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">ann_method_head</span><span class="p">:</span>
+            <span class="n">method_head_addr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cur_meth_impl_start</span>
+            <span class="n">cur_head_msg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_current_head_msg</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">method_head_addr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">head_msg_it</span> <span class="o">=</span> <span class="p">[</span><span class="n">msg</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">cur_head_msg</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">end</span><span class="p">:</span>
+                        <span class="n">head_msg_it</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">cur_head_msg</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">head_msg_it</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cur_head_msg</span><span class="p">)</span>
+                <span class="n">head_msg</span> <span class="o">=</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">head_msg_it</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">method_head_addr</span><span class="p">,</span> <span class="n">head_msg</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__get_current_head_msg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Get the current head msg as string. Returns an empty string if not set (None). &#39;&#39;&#39;</span>
+        <span class="n">method_head_addr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cur_meth_impl_start</span>
+        <span class="n">cur_head_msg</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">method_head_addr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">head_msg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">seg</span><span class="o">.</span><span class="n">getCommentAtAddress</span><span class="p">(</span><span class="n">method_head_addr</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">head_msg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">cur_head_msg</span> <span class="o">=</span> <span class="n">head_msg</span>
+        <span class="k">return</span> <span class="n">cur_head_msg</span>
+    
+<div class="viewcode-block" id="HopperAnnotater.reset"><a class="viewcode-back" href="../../../vizasm.hopper.html#vizasm.hopper.hopannotate.HopperAnnotater.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Reset and annotate all messages which have not been annotated &#39;&#39;&#39;</span>
+        <span class="n">head_address</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cur_meth_impl_start</span>
+        <span class="n">ann_method_head</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c"># annotate messages that have an address and store the others in ann_method_head</span>
+        <span class="k">for</span> <span class="n">msg</span><span class="p">,</span> <span class="n">addr</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">not_annotated_registers_list</span><span class="p">:</span>
+            <span class="n">address</span> <span class="o">=</span> <span class="n">addr</span>
+            <span class="k">if</span> <span class="n">address</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">ann_method_head</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">annotate_inline</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">keep_orig_msg</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="c"># annotate messages that had no address at head (if head address set)</span>
+        <span class="k">if</span> <span class="n">head_address</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">ann_method_head</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">annotate_method_head_end</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ann_method_head</span><span class="p">))</span>
+        <span class="c"># clear</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        </div>
+<div class="viewcode-block" id="HopperAnnotater.clear"><a class="viewcode-back" href="../../../vizasm.hopper.html#vizasm.hopper.hopannotate.HopperAnnotater.clear">[docs]</a>    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Clear the system &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seg</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">annotate_calls</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ann_method_head</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">annotate_registers</span><span class="p">)</span>
+        </div>
+    <span class="n">cur_meth_impl_start</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_cur_meth_impl_start</span><span class="p">,</span> <span class="n">set_cur_meth_impl_start</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;__cur_meth_impl_start(int) -- The address of the method implementation. Has to be set externally.&quot;</span><span class="p">)</span>
+    <span class="n">seg</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_seg</span><span class="p">,</span> <span class="n">set_seg</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;__seg(Segment see Hopper scripting api) -- object of Hopper which holds the function for annotation&quot;</span><span class="p">)</span>
+    <span class="n">not_annotated_registers_list</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_not_annotated_registers_list</span><span class="p">,</span> <span class="n">set_not_annotated_registers_list</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;__not_annotated_registers_list(list&lt;tuple&lt;str, int&gt;&gt;) -- if the annotation of registers is enabled, all registers that will be annotated are stored in this list and annotated if `clear()` gets called.&quot;</span><span class="p">)</span>
+    <span class="n">annotate_calls</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_annotate_calls</span><span class="p">,</span> <span class="n">set_annotate_calls</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;__annotate_calls(bool, optional (default is False)) -- enable annotation of calls&quot;</span><span class="p">)</span>
+    <span class="n">annotate_registers</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_annotate_registers</span><span class="p">,</span> <span class="n">set_annotate_registers</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;__annotate_assignments(bool, optional (default is False)) -- enable annotation of registers&quot;</span><span class="p">)</span>
+    <span class="n">ann_method_head</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_ann_method_head</span><span class="p">,</span> <span class="n">set_ann_method_head</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;__ann_method_head(bool, optional (default is False)) -- write a summary of the calls to the beginning of the method implementation.&quot;</span><span class="p">)</span>                
+    </div>
+<span class="n">hopanno</span> <span class="o">=</span> <span class="n">HopperAnnotater</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

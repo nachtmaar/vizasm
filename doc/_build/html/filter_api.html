@@ -1,0 +1,395 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Filter Api &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="index.html" />
+    <link rel="up" title="Custom Filters" href="custom_filters.html" />
+    <link rel="next" title="Example Filters" href="example_filters.html" />
+    <link rel="prev" title="Custom Filters" href="custom_filters.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="example_filters.html" title="Example Filters"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="custom_filters.html" title="Custom Filters"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="custom_filters.html" accesskey="U">Custom Filters</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Filter Api</a><ul>
+<li><a class="reference internal" href="#method-call">Method call</a><ul>
+<li><a class="reference internal" href="#c-stuff">C stuff</a></li>
+<li><a class="reference internal" href="#objective-c-stuff">Objective-C stuff</a></li>
+<li><a class="reference internal" href="#functioninterface-stuff">FunctionInterface stuff</a></li>
+<li><a class="reference internal" href="#other-stuff">Other stuff</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#method-definition">Method definition</a></li>
+<li><a class="reference internal" href="#modelutil">ModelUtil</a><ul>
+<li><a class="reference internal" href="#imp-stuff">Imp stuff</a></li>
+<li><a class="reference internal" href="#id1">Objective-C stuff</a></li>
+<li><a class="reference internal" href="#id2">C-Stuff</a></li>
+<li><a class="reference internal" href="#other">Other</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="custom_filters.html"
+                        title="previous chapter">Custom Filters</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="example_filters.html"
+                        title="next chapter">Example Filters</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/filter_api.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="filter-api">
+<h1>Filter Api<a class="headerlink" href="#filter-api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="method-call">
+<h2>Method call<a class="headerlink" href="#method-call" title="Permalink to this headline">¶</a></h2>
+<p>All the functions that you can use to filter method calls are prefixed with <a href="#id3"><span class="problematic" id="id4">mc_</span></a> .</p>
+<div class="section" id="c-stuff">
+<h3>C stuff<a class="headerlink" href="#c-stuff" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_is_c_function" title="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_is_c_function"><tt class="xref py py-obj docutils literal"><span class="pre">mc_is_c_function</span></tt></a>(function)</td>
+<td>Check if the function is a c function</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_get_c_function_name" title="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_get_c_function_name"><tt class="xref py py-obj docutils literal"><span class="pre">mc_get_c_function_name</span></tt></a>(c_function)</td>
+<td>Get the function name of the c function</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_c_function_has_any_name" title="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_c_function_has_any_name"><tt class="xref py py-obj docutils literal"><span class="pre">mc_c_function_has_any_name</span></tt></a>(c_function,&nbsp;names)</td>
+<td>Check if the given c function has any of the names specified by <cite>names</cite>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="objective-c-stuff">
+<h3>Objective-C stuff<a class="headerlink" href="#objective-c-stuff" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_is_objectivec_function" title="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_is_objectivec_function"><tt class="xref py py-obj docutils literal"><span class="pre">mc_is_objectivec_function</span></tt></a>(function)</td>
+<td>Check if the function is an objective c function</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_has_objc_class" title="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_has_objc_class"><tt class="xref py py-obj docutils literal"><span class="pre">mc_has_objc_class</span></tt></a>(function)</td>
+<td>Check if the receiver of a message is an objective c class.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_get_objc_class" title="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_get_objc_class"><tt class="xref py py-obj docutils literal"><span class="pre">mc_get_objc_class</span></tt></a>(objc_function)</td>
+<td>Same as <cite>mc_has_objc_class</cite> but returns the objective c class.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_has_any_selector" title="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_has_any_selector"><tt class="xref py py-obj docutils literal"><span class="pre">mc_has_any_selector</span></tt></a>(function,&nbsp;selector_names)</td>
+<td>Check if the <cite>function</cite> has a <cite>Selector</cite> with one of the specified names or will be loaded via NSSelectorFromString(...).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_sel_via_nsselector_from_string" title="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_sel_via_nsselector_from_string"><tt class="xref py py-obj docutils literal"><span class="pre">mc_sel_via_nsselector_from_string</span></tt></a>(function,&nbsp;...)</td>
+<td>Check if a <cite>Selector</cite> is loaded via the NSSelectorFromString function</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_objc_class_with_any_name" title="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_objc_class_with_any_name"><tt class="xref py py-obj docutils literal"><span class="pre">mc_objc_class_with_any_name</span></tt></a>(objc_function,&nbsp;names)</td>
+<td>Check if the name of the objective c class equals any name of <cite>names</cite>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="functioninterface-stuff">
+<h3>FunctionInterface stuff<a class="headerlink" href="#functioninterface-stuff" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_has_format_string" title="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_has_format_string"><tt class="xref py py-obj docutils literal"><span class="pre">mc_has_format_string</span></tt></a>(function)</td>
+<td>Check if the function has a <cite>FormatString</cite> as any of its arguments.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_filter_method_call" title="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_filter_method_call"><tt class="xref py py-obj docutils literal"><span class="pre">mc_filter_method_call</span></tt></a>(iterable,&nbsp;func_list[,&nbsp;...])</td>
+<td>Run over the iterable structure and check if one of the specified function matches on any argument.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_is_function" title="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_is_function"><tt class="xref py py-obj docutils literal"><span class="pre">mc_is_function</span></tt></a>(function)</td>
+<td>Check if the <cite>function</cite> is a <cite>Function</cite> at all</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_contains_imp_got" title="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_contains_imp_got"><tt class="xref py py-obj docutils literal"><span class="pre">mc_contains_imp_got</span></tt></a>(function,&nbsp;imp_got_name)</td>
+<td>Check if function has the <cite>imp_got_name</cite> as an any argument and is a subclass of <cite>ImpGot</cite>.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_function_has_arg_with_name" title="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_function_has_arg_with_name"><tt class="xref py py-obj docutils literal"><span class="pre">mc_function_has_arg_with_name</span></tt></a>(function,&nbsp;name)</td>
+<td>Check if the <cite>function</cite> contains an argument with the specified <cite>name</cite>.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_function_has_arg_with_exact_name" title="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_function_has_arg_with_exact_name"><tt class="xref py py-obj docutils literal"><span class="pre">mc_function_has_arg_with_exact_name</span></tt></a>(...[,&nbsp;...])</td>
+<td>Check if the <cite>function</cite> contains an argument with the specified <cite>exact_name</cite>.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_function_has_arg_with_subname" title="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_function_has_arg_with_subname"><tt class="xref py py-obj docutils literal"><span class="pre">mc_function_has_arg_with_subname</span></tt></a>(function,&nbsp;...)</td>
+<td>Check if the <cite>function</cite> contains an argument with the specified <cite>subname</cite>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="other-stuff">
+<h3>Other stuff<a class="headerlink" href="#other-stuff" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_is_exploitable_log_func" title="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_is_exploitable_log_func"><tt class="xref py py-obj docutils literal"><span class="pre">mc_is_exploitable_log_func</span></tt></a>(function)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="method-definition">
+<h2>Method definition<a class="headerlink" href="#method-definition" title="Permalink to this headline">¶</a></h2>
+<p>All the functions that you can use to filter on a method definition are prefixed with <a href="#id5"><span class="problematic" id="id6">md_</span></a></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodDefFilterUtil.md_filter_method_defintion" title="vizasm.analysis.security.filter.util.MethodDefFilterUtil.md_filter_method_defintion"><tt class="xref py py-obj docutils literal"><span class="pre">md_filter_method_defintion</span></tt></a>(msg_send[,&nbsp;...])</td>
+<td>Filter a method definition like e.g.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodDefFilterUtil.md_filter_category" title="vizasm.analysis.security.filter.util.MethodDefFilterUtil.md_filter_category"><tt class="xref py py-obj docutils literal"><span class="pre">md_filter_category</span></tt></a>(msg_send[,&nbsp;selector,&nbsp;...])</td>
+<td>Filter a category.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodDefFilterUtil.md_is_static_category_method" title="vizasm.analysis.security.filter.util.MethodDefFilterUtil.md_is_static_category_method"><tt class="xref py py-obj docutils literal"><span class="pre">md_is_static_category_method</span></tt></a>(function)</td>
+<td>Check if the category is static.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodDefFilterUtil.md_is_category" title="vizasm.analysis.security.filter.util.MethodDefFilterUtil.md_is_category"><tt class="xref py py-obj docutils literal"><span class="pre">md_is_category</span></tt></a>(function)</td>
+<td>Check if <cite>function</cite> is a category</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodDefFilterUtil.md_has_category_class" title="vizasm.analysis.security.filter.util.MethodDefFilterUtil.md_has_category_class"><tt class="xref py py-obj docutils literal"><span class="pre">md_has_category_class</span></tt></a>(function)</td>
+<td>Check if the <cite>function</cite> has a <cite>CategoryClass</cite></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="vizasm.analysis.security.filter.util.html#vizasm.analysis.security.filter.util.MethodDefFilterUtil.md_get_category_class" title="vizasm.analysis.security.filter.util.MethodDefFilterUtil.md_get_category_class"><tt class="xref py py-obj docutils literal"><span class="pre">md_get_category_class</span></tt></a>(function)</td>
+<td>Get the category class.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="modelutil">
+<h2>ModelUtil<a class="headerlink" href="#modelutil" title="Permalink to this headline">¶</a></h2>
+<p>All the functions that you can use to check if something is of a certain class are prefixed with <a href="#id7"><span class="problematic" id="id8">is_</span></a></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="vizasm.model.html#vizasm.model.ModelUtil.is_c_function" title="vizasm.model.ModelUtil.is_c_function"><tt class="xref py py-obj docutils literal"><span class="pre">is_c_function</span></tt></a>(c_function)</td>
+<td>Check if the given argument is a <cite>Function</cite></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="vizasm.model.html#vizasm.model.ModelUtil.is_sub" title="vizasm.model.ModelUtil.is_sub"><tt class="xref py py-obj docutils literal"><span class="pre">is_sub</span></tt></a>(sub)</td>
+<td>Check if <cite>sub</cite> is a subroutine like e.g.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="vizasm.model.html#vizasm.model.ModelUtil.is_objc_function" title="vizasm.model.ModelUtil.is_objc_function"><tt class="xref py py-obj docutils literal"><span class="pre">is_objc_function</span></tt></a>(objc_function)</td>
+<td>Check if <cite>objc_function</cite> is an objective-c function</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="vizasm.model.html#vizasm.model.ModelUtil.is_msg_send" title="vizasm.model.ModelUtil.is_msg_send"><tt class="xref py py-obj docutils literal"><span class="pre">is_msg_send</span></tt></a>(msg_send)</td>
+<td>Check if the given argument is a <cite>MsgSend</cite></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="vizasm.model.html#vizasm.model.ModelUtil.is_method_implementation" title="vizasm.model.ModelUtil.is_method_implementation"><tt class="xref py py-obj docutils literal"><span class="pre">is_method_implementation</span></tt></a>(function)</td>
+<td>Check if the <cite>function</cite> is a <cite>MethodImplementation</cite>.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="vizasm.model.html#vizasm.model.ModelUtil.is_method_implementation_argument" title="vizasm.model.ModelUtil.is_method_implementation_argument"><tt class="xref py py-obj docutils literal"><span class="pre">is_method_implementation_argument</span></tt></a>(arg)</td>
+<td>Check if the given argument is a <cite>MethodSelectorArgument</cite></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="imp-stuff">
+<h3>Imp stuff<a class="headerlink" href="#imp-stuff" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="vizasm.model.html#vizasm.model.ModelUtil.is_imp_got" title="vizasm.model.ModelUtil.is_imp_got"><tt class="xref py py-obj docutils literal"><span class="pre">is_imp_got</span></tt></a>(imp_got)</td>
+<td>Check for <cite>ImpGot</cite></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="vizasm.model.html#vizasm.model.ModelUtil.is_imp_stub" title="vizasm.model.ModelUtil.is_imp_stub"><tt class="xref py py-obj docutils literal"><span class="pre">is_imp_stub</span></tt></a>(imp_stub)</td>
+<td>Check for <cite>ImpStub</cite></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id1">
+<h3>Objective-C stuff<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="vizasm.model.html#vizasm.model.ModelUtil.is_selector" title="vizasm.model.ModelUtil.is_selector"><tt class="xref py py-obj docutils literal"><span class="pre">is_selector</span></tt></a>(selector)</td>
+<td>Check if the given argument is a <cite>Selector</cite></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="vizasm.model.html#vizasm.model.ModelUtil.is_objc_class" title="vizasm.model.ModelUtil.is_objc_class"><tt class="xref py py-obj docutils literal"><span class="pre">is_objc_class</span></tt></a>(clazz)</td>
+<td>Check if the given argument is an <cite>ObjcClass</cite></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="vizasm.model.html#vizasm.model.ModelUtil.is_category_class" title="vizasm.model.ModelUtil.is_category_class"><tt class="xref py py-obj docutils literal"><span class="pre">is_category_class</span></tt></a>(clazz)</td>
+<td>Check if the given argument is an <cite>CategoryClass</cite></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="vizasm.model.html#vizasm.model.ModelUtil.is_nsstring" title="vizasm.model.ModelUtil.is_nsstring"><tt class="xref py py-obj docutils literal"><span class="pre">is_nsstring</span></tt></a>(string)</td>
+<td>Check if the string is a <cite>NSString</cite></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="vizasm.model.html#vizasm.model.ModelUtil.is_frameworkclass" title="vizasm.model.ModelUtil.is_frameworkclass"><tt class="xref py py-obj docutils literal"><span class="pre">is_frameworkclass</span></tt></a>(arg)</td>
+<td>Check if the given argument is a framework class.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="vizasm.model.html#vizasm.model.ModelUtil.is_format_string" title="vizasm.model.ModelUtil.is_format_string"><tt class="xref py py-obj docutils literal"><span class="pre">is_format_string</span></tt></a>(string)</td>
+<td>Check if the given <cite>string</cite> is a <cite>FormatString</cite></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id2">
+<h3>C-Stuff<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="vizasm.model.html#vizasm.model.ModelUtil.is_memcpy" title="vizasm.model.ModelUtil.is_memcpy"><tt class="xref py py-obj docutils literal"><span class="pre">is_memcpy</span></tt></a>(arg)</td>
+<td>Check if argument is a memcpy()</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="vizasm.model.html#vizasm.model.ModelUtil.is_c_format_string" title="vizasm.model.ModelUtil.is_c_format_string"><tt class="xref py py-obj docutils literal"><span class="pre">is_c_format_string</span></tt></a>(c_format_string)</td>
+<td>Check if the given <cite>string</cite> is a <cite>CFormatString</cite></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="other">
+<h3>Other<a class="headerlink" href="#other" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="vizasm.model.html#vizasm.model.ModelUtil.is_stackvar" title="vizasm.model.ModelUtil.is_stackvar"><tt class="xref py py-obj docutils literal"><span class="pre">is_stackvar</span></tt></a>(stackvar)</td>
+<td>Check if the given argument is a <cite>StackVar</cite></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="vizasm.model.html#vizasm.model.ModelUtil.is_python_string" title="vizasm.model.ModelUtil.is_python_string"><tt class="xref py py-obj docutils literal"><span class="pre">is_python_string</span></tt></a>(string)</td>
+<td>Check if the given <cite>string</cite> is a python string</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="vizasm.model.html#vizasm.model.ModelUtil.is_number" title="vizasm.model.ModelUtil.is_number"><tt class="xref py py-obj docutils literal"><span class="pre">is_number</span></tt></a>(int_val)</td>
+<td>Check if the given argument is a number</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="vizasm.model.html#vizasm.model.ModelUtil.destination_not_initialized" title="vizasm.model.ModelUtil.destination_not_initialized"><tt class="xref py py-obj docutils literal"><span class="pre">destination_not_initialized</span></tt></a>(val)</td>
+<td>Check if the destination of an objc_msgSend is not initialized (has 0 as value).</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="example_filters.html" title="Example Filters"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="custom_filters.html" title="Custom Filters"
+             >previous</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="custom_filters.html" >Custom Filters</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

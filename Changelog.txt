@@ -1,0 +1,160 @@
+
+0.0.2:
+- changed to Hopper 2.8.3 behaviour (additional 0x0 for instance vars possible)
+
+Old changelog:
+
+Done:
+_______________________________
+- add general exception to cpu that is thrown then an exception occurs, so that the method implementation where the exception occurred can be left out and no crap is written to gephi
+- no none MsgSends are added to messages of the cpu
+- fixed regular expression RE_METH_IMPL, not recognizing "methImpl_AppDelegate_initializationComplete:" (does not have to end with an "_")
+- fixed error in hash function of arguments
+- added section and method reader
+- added gephi export (testing)
+- added class CategoryClass
+- added reading from asmline to MsgSend from Category in assembler line
+- fixed bug where RE_ASSIGNMENT_SPLIT splitted 'lea        rsi, qword [ds:cfstring__d___d___d___d] ; @"%d, %d, %d, %d"' after last comma, changed re to split after first comma seen (non greedy re)
+- read whole asm file and filter method implementations for further processing via AsmAnalyzer
+- added sphinx doc
+- Cpu returns now a MethodCall object
+- fixed bug in __str__() of MsgSend
+- added objective-c code examples
+- moved ImpStub, StackVar, ivar package, var assignment package to model.asm
+- moved Value to model
+- moved ParseUtil to model
+- added EntropyFilter
+- added support for node attributes in gexf format (vizualisation module)
+- read every killed regs!
+- added fallback support if value for register could not be resolved (nslog fallback seems to be: (eax, edx, ecx, r8d,...)
+- corrected __eq__ methods
+- converted doc style to numpydoc
+- added conversion from hex to int
+- extracted AssignmentMatchingSystem out of Cpu
+- created MsgSend's for externally initialized variables via call by reference
+- create MsgSend out of Function (e.g. "[NSSearchPathForDirectoriesInDomains() stringByAppendingPathComponent:@"contacts.db"]")
+- MsgSend formatting changed to only format "init" methods to *, not methods beginning with "init" any more
+- if filters enabled, outputfile will consist of filtered calls only
+- added FilterUtil for easier writing of SecurityFilters
+- added FunctionInterface -> Function and MsgSend implement it
+- extracted base class Imp out of ImpStub
+- added support for parsing "imp___got" -> class ImpGot
+- RE_REGISTER recognizes now "qword [ss:rsp]"
+- added CpuCouldNotReadNSLog, CpuCouldNotReadMsgSendException
+- __read_selector: call selector recognized if destination is Function
+- added convert statements like "cvtss2sd   xmm2, xmm2" to RE_ASSIGNMENT_SPLIT
+- added support for reading superclasses
+- added support for objc_msgSendSuper*, but superclass cannot be detected properly if method is not used in source, leads to superclass: NSObject !
+- VarAssignment.__init__() raises an exception
+- added dont-skip-exception option to cli
+- added support for meth_impl to resolve its arguments not just from registers, but also from stack
+- fixed StackFrame, multiple pushes to the same address have not been recognized as the same
+- fixed selfref, selector and method_selector arguments, are filled through definied registers, not basic block input any more
+- moved retain count stuff to branch
+- methods_it also reads entry point
+- added address to gexf graph
+- extracted class out of AsmAnalyzer module content
+- changed section iterator to support reading from multiple sections at once
+- removed --filter from cli
+- changed class of method selector arguments to NSObject instead of ObjcClass
+- added hopper integration
+- added node attributes to call nodes when not using any filters
+- added support for reading/writing method implementations like sub_* or _*
+- added support for calling via "jmp qord [ds:some imp]"
+- sqlite filter filters all sqlite3 calls if c func heuristic is not enabled
+- added method for checking selector loading via NSSelectorFromString(...)
+- added check for setAllowsAnyHTTPSCertificate:forHost: selector
+- added support for reading arguments for sub_
+- fixed bug where no convertion from stack (arg_) to arg1,... has been done (x86 and x86_64)
+- additional information about the method arguments are written to the method head
+- changed write_method_calls_summary to annotation of head
+- added annotation of instance vars
+- changed nsuserdefaultsfilter for better filtering on arm ( not only class amtch)
+- assembler lines of method are now written in correct order (problem: unordered dict)
+- method call graph without filtering has black nodes
+- corrected asm lines
+- fixed -sf cli paramter
+
+
+Branch type_matching_system:
+- StackVars are beeing resolved now
+- fixed RE_BASIC_BLOCK to recognize "; Basic Block Input Regs: <nothing> -  Killed Regs: rax rcx rdx rbp rsi rdi",  the characters '<' and '>' have not been matched before
+- arguments having arguments can also fill their arguments
+	- before: NSLog(@"%@", [NSString stringWithFormat:@"%@"])
+	- now   : NSLog(@"%@", [NSString stringWithFormat:@"%@", @"stringWithFormat"])
+- NSLog can also have a MsgSend as argument
+
+Branch additional_information_for_gephi
+- added line numbers, and surrounding lines to filtered methods (gephi output)
+- added asm code and lines of the current method to gephi output
+- rewrote reader to return an iterator iterating over the methods
+- all subnodes of a filter are colored in the same color
+- added different sizes and weights (edge) to the nodes
+- existing filters got hardcoded colors, new ones not overriding the colors still have random colors
+- added simple NSUserDefaults filter
+- fixed RE_METH_IMPL to recognize more method implementations
+	- recognizes if method is static
+  - ObjcClass knows wether its a static method or not
+- added command line interface
+- added possibility to read a single procedure from file
+- added NSUserDefaultsFilter
+- added description to SecurityFilter
+- updated docu
+- --all-filters can be used in conjunction with user supplied filters (--supply-filters)
+- changed filter input (cli) to fully qualified name instead of file path
+
+Branch new_arcs:
+- added annotation for stack
+- called can be sub_* or _*
+- added x86 architecture support
+- added lazy parsing for several functions in ParseUtil
+- refactored cpu to support other architectures
+- added support for reading objc_msgSend_stret
+- added lazy recognition of method implementation
+- use unfilled selector name if runtimerror occurs while filling it with arguments
+- Cpu reraises with exception traceback
+- added annotation of ivars (hopper)
+- added arm support
+- added support for reading arguments of Imp x86_64 (cfunction, approximative, may add more arguments than actual needed)
+- read printf
+- fixed reading of sub_ c methods and categories
+- fixed `methods_it` to read first method
+- added arguments for c functions (only over registers atm)
+- added recognition for method implementations if they are static
+- allows partial filling of arguments for FormatString and Selector (before: not all arguments lead to call not being read)
+- implemented __ne__ in all classes that define __eq__
+- added support for non thumb mode
+- fixed bug where string containing method and "_" has been read as method implementation
+- refactored cpu (memory, objcruntime, cruntime)
+- added nice file output (with and without filtering)
+- cpu does better resetting after method implemention has been read( implements Resetable as wall as many others)
+- added expcetion package for cpu
+- additional argument (x86_64) are stored as stackvars (defined in objcruntime)
+- added filters: IPCFilter, UIPasteBoardFilter, SQLiteFilter, CookiePolicyFilter, KeyChainFilter, DataProtectionFilter, BackgroundTasksFilter, GeoLocationFilter, SeatBeltFilter
+- fixed asmreader to proper read first method
+- reraising exceptions keeps stack trace (fixed in every reraise statement)
+- fixed category regexp
+- fixed creation of arguments for c function via registers
+- added support for additional arguments for c function definition (x86 and x86_64)
+- asmreader uses now a real iterator!
+- better hopper integration, no need to select text segment first
+- added printing superclasses as table
+- categories are modelled as MethodImplementation, fixed is_static recognition
+- added distinction of mac and ios filters (only platform available filters are used for filtering)
+- only filters which results are added to the graph
+- added rewriting of NSHTTPCookieAcceptPolicy from int value
+- addes support for reading a single method (selection) in Hopper
+- fixed bug where messages to super have not been resolved
+- added cfu switch (c function arguments heuristic)
+- moved all settings into settings module
+- added check for `Arguments` to prevent RuntimeError
+- cstrings should have a str repr like "..."!
+- changed sql filter to recognize exploitable strings
+
+version 0.0.1
+_______________________________
+
+- program can read single method implementations (AsmAnalyzer.py) and outputs the MsgSends to console
+- logging can be configured via Log.py
+
+

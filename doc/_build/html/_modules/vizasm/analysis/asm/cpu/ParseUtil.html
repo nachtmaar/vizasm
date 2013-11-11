@@ -1,0 +1,574 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm.analysis.asm.cpu.ParseUtil &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vizasm.analysis.asm.cpu.ParseUtil</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 23.08.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">imap</span>
+
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.AsmRegEx</span> <span class="kn">import</span> <span class="n">AsmRegEx</span> <span class="k">as</span> <span class="n">regexp</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.asm.CString</span> <span class="kn">import</span> <span class="n">CString</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.arguments.CFormatString</span> <span class="kn">import</span> <span class="n">CFormatString</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.arguments.FormatString</span> <span class="kn">import</span> <span class="n">FormatString</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.arguments.Selector</span> <span class="kn">import</span> <span class="n">Selector</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.function.Function</span> <span class="kn">import</span> <span class="n">Function</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.function.MethodImplementation</span> <span class="kn">import</span> <span class="n">MethodImplementation</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.function.Sub</span> <span class="kn">import</span> <span class="n">Sub</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.object.nsobject.NSString</span> <span class="kn">import</span> <span class="n">NSString</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.object.nsobject.objcclass.ObjcClass</span> <span class="kn">import</span> <span class="n">ObjcClass</span>
+<span class="kn">from</span> <span class="nn">vizasm.util</span> <span class="kn">import</span> <span class="n">Util</span>
+<span class="kn">from</span> <span class="nn">vizasm.util.Log</span> <span class="kn">import</span> <span class="n">log</span>
+
+
+<div class="viewcode-block" id="ParseUtil"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil">[docs]</a><span class="k">class</span> <span class="nc">ParseUtil</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    Base class for parsing an assembler line and turning it into the appropriate class. </span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    cpu: Cpu</span>
+<span class="sd">    register_class: classobj</span>
+<span class="sd">        the class to wrap around a register string</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cpu</span><span class="p">,</span> <span class="n">register_class</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cpu</span> <span class="o">=</span> <span class="n">cpu</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_register_class</span> <span class="o">=</span> <span class="n">register_class</span> 
+
+<div class="viewcode-block" id="ParseUtil.get_register_class"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.get_register_class">[docs]</a>    <span class="k">def</span> <span class="nf">get_register_class</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_register_class</span>
+</div>
+<div class="viewcode-block" id="ParseUtil.set_register_class"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.set_register_class">[docs]</a>    <span class="k">def</span> <span class="nf">set_register_class</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_register_class</span> <span class="o">=</span> <span class="n">value</span>
+</div>
+<div class="viewcode-block" id="ParseUtil.get_cpu"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.get_cpu">[docs]</a>    <span class="k">def</span> <span class="nf">get_cpu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cpu</span>
+</div>
+<div class="viewcode-block" id="ParseUtil.set_cpu"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.set_cpu">[docs]</a>    <span class="k">def</span> <span class="nf">set_cpu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cpu</span> <span class="o">=</span> <span class="n">value</span>
+</div>
+    <span class="n">register_class</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_register_class</span><span class="p">,</span> <span class="n">set_register_class</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;register_class(classobj) -- the class to wrap around a register string&quot;</span><span class="p">)</span>
+    <span class="n">cpu</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_cpu</span><span class="p">,</span> <span class="n">set_cpu</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;cpu(Cpu)&quot;</span><span class="p">)</span>
+
+<span class="c">#####################################################################################</span>
+<span class="c"># Implement these                                                                   #</span>
+<span class="c">#####################################################################################    </span>
+    
+<div class="viewcode-block" id="ParseUtil.parse_objc_class_from_classref"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_objc_class_from_classref">[docs]</a>    <span class="k">def</span> <span class="nf">parse_objc_class_from_classref</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    </div>
+<div class="viewcode-block" id="ParseUtil.parse_objc_class_from_framework_class"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_objc_class_from_framework_class">[docs]</a>    <span class="k">def</span> <span class="nf">parse_objc_class_from_framework_class</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    </div>
+<div class="viewcode-block" id="ParseUtil.parse_ivar"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_ivar">[docs]</a>    <span class="k">def</span> <span class="nf">parse_ivar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>    
+    </div>
+<div class="viewcode-block" id="ParseUtil.parse_var_assignment_without_ivar_ref_from_asmline"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_var_assignment_without_ivar_ref_from_asmline">[docs]</a>    <span class="k">def</span> <span class="nf">parse_var_assignment_without_ivar_ref_from_asmline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Create a VarAssignment from asmline like e.g. &quot;[ds:rax+rcx] (x86_64 example) &quot; </span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        asmline: String</span>
+<span class="sd">            </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        VarAssignmentResolveSelfrefRegisterException</span>
+<span class="sd">            if the value cannot be resolved</span>
+<span class="sd">        VarAssignmentResolveIvarRegisterException</span>
+<span class="sd">            if the value cannot be resolved and `resolve_ivar_value` is true</span>
+<span class="sd">        VarAssignmentIvarRegisterWrongTypeException</span>
+<span class="sd">            if the type of the ivar_reg is not `IVar and `resolve_ivar_value` is true</span>
+<span class="sd">                        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        VarAssignment</span>
+<span class="sd">            the VarAssignment without ivar_ref set (None if no VarAssignment)           </span>
+<span class="sd">        &#39;&#39;&#39;</span>        
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    </div>
+<div class="viewcode-block" id="ParseUtil.parse_var_assignment_with_ivar_ref_from_asmline"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_var_assignment_with_ivar_ref_from_asmline">[docs]</a>    <span class="k">def</span> <span class="nf">parse_var_assignment_with_ivar_ref_from_asmline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Create a VarAssignment from a line of assembler (like e.g. &quot;[ds:rax+rcx]&quot;, x86_64 example)</span>
+<span class="sd">        </span>
+<span class="sd">        If the asmline has the form of &quot;[ds:rdx+rsi], rax&quot; the ivar_ref will be resolved.</span>
+<span class="sd">        But the part after the comma can be left out.   </span>
+<span class="sd">        </span>
+<span class="sd">        Based on this method the `Cpu` keeps an instance variable cache. See `IVarRefLookup`.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        asmline: string</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        VarAssignmentResolveSelfrefRegisterException</span>
+<span class="sd">            if the value cannot be resolved</span>
+<span class="sd">        VarAssignmentResolveIvarRegisterException</span>
+<span class="sd">            if the value cannot be resolved</span>
+<span class="sd">        VarAssignmentIvarRegisterWrongTypeException</span>
+<span class="sd">            if the type of the ivar_reg is not `IVar`</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        VarAssignment</span>
+<span class="sd">            the VarAssignment with ivar_ref set (if possible)</span>
+<span class="sd">        None </span>
+<span class="sd">        &#39;&#39;&#39;</span>        
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    </div>
+<div class="viewcode-block" id="ParseUtil.parse_stackvar"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_stackvar">[docs]</a>    <span class="k">def</span> <span class="nf">parse_stackvar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    </div>
+<div class="viewcode-block" id="ParseUtil.parse_imp_stub"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_imp_stub">[docs]</a>    <span class="k">def</span> <span class="nf">parse_imp_stub</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    </div>
+<div class="viewcode-block" id="ParseUtil.parse_imp_got"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_imp_got">[docs]</a>    <span class="k">def</span> <span class="nf">parse_imp_got</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    </div>
+<div class="viewcode-block" id="ParseUtil.parse_call_instruction"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_call_instruction">[docs]</a>    <span class="k">def</span> <span class="nf">parse_call_instruction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Check if the line is a call instruction like &quot;call&quot; (x86) or &quot;blx&quot; (arm)</span>
+<span class="sd">        and return what is called as string. </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    </div>
+<div class="viewcode-block" id="ParseUtil.parse_register"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_register">[docs]</a>    <span class="k">def</span> <span class="nf">parse_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">register</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Parse a register.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        register_type: type</span>
+<span class="sd">            the type of the register to create. If non given, a string is used for the register representation.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        --------</span>
+<span class="sd">        register: `register_type`</span>
+<span class="sd">            the register wrapped in `register_type` </span>
+<span class="sd">        None</span>
+<span class="sd">            if regular expression did not classify as register  </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+<span class="c">#####################################################################################</span>
+<span class="c"># Own implementation                                                                #</span>
+<span class="c">#####################################################################################</span>
+</div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ParseUtil.get_address_from_asmline"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.get_address_from_asmline">[docs]</a>    <span class="k">def</span> <span class="nf">get_address_from_asmline</span><span class="p">(</span><span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get the hex address of the current line. This is the first number of the line.</span>
+<span class="sd">        Return it as int or None if not available.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">split</span> <span class="o">=</span> <span class="n">asmline</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">)</span>
+        <span class="n">int_addr</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">int_addr</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">16</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">int_addr</span>
+        </div>
+<div class="viewcode-block" id="ParseUtil.parse_selector"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_selector">[docs]</a>    <span class="k">def</span> <span class="nf">parse_selector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; If annotated by Hopper, the `Selector` will be created from this.</span>
+<span class="sd">        Otherwise implement this method yourself!</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">Selector</span><span class="o">.</span><span class="n">create_from_asm_line</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="ParseUtil.parse_format_string"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_format_string">[docs]</a>    <span class="k">def</span> <span class="nf">parse_format_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Create a `FormatString` from e.g. @&quot;%s%d&quot; &#39;&#39;&#39;</span>
+        <span class="n">string_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_FORMAT_STRING</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">string_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">string_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_FORMAT_STRING_GR_STRING</span><span class="p">)</span>
+            <span class="n">is_objc_format_string</span> <span class="o">=</span> <span class="n">string_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_FORMAT_STRING_GR_OBJC_STRING</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">is_objc_format_string</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">CFormatString</span><span class="p">(</span><span class="n">CString</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">FormatString</span><span class="p">(</span><span class="n">NSString</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">None</span>
+</div>
+<div class="viewcode-block" id="ParseUtil.parse_nsstring"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_nsstring">[docs]</a>    <span class="k">def</span> <span class="nf">parse_nsstring</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Create a `NSString` from e.g. @&quot;defaults&quot; &#39;&#39;&#39;</span>
+        <span class="n">string_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_STRING</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">string_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">string_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_STRING_GR_STRING</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">NSString</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    </div>
+<div class="viewcode-block" id="ParseUtil.parse_c_string"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_c_string">[docs]</a>    <span class="k">def</span> <span class="nf">parse_c_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Create a `CString` from a c string like e.g. &quot;defaults&quot; &#39;&#39;&#39;</span>
+        <span class="n">c_string_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_C_STRING</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">c_string_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">c_string</span> <span class="o">=</span> <span class="n">c_string_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_C_STRING_GR_NAME</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">CString</span><span class="p">(</span><span class="n">c_string</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    </div>
+<div class="viewcode-block" id="ParseUtil.parse_var_assignment"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_var_assignment">[docs]</a>    <span class="k">def</span> <span class="nf">parse_var_assignment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        Wrapper for `parse_var_assignment_with_ivar_ref_from_asmline`.</span>
+<span class="sd">        Ignores nop operations e.g. &quot;nop        dword [ds:rax+0x0]&quot;</span>
+<span class="sd">        </span>
+<span class="sd">        Create a VarAssignment from a line of assembler (like e.g. &quot;[ds:rax+rcx]&quot;, x86_64 example</span>
+<span class="sd">        </span>
+<span class="sd">        If the asmline has the form of &quot;[ds:rdx+rsi], rax&quot; the ivar_ref will be resolved.</span>
+<span class="sd">        But the part after the comma can be left out.   </span>
+<span class="sd">        </span>
+<span class="sd">        </span>
+<span class="sd">        Based on this method (more general `parse_var_assignment_with_ivar_ref_from_asmline`), the `Cpu` keeps an instance variable cache. See `IVarRefLookup`.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        asmline: string</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        VarAssignmentResolveSelfrefRegisterException</span>
+<span class="sd">            if the value cannot be resolved</span>
+<span class="sd">        VarAssignmentResolveIvarRegisterException</span>
+<span class="sd">            if the value cannot be resolved</span>
+<span class="sd">        VarAssignmentIvarRegisterWrongTypeException</span>
+<span class="sd">            if the type of the ivar_reg is not `IVar`</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        VarAssignment</span>
+<span class="sd">            the VarAssignment with ivar_ref set (if possible)</span>
+<span class="sd">        None </span>
+<span class="sd">            if no VarAssignment                </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">asmline</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">SEARCH_NOP</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_var_assignment_with_ivar_ref_from_asmline</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>  
+    </div>
+<div class="viewcode-block" id="ParseUtil.parse_objc_class"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_objc_class">[docs]</a>    <span class="k">def</span> <span class="nf">parse_objc_class</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Create ObjcClass from classref ([ds:objc_classref_Object1]) </span>
+<span class="sd">            or from frameworkclass e.g. ([ds:bind__OBJC_CLASS_$_NSUserDefaults]) </span>
+<span class="sd">            Returns None if no class matches.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_fst_match</span><span class="p">(</span><span class="n">asmline</span><span class="p">,</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">parse_objc_class_from_framework_class</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_objc_class_from_classref</span><span class="p">])</span>
+    </div>
+<div class="viewcode-block" id="ParseUtil.parse_stack_access"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_stack_access">[docs]</a>    <span class="k">def</span> <span class="nf">parse_stack_access</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Parse a stack access like e.g. &quot;[sp, #0x8]&quot; or &quot;[r7, #0x8]&quot; or &quot;[sp] (arm).</span>
+<span class="sd">        The latter should lead to an address of 0x0.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple&lt;string, string&gt;</span>
+<span class="sd">            Return the stack pointer name as well as the stack address as hex string.</span>
+<span class="sd">        &#39;&#39;&#39;</span>        
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    </div>
+<div class="viewcode-block" id="ParseUtil.parse_string"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_string">[docs]</a>    <span class="k">def</span> <span class="nf">parse_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Parse a string and return the appropriate string class. </span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        FormatString, NSString or string</span>
+<span class="sd">        None</span>
+<span class="sd">            if nothing matches</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_fst_match</span><span class="p">(</span><span class="n">asmline</span><span class="p">,</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">parse_format_string</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_nsstring</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_c_string</span><span class="p">])</span>
+        </div>
+<div class="viewcode-block" id="ParseUtil.parse_hex"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_hex">[docs]</a>    <span class="k">def</span> <span class="nf">parse_hex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        Parse a line containing a hex value and convert it to an int. </span>
+<span class="sd">          </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        asmline: string</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int: int</span>
+<span class="sd">            hex value converted to int</span>
+<span class="sd">        None</span>
+<span class="sd">            if regular expression did not classify as hex value</span>
+<span class="sd">        </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">hex_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_HEX_VALUE</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="n">hex_value</span><span class="p">,</span> <span class="n">res</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="n">hex_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">hex_value</span> <span class="o">=</span> <span class="n">hex_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_HEX_VALUE_GR_HEX_VALUE</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hex_value</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s"> is no hex value!&#39;</span><span class="p">,</span> <span class="n">hex_value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span>
+    </div>
+<div class="viewcode-block" id="ParseUtil.parse_imp"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_imp">[docs]</a>    <span class="k">def</span> <span class="nf">parse_imp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Create a subclass of `Imp` like `ImpStub` or `ImpGot` from the asm line.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_fst_match</span><span class="p">(</span><span class="n">asmline</span><span class="p">,</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">parse_imp_stub</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_imp_got</span><span class="p">])</span>
+    </div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ParseUtil.get_fst_match"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.get_fst_match">[docs]</a>    <span class="k">def</span> <span class="nf">get_fst_match</span><span class="p">(</span><span class="n">asmline</span><span class="p">,</span> <span class="n">functionlist</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get the first function (lazy) that matches on the given input argument.</span>
+<span class="sd">         </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        asmline: string</span>
+<span class="sd">            the argument to apply on the functions</span>
+<span class="sd">        functionlist: list&lt;functionrefs&gt;</span>
+<span class="sd">            the functions on which to apply the input argument </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">Util</span><span class="o">.</span><span class="n">get_fst_not_none</span><span class="p">(</span><span class="n">imap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">(</span><span class="n">asmline</span><span class="p">),</span> <span class="n">functionlist</span><span class="p">))</span>
+    </div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ParseUtil.get_fst_match_bool_list"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.get_fst_match_bool_list">[docs]</a>    <span class="k">def</span> <span class="nf">get_fst_match_bool_list</span><span class="p">(</span><span class="n">asmline</span><span class="p">,</span> <span class="n">functionlist</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get the first function (lazy) that matches on the given input argument.</span>
+<span class="sd">         </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        asmline: string</span>
+<span class="sd">            the argument to apply on the functions</span>
+<span class="sd">        functionlist: list&lt;functionrefs&gt;</span>
+<span class="sd">            the functions on which to apply the input argument </span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple&lt;list&lt;bool&gt;, object&gt;</span>
+<span class="sd">            Return a list where the function that matched has a True entry and the rest False.</span>
+<span class="sd">            The second argument of the tuple is the return value of the function that matched.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">bool_list</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">functionlist</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">imap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">(</span><span class="n">asmline</span><span class="p">),</span> <span class="n">functionlist</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">val</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">bool_list</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="k">return</span> <span class="p">(</span><span class="n">bool_list</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">bool_list</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+    </div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ParseUtil.parse_any_method_implementation"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_any_method_implementation">[docs]</a>    <span class="k">def</span> <span class="nf">parse_any_method_implementation</span><span class="p">(</span><span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Parse (lazy) `parse_meth_impl`, `ParseUtil.parse_own_c_method_def`, `parse_c_method_name`, category,.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple&lt;list&lt;bool&gt;, object&gt;</span>
+<span class="sd">            Return a list where the function that matched has a True entry and the rest False.</span>
+<span class="sd">            The second argument of the tuple is the return value of the function that matched.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c"># match category before parse_c_method_name because it will match also but should not</span>
+        <span class="n">functionlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">ParseUtil</span><span class="o">.</span><span class="n">parse_meth_impl</span><span class="p">,</span> <span class="n">ParseUtil</span><span class="o">.</span><span class="n">parse_own_c_method_def</span><span class="p">,</span> <span class="n">ParseUtil</span><span class="o">.</span><span class="n">parse_c_method_name</span><span class="p">,</span> <span class="n">MethodImplementation</span><span class="o">.</span><span class="n">create_from_asm_line</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">ParseUtil</span><span class="o">.</span><span class="n">get_fst_match_bool_list</span><span class="p">(</span><span class="n">asmline</span><span class="p">,</span> <span class="n">functionlist</span><span class="p">)</span>
+    </div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ParseUtil.parse_meth_impl"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_meth_impl">[docs]</a>    <span class="k">def</span> <span class="nf">parse_meth_impl</span><span class="p">(</span><span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Parse a method implementation like e.g. &quot;methImpl_AppDelegate_applicationDidFinishLaunching_&quot;. </span>
+<span class="sd">        </span>
+<span class="sd">        For more details see `RE_METH_IMPL`.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        MethodImplementation</span>
+<span class="sd">        &#39;&#39;&#39;</span> 
+        <span class="n">meth_impl_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_METH_IMPL</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">meth_impl_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">classname</span> <span class="o">=</span> <span class="n">meth_impl_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_METH_IMPL_GR_CLASS</span><span class="p">)</span>
+            <span class="n">selectorname</span> <span class="o">=</span> <span class="n">meth_impl_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_METH_IMPL_GR_SELECTOR</span><span class="p">)</span>
+            <span class="n">selector</span> <span class="o">=</span> <span class="n">Selector</span><span class="o">.</span><span class="n">selector_from_underscore_delimiter</span><span class="p">(</span><span class="n">selectorname</span><span class="p">)</span>
+            <span class="n">is_static</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">method_implementation_is_static</span><span class="p">(</span><span class="n">meth_impl_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_METH_IMPL_GR_STATIC</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">classname</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">objc_class</span> <span class="o">=</span> <span class="n">ObjcClass</span><span class="p">(</span><span class="n">classname</span><span class="p">,</span> <span class="n">is_static</span> <span class="o">=</span> <span class="n">is_static</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">MethodImplementation</span><span class="p">(</span><span class="n">objc_class</span><span class="p">,</span> <span class="p">[</span><span class="n">selector</span><span class="p">],</span> <span class="n">is_static</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    </div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ParseUtil.parse_c_method_name"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_c_method_name">[docs]</a>    <span class="k">def</span> <span class="nf">parse_c_method_name</span><span class="p">(</span><span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Check if is `RE_SUB` or `RE_C_METHOD` and return the appropriate name if available.</span>
+<span class="sd">        Otherwise None.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Function</span>
+<span class="sd">            if `RE_C_METHOD` matches</span>
+<span class="sd">        Sub</span>
+<span class="sd">            if `RE_SUB` matches</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">re_sub_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_SUB</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">re_sub_match</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Sub</span><span class="p">(</span><span class="n">re_sub_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_SUB_GR_SUBNAME</span><span class="p">))</span>
+        <span class="n">re_c_method_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_C_METHOD</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">re_c_method_match</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Function</span><span class="p">(</span><span class="n">re_c_method_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_C_METHOD_GR_NAME</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    </div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ParseUtil.parse_own_c_method_def"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_own_c_method_def">[docs]</a>    <span class="k">def</span> <span class="nf">parse_own_c_method_def</span><span class="p">(</span><span class="n">asmline</span><span class="p">):</span>
+        <span class="n">re_own_c_method_def_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_OWN_C_METHOD_DEF</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">re_own_c_method_def_match</span><span class="p">:</span>
+            <span class="n">func_name</span> <span class="o">=</span> <span class="n">re_own_c_method_def_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_OWN_C_METHOD_BASE_GR_NAME</span><span class="p">)</span>
+            <span class="n">func_args_str</span> <span class="o">=</span> <span class="n">re_own_c_method_def_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_OWN_C_METHOD_BASE_GR_ARGS</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">func_args_str</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">func_args_list</span> <span class="o">=</span> <span class="n">re_own_c_method_def_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_OWN_C_METHOD_BASE_GR_ARGS</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39; ,&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">func_args_list</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">return</span> <span class="n">Function</span><span class="p">(</span><span class="n">func_name</span><span class="p">,</span> <span class="n">func_args_list</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    </div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ParseUtil.parse_own_c_method_called"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_own_c_method_called">[docs]</a>    <span class="k">def</span> <span class="nf">parse_own_c_method_called</span><span class="p">(</span><span class="n">asmline</span><span class="p">):</span>
+        <span class="n">re_own_c_method_call_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_OWN_C_METHOD_CALLED</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">re_own_c_method_call_match</span><span class="p">:</span>
+            <span class="n">func_name</span> <span class="o">=</span> <span class="n">re_own_c_method_call_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_OWN_C_METHOD_BASE_GR_NAME</span><span class="p">)</span>
+            <span class="n">func_args_str</span> <span class="o">=</span> <span class="n">re_own_c_method_call_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_OWN_C_METHOD_BASE_GR_ARGS</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">func_args_str</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">func_args_list</span> <span class="o">=</span> <span class="n">re_own_c_method_call_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_OWN_C_METHOD_BASE_GR_ARGS</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;, &#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">func_args_list</span> <span class="o">=</span> <span class="p">[]</span>                
+            <span class="k">return</span> <span class="n">Function</span><span class="p">(</span><span class="n">func_name</span><span class="p">,</span> <span class="n">func_args_list</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    </div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ParseUtil.parse_called_method_name"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_called_method_name">[docs]</a>    <span class="k">def</span> <span class="nf">parse_called_method_name</span><span class="p">(</span><span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Check if `asmline` is a c method being called.</span>
+<span class="sd">        Check for `RE_CALLED_SUB` and `RE_CALLED_C_METHOD` and return the appropriate name if available.</span>
+<span class="sd">        Otherwise None.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Function</span>
+<span class="sd">            if `RE_C_METHOD` matches</span>
+<span class="sd">        Sub</span>
+<span class="sd">            if `RE_SUB` matches        </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">re_sub_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_CALLED_SUB</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">re_sub_match</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Sub</span><span class="p">(</span><span class="n">re_sub_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_CALLED_SUB_GR_SUBNAME</span><span class="p">))</span>
+        <span class="n">re_c_method_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_CALLED_C_METHOD</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">re_c_method_match</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Function</span><span class="p">(</span><span class="n">re_c_method_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_CALLED_C_METHOD_GR_NAME</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    </div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ParseUtil.parse_category"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.ParseUtil.ParseUtil.parse_category">[docs]</a>    <span class="k">def</span> <span class="nf">parse_category</span><span class="p">(</span><span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Parse a category method implementation.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        MethodImplementation</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">MethodImplementation</span><span class="o">.</span><span class="n">create_from_asm_line</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+    </div></div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">pu</span> <span class="o">=</span> <span class="n">ParseUtil</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="k">print</span> <span class="nb">repr</span><span class="p">(</span><span class="n">pu</span><span class="o">.</span><span class="n">parse_string</span><span class="p">(</span><span class="s">&#39;&quot;SELECT username FROM users where uid = ?&quot;&#39;</span><span class="p">))</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_meth_impl</span><span class="p">(</span><span class="s">&#39; methImpl_AppDelegate_applicationDidFinishLaunching_&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_meth_impl</span><span class="p">(</span><span class="s">&#39; methImpl_AppDelegate__cxx_destruct:&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_any_method_implementation</span><span class="p">(</span><span class="s">&#39; methImpl_AppDelegate__cxx_destruct&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_any_method_implementation</span><span class="p">(</span><span class="s">&#39;                                            methImpl_Networking_cookies:&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_any_method_implementation</span><span class="p">(</span><span class="s">&#39;+[NSURLRequest(AnyHttpsCert) allowsAnyHTTPSCertificateForHost:]_100001c70:&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&#39;this should not match: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_meth_impl</span><span class="p">(</span><span class="s">&#39;lea        rdi, qword [ds:cfstring________method_not_converted_to_OpenGL_ES_2_0] ; @&quot;%@: %@ method not converted to OpenGL ES 2.&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&#39;sub: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">pu</span><span class="o">.</span><span class="n">parse_any_method_implementation</span><span class="p">(</span><span class="s">&#39;sub_e020:&#39;</span><span class="p">))</span>
+    <span class="k">print</span> <span class="s">&#39;c method: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">pu</span><span class="o">.</span><span class="n">parse_any_method_implementation</span><span class="p">(</span><span class="s">&#39;_main_1000016a0:&#39;</span><span class="p">))</span>
+    <span class="k">print</span> <span class="s">&#39;category: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">pu</span><span class="o">.</span><span class="n">parse_any_method_implementation</span><span class="p">(</span><span class="s">&#39;+[NSURLRequest(AnyHttpsCert) allowsAnyHTTPSCertificateForHost:]_100002120:&#39;</span><span class="p">))</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_format_string</span><span class="p">(</span><span class="s">&#39;0000000100002a19 488D3D70310000                  lea        rdi, qword [ds:cfstring_error___s__code___d] ; @&quot;error: </span><span class="si">%s</span><span class="s">, code: </span><span class="si">%d</span><span class="s">&quot;&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&#39;format string: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="nb">repr</span><span class="p">(</span><span class="n">pu</span><span class="o">.</span><span class="n">parse_string</span><span class="p">(</span><span class="s">&#39;&quot;</span><span class="si">%d%d%d%d%d%d%d</span><span class="s">&quot;&#39;</span><span class="p">))</span>
+    
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

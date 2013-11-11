@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>3E28DEA3-D555-4696-A897-D25D95B4C36E</string>
+	<key>IDESourceControlProjectName</key>
+	<string>CocoaObjectcall</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>625DD72B-2411-44C6-A240-806B4544708F</key>
+		<string>https://bitbucket.org/vizasm/vizasm.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>objc_examples/CocoaObjectcall/CocoaObjectcall.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>625DD72B-2411-44C6-A240-806B4544708F</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://bitbucket.org/vizasm/vizasm.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>625DD72B-2411-44C6-A240-806B4544708F</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>625DD72B-2411-44C6-A240-806B4544708F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>vizasm</string>
+		</dict>
+	</array>
+</dict>
+</plist>

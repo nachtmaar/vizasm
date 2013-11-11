@@ -1,0 +1,214 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm.tests.security.filter.util.MethodDefFilterUtilTests &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="../../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vizasm.tests.security.filter.util.MethodDefFilterUtilTests</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 05.10.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">from</span> <span class="nn">unittest</span> <span class="kn">import</span> <span class="n">TestCase</span>
+
+<span class="kn">from</span> <span class="nn">vizasm.analysis.security.filter.util.MethodDefFilterUtil</span> <span class="kn">import</span> \
+    <span class="n">md_filter_method_defintion</span><span class="p">,</span> <span class="n">md_filter_category</span><span class="p">,</span> <span class="n">md_is_category</span><span class="p">,</span> \
+    <span class="n">md_is_static_category_method</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.ModelUtil</span> <span class="kn">import</span> <span class="n">is_method_implementation</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.arguments.Selector</span> <span class="kn">import</span> <span class="n">Selector</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.function.MethodImplementation</span> <span class="kn">import</span> <span class="n">MethodImplementation</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.function.MsgSend</span> <span class="kn">import</span> <span class="n">MsgSend</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.object.nsobject.objcclass.CategoryClass</span> <span class="kn">import</span> \
+    <span class="n">CategoryClass</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.object.nsobject.objcclass.ObjcClass</span> <span class="kn">import</span> <span class="n">ObjcClass</span>
+
+
+<div class="viewcode-block" id="MethodDefFilterUtilTests"><a class="viewcode-back" href="../../../../../../vizasm.tests.security.filter.util.html#vizasm.tests.security.filter.util.MethodDefFilterUtilTests.MethodDefFilterUtilTests">[docs]</a><span class="k">class</span> <span class="nc">MethodDefFilterUtilTests</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Tests for the `MethodDefFilterUtil` &#39;&#39;&#39;</span>
+    
+    <span class="n">MSG</span> <span class="o">=</span> <span class="s">&#39;The `</span><span class="si">%s</span><span class="s">` method is not working properly !&#39;</span>    
+    
+<div class="viewcode-block" id="MethodDefFilterUtilTests.get_category_class"><a class="viewcode-back" href="../../../../../../vizasm.tests.security.filter.util.html#vizasm.tests.security.filter.util.MethodDefFilterUtilTests.MethodDefFilterUtilTests.get_category_class">[docs]</a>    <span class="k">def</span> <span class="nf">get_category_class</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__category_class</span>
+</div>
+<div class="viewcode-block" id="MethodDefFilterUtilTests.set_category_class"><a class="viewcode-back" href="../../../../../../vizasm.tests.security.filter.util.html#vizasm.tests.security.filter.util.MethodDefFilterUtilTests.MethodDefFilterUtilTests.set_category_class">[docs]</a>    <span class="k">def</span> <span class="nf">set_category_class</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__category_class</span> <span class="o">=</span> <span class="n">value</span>
+</div>
+<div class="viewcode-block" id="MethodDefFilterUtilTests.get_category"><a class="viewcode-back" href="../../../../../../vizasm.tests.security.filter.util.html#vizasm.tests.security.filter.util.MethodDefFilterUtilTests.MethodDefFilterUtilTests.get_category">[docs]</a>    <span class="k">def</span> <span class="nf">get_category</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__category</span>
+</div>
+<div class="viewcode-block" id="MethodDefFilterUtilTests.set_category"><a class="viewcode-back" href="../../../../../../vizasm.tests.security.filter.util.html#vizasm.tests.security.filter.util.MethodDefFilterUtilTests.MethodDefFilterUtilTests.set_category">[docs]</a>    <span class="k">def</span> <span class="nf">set_category</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__category</span> <span class="o">=</span> <span class="n">value</span>
+</div>
+<div class="viewcode-block" id="MethodDefFilterUtilTests.setUp"><a class="viewcode-back" href="../../../../../../vizasm.tests.security.filter.util.html#vizasm.tests.security.filter.util.MethodDefFilterUtilTests.MethodDefFilterUtilTests.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">TestCase</span><span class="o">.</span><span class="n">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">__category_class</span> <span class="o">=</span> <span class="n">CategoryClass</span><span class="p">(</span><span class="s">&#39;AnyHttpsCert&#39;</span><span class="p">,</span> <span class="n">ObjcClass</span><span class="p">(</span><span class="s">&#39;NSURLRequest&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__category</span> <span class="o">=</span> <span class="n">MethodImplementation</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">category_class</span><span class="p">,</span> <span class="p">[</span><span class="n">Selector</span><span class="p">(</span><span class="s">&#39;allowsAnyHTTPSCertificateForHost:&#39;</span><span class="p">)],</span> <span class="n">is_static</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="MethodDefFilterUtilTests.test_filter_method_definition"><a class="viewcode-back" href="../../../../../../vizasm.tests.security.filter.util.html#vizasm.tests.security.filter.util.MethodDefFilterUtilTests.MethodDefFilterUtilTests.test_filter_method_definition">[docs]</a>    <span class="k">def</span> <span class="nf">test_filter_method_definition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Test `md_filter_method_defintion` &#39;&#39;&#39;</span>
+        <span class="n">selname</span> <span class="o">=</span> <span class="s">&#39;application:handleOpenURL:&#39;</span>
+        <span class="n">sel</span> <span class="o">=</span> <span class="n">Selector</span><span class="p">(</span><span class="n">selname</span><span class="p">)</span>
+        <span class="n">msg_send</span> <span class="o">=</span> <span class="n">MsgSend</span><span class="p">(</span><span class="n">ObjcClass</span><span class="p">(</span><span class="s">&#39;AppDelegate&#39;</span><span class="p">),</span> <span class="p">[</span><span class="n">sel</span><span class="p">])</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">md_filter_method_defintion</span><span class="p">(</span><span class="n">msg_send</span><span class="p">,</span> <span class="n">class_name</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">selector_name</span> <span class="o">=</span> <span class="n">selname</span><span class="p">,</span> <span class="n">search_substring</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="k">print</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s"> has selector </span><span class="si">%s</span><span class="s"> = </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">msg_send</span><span class="p">,</span> <span class="n">sel</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">MSG</span> <span class="o">%</span> <span class="s">&#39;MethodDefFilterUtil&#39;</span><span class="p">)</span>
+        </div>
+<div class="viewcode-block" id="MethodDefFilterUtilTests.test_filter_category"><a class="viewcode-back" href="../../../../../../vizasm.tests.security.filter.util.html#vizasm.tests.security.filter.util.MethodDefFilterUtilTests.MethodDefFilterUtilTests.test_filter_category">[docs]</a>    <span class="k">def</span> <span class="nf">test_filter_category</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Tests for the method `md_filter_category` &#39;&#39;&#39;</span>
+        <span class="n">category_on_class_name</span> <span class="o">=</span> <span class="s">&#39;NSURLRequest&#39;</span>
+        <span class="n">category_on_class</span> <span class="o">=</span> <span class="n">ObjcClass</span><span class="p">(</span><span class="n">category_on_class_name</span><span class="p">)</span>
+        <span class="n">category_name</span> <span class="o">=</span> <span class="s">&#39;AnyHttpsCert&#39;</span>
+        <span class="n">cclass</span> <span class="o">=</span> <span class="n">CategoryClass</span><span class="p">(</span><span class="n">category_name</span><span class="p">,</span> <span class="n">category_on_class</span> <span class="o">=</span> <span class="n">category_on_class</span><span class="p">)</span>
+        <span class="n">selector</span> <span class="o">=</span> <span class="n">Selector</span><span class="p">(</span><span class="s">&#39;allowsAnyHTTPSCertificateForHost&#39;</span><span class="p">)</span>
+        <span class="n">category_msg_send</span> <span class="o">=</span> <span class="n">MsgSend</span><span class="p">(</span><span class="n">cclass</span><span class="p">,</span> <span class="p">[</span><span class="n">selector</span><span class="p">])</span>
+        
+        <span class="c"># test with all properties at once</span>
+        <span class="n">category_match</span> <span class="o">=</span> <span class="n">md_filter_category</span><span class="p">(</span><span class="n">category_msg_send</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">selector</span><span class="p">),</span> <span class="n">category_on_class_name</span><span class="p">,</span> <span class="n">category_name</span><span class="p">,</span> <span class="n">search_substring</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span> 
+        <span class="k">print</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s"> is category on </span><span class="si">%s</span><span class="s"> with name </span><span class="si">%s</span><span class="s"> and selector </span><span class="si">%s</span><span class="s"> = </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">category_msg_send</span><span class="p">,</span> <span class="n">category_on_class_name</span><span class="p">,</span> <span class="n">category_name</span><span class="p">,</span> <span class="n">selector</span><span class="p">,</span> <span class="n">category_match</span><span class="p">)</span>
+        
+        <span class="n">category_match2</span> <span class="o">=</span> <span class="n">md_filter_category</span><span class="p">(</span><span class="n">category_msg_send</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">selector</span><span class="p">),</span> <span class="n">category_on_class_name</span><span class="p">,</span> <span class="n">category_name</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">search_substring</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span> 
+        <span class="k">print</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s"> is category on </span><span class="si">%s</span><span class="s"> and selector </span><span class="si">%s</span><span class="s"> = </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">category_msg_send</span><span class="p">,</span> <span class="n">category_on_class_name</span><span class="p">,</span> <span class="n">selector</span><span class="p">,</span> <span class="n">category_match2</span><span class="p">)</span>
+        
+        <span class="c"># category_on test</span>
+        <span class="n">category_match3</span> <span class="o">=</span> <span class="n">md_filter_category</span><span class="p">(</span><span class="n">category_msg_send</span><span class="p">,</span> <span class="n">category_on</span> <span class="o">=</span> <span class="n">category_on_class_name</span><span class="p">)</span> 
+        <span class="k">print</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s"> is category on </span><span class="si">%s</span><span class="s"> = </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">category_msg_send</span><span class="p">,</span> <span class="n">category_on_class_name</span><span class="p">,</span> <span class="n">category_match3</span><span class="p">)</span>
+        
+        <span class="c"># category name test</span>
+        <span class="n">category_match4</span> <span class="o">=</span> <span class="n">md_filter_category</span><span class="p">(</span><span class="n">category_msg_send</span><span class="p">,</span> <span class="n">category_name</span> <span class="o">=</span> <span class="n">category_name</span><span class="p">)</span> 
+        <span class="k">print</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s"> is category with name </span><span class="si">%s</span><span class="s"> = </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">category_msg_send</span><span class="p">,</span> <span class="n">category_name</span><span class="p">,</span> <span class="n">category_match4</span><span class="p">)</span>
+        
+        <span class="c"># selector test</span>
+        <span class="n">category_match5</span> <span class="o">=</span> <span class="n">md_filter_category</span><span class="p">(</span><span class="n">category_msg_send</span><span class="p">,</span> <span class="n">selector</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">selector</span><span class="p">))</span> 
+        <span class="k">print</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s"> is category with selector </span><span class="si">%s</span><span class="s"> = </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">category_msg_send</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">selector</span><span class="p">),</span> <span class="n">category_match5</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="nb">all</span><span class="p">((</span><span class="n">category_match</span><span class="p">,</span> <span class="n">category_match2</span><span class="p">,</span> <span class="n">category_match3</span><span class="p">,</span> <span class="n">category_match4</span><span class="p">,</span> <span class="n">category_match5</span><span class="p">)),</span> <span class="bp">self</span><span class="o">.</span><span class="n">MSG</span> <span class="o">%</span> <span class="s">&#39;md_filter_category&#39;</span><span class="p">)</span>
+        </div>
+<div class="viewcode-block" id="MethodDefFilterUtilTests.test_is_category"><a class="viewcode-back" href="../../../../../../vizasm.tests.security.filter.util.html#vizasm.tests.security.filter.util.MethodDefFilterUtilTests.MethodDefFilterUtilTests.test_is_category">[docs]</a>    <span class="k">def</span> <span class="nf">test_is_category</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Test the `md_is_category` method &#39;&#39;&#39;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">md_is_category</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">category</span><span class="p">)</span>
+        <span class="k">print</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s"> is category = </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">category</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">MSG</span> <span class="o">%</span> <span class="s">&#39;md_is_category&#39;</span><span class="p">)</span>
+        </div>
+<div class="viewcode-block" id="MethodDefFilterUtilTests.test_is_static_category_method"><a class="viewcode-back" href="../../../../../../vizasm.tests.security.filter.util.html#vizasm.tests.security.filter.util.MethodDefFilterUtilTests.MethodDefFilterUtilTests.test_is_static_category_method">[docs]</a>    <span class="k">def</span> <span class="nf">test_is_static_category_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Test the `md_is_static_category_method&#39; method &#39;&#39;&#39;</span>
+        <span class="n">MSG</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">MSG</span> <span class="o">%</span> <span class="s">&#39;md_is_static_category_method&#39;</span>
+        
+        <span class="c"># static category</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">md_is_category</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">category</span><span class="p">)</span>
+        <span class="k">print</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s"> is static category = </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">category</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">MSG</span><span class="p">)</span>
+        
+        <span class="c"># not static category</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">category</span><span class="o">.</span><span class="n">is_static</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">md_is_static_category_method</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">category</span><span class="p">)</span>
+        <span class="k">print</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s"> is static category = </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">category</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">MSG</span><span class="p">)</span>
+        </div>
+<div class="viewcode-block" id="MethodDefFilterUtilTests.test_is_method_implementation"><a class="viewcode-back" href="../../../../../../vizasm.tests.security.filter.util.html#vizasm.tests.security.filter.util.MethodDefFilterUtilTests.MethodDefFilterUtilTests.test_is_method_implementation">[docs]</a>    <span class="k">def</span> <span class="nf">test_is_method_implementation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Test the `is_method_implementation` method &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">is_method_implementation</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">category</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">MSG</span> <span class="o">%</span> <span class="s">&#39;is_method_implementation&#39;</span><span class="p">)</span>
+                        </div>
+    <span class="n">category</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_category</span><span class="p">,</span> <span class="n">set_category</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="n">category_class</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_category_class</span><span class="p">,</span> <span class="n">set_category_class</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        
+        </div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

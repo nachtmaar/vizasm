@@ -1,0 +1,328 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm.model.objc.methodcall.MethodCall &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vizasm.model.objc.methodcall.MethodCall</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 02.04.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+
+<span class="kn">from</span> <span class="nn">vizasm.Settings</span> <span class="kn">import</span> <span class="n">setting_for_key</span><span class="p">,</span> <span class="n">SETTINGS_CNT_SURROUNDING_LINES</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.function.MsgSend</span> <span class="kn">import</span> <span class="n">MsgSend</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.methodcall.MethodCallItem</span> <span class="kn">import</span> <span class="n">MethodCallItem</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.object.nsobject.objcclass.ObjcClass</span> <span class="kn">import</span> <span class="n">ObjcClass</span>
+<span class="kn">from</span> <span class="nn">vizasm.util</span> <span class="kn">import</span> <span class="n">Util</span>
+<span class="kn">from</span> <span class="nn">vizasm.vizasm_networkx</span> <span class="kn">import</span> <span class="n">NodeAttributes</span><span class="p">,</span> <span class="n">GraphUtil</span>
+<span class="kn">from</span> <span class="nn">vizasm.vizasm_networkx.AddMethodCallToGraphInterface</span> <span class="kn">import</span> \
+    <span class="n">AddMethodCallToGraphInterface</span>
+<span class="kn">from</span> <span class="nn">vizasm.vizasm_networkx.GexfConstants</span> <span class="kn">import</span> <span class="n">TAG_VIZ</span><span class="p">,</span> <span class="n">TAG_SIZE</span><span class="p">,</span> <span class="n">TAG_COLOR</span>
+
+<div class="viewcode-block" id="MethodCall"><a class="viewcode-back" href="../../../../../vizasm.model.objc.methodcall.html#vizasm.model.objc.methodcall.MethodCall.MethodCall">[docs]</a><span class="k">class</span> <span class="nc">MethodCall</span><span class="p">(</span><span class="nb">object</span><span class="p">,</span> <span class="n">AddMethodCallToGraphInterface</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    The `Methodcall` stores messages a sender has sent.</span>
+<span class="sd">    This model is uses for a method (sender) that sends several messages and is the output of the `Cpu`.</span>
+
+<span class="sd">    If the sender is not present at creation, using None as argument for the sender creates a pseudo none sender. </span>
+<span class="sd">    You can check if this sender is still present with the method has_no_sender().</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    __sender: FunctionInterface, optional (default is PSEUDO_NONE_SENDER)</span>
+<span class="sd">    __calls: list&lt;MethodCallItem&gt;, optional (default is [])</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="n">PSEUDO_NONE_NAME</span> <span class="o">=</span> <span class="s">&#39;pseudo none&#39;</span>
+    <span class="n">PSEUDO_NONE_SENDER</span> <span class="o">=</span> <span class="n">MsgSend</span><span class="p">(</span><span class="n">ObjcClass</span><span class="p">(</span><span class="n">PSEUDO_NONE_NAME</span><span class="p">),</span> <span class="p">[])</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sender</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">calls</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="nb">object</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">calls</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">calls</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c"># fix for creation with None as sender</span>
+        <span class="k">if</span> <span class="n">sender</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">sender</span> <span class="o">=</span> <span class="n">MethodCall</span><span class="o">.</span><span class="n">PSEUDO_NONE_SENDER</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__sender</span> <span class="o">=</span> <span class="n">sender</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__calls</span> <span class="o">=</span> <span class="n">calls</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_calls</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span> 
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">MethodCall</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span> <span class="ow">is</span> <span class="n">other</span> <span class="ow">or</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">get_sender</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_calls</span><span class="p">()))</span> <span class="o">==</span> <span class="p">((</span><span class="n">other</span><span class="o">.</span><span class="n">sender</span><span class="p">(),</span> <span class="n">other</span><span class="o">.</span><span class="n">get_msg</span><span class="p">()))</span>   
+        <span class="k">return</span> <span class="bp">False</span>
+    
+    <span class="k">def</span> <span class="nf">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span> <span class="o">==</span> <span class="n">other</span>
+    
+    <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">get_sender</span><span class="p">()</span><span class="o">.</span><span class="n">__hash__</span><span class="p">(),</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_calls</span><span class="p">())</span><span class="o">.</span><span class="n">__hash__</span><span class="p">()))</span>
+    
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calls</span><span class="p">))</span>
+    
+<div class="viewcode-block" id="MethodCall.format_head"><a class="viewcode-back" href="../../../../../vizasm.model.objc.methodcall.html#vizasm.model.objc.methodcall.MethodCall.MethodCall.format_head">[docs]</a>    <span class="k">def</span> <span class="nf">format_head</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Format the head (first line) of the `MethodCall`.</span>
+<span class="sd">        No newline will be appended.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="s">&#39;Method: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_sender</span><span class="p">())</span>
+        </div>
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_head</span><span class="p">()</span>
+        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">:</span><span class="se">\n</span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">head</span><span class="p">,</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">head</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="s">&#39;-&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">call</span><span class="p">)</span> <span class="k">for</span> <span class="n">call</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">))</span>
+    
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">(</span><span class="si">%s</span><span class="s">: </span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_sender</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_calls</span><span class="p">())</span>
+    
+<div class="viewcode-block" id="MethodCall.get_sender"><a class="viewcode-back" href="../../../../../vizasm.model.objc.methodcall.html#vizasm.model.objc.methodcall.MethodCall.MethodCall.get_sender">[docs]</a>    <span class="k">def</span> <span class="nf">get_sender</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__sender</span>
+</div>
+<div class="viewcode-block" id="MethodCall.get_calls"><a class="viewcode-back" href="../../../../../vizasm.model.objc.methodcall.html#vizasm.model.objc.methodcall.MethodCall.MethodCall.get_calls">[docs]</a>    <span class="k">def</span> <span class="nf">get_calls</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__calls</span>
+</div>
+<div class="viewcode-block" id="MethodCall.set_sender"><a class="viewcode-back" href="../../../../../vizasm.model.objc.methodcall.html#vizasm.model.objc.methodcall.MethodCall.MethodCall.set_sender">[docs]</a>    <span class="k">def</span> <span class="nf">set_sender</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__sender</span> <span class="o">=</span> <span class="n">value</span>
+</div>
+<div class="viewcode-block" id="MethodCall.set_calls"><a class="viewcode-back" href="../../../../../vizasm.model.objc.methodcall.html#vizasm.model.objc.methodcall.MethodCall.MethodCall.set_calls">[docs]</a>    <span class="k">def</span> <span class="nf">set_calls</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__calls</span> <span class="o">=</span> <span class="n">value</span>
+        </div>
+    <span class="n">sender</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_sender</span><span class="p">,</span> <span class="n">set_sender</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;__sender(MsgSend, optional (default is PSEUDO_NONE_SENDER))&quot;</span><span class="p">)</span>
+    <span class="n">calls</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_calls</span><span class="p">,</span> <span class="n">set_calls</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;__calls:(list&lt;MethodCallItem&gt;, optional (default is []))&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="MethodCall.add_methodcall"><a class="viewcode-back" href="../../../../../vizasm.model.objc.methodcall.html#vizasm.model.objc.methodcall.MethodCall.MethodCall.add_methodcall">[docs]</a>    <span class="k">def</span> <span class="nf">add_methodcall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">,</span> <span class="n">linenr</span><span class="p">,</span> <span class="n">address</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Add a call.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters:</span>
+<span class="sd">        -----------</span>
+<span class="sd">        call: Function or MsgSend</span>
+<span class="sd">        linenr: int</span>
+<span class="sd">        address: int</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_methodcallitem</span><span class="p">(</span><span class="n">MethodCallItem</span><span class="p">(</span><span class="n">call</span><span class="p">,</span> <span class="n">linenr</span><span class="p">,</span> <span class="n">address</span><span class="p">))</span> 
+        </div>
+<div class="viewcode-block" id="MethodCall.add_methodcallitem"><a class="viewcode-back" href="../../../../../vizasm.model.objc.methodcall.html#vizasm.model.objc.methodcall.MethodCall.MethodCall.add_methodcallitem">[docs]</a>    <span class="k">def</span> <span class="nf">add_methodcallitem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">methodcallitem</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Add the `MethodCallItem`.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters:</span>
+<span class="sd">        -----------</span>
+<span class="sd">        methodcallitem: MethodCallItem</span>
+<span class="sd">            the `MethodCallItem` which shall be added</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_calls</span><span class="p">()</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">methodcallitem</span><span class="p">)</span> 
+</div>
+<div class="viewcode-block" id="MethodCall.idx_methodcallitem"><a class="viewcode-back" href="../../../../../vizasm.model.objc.methodcall.html#vizasm.model.objc.methodcall.MethodCall.MethodCall.idx_methodcallitem">[docs]</a>    <span class="k">def</span> <span class="nf">idx_methodcallitem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">linenr</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return the index of the `MethodCallItem` with the given line number&#39;&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">methocallitem</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calls</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">methocallitem</span><span class="o">.</span><span class="n">linenr</span> <span class="o">==</span> <span class="n">linenr</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">i</span>
+        <span class="k">return</span> <span class="bp">None</span>
+                    </div>
+<div class="viewcode-block" id="MethodCall.has_no_sender"><a class="viewcode-back" href="../../../../../vizasm.model.objc.methodcall.html#vizasm.model.objc.methodcall.MethodCall.MethodCall.has_no_sender">[docs]</a>    <span class="k">def</span> <span class="nf">has_no_sender</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Check if the `Methodcall` has a sender. </span>
+<span class="sd">        If the `MethodCall` is initialized with None as sender, a pseudo none sender is created and used.</span>
+<span class="sd">        &#39;&#39;&#39;</span> 
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_sender</span><span class="p">()</span> <span class="o">==</span> <span class="n">MethodCall</span><span class="o">.</span><span class="n">PSEUDO_NONE_SENDER</span>
+    </div>
+<div class="viewcode-block" id="MethodCall.is_empty"><a class="viewcode-back" href="../../../../../vizasm.model.objc.methodcall.html#vizasm.model.objc.methodcall.MethodCall.MethodCall.is_empty">[docs]</a>    <span class="k">def</span> <span class="nf">is_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Returns if the methodcall does not contain any calls &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_calls</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span>
+</div>
+<div class="viewcode-block" id="MethodCall.create_gephi_attr_dicts"><a class="viewcode-back" href="../../../../../vizasm.model.objc.methodcall.html#vizasm.model.objc.methodcall.MethodCall.MethodCall.create_gephi_attr_dicts">[docs]</a>    <span class="k">def</span> <span class="nf">create_gephi_attr_dicts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asm_lines</span><span class="p">,</span> <span class="n">filtered_methodcall</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>    
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Construct the attribute dictionary describing the graph style.</span>
+<span class="sd">        Use the created dictionaries with the `add_to_graph` method.</span>
+<span class="sd">        </span>
+<span class="sd">        The attributes are:</span>
+<span class="sd">        Calling Method:</span>
+<span class="sd">            assembler code</span>
+<span class="sd">            the method calls (filtered or not)</span>
+<span class="sd">        Method:</span>
+<span class="sd">            line number in the asm file</span>
+<span class="sd">            address in the asm file</span>
+<span class="sd">            surrounding lines</span>
+<span class="sd">            </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        asm_lines: string</span>
+<span class="sd">            the assembler method as string</span>
+<span class="sd">        filtered_methodcall: MethodCall, optional (default is None)</span>
+<span class="sd">            the filtered `MethodCall`</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        methodcall_sender_attr_dict: dict</span>
+<span class="sd">        methodcall_calls_attr_list_dict: dict</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">method_lines_list</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">methodcallitem</span><span class="p">)</span> <span class="k">for</span> <span class="n">methodcallitem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">calls</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">filtered_methodcall</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">filtered_methodcall</span> <span class="o">=</span> <span class="bp">self</span>
+            
+        <span class="c"># construct calls attribute dictionary</span>
+        <span class="n">methodcall_calls_attr_list_dict</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">cnt_surrounding_lines</span> <span class="o">=</span> <span class="n">setting_for_key</span><span class="p">(</span><span class="n">SETTINGS_CNT_SURROUNDING_LINES</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cnt_surrounding_lines</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">methodcallitem</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">filtered_methodcall</span><span class="o">.</span><span class="n">calls</span><span class="p">):</span>
+                <span class="c"># construct leading and trailing lines</span>
+                <span class="c"># index of the current line (filtered `MethodCall`) in the list of method lines </span>
+                <span class="n">current_line</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">filtered_methodcall</span><span class="o">.</span><span class="n">calls</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">call</span><span class="p">)</span>
+                <span class="n">linenr</span> <span class="o">=</span> <span class="n">methodcallitem</span><span class="o">.</span><span class="n">linenr</span>
+                <span class="n">idx_line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">idx_methodcallitem</span><span class="p">(</span><span class="n">linenr</span><span class="p">)</span>
+                <span class="c"># idx_line = method_lines_list.index(current_line)</span>
+                <span class="n">lines_before</span><span class="p">,</span> <span class="n">lines_after</span> <span class="o">=</span> <span class="n">Util</span><span class="o">.</span><span class="n">surrounding_elements_from_list</span><span class="p">(</span><span class="n">method_lines_list</span><span class="p">,</span> <span class="n">idx_line</span><span class="p">,</span> <span class="n">cnt_surrounding_lines</span><span class="p">)</span>
+                
+                <span class="n">surrounding_lines</span> <span class="o">=</span> <span class="n">NodeAttributes</span><span class="o">.</span><span class="n">NPATTERN_SURROUND_LINES</span> <span class="o">%</span> <span class="p">(</span><span class="n">Util</span><span class="o">.</span><span class="n">strlist_to_str</span><span class="p">(</span><span class="n">lines_before</span><span class="p">),</span> <span class="n">current_line</span><span class="p">,</span> <span class="n">Util</span><span class="o">.</span><span class="n">strlist_to_str</span><span class="p">(</span><span class="n">lines_after</span><span class="p">))</span>
+                <span class="n">methodcall_attr_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">NodeAttributes</span><span class="o">.</span><span class="n">NATTR_METHOD_SURROUNDING_LINES</span> <span class="o">%</span> <span class="n">cnt_surrounding_lines</span> <span class="p">:</span> <span class="n">surrounding_lines</span><span class="p">}</span>
+                
+                <span class="n">methodcall_attr_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">methodcallitem</span><span class="o">.</span><span class="n">get_gexf_viz_attr_dict</span><span class="p">())</span>
+                
+                <span class="n">methodcall_calls_attr_list_dict</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">methodcall_attr_dict</span><span class="p">)</span>
+        
+        <span class="c"># add method signature to list of method lines </span>
+        <span class="n">method_lines_list</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">filtered_methodcall</span><span class="o">.</span><span class="n">format_head</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot;:</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+        
+        <span class="c"># construct sender attribute dictionary</span>
+        <span class="n">method_lines</span> <span class="o">=</span> <span class="n">Util</span><span class="o">.</span><span class="n">strlist_to_str</span><span class="p">(</span><span class="n">method_lines_list</span><span class="p">)</span>
+        <span class="n">methodcall_sender_attr_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">NodeAttributes</span><span class="o">.</span><span class="n">NATTR_METHOD</span> <span class="p">:</span> <span class="n">method_lines</span><span class="p">,</span> <span class="n">NodeAttributes</span><span class="o">.</span><span class="n">NATTR_ASM_CODE</span> <span class="p">:</span> <span class="n">asm_lines</span><span class="p">}</span>
+        
+        <span class="k">return</span> <span class="p">(</span><span class="n">methodcall_sender_attr_dict</span><span class="p">,</span> <span class="n">methodcall_calls_attr_list_dict</span><span class="p">)</span>
+   
+<span class="c">#####################################################################################</span>
+<span class="c"># AddToGraphInterface                                                               #</span>
+<span class="c">#####################################################################################</span>
+    </div>
+<div class="viewcode-block" id="MethodCall.add_to_graph"><a class="viewcode-back" href="../../../../../vizasm.model.objc.methodcall.html#vizasm.model.objc.methodcall.MethodCall.MethodCall.add_to_graph">[docs]</a>    <span class="k">def</span> <span class="nf">add_to_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">methodcall_sender_attr_dict</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">methodcall_calls_attr_list_dict</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">sender_methodcall_edge_attr_dict</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Add the `MethodCall` to the graph</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        methodcall_sender_attr_dict: dict, optional (Default {})</span>
+<span class="sd">        methodcall_calls_attr_list_dict: dict, optional (Default {})</span>
+<span class="sd">        methodcall_calls_attr_list_dict: dict, optional (Default {})</span>
+<span class="sd">         &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="n">methodcall_sender_attr_dict</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">methodcall_sender_attr_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">methodcall_calls_attr_list_dict</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">methodcall_calls_attr_list_dict</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">sender_methodcall_edge_attr_dict</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">sender_methodcall_edge_attr_dict</span> <span class="o">=</span> <span class="p">{}</span>
+            
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sender</span>
+            <span class="n">graph</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="n">graph</span><span class="o">.</span><span class="n">add_attributes</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">methodcall_sender_attr_dict</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">methodcallitem</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="c"># only set the next attribute dictionary if list is not empty</span>
+                <span class="k">if</span> <span class="n">methodcall_calls_attr_list_dict</span><span class="p">:</span>
+                    <span class="n">methodcall_attr_dict</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">methodcall_calls_attr_list_dict</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">methodcall_attr_dict</span> <span class="o">=</span> <span class="p">{}</span>
+                    
+                <span class="n">edge_label</span> <span class="o">=</span> <span class="n">methodcallitem</span><span class="o">.</span><span class="n">call</span>
+                <span class="n">graph</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">edge_label</span><span class="p">)</span>
+                <span class="n">graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sender</span><span class="p">,</span> <span class="n">edge_label</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">attr_dict</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">sender_methodcall_edge_attr_dict</span><span class="p">))</span>
+                <span class="n">methodcall_attr_dict</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">NodeAttributes</span><span class="o">.</span><span class="n">NATTR_LINENUMBER</span> <span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">methodcallitem</span><span class="o">.</span><span class="n">linenr</span><span class="p">)})</span> 
+                <span class="n">methodcall_attr_dict</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">NodeAttributes</span><span class="o">.</span><span class="n">NATTR_ADDRESS</span> <span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">methodcallitem</span><span class="o">.</span><span class="n">address</span><span class="p">))})</span> 
+                <span class="n">graph</span><span class="o">.</span><span class="n">add_attributes</span><span class="p">(</span><span class="n">edge_label</span><span class="p">,</span> <span class="n">methodcall_attr_dict</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

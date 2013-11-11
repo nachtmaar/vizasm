@@ -1,0 +1,469 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="../../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 17.09.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.Resetable</span> <span class="kn">import</span> <span class="n">Resetable</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.objcruntime.IVarRefLookup</span> <span class="kn">import</span> <span class="n">IVarRefLookup</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.objcruntime.exceptions.ObjcRuntimeCouldNotGetSelector</span> <span class="kn">import</span> \
+    <span class="n">ObjcRuntimeCouldNotGetSelector</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.objcruntime.exceptions.ObjcRuntimeCouldNotReadMsgSendException</span> <span class="kn">import</span> \
+    <span class="n">ObjcRuntimeCouldNotReadMsgSendException</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.objcruntime.exceptions.ObjcRuntimeSelectorWrongTypeException</span> <span class="kn">import</span> \
+    <span class="n">ObjcRuntimeSelectorWrongTypeException</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.asm.ivar.IVar</span> <span class="kn">import</span> <span class="n">IVar</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.asm.ivar.IvarRefCouldNotBeResolved</span> <span class="kn">import</span> \
+    <span class="n">IvarRefCouldNotBeResolvedException</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.asm.ivar.IvarRefWrongTypeException</span> <span class="kn">import</span> \
+    <span class="n">IvarRefWrongTypeException</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.arguments.Selector</span> <span class="kn">import</span> <span class="n">SelectorOverloadedException</span><span class="p">,</span> \
+    <span class="n">SelectorUnderloadedException</span><span class="p">,</span> <span class="n">Selector</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.function.FunctionInterface</span> <span class="kn">import</span> <span class="n">FunctionInterface</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.function.MethodSelectorArgument</span> <span class="kn">import</span> \
+    <span class="n">MethodSelectorArgument</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.function.MsgSend</span> <span class="kn">import</span> <span class="n">MsgSend</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.function.MsgSendInterface</span> <span class="kn">import</span> <span class="n">MsgSendInterface</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.object.nsobject.NSObject</span> <span class="kn">import</span> <span class="n">NSObject</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.object.nsobject.NSObjectInterface</span> <span class="kn">import</span> \
+    <span class="n">NSObjectInterface</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.object.nsobject.objcclass.ObjcClass</span> <span class="kn">import</span> <span class="n">ObjcClass</span>
+<span class="kn">from</span> <span class="nn">vizasm.util</span> <span class="kn">import</span> <span class="n">Util</span>
+<span class="kn">from</span> <span class="nn">vizasm.util.Log</span> <span class="kn">import</span> <span class="n">log</span>
+
+
+<span class="n">METHOD_ARGUMENTS_PREFIX</span> <span class="o">=</span> <span class="s">&#39;arg&#39;</span>
+<span class="c"># destination = 0 means the destination is a reference to a variable (&amp;var)</span>
+<span class="n">NOT_INITIALIZED_CLASS</span> <span class="o">=</span> <span class="n">ObjcClass</span><span class="o">.</span><span class="n">not_initialized</span>
+
+<div class="viewcode-block" id="ObjectiveCRuntime"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.objcruntime.html#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime">[docs]</a><span class="k">class</span> <span class="nc">ObjectiveCRuntime</span><span class="p">(</span><span class="nb">object</span><span class="p">,</span> <span class="n">Resetable</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Models the objective-c runtime.</span>
+<span class="sd">    </span>
+<span class="sd">    It keeps track of seen instance variables and their values</span>
+<span class="sd">    and handles calls to super as well as all msgSend stuff</span>
+<span class="sd">    (objc_msgSend).  </span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    _cpu: Cpu</span>
+<span class="sd">    _ivar_lookup: IVarRefLookup</span>
+<span class="sd">        Dictionary helper to look up instance variables    </span>
+<span class="sd">    _superclass_dict: dict&lt;ObjcClass, ObjcClass&gt;, optional (default {})</span>
+<span class="sd">        dictionary holding the base classes of the classes        </span>
+<span class="sd">        </span>
+<span class="sd">    See</span>
+<span class="sd">    ---</span>
+<span class="sd">    Implement these:</span>
+<span class="sd">        create_and_store_method_selector_arguments</span>
+<span class="sd">        store_self_cmd_for_stack_fetching_cpu</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+<span class="c">#####################################################################################</span>
+<span class="c"># Resetable                                                                         #</span>
+<span class="c">#####################################################################################    </span>
+
+<div class="viewcode-block" id="ObjectiveCRuntime.reset"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.objcruntime.html#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Reset the objective-c runtime &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ivar_lookup</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        
+<span class="c">#####################################################################################</span>
+<span class="c"># Implementation                                                                    #</span>
+<span class="c">#####################################################################################</span>
+    </div>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cpu</span><span class="p">,</span> <span class="n">superclass_dict</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cpu</span> <span class="o">=</span> <span class="n">cpu</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ivar_lookup</span> <span class="o">=</span> <span class="n">IVarRefLookup</span><span class="p">()</span>
+        
+        <span class="k">if</span> <span class="n">superclass_dict</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">superclass_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_superclass_dict</span> <span class="o">=</span> <span class="n">superclass_dict</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ivar_lookup</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">: </span><span class="si">%s</span><span class="s">\</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ivar_lookup</span><span class="p">),</span> <span class="n">Util</span><span class="o">.</span><span class="n">pretty_format_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">superclass_dict</span><span class="p">,</span> <span class="bp">True</span><span class="p">))</span>
+    
+<div class="viewcode-block" id="ObjectiveCRuntime.get_cpu"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.objcruntime.html#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.get_cpu">[docs]</a>    <span class="k">def</span> <span class="nf">get_cpu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cpu</span>
+    </div>
+<div class="viewcode-block" id="ObjectiveCRuntime.set_cpu"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.objcruntime.html#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.set_cpu">[docs]</a>    <span class="k">def</span> <span class="nf">set_cpu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cpu</span> <span class="o">=</span> <span class="n">value</span>
+        </div>
+<div class="viewcode-block" id="ObjectiveCRuntime.get_ivar_lookup"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.objcruntime.html#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.get_ivar_lookup">[docs]</a>    <span class="k">def</span> <span class="nf">get_ivar_lookup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ivar_lookup</span>
+</div>
+<div class="viewcode-block" id="ObjectiveCRuntime.set_ivar_lookup"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.objcruntime.html#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.set_ivar_lookup">[docs]</a>    <span class="k">def</span> <span class="nf">set_ivar_lookup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ivar_lookup</span> <span class="o">=</span> <span class="n">value</span>
+        </div>
+<div class="viewcode-block" id="ObjectiveCRuntime.get_superclass_dict"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.objcruntime.html#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.get_superclass_dict">[docs]</a>    <span class="k">def</span> <span class="nf">get_superclass_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_superclass_dict</span>
+</div>
+<div class="viewcode-block" id="ObjectiveCRuntime.set_superclass_dict"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.objcruntime.html#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.set_superclass_dict">[docs]</a>    <span class="k">def</span> <span class="nf">set_superclass_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_superclass_dict</span> <span class="o">=</span> <span class="n">value</span>        
+        </div>
+    <span class="n">cpu</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_cpu</span><span class="p">,</span> <span class="n">set_cpu</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;_cpu(Cpu)&quot;</span><span class="p">)</span>
+    <span class="n">ivar_lookup</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_ivar_lookup</span><span class="p">,</span> <span class="n">set_ivar_lookup</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;_ivar_lookup(IVarRefLookup) -- Dictionary helper to look up instance variables&quot;</span><span class="p">)</span>    
+    <span class="n">superclass_dict</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_superclass_dict</span><span class="p">,</span> <span class="n">set_superclass_dict</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;_superclass_dict(dict&lt;ObjcClass, ObjcClass&gt;, optional (default {})) -- dictionary holding the base classes of the classes&quot;</span><span class="p">)</span>
+
+<span class="c">#####################################################################################</span>
+<span class="c"># Implement them                                                                    #</span>
+<span class="c">#####################################################################################</span>
+
+<div class="viewcode-block" id="ObjectiveCRuntime.create_and_store_method_selector_arguments"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.objcruntime.html#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.create_and_store_method_selector_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">create_and_store_method_selector_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method_selector</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Create and store the arguments for the `method_selector`.</span>
+<span class="sd">        There will be as many arguments created as the `Selector` needs.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        method_selector: Selector</span>
+<span class="sd">            the `Selector` describing the method that is currently being read by the `Cpu`</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        SelectorOverloadedException</span>
+<span class="sd">            if selector has more arguments than it needs</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    </div>
+<div class="viewcode-block" id="ObjectiveCRuntime.store_self_cmd_for_stack_fetching_cpu"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.objcruntime.html#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.store_self_cmd_for_stack_fetching_cpu">[docs]</a>    <span class="k">def</span> <span class="nf">store_self_cmd_for_stack_fetching_cpu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objc_class</span><span class="p">,</span> <span class="n">selector</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Store self and _cmd in the appropriate place if the</span>
+<span class="sd">        `Cpu` fetches all of its arguments from stack&#39;&#39;&#39;</span> 
+    
+<span class="c">#####################################################################################</span>
+<span class="c"># Implementation                                                                    #</span>
+<span class="c">#####################################################################################    </span>
+</div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ObjectiveCRuntime.create_method_selector_arg"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.objcruntime.html#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.create_method_selector_arg">[docs]</a>    <span class="k">def</span> <span class="nf">create_method_selector_arg</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Create a method argument for the current method selector. See `method_selector`. </span>
+<span class="sd">        The method arguments are stored as instance of `MethodSelectorArgument` named with the suffix `Cpu.METHOD_ARGUMENTS_PREFIX`.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        number: int</span>
+<span class="sd">            the number to append to the argument name</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        MethodSelectorArgument</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">objc_class</span> <span class="o">=</span> <span class="n">NSObject</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s%d</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">METHOD_ARGUMENTS_PREFIX</span><span class="p">,</span> <span class="n">number</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">MethodSelectorArgument</span><span class="p">(</span><span class="n">objc_class</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="ObjectiveCRuntime.set_superclass"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.objcruntime.html#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.set_superclass">[docs]</a>    <span class="k">def</span> <span class="nf">set_superclass</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ivar_ref</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Set the superclass for the `ivar_ref` from the `superclass_dict`.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ivar_ref: MsgSend</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c"># set superclass if available</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ivar_ref</span><span class="p">,</span> <span class="n">MsgSend</span><span class="p">):</span>
+            <span class="n">objc_class</span> <span class="o">=</span> <span class="n">ivar_ref</span><span class="o">.</span><span class="n">msg_receiver</span>
+            <span class="c"># TODO: EQUALITY DOES NOT TAKE PLACE, IS STATIC! WHY? THIS IS A TEMPORARY WORKAROUND</span>
+            <span class="n">objc_class</span><span class="o">.</span><span class="n">is_static</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">objc_class</span><span class="p">,</span> <span class="n">ObjcClass</span><span class="p">):</span>
+                <span class="n">superclass</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">superclass_dict</span><span class="o">.</span><span class="n">get_from_idx</span><span class="p">(</span><span class="n">objc_class</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">superclass</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="n">objc_class</span><span class="o">.</span><span class="n">superclass</span> <span class="o">=</span> <span class="n">superclass</span>    
+                    </div>
+<div class="viewcode-block" id="ObjectiveCRuntime.read_msg_send"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.objcruntime.html#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.read_msg_send">[docs]</a>    <span class="k">def</span> <span class="nf">read_msg_send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">imp</span><span class="p">,</span> <span class="n">destination</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Read a msg_send and store it .</span>
+<span class="sd">    </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ObjcRuntimeCouldNotGetSelector</span>
+<span class="sd">            if the value of the destination register could not be resolved</span>
+<span class="sd">        ObjcRuntimeSelectorWrongTypeException</span>
+<span class="sd">            if the selector has not the right class. Has to be: `Selector`</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        MsgSend</span>
+<span class="sd">            the `MsgSend` created</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c"># resolve superclass</span>
+        <span class="k">if</span> <span class="n">imp</span><span class="o">.</span><span class="n">is_any_msg_send_super</span><span class="p">():</span>
+            <span class="n">method</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cpu</span><span class="o">.</span><span class="n">method</span>
+            <span class="k">if</span> <span class="n">method</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">method</span><span class="o">.</span><span class="n">is_objc_function</span><span class="p">():</span>
+                <span class="n">method_class</span> <span class="o">=</span> <span class="n">method</span><span class="o">.</span><span class="n">msg_receiver</span>
+                <span class="n">destination</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">superclass_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">method_class</span><span class="p">)</span>
+                <span class="c"># if no superclass has been found, set it to NSObject</span>
+                <span class="k">if</span> <span class="n">destination</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="n">destination</span> <span class="o">=</span> <span class="n">ObjcClass</span><span class="o">.</span><span class="n">nsobject</span>
+                    
+        <span class="k">if</span> <span class="n">imp</span><span class="o">.</span><span class="n">is_any_msg_send</span><span class="p">():</span>
+            <span class="c"># deepcopy needed for arm</span>
+            <span class="c"># otherwise multiple usage of same selectors leads to the same selector every time</span>
+            <span class="c"># and new arguments cannot be filled into an full selector</span>
+            <span class="n">selector</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_current_selector_check_sel_type</span><span class="p">(</span><span class="n">imp</span><span class="o">.</span><span class="n">is_any_msg_send_stret</span><span class="p">()))</span>
+            <span class="n">selector</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+            <span class="c"># TODO.</span>
+            <span class="n">msgSend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_msgsend_from_selector</span><span class="p">(</span><span class="n">selector</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">msgSend</span>
+        <span class="k">return</span> <span class="bp">None</span>                    
+    </div>
+    <span class="k">def</span> <span class="nf">_msgsend_from_selector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">,</span> <span class="n">destination</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Create a MsgSend and store it in the `MethodCall`.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        selector: Selector</span>
+<span class="sd">        destination: </span>
+<span class="sd">            to which object to send the message</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ObjcRuntimeCouldNotReadMsgSendException</span>
+<span class="sd">            if the msgSend could not be read</span>
+<span class="sd">            </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        MsgSend</span>
+<span class="sd">            the created `MsgSend`</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">cpu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cpu</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">selector</span><span class="o">.</span><span class="n">fill_from_cpu</span><span class="p">(</span><span class="n">cpu</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">SelectorOverloadedException</span><span class="p">,</span> <span class="n">SelectorUnderloadedException</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="n">msg_send</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">msg_send_from_destination</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="n">selector</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">msg_send</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ObjcRuntimeCouldNotReadMsgSendException</span><span class="p">(</span><span class="n">cpu</span><span class="p">,</span> <span class="n">destination</span><span class="p">,</span> <span class="n">selector</span><span class="p">)</span>
+        <span class="c"># save MsgSend in return register</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpu</span><span class="o">.</span><span class="n">_store_function</span><span class="p">(</span><span class="n">msg_send</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">msg_send</span>
+        
+<div class="viewcode-block" id="ObjectiveCRuntime.read_selector"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.objcruntime.html#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.read_selector">[docs]</a>    <span class="k">def</span> <span class="nf">read_selector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">,</span> <span class="n">destination</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Called is a `Selector`. </span>
+<span class="sd">        Create a `MsgSend` and store it in the `MethodCall.</span>
+<span class="sd">         </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        MsgSend</span>
+<span class="sd">            the created `MsgSend </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">dest</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="n">selector</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="n">IVar</span><span class="p">):</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">destination</span><span class="o">.</span><span class="n">resolve_ivar_ref</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ivar_lookup</span><span class="p">)</span>
+                <span class="k">except</span> <span class="p">(</span><span class="n">IvarRefCouldNotBeResolvedException</span><span class="p">,</span> <span class="n">IvarRefWrongTypeException</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+                    
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="n">FunctionInterface</span><span class="p">):</span>
+                <span class="n">dest</span> <span class="o">=</span> <span class="n">destination</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="n">NSObjectInterface</span><span class="p">):</span>
+                <span class="n">dest</span> <span class="o">=</span> <span class="n">destination</span><span class="o">.</span><span class="n">get_nsobject</span><span class="p">()</span>
+            
+            <span class="n">msg_send</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_msgsend_from_selector</span><span class="p">(</span><span class="n">selector</span><span class="p">,</span> <span class="n">dest</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">msg_send</span>
+        <span class="k">return</span> <span class="bp">None</span>        
+</div>
+<div class="viewcode-block" id="ObjectiveCRuntime.msg_send_from_destination"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.objcruntime.html#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.msg_send_from_destination">[docs]</a>    <span class="k">def</span> <span class="nf">msg_send_from_destination</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">destination</span><span class="p">,</span> <span class="n">selector</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Create a MsgSend from the given `destination` and `selector`.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        selector: Selector</span>
+<span class="sd">        destination: </span>
+<span class="sd">            to which object to send the message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        msg_send: MsgSend</span>
+<span class="sd">            the created `MsgSend`</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">msg_send</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="n">selector</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="n">MsgSendInterface</span><span class="p">)</span> <span class="ow">or</span> <span class="n">destination</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c"># set 0 to not_initialized</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="n">IVar</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">destination</span><span class="o">.</span><span class="n">ivar_ref</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">destination</span><span class="o">.</span><span class="n">ivar_ref</span> <span class="o">=</span> <span class="n">MsgSend</span><span class="p">(</span><span class="n">NOT_INITIALIZED_CLASS</span><span class="p">,</span> <span class="p">[])</span>
+                <span class="c"># set 0 to not_initialized</span>
+                <span class="k">if</span> <span class="n">destination</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">msg_send</span> <span class="o">=</span> <span class="n">MsgSend</span><span class="p">(</span><span class="n">NOT_INITIALIZED_CLASS</span><span class="p">,</span> <span class="p">[</span><span class="n">selector</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c"># ivar_ref_lookup kwarg resolves ivar_ref from IVar </span>
+                    <span class="n">msg_send</span> <span class="o">=</span> <span class="n">destination</span><span class="o">.</span><span class="n">create_msg_send</span><span class="p">(</span><span class="n">selector</span><span class="p">,</span> <span class="n">ivar_ref_lookup</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ivar_lookup</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">msg_send</span>
+</div>
+<div class="viewcode-block" id="ObjectiveCRuntime.read_return_important_objc_call"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.objcruntime.html#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.read_return_important_objc_call">[docs]</a>    <span class="k">def</span> <span class="nf">read_return_important_objc_call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">imp</span><span class="p">,</span> <span class="n">destination</span><span class="p">,</span> <span class="n">return_register</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Read a line which seems to return something and store it in the return register. </span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        is return important</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">is_return_important</span> <span class="o">=</span> <span class="n">imp</span><span class="o">.</span><span class="n">is_return_important</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">is_return_important</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s"> = </span><span class="si">%s</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">return_register</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cpu</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">registers</span><span class="o">.</span><span class="n">set_value_for_register</span><span class="p">(</span><span class="n">return_register</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span>        
+        <span class="k">return</span> <span class="n">is_return_important</span>    
+    </div>
+    <span class="k">def</span> <span class="nf">_get_current_selector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objc_msgSend_stret</span><span class="p">,</span> <span class="n">raise_cpu_selector_wrong_type_exception</span> <span class="o">=</span> <span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return the current selector.</span>
+<span class="sd">        If the `Cpu` fetches its arguments from stack, it will be popped from the stack. </span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        raise_cpu_selector_wrong_type_exception: bool</span>
+<span class="sd">            raise ObjcRuntimeSelectorWrongTypeException if this exceptions occurrs but only if the bool is True</span>
+<span class="sd">            </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ObjcRuntimeCouldNotGetSelector</span>
+<span class="sd">            raised if the value of the selector register could not be detected</span>
+<span class="sd">        ObjcRuntimeSelectorWrongTypeException</span>
+<span class="sd">            raised if the type of selector is not Selector but only if raise_cpu_selector_wrong_type_exception</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Selector</span>
+<span class="sd">        &#39;&#39;&#39;</span> 
+        <span class="n">cpu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cpu</span>
+        <span class="n">selector_reg</span> <span class="o">=</span> <span class="n">cpu</span><span class="o">.</span><span class="n">selector_register</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">objc_msgSend_stret</span><span class="p">:</span>
+            <span class="n">selector_reg</span> <span class="o">=</span> <span class="n">cpu</span><span class="o">.</span><span class="n">next_reg_for_spret</span><span class="p">(</span><span class="n">selector_reg</span><span class="p">)</span>
+        <span class="n">selector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cpu</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">get_argument</span><span class="p">(</span><span class="n">selector_reg</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">selector</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">selector</span><span class="p">,</span> <span class="n">Selector</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">selector</span>
+            <span class="k">elif</span> <span class="n">raise_cpu_selector_wrong_type_exception</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ObjcRuntimeSelectorWrongTypeException</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">selector</span>
+        <span class="k">raise</span> <span class="n">ObjcRuntimeCouldNotGetSelector</span><span class="p">(</span><span class="n">cpu</span><span class="p">)</span>    
+    
+<div class="viewcode-block" id="ObjectiveCRuntime.get_current_selector_check_sel_type"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.objcruntime.html#vizasm.analysis.asm.cpu.objcruntime.ObjectiveCRuntime.ObjectiveCRuntime.get_current_selector_check_sel_type">[docs]</a>    <span class="k">def</span> <span class="nf">get_current_selector_check_sel_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objc_msgSend_stret</span> <span class="o">=</span> <span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return the current selector and check the type of the selector.</span>
+<span class="sd">        If not correct, raise ObjcRuntimeSelectorWrongTypeException.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        objc_msgSend_stret: bool, optional (default is False)</span>
+<span class="sd">            indicate an objc_msgSend_stret</span>
+<span class="sd">            </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ObjcRuntimeCouldNotGetSelector</span>
+<span class="sd">            raised if the value of the selector register could not be detected</span>
+<span class="sd">        ObjcRuntimeSelectorWrongTypeException</span>
+<span class="sd">            raised if the type of selector is not Selector</span>
+<span class="sd">            </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        selector: Selector</span>
+<span class="sd">            The selector currently stored in the register specified by `selector_registers`.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_current_selector</span><span class="p">(</span><span class="n">objc_msgSend_stret</span><span class="p">,</span> <span class="n">raise_cpu_selector_wrong_type_exception</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

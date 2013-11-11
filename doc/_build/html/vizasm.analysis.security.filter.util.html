@@ -1,0 +1,618 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>util Package &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">util Package</a><ul>
+<li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">util</span></tt> Package</a></li>
+<li><a class="reference internal" href="#module-vizasm.analysis.security.filter.util.MethodCallFilterUtil"><tt class="docutils literal"><span class="pre">MethodCallFilterUtil</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vizasm.analysis.security.filter.util.MethodDefFilterUtil"><tt class="docutils literal"><span class="pre">MethodDefFilterUtil</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vizasm.analysis.security.filter.util.Util"><tt class="docutils literal"><span class="pre">Util</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/vizasm.analysis.security.filter.util.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="util-package">
+<h1>util Package<a class="headerlink" href="#util-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">util</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-vizasm.analysis.security.filter.util"></span></div>
+<div class="section" id="module-vizasm.analysis.security.filter.util.MethodCallFilterUtil">
+<span id="methodcallfilterutil-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">MethodCallFilterUtil</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.security.filter.util.MethodCallFilterUtil" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 07.08.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="function">
+<dt id="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_c_function_has_any_name">
+<tt class="descclassname">vizasm.analysis.security.filter.util.MethodCallFilterUtil.</tt><tt class="descname">mc_c_function_has_any_name</tt><big>(</big><em>c_function</em>, <em>names</em>, <em>search_substring=False</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/util/MethodCallFilterUtil.html#mc_c_function_has_any_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_c_function_has_any_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the given c function has any of the names specified by <cite>names</cite>.
+This means that the names are equal (character for character).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>names: list&lt;string&gt;</strong> :</p>
+<blockquote>
+<div><p>possible names the function can have</p>
+</div></blockquote>
+<p><strong>search_substring: bool (default is False)</strong> :</p>
+<blockquote class="last">
+<div><p>If True match even if just substring found (<cite>find</cite>).
+Otherwise check for exact equality via <cite>==</cite>.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_contains_imp_got">
+<tt class="descclassname">vizasm.analysis.security.filter.util.MethodCallFilterUtil.</tt><tt class="descname">mc_contains_imp_got</tt><big>(</big><em>function</em>, <em>imp_got_name</em>, <em>search_substring=False</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/util/MethodCallFilterUtil.html#mc_contains_imp_got"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_contains_imp_got" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if function has the <cite>imp_got_name</cite> as an any argument and is a subclass of <cite>ImpGot</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>function: FunctionInterface</strong> :</p>
+<p><strong>imp_got_name: string</strong> :</p>
+<blockquote>
+<div><p>the name of the <cite>ImpGot</cite></p>
+</div></blockquote>
+<p><strong>search_substring: bool (default is False)</strong> :</p>
+<blockquote class="last">
+<div><p>If True match even if just substring found (<cite>find</cite>).
+Otherwise check for exact equality via <cite>==</cite>.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_filter_method_call">
+<tt class="descclassname">vizasm.analysis.security.filter.util.MethodCallFilterUtil.</tt><tt class="descname">mc_filter_method_call</tt><big>(</big><em>iterable</em>, <em>func_list</em>, <em>steps=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/util/MethodCallFilterUtil.html#mc_filter_method_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_filter_method_call" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run over the iterable structure and check if one of the specified function matches on any argument.</p>
+<p>[SomeClass someSelector:&#64;&#8221;SomeString&#8221; 2ndarg:&#64;&#8221;foo&#8221; 3rdarg:&#64;&#8221;bar&#8221;]
+Be careful, this does not apply the function on the class of the MsgSend! Because it does not belong to the iterable part.</p>
+<p>steps:     1            2</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>iterable: iterable</strong> :</p>
+<p><strong>func_list: list&lt;object -&gt; bool&gt;</strong> :</p>
+<blockquote>
+<div><p>list of functions to apply on every argument</p>
+</div></blockquote>
+<p><strong>steps: int, optional (default is None)</strong> :</p>
+<blockquote class="last">
+<div><p>Maximum number of steps to go into iterable structure.
+None means take as much steps as available.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="s">&#39;@&quot;foo&quot;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c_func</span> <span class="o">=</span> <span class="n">MsgSend</span><span class="p">(</span><span class="n">ObjcClass</span><span class="p">(</span><span class="s">&#39;Bla&#39;</span><span class="p">),</span> <span class="p">[</span><span class="n">Selector</span><span class="p">(</span><span class="s">&#39;foo:&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">NSString</span><span class="p">(</span><span class="s">&#39;foo&#39;</span><span class="p">)])])</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">msgsend</span> <span class="o">=</span> <span class="n">MsgSend</span><span class="p">(</span><span class="n">ObjcClass</span><span class="p">(</span><span class="s">&#39;SomeClass&#39;</span><span class="p">),</span> <span class="p">[</span><span class="n">Selector</span><span class="p">(</span><span class="s">&#39;someSelector:2dnarg:3rdarg:&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">c_func</span><span class="p">,</span> <span class="n">NSString</span><span class="p">(</span><span class="s">&#39;SomeString&#39;</span><span class="p">),</span> <span class="n">NSString</span><span class="p">(</span><span class="s">&#39;bar&#39;</span><span class="p">)])])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">mc_filter_method_call</span><span class="p">(</span><span class="n">msgsend</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">steps</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>[SomeClass someSelector:[Bla foo:&#64;&#8221;foo&#8221;] 2dnarg:&#64;&#8221;SomeString&#8221; 3rdarg:&#64;&#8221;bar&#8221;]</dt>
+<dd>^            ^   ^   ^ 
+|            |   |   |</dd>
+</dl>
+<p>steps:      0            1   2   3</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_function_has_arg_with_exact_name">
+<tt class="descclassname">vizasm.analysis.security.filter.util.MethodCallFilterUtil.</tt><tt class="descname">mc_function_has_arg_with_exact_name</tt><big>(</big><em>function</em>, <em>exact_name</em>, <em>modelutil_func=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/util/MethodCallFilterUtil.html#mc_function_has_arg_with_exact_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_function_has_arg_with_exact_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the <cite>function</cite> contains an argument with the specified <cite>exact_name</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>function: FunctionInterface</strong> :</p>
+<p><strong>exact_name: string</strong> :</p>
+<blockquote>
+<div><p>the name to look for</p>
+</div></blockquote>
+<p><strong>modelutil_func: function from `ModelUtil`</strong> :</p>
+<blockquote class="last">
+<div><p>use this to check if the argument is a certain class</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_function_has_arg_with_name">
+<tt class="descclassname">vizasm.analysis.security.filter.util.MethodCallFilterUtil.</tt><tt class="descname">mc_function_has_arg_with_name</tt><big>(</big><em>function</em>, <em>name</em>, <em>search_substring=False</em>, <em>modelutil_func=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/util/MethodCallFilterUtil.html#mc_function_has_arg_with_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_function_has_arg_with_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the <cite>function</cite> contains an argument with the specified <cite>name</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>function: FunctionInterface</strong> :</p>
+<p><strong>name: string</strong> :</p>
+<blockquote>
+<div><p>the name to look for</p>
+</div></blockquote>
+<p><strong>search_substring: bool</strong> :</p>
+<blockquote>
+<div><p>If True match even if just substring found (<cite>find</cite>).
+Otherwise check for exact equality via <cite>==</cite>.</p>
+</div></blockquote>
+<p><strong>modelutil_func: function from `ModelUtil`</strong> :</p>
+<blockquote class="last">
+<div><p>use this to check if the function argument is a certain class</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_function_has_arg_with_subname">
+<tt class="descclassname">vizasm.analysis.security.filter.util.MethodCallFilterUtil.</tt><tt class="descname">mc_function_has_arg_with_subname</tt><big>(</big><em>function</em>, <em>subname</em>, <em>modelutil_func=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/util/MethodCallFilterUtil.html#mc_function_has_arg_with_subname"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_function_has_arg_with_subname" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the <cite>function</cite> contains an argument with the specified <cite>subname</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>function: FunctionInterface</strong> :</p>
+<p><strong>subname: string</strong> :</p>
+<blockquote>
+<div><p>the name to look for</p>
+</div></blockquote>
+<p><strong>modelutil_func: function from `ModelUtil`</strong> :</p>
+<blockquote class="last">
+<div><p>use this to check if the argument is a certain class</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_get_c_function_name">
+<tt class="descclassname">vizasm.analysis.security.filter.util.MethodCallFilterUtil.</tt><tt class="descname">mc_get_c_function_name</tt><big>(</big><em>c_function</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/util/MethodCallFilterUtil.html#mc_get_c_function_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_get_c_function_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the function name of the c function</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><strong>c_function: Function</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_get_objc_class">
+<tt class="descclassname">vizasm.analysis.security.filter.util.MethodCallFilterUtil.</tt><tt class="descname">mc_get_objc_class</tt><big>(</big><em>objc_function</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/util/MethodCallFilterUtil.html#mc_get_objc_class"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_get_objc_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Same as <cite>mc_has_objc_class</cite> but returns the objective c class.
+E.g. &#8220;[[NSString alloc] init]&#8221; returns objective c class &#8220;NSString&#8221;.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>objc_function: MsgSend</strong> :</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>objc_class: ObjcClass</strong> :</p>
+<blockquote class="last">
+<div><p>the objective c class of the objective c function</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_has_any_selector">
+<tt class="descclassname">vizasm.analysis.security.filter.util.MethodCallFilterUtil.</tt><tt class="descname">mc_has_any_selector</tt><big>(</big><em>function</em>, <em>selector_names</em>, <em>search_substring=False</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/util/MethodCallFilterUtil.html#mc_has_any_selector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_has_any_selector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the <cite>function</cite> has a <cite>Selector</cite> with one of the specified names or will be loaded via NSSelectorFromString(...). 
+Can also be a c function (e.g. [c_func_res() someSelector]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>function: FunctionInterface</strong> :</p>
+<p><strong>selectorname: list&lt;string&gt;</strong> :</p>
+<blockquote>
+<div><p>name of the <cite>Selector</cite> (without arguments filled, e.g: &#8220;setProperty:forKey:&#8221;)</p>
+</div></blockquote>
+<p><strong>search_substring: bool</strong> :</p>
+<blockquote class="last">
+<div><p>If True match even if just substring found (<cite>find</cite>).
+Otherwise check for exact equality via <cite>==</cite>.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_has_format_string">
+<tt class="descclassname">vizasm.analysis.security.filter.util.MethodCallFilterUtil.</tt><tt class="descname">mc_has_format_string</tt><big>(</big><em>function</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/util/MethodCallFilterUtil.html#mc_has_format_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_has_format_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the function has a <cite>FormatString</cite> as any of its arguments.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><strong>function: FunctionInterface</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_has_objc_class">
+<tt class="descclassname">vizasm.analysis.security.filter.util.MethodCallFilterUtil.</tt><tt class="descname">mc_has_objc_class</tt><big>(</big><em>function</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/util/MethodCallFilterUtil.html#mc_has_objc_class"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_has_objc_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the receiver of a message is an objective c class.
+E.g. &#8220;[[NSString alloc] init]&#8221; is an objective c function and NSString is the objective c class.</p>
+<p>But sending a message to the return result of a c function (e.g. &#8220;[c_func() anyThing]&#8221;)
+means that the objective c function does not an objective c class.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><strong>function: FunctionInterface</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_is_c_function">
+<tt class="descclassname">vizasm.analysis.security.filter.util.MethodCallFilterUtil.</tt><tt class="descname">mc_is_c_function</tt><big>(</big><em>function</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/util/MethodCallFilterUtil.html#mc_is_c_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_is_c_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the function is a c function</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_is_exploitable_log_func">
+<tt class="descclassname">vizasm.analysis.security.filter.util.MethodCallFilterUtil.</tt><tt class="descname">mc_is_exploitable_log_func</tt><big>(</big><em>function</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/util/MethodCallFilterUtil.html#mc_is_exploitable_log_func"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_is_exploitable_log_func" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_is_function">
+<tt class="descclassname">vizasm.analysis.security.filter.util.MethodCallFilterUtil.</tt><tt class="descname">mc_is_function</tt><big>(</big><em>function</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/util/MethodCallFilterUtil.html#mc_is_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_is_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the <cite>function</cite> is a <cite>Function</cite> at all</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_is_objectivec_function">
+<tt class="descclassname">vizasm.analysis.security.filter.util.MethodCallFilterUtil.</tt><tt class="descname">mc_is_objectivec_function</tt><big>(</big><em>function</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/util/MethodCallFilterUtil.html#mc_is_objectivec_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_is_objectivec_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the function is an objective c function</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_objc_class_with_any_name">
+<tt class="descclassname">vizasm.analysis.security.filter.util.MethodCallFilterUtil.</tt><tt class="descname">mc_objc_class_with_any_name</tt><big>(</big><em>objc_function</em>, <em>names</em>, <em>search_substring=True</em>, <em>modelutil_func=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/util/MethodCallFilterUtil.html#mc_objc_class_with_any_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_objc_class_with_any_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the name of the objective c class equals any name of <cite>names</cite>.
+For definition of equality see <cite>search_substring</cite> parameter.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>objc_function: MsgSend</strong> :</p>
+<p><strong>names: list&lt;string&gt;</strong> :</p>
+<blockquote>
+<div><p>the names to search for</p>
+</div></blockquote>
+<p><strong>search_substring: bool (default is True)</strong> :</p>
+<blockquote>
+<div><p>If True match even if just substring found (<cite>find</cite>).
+Otherwise check for exact equality via <cite>==</cite>.</p>
+</div></blockquote>
+<p><strong>modelutil_func: function from `ModelUtil`</strong> :</p>
+<blockquote class="last">
+<div><p>use this to check if the argument is a certain class</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_sel_via_nsselector_from_string">
+<tt class="descclassname">vizasm.analysis.security.filter.util.MethodCallFilterUtil.</tt><tt class="descname">mc_sel_via_nsselector_from_string</tt><big>(</big><em>function</em>, <em>sel_name</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/util/MethodCallFilterUtil.html#mc_sel_via_nsselector_from_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.util.MethodCallFilterUtil.mc_sel_via_nsselector_from_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if a <cite>Selector</cite> is loaded via the NSSelectorFromString function</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.security.filter.util.MethodDefFilterUtil">
+<span id="methoddeffilterutil-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">MethodDefFilterUtil</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.security.filter.util.MethodDefFilterUtil" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 09.09.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="function">
+<dt id="vizasm.analysis.security.filter.util.MethodDefFilterUtil.md_filter_category">
+<tt class="descclassname">vizasm.analysis.security.filter.util.MethodDefFilterUtil.</tt><tt class="descname">md_filter_category</tt><big>(</big><em>msg_send</em>, <em>selector=None</em>, <em>category_on=None</em>, <em>category_name=None</em>, <em>search_substring=False</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/util/MethodDefFilterUtil.html#md_filter_category"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.util.MethodDefFilterUtil.md_filter_category" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter a category.</p>
+<p>E.g. +[NSURLRequest(AnyHttpsCert) allowsAnyHTTPSCertificateForHost:].
+This is a category on NSURLRequest (<cite>category_on</cite>) with the name AnyHttpsCert (<cite>category_name</cite>).</p>
+<p>If you do not want to match on a keyword property, simple leave it out or set it to None!</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>msg_send: MsgSend</strong> :</p>
+<p><strong>selector: string, optional (default is &#8216;&#8217; and means to match always)</strong> :</p>
+<blockquote>
+<div><p>the unfilled selector name, without any arguments!</p>
+</div></blockquote>
+<p><strong>category_name: string, optional (default is &#8216;&#8217; and means to match always)</strong> :</p>
+<blockquote>
+<div><p>the name of the category</p>
+</div></blockquote>
+<p><strong>category_on: string, optional (default is None and means to match always)</strong> :</p>
+<p><strong>search_substring: bool (default is False)</strong> :</p>
+<blockquote class="last">
+<div><p>If True match even if just substring found (<cite>find</cite>).
+Otherwise check for exact equality via <cite>==</cite>.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.analysis.security.filter.util.MethodDefFilterUtil.md_filter_method_defintion">
+<tt class="descclassname">vizasm.analysis.security.filter.util.MethodDefFilterUtil.</tt><tt class="descname">md_filter_method_defintion</tt><big>(</big><em>msg_send</em>, <em>class_name=None</em>, <em>selector_name=None</em>, <em>search_substring=False</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/util/MethodDefFilterUtil.html#md_filter_method_defintion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.util.MethodDefFilterUtil.md_filter_method_defintion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter a method definition like e.g. &#8220;[AppDelegate application:didFinishLaunchingWithOptions:]&#8221;</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>msg_send: MsgSend</strong> :</p>
+<p><strong>class_name: string, optional (default is None)</strong> :</p>
+<blockquote>
+<div><p>E.g. &#8220;AppDelegate&#8221;. None means to not filter on the class name.</p>
+</div></blockquote>
+<p><strong>selector_name: string, optional (default is None)</strong> :</p>
+<blockquote>
+<div><p>E.g. &#8220;application:didFinishLaunchingWithOptions:&#8221;.
+The name is the pure selector name without any arguments.
+None means to not filter on the selector name.</p>
+</div></blockquote>
+<p><strong>search_substring: bool (default is False)</strong> :</p>
+<blockquote class="last">
+<div><p>If True match even if just substring found (<cite>find</cite>).
+Otherwise check for exact equality via <cite>==</cite>.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.analysis.security.filter.util.MethodDefFilterUtil.md_get_category_class">
+<tt class="descclassname">vizasm.analysis.security.filter.util.MethodDefFilterUtil.</tt><tt class="descname">md_get_category_class</tt><big>(</big><em>function</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/util/MethodDefFilterUtil.html#md_get_category_class"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.util.MethodDefFilterUtil.md_get_category_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the category class.</p>
+<p>E.g. &#8220;+[NSURLRequest(AnyHttpsCert) allowsAnyHTTPSCertificateForHost:]&#8221; has the category class &#8220;NSURLRequest(AnyHttpsCert)&#8221;.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>function: FunctionInterface</strong> :</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>CategoryClass</strong> :</p>
+<p><strong>None</strong> :</p>
+<blockquote class="last">
+<div><p>if <cite>msg_send</cite> is no category</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.analysis.security.filter.util.MethodDefFilterUtil.md_has_category_class">
+<tt class="descclassname">vizasm.analysis.security.filter.util.MethodDefFilterUtil.</tt><tt class="descname">md_has_category_class</tt><big>(</big><em>function</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/util/MethodDefFilterUtil.html#md_has_category_class"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.util.MethodDefFilterUtil.md_has_category_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the <cite>function</cite> has a <cite>CategoryClass</cite></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.analysis.security.filter.util.MethodDefFilterUtil.md_is_category">
+<tt class="descclassname">vizasm.analysis.security.filter.util.MethodDefFilterUtil.</tt><tt class="descname">md_is_category</tt><big>(</big><em>function</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/util/MethodDefFilterUtil.html#md_is_category"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.util.MethodDefFilterUtil.md_is_category" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if <cite>function</cite> is a category</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vizasm.analysis.security.filter.util.MethodDefFilterUtil.md_is_static_category_method">
+<tt class="descclassname">vizasm.analysis.security.filter.util.MethodDefFilterUtil.</tt><tt class="descname">md_is_static_category_method</tt><big>(</big><em>function</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/util/MethodDefFilterUtil.html#md_is_static_category_method"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.util.MethodDefFilterUtil.md_is_static_category_method" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the category is static.
+This means that the method that the category overwrites is static.</p>
+<p>E.g. &#8220;+[NSURLRequest(AnyHttpsCert) allowsAnyHTTPSCertificateForHost:]&#8221; is static (&#8220;+&#8221;).
+&#8220;-[NSURLRequest(AnyHttpsCert) allowsAnyHTTPSCertificateForHost:]&#8221; is not static (&#8220;-&#8221;).</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.security.filter.util.Util">
+<span id="util-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">Util</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.security.filter.util.Util" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 18.10.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="function">
+<dt id="vizasm.analysis.security.filter.util.Util.ut_search_string">
+<tt class="descclassname">vizasm.analysis.security.filter.util.Util.</tt><tt class="descname">ut_search_string</tt><big>(</big><em>string</em>, <em>ut_search_string</em>, <em>search_substring=False</em>, <em>ignore_case=True</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/security/filter/util/Util.html#ut_search_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.security.filter.util.Util.ut_search_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if <cite>string</cite> is equal to <cite>ut_search_string</cite> or
+if <cite>search_substring</cite> <cite>string</cite> contains <cite>search_substring</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>string: string</strong> :</p>
+<p><strong>ut_search_string: string</strong> :</p>
+<p><strong>search_substring: bool (default is False)</strong> :</p>
+<blockquote>
+<div><p>If True match even if just substring found (<cite>find</cite>).
+Otherwise check for exact equality via <cite>==</cite>.</p>
+</div></blockquote>
+<p><strong>ignore_case: bool</strong> :</p>
+<blockquote class="last">
+<div><p>ignore case if enabled</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

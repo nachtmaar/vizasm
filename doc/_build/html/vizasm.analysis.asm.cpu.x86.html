@@ -1,0 +1,1001 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>x86 Package &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">x86 Package</a><ul>
+<li><a class="reference internal" href="#module-vizasm.analysis.asm.cpu.x86.ASM_x86"><tt class="docutils literal"><span class="pre">ASM_x86</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.analysis.asm.cpu.x86.AsmRegEx_x86"><tt class="docutils literal"><span class="pre">AsmRegEx_x86</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.analysis.asm.cpu.x86.Cpu_x86"><tt class="docutils literal"><span class="pre">Cpu_x86</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.analysis.asm.cpu.x86.ObjcRuntime_x86"><tt class="docutils literal"><span class="pre">ObjcRuntime_x86</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.analysis.asm.cpu.x86.ParseUtil_x86"><tt class="docutils literal"><span class="pre">ParseUtil_x86</span></tt> Module</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vizasm.analysis.asm.cpu.x86.Register_x86"><tt class="docutils literal"><span class="pre">Register_x86</span></tt> Module</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/vizasm.analysis.asm.cpu.x86.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="x86-package">
+<h1>x86 Package<a class="headerlink" href="#x86-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-vizasm.analysis.asm.cpu.x86.ASM_x86">
+<span id="asm-x86-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">ASM_x86</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.asm.cpu.x86.ASM_x86" title="Permalink to this headline">¶</a></h2>
+<p>Created on 28.08.2013</p>
+<p>&#64;author: nils</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.asm.cpu.x86.ASM_x86.ASM_x86">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.asm.cpu.x86.ASM_x86.</tt><tt class="descname">ASM_x86</tt><big>(</big><em>cpu</em>, <em>parse_util</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/x86/ASM_x86.html#ASM_x86"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.ASM_x86.ASM_x86" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vizasm.analysis.asm.cpu.x86_64.html#vizasm.analysis.asm.cpu.x86_64.ASM_x86_64.ASM_x86_64" title="vizasm.analysis.asm.cpu.x86_64.ASM_x86_64.ASM_x86_64"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.asm.cpu.x86_64.ASM_x86_64.ASM_x86_64</span></tt></a></p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_reg_arg_since_last_call</span></tt>(reg,&nbsp;robject)</td>
+<td>Add a <cite>Register</cite> to <cite>reg_usage_since_last_call</cite> if the</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">clear_usage_since_last_call</span></tt>()</td>
+<td>The <cite>Cpu</cite> uses this after a new call has been read</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_c_func_heuristic</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_cpu</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_is_stack_fetch</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_is_stack_push</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_lobject</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_parse_util</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_reg_args_since_last_call</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_robject</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_stack_address</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_stack_args_since_last_call</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_stack_push_objects</span></tt>()</td>
+<td>If <cite>is_stack_push</cite>, the stored object is a single register -&gt; wrap into list.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_usage_since_last_call</span></tt>()</td>
+<td>Get the registers and stack usage since the last call.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">number_of_arguments_since_last_call</span></tt>()</td>
+<td>Get the number of arguments that have been seen since the last call.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">process_stack_push</span></tt>()</td>
+<td>Push the objects onto the stack</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">read_assignment</span></tt>(asmline)</td>
+<td>Read an assigment and try to split it.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">reset</span></tt>()</td>
+<td>Use to reset the system after an assignment has been read.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_c_func_heuristic</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_cpu</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_is_stack_fetch</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_is_stack_push</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_lobject</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_parse_util</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_reg_args_since_last_call</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_robject</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_stack_address</span></tt>(value)</td>
+<td>Set the stack address.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_stack_args_since_last_call</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_stack_push_objects</span></tt>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.asm.cpu.x86.AsmRegEx_x86">
+<span id="asmregex-x86-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">AsmRegEx_x86</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.asm.cpu.x86.AsmRegEx_x86" title="Permalink to this headline">¶</a></h2>
+<p>Created on 23.08.2013</p>
+<p>&#64;author: nils</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.asm.cpu.x86.AsmRegEx_x86.AsmRegEx_x86">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.asm.cpu.x86.AsmRegEx_x86.</tt><tt class="descname">AsmRegEx_x86</tt><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/x86/AsmRegEx_x86.html#AsmRegEx_x86"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.AsmRegEx_x86.AsmRegEx_x86" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vizasm.analysis.asm.cpu.x86_64.html#vizasm.analysis.asm.cpu.x86_64.AsmRegEx_x86_64.AsmRegEx_x86_64" title="vizasm.analysis.asm.cpu.x86_64.AsmRegEx_x86_64.AsmRegEx_x86_64"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.asm.cpu.x86_64.AsmRegEx_x86_64.AsmRegEx_x86_64</span></tt></a></p>
+<p>Contains regular expressions (mostly in verbose mode) used for analyzing the assembler file on the x86 architecture.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>RE_CLASSREF</strong> :</p>
+<blockquote>
+<div><p>match e.g. &#8220;[ds:cls_NSAssertionHandler]&#8221; or &#8220;dword [ds:eax-0x25e1+cls_Object1]&#8221;</p>
+</div></blockquote>
+<p><strong>__RE_IMP</strong> :</p>
+<blockquote>
+<div><p>Used for RE_IMP_STUBS and RE_IMP_GOT. DO NOT USE DIRECTLY !</p>
+</div></blockquote>
+<p><strong>RE_IMP_STUBS</strong> :</p>
+<blockquote>
+<div><p>match e.g &#8220;imp___stubs__NSApplicationMain&#8221;, &#8220;imp___stubs__objc_retain&#8221;, &#8220;imp___stubs__objc_msgSend&#8221; ...</p>
+</div></blockquote>
+<p><strong>RE_VAR_ASSIGNMENT</strong> :</p>
+<blockquote>
+<div><p>match e.g. &#8220;dword [ds:ecx+0x8]&#8221;</p>
+</div></blockquote>
+<p><strong>RE_IMP_NL_SYMBOL_PTR</strong> :</p>
+<blockquote class="last">
+<div><p>match e.g &#8220;[ds:eax-0x221e+imp___nl_symbol_ptr__NSStreamSocketSecurityLevelKey]&#8221;</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">compiled_re</span></tt>(regex[,&nbsp;flags])</td>
+<td>Returns a compiled regex pattern object</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">compiled_re_stack</span></tt>(stack_pointer_name)</td>
+<td>Return a compiled regular expression that matches  e.g.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">compiled_vre</span></tt>(regex[,&nbsp;flags])</td>
+<td>Returns a compiled regex pattern object</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_entrypoint</span></tt>(asmline)</td>
+<td>Check if line is entry point in asm file (See <cite>AsmRegEx.RE_MATCH_ENTRYPOINT</cite>)</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_method_implementation</span></tt>(asmline)</td>
+<td>Indicates if a line is a <cite>CategoryClass</cite> or method implementation.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">method_implementation_is_static</span></tt>(...)</td>
+<td>Returns if the method is static</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.x86.AsmRegEx_x86.AsmRegEx_x86.RE_CLASSREF">
+<tt class="descname">RE_CLASSREF</tt><em class="property"> = '\n \\[ds\\:                 # [ds:\n ([-\\w]+[+])*           # eax-0x25e1+\n cls[_]                 # cls_\n (?P&lt;classref&gt;\\w+)            # Object1\n \\]                     # ]\n'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.AsmRegEx_x86.AsmRegEx_x86.RE_CLASSREF" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.x86.AsmRegEx_x86.AsmRegEx_x86.RE_CLASSREF_GR_CLASSREF">
+<tt class="descname">RE_CLASSREF_GR_CLASSREF</tt><em class="property"> = 'classref'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.AsmRegEx_x86.AsmRegEx_x86.RE_CLASSREF_GR_CLASSREF" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.x86.AsmRegEx_x86.AsmRegEx_x86.RE_IMP_NL_SYMBOL_PTR">
+<tt class="descname">RE_IMP_NL_SYMBOL_PTR</tt><em class="property"> = '\n imp[_]{3}nl[_]symbol[_]ptr[_]{2}       # imp___nl_symbol_ptr__ \n (?P&lt;name&gt;\\w+)                            # NSStreamSocketSecurityLevelKey \n    '</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.AsmRegEx_x86.AsmRegEx_x86.RE_IMP_NL_SYMBOL_PTR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.x86.AsmRegEx_x86.AsmRegEx_x86.RE_IMP_NL_SYMBOL_PTR_GR_NAME">
+<tt class="descname">RE_IMP_NL_SYMBOL_PTR_GR_NAME</tt><em class="property"> = 'name'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.AsmRegEx_x86.AsmRegEx_x86.RE_IMP_NL_SYMBOL_PTR_GR_NAME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.x86.AsmRegEx_x86.AsmRegEx_x86.RE_IMP_STUB">
+<tt class="descname">RE_IMP_STUB</tt><em class="property"> = '\n (\\[(ds|ss)[:])?                 # [ds: &lt;- optional    \n (?:imp[_]{3}symbol[_]stub[_]{2,}) # imp___symbol_stub__          &lt;- this seems to be the 32 bit version\n (?P&lt;imp_stub&gt;\\w+)                     # NSLog\n (\\])?                           # ] &lt;- optional\n '</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.AsmRegEx_x86.AsmRegEx_x86.RE_IMP_STUB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.x86.AsmRegEx_x86.AsmRegEx_x86.RE_IMP_STUB_GR_IMP_STUB">
+<tt class="descname">RE_IMP_STUB_GR_IMP_STUB</tt><em class="property"> = 'imp_stub'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.AsmRegEx_x86.AsmRegEx_x86.RE_IMP_STUB_GR_IMP_STUB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.x86.AsmRegEx_x86.AsmRegEx_x86.RE_VAR_ASSIGNMENT">
+<tt class="descname">RE_VAR_ASSIGNMENT</tt><em class="property"> = '\n \\[ds\\:                 # [ds:\n (?P&lt;class&gt;\\w+)            # ecx\n \\+                     # +\n (?P&lt;var&gt;0x\\w+)          # 0x8\n \\]                     # ]\n'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.AsmRegEx_x86.AsmRegEx_x86.RE_VAR_ASSIGNMENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.x86.AsmRegEx_x86.AsmRegEx_x86.RE_VAR_ASSIGNMENT_GR_IVAR_ADDR">
+<tt class="descname">RE_VAR_ASSIGNMENT_GR_IVAR_ADDR</tt><em class="property"> = 'var'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.AsmRegEx_x86.AsmRegEx_x86.RE_VAR_ASSIGNMENT_GR_IVAR_ADDR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vizasm.analysis.asm.cpu.x86.AsmRegEx_x86.AsmRegEx_x86.RE_VAR_ASSIGNMENT_GR_SELF_REGISTER">
+<tt class="descname">RE_VAR_ASSIGNMENT_GR_SELF_REGISTER</tt><em class="property"> = 'class'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.AsmRegEx_x86.AsmRegEx_x86.RE_VAR_ASSIGNMENT_GR_SELF_REGISTER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.asm.cpu.x86.Cpu_x86">
+<span id="cpu-x86-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">Cpu_x86</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.asm.cpu.x86.Cpu_x86" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 23.08.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.asm.cpu.x86.Cpu_x86.</tt><tt class="descname">Cpu_x86</tt><big>(</big><em>superclasses_dict=None</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/x86/Cpu_x86.html#Cpu_x86"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.Cpu.Cpu" title="vizasm.analysis.asm.cpu.Cpu.Cpu"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.asm.cpu.Cpu.Cpu</span></tt></a></p>
+<p>Cpu subclass for the x86_64 architecture.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">arguments_registers</span></tt>()</td>
+<td>List of <cite>Register</cite> which specifies where the arguments are being stored.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">arguments_registers_in_sequence</span></tt>()</td>
+<td>Return True if the <cite>destination_register</cite>, <cite>selector_register</cite>,</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">create_and_store_c_func_arguments</span></tt>(method)</td>
+<td>Create and store the arguments for the function.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.destination_register" title="vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.destination_register"><tt class="xref py py-obj docutils literal"><span class="pre">destination_register</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">exclude_argument_regs</span></tt>()</td>
+<td>Return a list&lt;Register&gt; from which you know,</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.fetches_all_arguments_from_stack" title="vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.fetches_all_arguments_from_stack"><tt class="xref py py-obj docutils literal"><span class="pre">fetches_all_arguments_from_stack</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.floating_arg_registers" title="vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.floating_arg_registers"><tt class="xref py py-obj docutils literal"><span class="pre">floating_arg_registers</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.frame_pointer_register" title="vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.frame_pointer_register"><tt class="xref py py-obj docutils literal"><span class="pre">frame_pointer_register</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_address</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_assignment_matching_system</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_c_func_heuristic</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_current_destination</span></tt>([objc_msgSend_stret])</td>
+<td>Return the current destination.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_line_number</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_memory</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_method</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_method_call</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_method_selector_reg_value</span></tt>()</td>
+<td>Get the value for the register where the selector of the current method is stored.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_objc_runtime</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_parse_util</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_register_class</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_selfref_reg_value</span></tt>()</td>
+<td>Get the value for the register where the self reference of the current method is stored.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.ignore_hex_addr_call" title="vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.ignore_hex_addr_call"><tt class="xref py py-obj docutils literal"><span class="pre">ignore_hex_addr_call</span></tt></a>()</td>
+<td>x86 disassemblies often call the next line -&gt; ignore it</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_32_bits</span></tt>()</td>
+<td>Check if is 32 bit <cite>Cpu</cite></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">is_64_bits</span></tt>()</td>
+<td>Check if is 64 bit <cite>Cpu</cite></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">next_reg_for_spret</span></tt>(register)</td>
+<td>If an objc_msgSend_stret is detected, the specified <cite>Register</cite> for the destination and selector do not match anymore</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">next_regs_for_spret</span></tt>(reg_list)</td>
+<td>Same as <cite>next_reg_for_spret</cite>, but do it for the whole list of <cite>Register</cite></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.nslog_arg_registers" title="vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.nslog_arg_registers"><tt class="xref py py-obj docutils literal"><span class="pre">nslog_arg_registers</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.pointer_size" title="vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.pointer_size"><tt class="xref py py-obj docutils literal"><span class="pre">pointer_size</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">read_line</span></tt>(asmline[,&nbsp;linenr])</td>
+<td>Read a line of the asm file and process the information to keep track of the registers and stack.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">reg_list</span></tt>(regs)</td>
+<td>Implement this method by calling <cite>_reg_list</cite> with the register type (<cite>reg_typereg_type</cite>).</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">reset</span></tt>()</td>
+<td>Reset the <cite>Cpu</cite> and make it ready to analyze the next method implementation</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">return_reg_is_fst_arg_reg</span></tt>()</td>
+<td>Check if the return register is also the first argument register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.return_register" title="vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.return_register"><tt class="xref py py-obj docutils literal"><span class="pre">return_register</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.selector_arg_registers" title="vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.selector_arg_registers"><tt class="xref py py-obj docutils literal"><span class="pre">selector_arg_registers</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.selector_register" title="vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.selector_register"><tt class="xref py py-obj docutils literal"><span class="pre">selector_register</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_address</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_assignment_matching_system</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_c_func_heuristic</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_line_number</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_memory</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_method</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_method_call</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_method_selector_reg_value</span></tt>(value)</td>
+<td>Set the value for the register where the selector of the current method is stored.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_objc_runtime</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_parse_util</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_register_class</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_selfref_reg_value</span></tt>(value)</td>
+<td>Set the value for the register where the self reference of the current method is stored</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.stack_pointer_register" title="vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.stack_pointer_register"><tt class="xref py py-obj docutils literal"><span class="pre">stack_pointer_register</span></tt></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">stret_selector_arg_registers</span></tt>()</td>
+<td>The registers (list&lt;Register&gt;) where the arguments for the selector are stored.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.destination_register">
+<tt class="descname">destination_register</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/x86/Cpu_x86.html#Cpu_x86.destination_register"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.destination_register" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.fetches_all_arguments_from_stack">
+<tt class="descname">fetches_all_arguments_from_stack</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/x86/Cpu_x86.html#Cpu_x86.fetches_all_arguments_from_stack"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.fetches_all_arguments_from_stack" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.floating_arg_registers">
+<tt class="descname">floating_arg_registers</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/x86/Cpu_x86.html#Cpu_x86.floating_arg_registers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.floating_arg_registers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.frame_pointer_register">
+<tt class="descname">frame_pointer_register</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/x86/Cpu_x86.html#Cpu_x86.frame_pointer_register"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.frame_pointer_register" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.ignore_hex_addr_call">
+<tt class="descname">ignore_hex_addr_call</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/x86/Cpu_x86.html#Cpu_x86.ignore_hex_addr_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.ignore_hex_addr_call" title="Permalink to this definition">¶</a></dt>
+<dd><p>x86 disassemblies often call the next line -&gt; ignore it
+Example: 
+00002d09 E800000000                      call       0x2d0e
+00002d0e 58                              pop        eax                                   ; XREF=0x2d09&#8221;&#8220;</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.nslog_arg_registers">
+<tt class="descname">nslog_arg_registers</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/x86/Cpu_x86.html#Cpu_x86.nslog_arg_registers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.nslog_arg_registers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.pointer_size">
+<tt class="descname">pointer_size</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/x86/Cpu_x86.html#Cpu_x86.pointer_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.pointer_size" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.return_register">
+<tt class="descname">return_register</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/x86/Cpu_x86.html#Cpu_x86.return_register"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.return_register" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.selector_arg_registers">
+<tt class="descname">selector_arg_registers</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/x86/Cpu_x86.html#Cpu_x86.selector_arg_registers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.selector_arg_registers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.selector_register">
+<tt class="descname">selector_register</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/x86/Cpu_x86.html#Cpu_x86.selector_register"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.selector_register" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.stack_pointer_register">
+<tt class="descname">stack_pointer_register</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/x86/Cpu_x86.html#Cpu_x86.stack_pointer_register"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.stack_pointer_register" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.asm.cpu.x86.ObjcRuntime_x86">
+<span id="objcruntime-x86-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">ObjcRuntime_x86</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.asm.cpu.x86.ObjcRuntime_x86" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 18.09.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.asm.cpu.x86.ObjcRuntime_x86.ObjcRuntime_x86">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.asm.cpu.x86.ObjcRuntime_x86.</tt><tt class="descname">ObjcRuntime_x86</tt><big>(</big><em>cpu</em>, <em>superclass_dict</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/x86/ObjcRuntime_x86.html#ObjcRuntime_x86"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.ObjcRuntime_x86.ObjcRuntime_x86" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vizasm.analysis.asm.cpu.x86_64.html#vizasm.analysis.asm.cpu.x86_64.ObjcRuntime_x86_64.ObjcRuntime_x86_64" title="vizasm.analysis.asm.cpu.x86_64.ObjcRuntime_x86_64.ObjcRuntime_x86_64"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.asm.cpu.x86_64.ObjcRuntime_x86_64.ObjcRuntime_x86_64</span></tt></a></p>
+<p>Objective-C runtime for x86 arch</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.x86.ObjcRuntime_x86.ObjcRuntime_x86.create_and_store_method_selector_arguments" title="vizasm.analysis.asm.cpu.x86.ObjcRuntime_x86.ObjcRuntime_x86.create_and_store_method_selector_arguments"><tt class="xref py py-obj docutils literal"><span class="pre">create_and_store_method_selector_arguments</span></tt></a>(...)</td>
+<td>Create and store the arguments for the <cite>method_selector</cite>.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">create_and_store_remaining_method_selector_arguments</span></tt>(...)</td>
+<td>Create and store the remaining arguments for the <cite>method_selector</cite>.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">create_method_selector_arg</span></tt>(number)</td>
+<td>Create a method argument for the current method selector.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_cpu</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_current_selector_check_sel_type</span></tt>([...])</td>
+<td>Return the current selector and check the type of the selector.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_ivar_lookup</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_superclass_dict</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">msg_send_from_destination</span></tt>(destination,&nbsp;selector)</td>
+<td>Create a MsgSend from the given <cite>destination</cite> and <cite>selector</cite>.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">read_msg_send</span></tt>(imp,&nbsp;destination)</td>
+<td>Read a msg_send and store it .</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">read_return_important_objc_call</span></tt>(imp,&nbsp;...)</td>
+<td>Read a line which seems to return something and store it in the return register.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">read_selector</span></tt>(selector,&nbsp;destination)</td>
+<td>Called is a <cite>Selector</cite>.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">reset</span></tt>()</td>
+<td>Reset the objective-c runtime</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_cpu</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_ivar_lookup</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_superclass</span></tt>(ivar_ref)</td>
+<td>Set the superclass for the <cite>ivar_ref</cite> from the <cite>superclass_dict</cite>.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_superclass_dict</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.x86.ObjcRuntime_x86.ObjcRuntime_x86.store_self_cmd_for_stack_fetching_cpu" title="vizasm.analysis.asm.cpu.x86.ObjcRuntime_x86.ObjcRuntime_x86.store_self_cmd_for_stack_fetching_cpu"><tt class="xref py py-obj docutils literal"><span class="pre">store_self_cmd_for_stack_fetching_cpu</span></tt></a>(...)</td>
+<td>Store self and _cmd in the appropriate place</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.x86.ObjcRuntime_x86.ObjcRuntime_x86.create_and_store_method_selector_arguments">
+<tt class="descname">create_and_store_method_selector_arguments</tt><big>(</big><em>method_selector</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/x86/ObjcRuntime_x86.html#ObjcRuntime_x86.create_and_store_method_selector_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.ObjcRuntime_x86.ObjcRuntime_x86.create_and_store_method_selector_arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and store the arguments for the <cite>method_selector</cite>.
+There will be as many arguments created as the <cite>Selector</cite> needs
+and stored as <cite>StackVar</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>method_selector: Selector</strong> :</p>
+<blockquote>
+<div><p>the <cite>Selector</cite> describing the method that is currently being read by the <cite>Cpu</cite></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><strong>SelectorOverloadedException</strong> :</p>
+<blockquote class="last">
+<div><p>if selector has more arguments than it needs</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.x86.ObjcRuntime_x86.ObjcRuntime_x86.store_self_cmd_for_stack_fetching_cpu">
+<tt class="descname">store_self_cmd_for_stack_fetching_cpu</tt><big>(</big><em>objc_class</em>, <em>selector</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/x86/ObjcRuntime_x86.html#ObjcRuntime_x86.store_self_cmd_for_stack_fetching_cpu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.ObjcRuntime_x86.ObjcRuntime_x86.store_self_cmd_for_stack_fetching_cpu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Store self and _cmd in the appropriate place</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.asm.cpu.x86.ParseUtil_x86">
+<span id="parseutil-x86-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">ParseUtil_x86</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.asm.cpu.x86.ParseUtil_x86" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 24.08.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.asm.cpu.x86.ParseUtil_x86.</tt><tt class="descname">ParseUtil_x86</tt><big>(</big><em>cpu</em>, <em>register_class</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/x86/ParseUtil_x86.html#ParseUtil_x86"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vizasm.analysis.asm.cpu.x86_64.html#vizasm.analysis.asm.cpu.x86_64.ParseUtil_x86_64.ParseUtil_x86_64" title="vizasm.analysis.asm.cpu.x86_64.ParseUtil_x86_64.ParseUtil_x86_64"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.analysis.asm.cpu.x86_64.ParseUtil_x86_64.ParseUtil_x86_64</span></tt></a></p>
+<p>The <cite>ParseUtil</cite> for the x86 architecture is nearly the same as for x86_64.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_address_from_asmline</span></tt>(asmline)</td>
+<td>Get the hex address of the current line.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_cpu</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_fst_match</span></tt>(asmline,&nbsp;functionlist)</td>
+<td>Get the first function (lazy) that matches on the given input argument.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_fst_match_bool_list</span></tt>(asmline,&nbsp;functionlist)</td>
+<td>Get the first function (lazy) that matches on the given input argument.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_register_class</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_additional_method_argument_stack</span></tt>(asmline)</td>
+<td>Parse an additional argument that lies on the stack.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_any_method_implementation</span></tt>(asmline)</td>
+<td>Parse (lazy) <cite>parse_meth_impl</cite>, <cite>ParseUtil.parse_own_c_method_def</cite>, <cite>parse_c_method_name</cite>, category,.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_c_method_name</span></tt>(asmline)</td>
+<td>Check if is <cite>RE_SUB</cite> or <cite>RE_C_METHOD</cite> and return the appropriate name if available.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_c_string</span></tt>(asmline)</td>
+<td>Create a <cite>CString</cite> from a c string like e.g. &#8220;defaults&#8221;</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_call_instruction</span></tt>(asmline)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_called_method_name</span></tt>(asmline)</td>
+<td>Check if <cite>asmline</cite> is a c method being called.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_category</span></tt>(asmline)</td>
+<td>Parse a category method implementation.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_format_string</span></tt>(asmline)</td>
+<td>Create a <cite>FormatString</cite> from e.g. &#64;&#8221;%s%d&#8221;</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_hex</span></tt>(asmline)</td>
+<td>Parse a line containing a hex value and convert it to an int.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_imp</span></tt>(asmline)</td>
+<td>Create a subclass of <cite>Imp</cite> like <cite>ImpStub</cite> or <cite>ImpGot</cite> from the asm line.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_imp_got" title="vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_imp_got"><tt class="xref py py-obj docutils literal"><span class="pre">parse_imp_got</span></tt></a>(asmline)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_imp_stub" title="vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_imp_stub"><tt class="xref py py-obj docutils literal"><span class="pre">parse_imp_stub</span></tt></a>(asmline)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_ivar</span></tt>(asmline)</td>
+<td>Create a ObjcClass from e.g. [ds:_OBJC_IVAR_$_AppDelegate.obj3]</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_meth_impl</span></tt>(asmline)</td>
+<td>Parse a method implementation like e.g.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_nsstring</span></tt>(asmline)</td>
+<td>Create a <cite>NSString</cite> from e.g. &#64;&#8221;defaults&#8221;</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_objc_class</span></tt>(asmline)</td>
+<td>Create ObjcClass from classref ([ds:objc_classref_Object1])</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_objc_class_from_classref" title="vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_objc_class_from_classref"><tt class="xref py py-obj docutils literal"><span class="pre">parse_objc_class_from_classref</span></tt></a>(asmline)</td>
+<td>Create ObjcClass from classref ([ds:cls_NSAssertionHandler])</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_objc_class_from_framework_class</span></tt>(asmline)</td>
+<td>Create ObjcClass from frameworkclass e.g. ([ds:bind__OBJC_CLASS_$_NSUserDefaults])</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_own_c_method_called</span></tt>(asmline)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_own_c_method_def</span></tt>(asmline)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_register</span></tt>(register)</td>
+<td>Parse a register.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_selector</span></tt>(asmline)</td>
+<td>If annotated by Hopper, the <cite>Selector</cite> will be created from this.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_stack_access</span></tt>(asmline)</td>
+<td>Parse a stack access like e.g.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_stackvar</span></tt>(asmline)</td>
+<td>Create an StackVar from asmline, match e.g. [ss:rbp-0x30+var_40]</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_string</span></tt>(asmline)</td>
+<td>Parse a string and return the appropriate string class.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_var_assignment</span></tt>(asmline)</td>
+<td>Wrapper for <cite>parse_var_assignment_with_ivar_ref_from_asmline</cite>.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_var_assignment_with_ivar_ref_from_asmline" title="vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_var_assignment_with_ivar_ref_from_asmline"><tt class="xref py py-obj docutils literal"><span class="pre">parse_var_assignment_with_ivar_ref_from_asmline</span></tt></a>(asmline)</td>
+<td>Create a VarAssignment from asmline like e.g. &#8220;mov dword [ds:ecx+0x8], eax&#8221;.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_var_assignment_without_ivar_ref_from_asmline" title="vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_var_assignment_without_ivar_ref_from_asmline"><tt class="xref py py-obj docutils literal"><span class="pre">parse_var_assignment_without_ivar_ref_from_asmline</span></tt></a>(asmline)</td>
+<td>Create a VarAssignment from asmline like e.g. &#8220;mov dword [ds:ecx+0x8]&#8221;.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_cpu</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_register_class</span></tt>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_imp_got">
+<tt class="descname">parse_imp_got</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/x86/ParseUtil_x86.html#ParseUtil_x86.parse_imp_got"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_imp_got" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_imp_stub">
+<tt class="descname">parse_imp_stub</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/x86/ParseUtil_x86.html#ParseUtil_x86.parse_imp_stub"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_imp_stub" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_objc_class_from_classref">
+<tt class="descname">parse_objc_class_from_classref</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/x86/ParseUtil_x86.html#ParseUtil_x86.parse_objc_class_from_classref"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_objc_class_from_classref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create ObjcClass from classref ([ds:cls_NSAssertionHandler])</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_var_assignment_with_ivar_ref_from_asmline">
+<tt class="descname">parse_var_assignment_with_ivar_ref_from_asmline</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/x86/ParseUtil_x86.html#ParseUtil_x86.parse_var_assignment_with_ivar_ref_from_asmline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_var_assignment_with_ivar_ref_from_asmline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a VarAssignment from asmline like e.g. &#8220;mov dword [ds:ecx+0x8], eax&#8221;.
+Try to resolve the ivar_ref of the IVar from the register of the right side of the assignment.</p>
+<p>The difference to x86_64 is that  the <cite>ivar_dest</cite> of the <cite>VarAssignment</cite> is no register and cannot be resolved.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>asmline: String</strong> :</p>
+<blockquote>
+<div><p>the <cite>asmline</cite> should have the form of &#8220;[ds:rdx+rsi], rax&#8221; where the part after the comma is optional. 
+If left out, the ivar_ref cannot be resolved.</p>
+</div></blockquote>
+<p><strong>cpu: Cpu</strong> :</p>
+<blockquote>
+<div><p>the cpu which is needed for resolving the values of the registers</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>VarAssignment</strong> :</p>
+<blockquote>
+<div><p>the VarAssignment with ivar_ref set (None if no VarAssignment)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body"><p class="first last"><strong>VarAssignmentResolveSelfrefRegisterException</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_var_assignment_without_ivar_ref_from_asmline">
+<tt class="descname">parse_var_assignment_without_ivar_ref_from_asmline</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/x86/ParseUtil_x86.html#ParseUtil_x86.parse_var_assignment_without_ivar_ref_from_asmline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_var_assignment_without_ivar_ref_from_asmline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a VarAssignment from asmline like e.g. &#8220;mov dword [ds:ecx+0x8]&#8221;.</p>
+<p>The difference to x86_64 is that  the <cite>ivar_dest</cite> of the <cite>VarAssignment</cite> is no register and cannot be resolved.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>asmline: String</strong> :</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>VarAssignment</strong> :</p>
+<blockquote>
+<div><p>the VarAssignment without ivar_ref set (None if no VarAssignment)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body"><p class="first last"><strong>VarAssignmentResolveSelfrefRegisterException</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vizasm.analysis.asm.cpu.x86.Register_x86">
+<span id="register-x86-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">Register_x86</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.asm.cpu.x86.Register_x86" title="Permalink to this headline">¶</a></h2>
+<p>VizAsm</p>
+<p>Created on 23.08.2013</p>
+<p>&#64;author: Nils Schmidt</p>
+<p>Copyright 2013 Nils Schmidt</p>
+<p>This file is part of VizAsm.</p>
+<p>VizAsm is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+<p>VizAsm is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="vizasm.analysis.asm.cpu.x86.Register_x86.Register_x86">
+<em class="property">class </em><tt class="descclassname">vizasm.analysis.asm.cpu.x86.Register_x86.</tt><tt class="descname">Register_x86</tt><big>(</big><em>register</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/x86/Register_x86.html#Register_x86"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.Register_x86.Register_x86" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vizasm.model.asm.html#vizasm.model.asm.Register.Register" title="vizasm.model.asm.Register.Register"><tt class="xref py py-class docutils literal"><span class="pre">vizasm.model.asm.Register.Register</span></tt></a></p>
+<p>Implements an register for the x86 architecture</p>
+<p class="rubric">Notes</p>
+<p>Register list taken from: <a class="reference external" href="http://msdn.microsoft.com/en-us/library/ff561499.aspx">http://msdn.microsoft.com/en-us/library/ff561499.aspx</a></p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">fallback_support</span></tt>(register,&nbsp;register_dict)</td>
+<td>Returns a list of registers which are equal in the manner that one registers uses the memory space of the other.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_fallback_list</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_register</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_register_dict</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_fallback_list</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_register</span></tt>(value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_register_dict</span></tt>(value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

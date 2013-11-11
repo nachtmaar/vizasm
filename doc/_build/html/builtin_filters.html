@@ -1,0 +1,177 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Built-in filters &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="index.html" />
+    <link rel="next" title="Custom Filters" href="custom_filters.html" />
+    <link rel="prev" title="Usage" href="usage.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="custom_filters.html" title="Custom Filters"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="usage.html" title="Usage"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="usage.html"
+                        title="previous chapter">Usage</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="custom_filters.html"
+                        title="next chapter">Custom Filters</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/builtin_filters.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="built-in-filters">
+<h1>Built-in filters<a class="headerlink" href="#built-in-filters" title="Permalink to this headline">¶</a></h1>
+<p>You can list the available build-in filters with &#8220;/VizAsm.py -lf &lt;arch&gt;&#8221; where arch is x86, x86_64 or arm.</p>
+<div class="highlight-sh"><div class="highlight"><pre>/.VizAsm.py -lf arm
+
+NSUserDefaultsFilter:
+Filters all NSUserDefault access
+
+UntrustedSSLCertsFilter:
+Check <span class="k">if </span>invalid SSL certificates are being accepted
+
+RandomFuncFilter:
+Look out <span class="k">for </span>functions generating random values: rand, random, arc4random
+
+FormatStringFilter:
+Check <span class="k">for </span>exploitable log <span class="k">function</span> <span class="o">(</span><span class="nb">printf </span>and NSLog<span class="o">)</span>
+
+CFStreamSSLLevelFilter:
+Check the SSL level of a CFStream. Available levels are: kCFStreamSocketSecurityLevelNone, kCFStreamSocketSecurityLevelTLSv1,, kCFStreamSocketSecurityLevelSSLv2, kCFStreamSocketSecurityLevelSSLv3, kCFStreamSocketSecurityLevelNegotiatedSSL
+
+NSStreamSSLLevelFilter:
+Check the SSL level of a NSStream. Available levels are: NSStreamSocketSecurityLevelNone, NSStreamSocketSecurityLevelTLSv1, NSStreamSocketSecurityLevelSSLv2, NSStreamSocketSecurityLevelSSLv3, NSStreamSocketSecurityLevelNegotiatedSSL
+
+IPCFilter:
+Check <span class="k">if </span>the app has configured its own URL handler <span class="o">(</span>iOS only<span class="o">)</span> or does any interprocess communication call
+
+SQLiteFilter:
+Filter exploitable sqlite3 calls <span class="o">(</span><span class="k">if </span>the c <span class="k">function </span>arguments heuristic is enabled!<span class="o">)</span>. Otherwise all sqlite3 calls will be filtered.
+
+CookiePolicyFilter:
+Check <span class="k">if </span>a special cookie policy has been set. Available policies: NSHTTPCookieAcceptPolicyAlways, NSHTTPCookieAcceptPolicyNever, NSHTTPCookieAcceptPolicyOnlyFromMainDocumentDomain
+
+KeyChainFilter:
+Check <span class="k">for </span>Keychain usage
+
+GeoLocationFilter:
+Check which geo information are retrieved and which accuracy level is set. Available levels: kCLLocationAccuracyBestForNavigation, kCLLocationAccuracyBest, kCLLocationAccuracyNearestTenMeters, kCLLocationAccuracyHundredMeters, kCLLocationAccuracyKilometer, kCLLocationAccuracyThreeKilometers
+
+SeatBeltFilter:
+Check <span class="k">if </span>a special sandbox profile has been set. Available profiles are: kSBXProfileNoWriteExceptTemporary, kSBXProfileNoWrite, kSBXProfileNoNetwork, kSBXProfilePureComputation, kSBXProfileNoInternet
+
+DataProtectionFilter:
+Check <span class="k">for </span>data storage via NSFileManager and NS<span class="o">(</span>Mutable<span class="o">)</span>Data <span class="o">(</span>iOS only<span class="o">)</span>.
+Available options <span class="k">for </span>NS<span class="o">(</span>Mutable<span class="o">)</span>Data writing are: NSDataWritingFileProtectionNone <span class="o">(</span>0x10000000<span class="o">)</span>, NSDataWritingFileProtectionComplete <span class="o">(</span>0x20000000<span class="o">)</span>, NSDataWritingFileProtectionMask <span class="o">(</span>0xf0000000<span class="o">)</span>, NSDataWritingFileProtectionCompleteUnlessOpen <span class="o">(</span>0x30000000<span class="o">)</span>, NSDataWritingFileProtectionCompleteUntilFirstUserAuthentication <span class="o">(</span>0x40000000<span class="o">)</span>,
+Available options <span class="k">for </span>NSFileManager writing are: NSFileProtectionNone, NSFileProtectionComplete, NSFileProtectionCompleteUnlessOpen, NSFileProtectionCompleteUntilFirstUserAuthentication
+
+
+UIPasteBoardFilter:
+Check <span class="k">for </span>UIPasteboard usage
+
+BackgroundTasksFilter:
+Check <span class="k">for </span>background tasks
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="custom_filters.html" title="Custom Filters"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="usage.html" title="Usage"
+             >previous</a> |</li>
+        <li><a href="index.html">VizAsm 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

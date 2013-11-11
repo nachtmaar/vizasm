@@ -1,0 +1,422 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm.analysis.asm.cpu.x86_64.ParseUtil_x86_64 &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="../../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vizasm.analysis.asm.cpu.x86_64.ParseUtil_x86_64</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 23.08.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.ParseUtil</span> <span class="kn">import</span> <span class="n">ParseUtil</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.x86_64.AsmRegEx_x86_64</span> <span class="kn">import</span> \
+    <span class="n">AsmRegEx_x86_64</span> <span class="k">as</span> <span class="n">regexp</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.asm.StackVar</span> <span class="kn">import</span> <span class="n">StackVar</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.asm.imp.ImpGot</span> <span class="kn">import</span> <span class="n">ImpGot</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.asm.imp.ImpStub</span> <span class="kn">import</span> <span class="n">ImpStub</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.asm.ivar.IVar</span> <span class="kn">import</span> <span class="n">IVar</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.asm.var_assignment.VarAssignment</span> <span class="kn">import</span> <span class="n">VarAssignment</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.object.nsobject.Variable</span> <span class="kn">import</span> <span class="n">Variable</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.object.nsobject.objcclass.ObjcClass</span> <span class="kn">import</span> <span class="n">ObjcClass</span>
+<span class="kn">from</span> <span class="nn">vizasm.util</span> <span class="kn">import</span> <span class="n">Util</span>
+
+<div class="viewcode-block" id="ParseUtil_x86_64"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.x86_64.html#vizasm.analysis.asm.cpu.x86_64.ParseUtil_x86_64.ParseUtil_x86_64">[docs]</a><span class="k">class</span> <span class="nc">ParseUtil_x86_64</span><span class="p">(</span><span class="n">ParseUtil</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; ParseUtil for the x86_64 architecture &#39;&#39;&#39;</span>
+
+<div class="viewcode-block" id="ParseUtil_x86_64.parse_objc_class_from_classref"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.x86_64.html#vizasm.analysis.asm.cpu.x86_64.ParseUtil_x86_64.ParseUtil_x86_64.parse_objc_class_from_classref">[docs]</a>    <span class="k">def</span> <span class="nf">parse_objc_class_from_classref</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Create ObjcClass from classref ([ds:objc_classref_Object1]) &#39;&#39;&#39;</span>
+        <span class="n">classsref_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_CLASSREF</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>                
+        <span class="c"># is classref e.g. [ds:objc_classref_Object1]</span>
+        <span class="k">if</span> <span class="n">classsref_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">classsref_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_CLASSREF_GR_CLASSREF</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">ObjcClass</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">is_static</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>       
+        <span class="k">return</span> <span class="bp">None</span>  
+    </div>
+<div class="viewcode-block" id="ParseUtil_x86_64.parse_objc_class_from_framework_class"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.x86_64.html#vizasm.analysis.asm.cpu.x86_64.ParseUtil_x86_64.ParseUtil_x86_64.parse_objc_class_from_framework_class">[docs]</a>    <span class="k">def</span> <span class="nf">parse_objc_class_from_framework_class</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Create ObjcClass from frameworkclass e.g. ([ds:bind__OBJC_CLASS_$_NSUserDefaults]) &#39;&#39;&#39;</span>
+        <span class="n">frameworkclass_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_FRAMEWORKCLASS</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="c"># is frameworkclass e.g. [ds:bind__OBJC_CLASS_$_NSUserDefaults]</span>
+        <span class="k">if</span> <span class="n">frameworkclass_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">frameworkclass_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_FRAMEWORKCLASS_GR_FCLASS</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">ObjcClass</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">is_frameworkclass</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span> 
+     </div>
+<div class="viewcode-block" id="ParseUtil_x86_64.parse_ivar"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.x86_64.html#vizasm.analysis.asm.cpu.x86_64.ParseUtil_x86_64.ParseUtil_x86_64.parse_ivar">[docs]</a>    <span class="k">def</span> <span class="nf">parse_ivar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Create a ObjcClass from e.g. [ds:_OBJC_IVAR_$_AppDelegate.obj3] </span>
+<span class="sd">            and set AppDelegate as the class with the attribute obj3 &#39;&#39;&#39;</span>
+        <span class="n">ivar_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_IVAR</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ivar_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">ivar_class</span> <span class="o">=</span> <span class="n">ivar_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_IVAR_GR_CLASS</span><span class="p">)</span>
+            <span class="n">ivar_name</span> <span class="o">=</span> <span class="n">ivar_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_IVAR_GR_IVAR</span><span class="p">)</span>
+            <span class="n">var</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="n">ivar_name</span><span class="p">)</span>
+            <span class="n">ivar_class</span> <span class="o">=</span> <span class="n">ObjcClass</span><span class="p">(</span><span class="n">ivar_class</span><span class="p">,</span> <span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="n">var</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">IVar</span><span class="p">(</span><span class="n">ivar_class</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span> 
+</div>
+<div class="viewcode-block" id="ParseUtil_x86_64.parse_var_assignment_without_ivar_ref_from_asmline"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.x86_64.html#vizasm.analysis.asm.cpu.x86_64.ParseUtil_x86_64.ParseUtil_x86_64.parse_var_assignment_without_ivar_ref_from_asmline">[docs]</a>    <span class="k">def</span> <span class="nf">parse_var_assignment_without_ivar_ref_from_asmline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Create a VarAssignment from asmline like e.g. &quot;[ds:rax+rcx]&quot; </span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        asmline: String</span>
+<span class="sd">            </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        VarAssignmentResolveSelfrefRegisterException</span>
+<span class="sd">            if the value cannot be resolved</span>
+<span class="sd">        VarAssignmentResolveIvarRegisterException</span>
+<span class="sd">            if the value cannot be resolved and `resolve_ivar_value` is true</span>
+<span class="sd">        VarAssignmentIvarRegisterWrongTypeException</span>
+<span class="sd">            if the type of the ivar_reg is not `IVar and `resolve_ivar_value` is true</span>
+<span class="sd">                        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        VarAssignment</span>
+<span class="sd">            the VarAssignment without ivar_ref set (None if no VarAssignment)           </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">var_assignment_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_VAR_ASSIGNMENT</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>                
+        <span class="k">if</span> <span class="n">var_assignment_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">selfref_register</span> <span class="o">=</span> <span class="n">var_assignment_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_VAR_ASSIGNMENT_GR_SELF_REGISTER</span><span class="p">)</span>
+            <span class="n">ivar_register</span> <span class="o">=</span> <span class="n">var_assignment_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_VAR_ASSIGNMENT_GR_IVAR_REG</span><span class="p">)</span>
+            <span class="n">reg1</span><span class="p">,</span> <span class="n">reg2</span> <span class="o">=</span> <span class="n">selfref_register</span><span class="p">,</span> <span class="n">ivar_register</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">register_class</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">reg1</span><span class="p">,</span> <span class="n">reg2</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">register_class</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="p">[</span><span class="n">reg1</span><span class="p">,</span> <span class="n">reg2</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">VarAssignment</span><span class="p">(</span><span class="n">reg1</span><span class="p">,</span> <span class="n">reg2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cpu</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>       
+    </div>
+<div class="viewcode-block" id="ParseUtil_x86_64.parse_var_assignment_with_ivar_ref_from_asmline"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.x86_64.html#vizasm.analysis.asm.cpu.x86_64.ParseUtil_x86_64.ParseUtil_x86_64.parse_var_assignment_with_ivar_ref_from_asmline">[docs]</a>    <span class="k">def</span> <span class="nf">parse_var_assignment_with_ivar_ref_from_asmline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Create a VarAssignment from asmline like e.g. &quot;[ds:rdx+rsi], rax&quot;.</span>
+<span class="sd">        Try to resolve the ivar_ref of the IVar from the register of the right side of the assignment.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        asmline: String</span>
+<span class="sd">            the `asmline` should have the form of &quot;[ds:rdx+rsi], rax&quot; where the part after the comma is optional. </span>
+<span class="sd">            If left out, the ivar_ref cannot be resolved.</span>
+<span class="sd">        cpu: Cpu</span>
+<span class="sd">            the cpu which is needed for resolving the values of the registers</span>
+<span class="sd">            </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        VarAssignmentResolveSelfrefRegisterException</span>
+<span class="sd">            if the value cannot be resolved</span>
+<span class="sd">        VarAssignmentResolveIvarRegisterException</span>
+<span class="sd">            if the value cannot be resolved and `resolve_ivar_value` is true</span>
+<span class="sd">        VarAssignmentIvarRegisterWrongTypeException</span>
+<span class="sd">            if the type of the ivar_reg is not `IVar and `resolve_ivar_value` is true</span>
+<span class="sd">            </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        VarAssignment</span>
+<span class="sd">            the VarAssignment with ivar_ref set (None if no VarAssignment)</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">assignment_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_ASSINGMENT_SPLIT</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="n">var_assign</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="n">assignment_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">val2</span> <span class="o">=</span> <span class="n">assignment_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_ASSINGMENT_SPLIT_GR_VAL2</span><span class="p">)</span>
+            <span class="n">reg2</span> <span class="o">=</span> <span class="n">val2</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">register_class</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">reg2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">register_class</span><span class="p">(</span><span class="n">val2</span><span class="p">)</span>
+            <span class="n">var_assign</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_var_assignment_without_ivar_ref_from_asmline</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+            <span class="n">ivar_ref</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cpu</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">registers</span><span class="o">.</span><span class="n">get_value_for_register</span><span class="p">(</span><span class="n">reg2</span><span class="p">)</span>
+            <span class="c"># just an assignment? check if var_assign is None to conclude that pattern really is a var assignment</span>
+            <span class="k">if</span> <span class="n">var_assign</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">ivar_ref</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">ivar_val</span> <span class="o">=</span> <span class="n">var_assign</span><span class="o">.</span><span class="n">get_ivar_value</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">ivar_val</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="n">ivar_val</span><span class="o">.</span><span class="n">set_ivar_ref</span><span class="p">(</span><span class="n">ivar_ref</span><span class="p">)</span>            
+                    <span class="k">return</span> <span class="n">var_assign</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    </div>
+<div class="viewcode-block" id="ParseUtil_x86_64.parse_stackvar"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.x86_64.html#vizasm.analysis.asm.cpu.x86_64.ParseUtil_x86_64.ParseUtil_x86_64.parse_stackvar">[docs]</a>    <span class="k">def</span> <span class="nf">parse_stackvar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Create an StackVar from asmline, match e.g. [ss:rbp-0x30+var_40] &#39;&#39;&#39;</span>
+        <span class="n">stackvar</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_STACKVAR</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">stackvar</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">stackvar</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_STACKVAR_GR_STACKVAR</span><span class="p">)</span>
+            <span class="n">var</span> <span class="o">=</span> <span class="n">StackVar</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">var</span>
+        <span class="k">return</span> <span class="bp">None</span>   
+</div>
+<div class="viewcode-block" id="ParseUtil_x86_64.parse_imp_stub"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.x86_64.html#vizasm.analysis.asm.cpu.x86_64.ParseUtil_x86_64.ParseUtil_x86_64.parse_imp_stub">[docs]</a>    <span class="k">def</span> <span class="nf">parse_imp_stub</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="n">imp_stub_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_IMP_STUBS</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">imp_stub_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">imp_stub</span> <span class="o">=</span> <span class="n">imp_stub_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_IMP_STUBS_GR_IMP_STUBS</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">ImpStub</span><span class="p">(</span><span class="n">imp_stub</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+</div>
+<div class="viewcode-block" id="ParseUtil_x86_64.parse_imp_got"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.x86_64.html#vizasm.analysis.asm.cpu.x86_64.ParseUtil_x86_64.ParseUtil_x86_64.parse_imp_got">[docs]</a>    <span class="k">def</span> <span class="nf">parse_imp_got</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="n">imp_got_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_IMP_GOT</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">imp_got_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">imp_got</span> <span class="o">=</span> <span class="n">imp_got_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_IMP_GOT_GR_IMP_GOT</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">ImpGot</span><span class="p">(</span><span class="n">imp_got</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    </div>
+<div class="viewcode-block" id="ParseUtil_x86_64.parse_call_instruction"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.x86_64.html#vizasm.analysis.asm.cpu.x86_64.ParseUtil_x86_64.ParseUtil_x86_64.parse_call_instruction">[docs]</a>    <span class="k">def</span> <span class="nf">parse_call_instruction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="n">call_instr_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_CALL_INSTRUCTION</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">call_instr_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">call_instr_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_CALL_INSTRUCTION_GR_CALLED</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    </div>
+<div class="viewcode-block" id="ParseUtil_x86_64.parse_register"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.x86_64.html#vizasm.analysis.asm.cpu.x86_64.ParseUtil_x86_64.ParseUtil_x86_64.parse_register">[docs]</a>    <span class="k">def</span> <span class="nf">parse_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">register</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Parse a register.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        register: string</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        --------</span>
+<span class="sd">        register: `register_type`</span>
+<span class="sd">            the register wrapped in `register_type` </span>
+<span class="sd">        None</span>
+<span class="sd">            if regular expression did not classify as register  </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">register_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_REGISTER</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">register</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">register_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">ds_reg</span> <span class="o">=</span> <span class="n">register_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_REGISTER_GR_DS_REG</span><span class="p">)</span>
+            <span class="n">reg</span> <span class="o">=</span> <span class="n">register_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_REGISTER_GR_REG</span><span class="p">)</span>
+            <span class="n">qword_reg</span> <span class="o">=</span> <span class="n">register_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_REGISTER_GR_QWORD_REG</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">register_class</span><span class="p">(</span><span class="n">Util</span><span class="o">.</span><span class="n">filter_not_none</span><span class="p">((</span><span class="n">ds_reg</span><span class="p">,</span> <span class="n">reg</span><span class="p">,</span> <span class="n">qword_reg</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">None</span>
+</div>
+<div class="viewcode-block" id="ParseUtil_x86_64.parse_stack_access"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.x86_64.html#vizasm.analysis.asm.cpu.x86_64.ParseUtil_x86_64.ParseUtil_x86_64.parse_stack_access">[docs]</a>    <span class="k">def</span> <span class="nf">parse_stack_access</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Parse a stack access like e.g. &quot;[ss:rsp+0x8]&quot; or &quot;[ss:rsp]&quot;.</span>
+<span class="sd">        The latter leads to an address of 0x0.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple&lt;string, string&gt;</span>
+<span class="sd">            Return the stack pointer name as well as the stack address as hex string.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">stack_access_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_re_stack</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cpu</span><span class="o">.</span><span class="n">stack_pointer_register</span><span class="p">()</span><span class="o">.</span><span class="n">register</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">stack_access_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">addr</span> <span class="o">=</span> <span class="n">stack_access_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_STACK_GR_ADDRESS</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">addr</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">addr</span> <span class="o">=</span> <span class="s">&#39;0x0&#39;</span>
+            <span class="n">sp_name</span> <span class="o">=</span> <span class="n">stack_access_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_STACK_GR_REG</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">sp_name</span><span class="p">,</span> <span class="n">addr</span>
+        <span class="k">return</span> <span class="bp">None</span>
+
+<span class="c">#####################################################################################</span>
+<span class="c"># Non ParseUtil stuff                                                               #</span>
+<span class="c">#####################################################################################</span>
+    </div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ParseUtil_x86_64.parse_additional_method_argument_stack"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.x86_64.html#vizasm.analysis.asm.cpu.x86_64.ParseUtil_x86_64.ParseUtil_x86_64.parse_additional_method_argument_stack">[docs]</a>    <span class="k">def</span> <span class="nf">parse_additional_method_argument_stack</span><span class="p">(</span><span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Parse an additional argument that lies on the stack. Prefix is &quot;arg_&quot;.</span>
+<span class="sd">        Returns the prefix of the argument (value after &quot;_&quot;) as string &#39;&#39;&#39;</span>
+        <span class="n">additional_method_argument_stack_match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_ADD_METHOD_ARG_STACK</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">additional_method_argument_stack_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">additional_method_argument_stack_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">regexp</span><span class="o">.</span><span class="n">RE_ADD_METHOD_ARG_STACK_GR_ARG_NR</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    </div></div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.x86_64.Register_x86_64</span> <span class="kn">import</span> <span class="n">Register_x86_64</span> <span class="k">as</span> <span class="n">reg</span>
+    <span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.x86_64.Cpu_x86_64</span> <span class="kn">import</span> <span class="n">Cpu_x86_64</span>
+    <span class="kn">from</span> <span class="nn">vizasm.model.objc.arguments.Selector</span> <span class="kn">import</span> <span class="n">Selector</span>
+    <span class="kn">from</span> <span class="nn">vizasm.model.objc.function.MsgSend</span> <span class="kn">import</span> <span class="n">MsgSend</span>
+    <span class="n">cpu</span> <span class="o">=</span> <span class="n">Cpu_x86_64</span><span class="p">({})</span>
+    <span class="n">pu</span> <span class="o">=</span> <span class="n">ParseUtil_x86_64</span><span class="p">(</span><span class="n">cpu</span><span class="p">,</span> <span class="n">reg</span><span class="p">)</span>
+    
+    <span class="n">fclass</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_objc_class_from_framework_class</span><span class="p">(</span><span class="s">&#39;[ds:bind__OBJC_CLASS_$_NSUserDefaults]&#39;</span><span class="p">)</span>
+    <span class="n">classref</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_objc_class_from_classref</span><span class="p">(</span><span class="s">&#39;[ds:objc_classref_Object1]&#39;</span><span class="p">)</span>
+    <span class="n">ivar</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_ivar</span><span class="p">(</span><span class="s">&#39;[ds:_OBJC_IVAR_$_AppDelegate.obj3]&#39;</span><span class="p">)</span>
+    <span class="n">sel</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_selector</span><span class="p">(</span><span class="s">&#39;qword [ds:objc_sel_selfMethod] ; @selector(selfMethod)&#39;</span><span class="p">)</span>
+    <span class="n">nsstring_asm</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_string</span><span class="p">(</span><span class="s">&#39;@&quot;Defaults&quot;&#39;</span><span class="p">)</span>
+    <span class="n">format_string_asm</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_format_string</span><span class="p">(</span><span class="s">&#39;@&quot;Defaults</span><span class="si">%s</span><span class="s">&quot;&#39;</span><span class="p">)</span>
+    <span class="n">stackvar</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_stackvar</span><span class="p">(</span><span class="s">&#39;[ss:rbp-0x30+var_40]&#39;</span><span class="p">)</span>
+    <span class="c"># var_assign = pu.parse_var_assignment(&#39; qword [ds:rax+rcx]&#39;)</span>
+    <span class="n">imp_stub</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_imp_stub</span><span class="p">(</span><span class="s">&#39;call       imp___stubs__objc_msgSend&#39;</span><span class="p">)</span>
+    <span class="n">imp_got</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_imp_got</span><span class="p">(</span><span class="s">&#39;imp___got__objc_msgSend&#39;</span><span class="p">)</span>
+    <span class="n">imp</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_imp</span><span class="p">(</span><span class="s">&#39;qword [ds:imp___got__objc_msgSend]&#39;</span><span class="p">)</span>
+    <span class="n">ds_reg</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_register</span><span class="p">(</span><span class="s">&#39;ds:[rdx]&#39;</span><span class="p">)</span>
+    <span class="n">ss_reg</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_stack_access</span><span class="p">(</span><span class="s">&#39;qword [ss:rsp+0x8]&#39;</span><span class="p">)</span>
+    <span class="n">reg</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_register</span><span class="p">(</span><span class="s">&#39;r8&#39;</span><span class="p">)</span>
+    <span class="n">qword_reg</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_register</span><span class="p">(</span><span class="s">&#39;qword [ds:rdi]&#39;</span><span class="p">)</span>
+    <span class="n">stack</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">compiled_re_stack</span><span class="p">(</span><span class="n">cpu</span><span class="o">.</span><span class="n">stack_pointer_register</span><span class="p">())</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s">&#39;qword [ss:rsp+0xc]&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&#39;fclass: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">fclass</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&#39;classref: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">classref</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&#39;ivar: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">ivar</span><span class="p">)</span>   
+    <span class="k">print</span> <span class="s">&#39;sel: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sel</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&#39;nsstring: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">nsstring_asm</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&#39;format string: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">format_string_asm</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&#39;stackvar: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">stackvar</span><span class="p">)</span>
+    <span class="c"># print &#39;var_assign: %s&#39; % (var_assign)</span>
+    <span class="k">print</span> <span class="s">&#39;imp_stub: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">imp_stub</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&#39;imp_got: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">imp_got</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&#39;register ds : </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">ds_reg</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&#39;register ss : </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ss_reg</span><span class="p">))</span>
+    <span class="k">print</span> <span class="s">&#39;register: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">reg</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&#39;register: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">qword_reg</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">imp</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_selector</span><span class="p">(</span><span class="s">&#39;00003b78 8B0D58A61B00                    mov        ecx, dword [ds:objc_msg_currentHandler] ; @selector(currentHandler)&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">stack</span><span class="o">.</span><span class="n">groupdict</span><span class="p">()</span>
+    
+    <span class="k">print</span> <span class="s">&#39;IVar&#39;</span>
+    <span class="k">print</span> <span class="s">&#39;Dictionary Key Test:&#39;</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="n">ivar</span> <span class="p">:</span> <span class="s">&#39;test&#39;</span><span class="p">}</span>
+    <span class="n">ivar2</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_ivar</span><span class="p">(</span><span class="s">&#39;[ds:_OBJC_IVAR_$_AppDelegate.obj3] &#39;</span><span class="p">)</span>
+    <span class="n">d</span><span class="p">[</span><span class="n">ivar2</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;test2&#39;</span>
+    <span class="c"># this should not overwrite ivar2 but add an additional entry in the dict, cause ivar3 is not equal to ivar2</span>
+    <span class="n">ivar3</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_ivar</span><span class="p">(</span><span class="s">&#39;[ds:_OBJC_IVAR_$_AppDelegate.obj2] &#39;</span><span class="p">)</span>
+    <span class="n">d</span><span class="p">[</span><span class="n">ivar3</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;test3&#39;</span>
+    <span class="k">print</span> <span class="n">d</span>
+    
+    <span class="k">print</span> <span class="s">&#39;list equal test: should be true&#39;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">ivar</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">ivar</span><span class="p">]</span>
+    <span class="k">print</span> <span class="s">&#39;[ivar] equals [ivar]: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&#39;[ivar] equals [ivar2]: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="p">[</span><span class="n">ivar2</span><span class="p">])</span>
+    
+    <span class="k">print</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">ivar without ref: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">ivar</span><span class="p">)</span>
+    <span class="n">ivar</span><span class="o">.</span><span class="n">set_ivar_ref</span><span class="p">(</span><span class="n">MsgSend</span><span class="p">(</span><span class="n">ObjcClass</span><span class="p">(</span><span class="s">&#39;Object3&#39;</span><span class="p">),</span> <span class="p">[</span><span class="n">Selector</span><span class="p">(</span><span class="s">&#39;alloc&#39;</span><span class="p">),</span> <span class="n">Selector</span><span class="p">(</span><span class="s">&#39;init&#39;</span><span class="p">)]))</span>
+    <span class="k">print</span> <span class="s">&#39;ivar with ref: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">ivar</span><span class="p">)</span>
+    
+    <span class="k">print</span> <span class="s">&#39;StackVar&#39;</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_stackvar</span><span class="p">(</span><span class="s">&#39;dword [ss:rbp-0x60+arg_0]&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">pu</span><span class="o">.</span><span class="n">parse_stackvar</span><span class="p">(</span><span class="s">&#39;[ss:rbp-0x30+var_41]&#39;</span><span class="p">)</span>
+   
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    print &#39;ObjcClass&#39;</span>
+<span class="sd">    fclass = ObjcClass.create_from_asm_line(&#39;[ds:bind__OBJC_CLASS_$_NSUserDefaults]&#39;)</span>
+<span class="sd">    fclass2 = ObjcClass.create_from_asm_line(&#39;[ds:bind__OBJC_CLASS_$_NSUserDefaults]&#39;)</span>
+<span class="sd">    classref = ObjcClass.create_from_asm_line(&#39;[ds:objc_classref_Object1]&#39;)</span>
+<span class="sd">    print &#39;fclass: %s&#39; % (fclass)</span>
+<span class="sd">    print &#39;classref: %s&#39; % (classref)</span>
+<span class="sd">    </span>
+<span class="sd">    print fclass.__hash__() == fclass2.__hash__()</span>
+<span class="sd">    </span>
+<span class="sd">    ivar = IVar.create_from_asm_line(&#39;[ds:_OBJC_IVAR_$_AppDelegate.obj3]&#39;)</span>
+<span class="sd">    print &#39;ivar: %s&#39; % (ivar)</span>
+<span class="sd">    </span>
+<span class="sd">    FormatString:</span>
+<span class="sd">    fs1 = FormatString.create_from_asm_line(&#39;@&quot;%@%d&quot;&#39;)</span>
+<span class="sd">    fs2 = FormatString.create_from_asm_line(&#39;@&quot;f%%oo&quot;&#39;)</span>
+<span class="sd">    fs3 = FormatString.create_from_asm_line(&#39;@&quot;f%%o%d&quot;&#39;)</span>
+<span class="sd">    </span>
+<span class="sd">    print fs1</span>
+<span class="sd">    print &#39;Should not be a format string: %s&#39; % (fs2)</span>
+<span class="sd">    print fs3</span>
+<span class="sd">    </span>
+<span class="sd">    NSString:</span>
+<span class="sd">    nsstring_asm = NSString.create_from_asm_line(&#39;@&quot;Defaults&quot;&#39;)</span>
+<span class="sd">    print nsstring_asm</span>
+<span class="sd">    </span>
+<span class="sd">    StackVar:</span>
+<span class="sd">    var1 = StackVar.create_from_asm_line(&#39;[ss:rbp-0x30+var_40]&#39;)</span>
+<span class="sd">    print var1</span>
+<span class="sd">    var2 = StackVar.create_from_asm_line(&#39;[ss:rbp-0x30+var_41]&#39;)</span>
+<span class="sd">    vareq1 = StackVar.create_from_asm_line(&#39;[ss:rbp-0x30+var_40]&#39;)</span>
+<span class="sd">    print &#39;same vars equal: %s&#39; % (var1.__eq__(var1))</span>
+<span class="sd">    print &#39;equal vars equal: %s&#39; % (var1.__eq__(vareq1))</span>
+<span class="sd">    print &#39;unequal vars equal: %s&#39; % (var1.__eq__(var2))</span>
+<span class="sd">    </span>
+<span class="sd">    ImpStub:</span>
+<span class="sd">    imp_stub = ImpStub.create_from_asm_line(&#39;000000010000197b E8A4070000                      call       imp___stubs__objc_msgSend&#39;)</span>
+<span class="sd">    print imp_stub.__repr__()</span>
+<span class="sd">    print imp_stub</span>
+<span class="sd">    print &#39;is msgSend: %s&#39; % (imp_stub.is_msg_send())</span>
+<span class="sd">    </span>
+<span class="sd">    ImpGot:</span>
+<span class="sd">    imp_got = ImpGot.create_from_asm_line(&#39;0000000100001cc7 488B0542230000                  mov        rax, qword [ds:imp___got__NSStreamSocketSecurityLevelKey]&#39;)</span>
+<span class="sd">    print imp_got.__repr__()</span>
+<span class="sd">    print imp_got </span>
+<span class="sd">    &#39;&#39;&#39;</span> 
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,407 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm.analysis.asm.asmanalyzer.AsmAnalyzerBase &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vizasm.analysis.asm.asmanalyzer.AsmAnalyzerBase</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 21.08.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">abspath</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">from</span> <span class="nn">vizasm.Settings</span> <span class="kn">import</span> <span class="n">setting_for_key</span><span class="p">,</span> <span class="n">SETTINGS_FILTERS</span><span class="p">,</span> \
+    <span class="n">filtering_enabled</span><span class="p">,</span> <span class="n">SETTINGS_DONT_SKIP_EXCEPTION</span><span class="p">,</span> <span class="n">SETTINGS_OUTPUT_FILEPATH</span><span class="p">,</span> \
+    <span class="n">SETTINGS_GRAPH_FILEPATH</span><span class="p">,</span> <span class="n">is_x86</span><span class="p">,</span> <span class="n">is_x86_64</span><span class="p">,</span> <span class="n">is_arm</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.AsmRegEx</span> <span class="kn">import</span> <span class="n">AsmRegEx</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.arm.Cpu_arm</span> <span class="kn">import</span> <span class="n">Cpu_arm</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.exceptions.CpuException</span> <span class="kn">import</span> <span class="n">CpuException</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.x86.Cpu_x86</span> <span class="kn">import</span> <span class="n">Cpu_x86</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.x86_64.Cpu_x86_64</span> <span class="kn">import</span> <span class="n">Cpu_x86_64</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.security.SecurityAnalyzer</span> <span class="kn">import</span> <span class="n">SecurityAnalyzer</span>
+<span class="kn">from</span> <span class="nn">vizasm.hopper.hopannotate</span> <span class="kn">import</span> <span class="n">hopanno</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.asm</span> <span class="kn">import</span> <span class="n">Segments</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.object.nsobject.objcclass.ObjcClass</span> <span class="kn">import</span> <span class="n">ObjcClass</span>
+<span class="kn">from</span> <span class="nn">vizasm.util</span> <span class="kn">import</span> <span class="n">Util</span>
+<span class="kn">from</span> <span class="nn">vizasm.util.Log</span> <span class="kn">import</span> <span class="n">clilog</span><span class="p">,</span> <span class="n">log</span><span class="p">,</span> <span class="n">log_info</span>
+<span class="kn">from</span> <span class="nn">vizasm.vizasm_networkx.GraphUtil</span> <span class="kn">import</span> <span class="n">GraphUtil</span>
+<span class="kn">from</span> <span class="nn">vizasm.vizasm_networkx.Graph</span> <span class="kn">import</span> <span class="n">Graph</span>
+
+
+<span class="n">HOPANNO_EXCEPTION_STR</span> <span class="o">=</span> <span class="s">&#39;!! Exception occurred !!&#39;</span>
+<span class="c"># length of exception msg (annotated in hopper)</span>
+<span class="n">HOPPER_EXCEPTION_LENGTH</span> <span class="o">=</span> <span class="mi">120</span>
+
+<div class="viewcode-block" id="AsmAnalyzerBase"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.asmanalyzer.html#vizasm.analysis.asm.asmanalyzer.AsmAnalyzerBase.AsmAnalyzerBase">[docs]</a><span class="k">class</span> <span class="nc">AsmAnalyzerBase</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Base class for an assembler analyzer.</span>
+<span class="sd">    Do not forget to set architecture to analyze !</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    superclass_dict: dict&lt;ObjcClass, ObjcClass&gt;, optional (default is {})</span>
+<span class="sd">        a dictionary holding the base classes as values</span>
+<span class="sd">    output_file: file</span>
+<span class="sd">        the opened output file</span>
+<span class="sd">    graph: Graph</span>
+<span class="sd">        the `Graph` to which the methodcalls will be added</span>
+<span class="sd">    _security_analyzer: SecurityAnalyzer</span>
+<span class="sd">        the `SecurityAnalyzer` which does the filtering</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">superclass_dict</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">superclass_dict</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">superclass_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_superclass_dict</span> <span class="o">=</span> <span class="n">superclass_dict</span>
+        <span class="n">output_file</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="n">output_filepath</span> <span class="o">=</span> <span class="n">setting_for_key</span><span class="p">(</span><span class="n">SETTINGS_OUTPUT_FILEPATH</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">output_filepath</span><span class="p">:</span>
+            <span class="n">output_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_filepath</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_output_file</span> <span class="o">=</span> <span class="n">output_file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">()</span>
+        
+        <span class="c"># do not forget to set `MethodCall` later</span>
+        <span class="n">filters</span> <span class="o">=</span> <span class="n">setting_for_key</span><span class="p">(</span><span class="n">SETTINGS_FILTERS</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_security_analyzer</span> <span class="o">=</span> <span class="n">SecurityAnalyzer</span><span class="p">(</span><span class="n">methodcall</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">filters</span> <span class="o">=</span> <span class="n">filters</span><span class="p">)</span>
+
+<div class="viewcode-block" id="AsmAnalyzerBase.get_security_analyzer"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.asmanalyzer.html#vizasm.analysis.asm.asmanalyzer.AsmAnalyzerBase.AsmAnalyzerBase.get_security_analyzer">[docs]</a>    <span class="k">def</span> <span class="nf">get_security_analyzer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_security_analyzer</span>
+</div>
+<div class="viewcode-block" id="AsmAnalyzerBase.set_security_analyzer"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.asmanalyzer.html#vizasm.analysis.asm.asmanalyzer.AsmAnalyzerBase.AsmAnalyzerBase.set_security_analyzer">[docs]</a>    <span class="k">def</span> <span class="nf">set_security_analyzer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_security_analyzer</span> <span class="o">=</span> <span class="n">value</span>
+</div>
+<div class="viewcode-block" id="AsmAnalyzerBase.get_graph"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.asmanalyzer.html#vizasm.analysis.asm.asmanalyzer.AsmAnalyzerBase.AsmAnalyzerBase.get_graph">[docs]</a>    <span class="k">def</span> <span class="nf">get_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span>
+</div>
+<div class="viewcode-block" id="AsmAnalyzerBase.set_graph"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.asmanalyzer.html#vizasm.analysis.asm.asmanalyzer.AsmAnalyzerBase.AsmAnalyzerBase.set_graph">[docs]</a>    <span class="k">def</span> <span class="nf">set_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span> <span class="o">=</span> <span class="n">value</span>
+</div>
+<div class="viewcode-block" id="AsmAnalyzerBase.get_output_file"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.asmanalyzer.html#vizasm.analysis.asm.asmanalyzer.AsmAnalyzerBase.AsmAnalyzerBase.get_output_file">[docs]</a>    <span class="k">def</span> <span class="nf">get_output_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_file</span>
+</div>
+<div class="viewcode-block" id="AsmAnalyzerBase.set_output_file"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.asmanalyzer.html#vizasm.analysis.asm.asmanalyzer.AsmAnalyzerBase.AsmAnalyzerBase.set_output_file">[docs]</a>    <span class="k">def</span> <span class="nf">set_output_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_output_file</span> <span class="o">=</span> <span class="n">value</span>
+</div>
+<div class="viewcode-block" id="AsmAnalyzerBase.get_superclass_dict"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.asmanalyzer.html#vizasm.analysis.asm.asmanalyzer.AsmAnalyzerBase.AsmAnalyzerBase.get_superclass_dict">[docs]</a>    <span class="k">def</span> <span class="nf">get_superclass_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_superclass_dict</span>
+</div>
+<div class="viewcode-block" id="AsmAnalyzerBase.set_superclass_dict"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.asmanalyzer.html#vizasm.analysis.asm.asmanalyzer.AsmAnalyzerBase.AsmAnalyzerBase.set_superclass_dict">[docs]</a>    <span class="k">def</span> <span class="nf">set_superclass_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_superclass_dict</span> <span class="o">=</span> <span class="n">value</span>
+</div>
+    <span class="n">superclass_dict</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_superclass_dict</span><span class="p">,</span> <span class="n">set_superclass_dict</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;superclass_dict(dict&lt;ObjcClass, ObjcClass&gt;, optional (default is {})) -- a dictionary holding the base classes as values&quot;</span><span class="p">)</span>
+    <span class="n">output_file</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_output_file</span><span class="p">,</span> <span class="n">set_output_file</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;output_file(file) -- the opened output file&quot;</span><span class="p">)</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_graph</span><span class="p">,</span> <span class="n">set_graph</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;graph(Graph) -- the `Graph` to which the methodcalls will be added&quot;</span><span class="p">)</span>        
+    <span class="n">security_analyzer</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_security_analyzer</span><span class="p">,</span> <span class="n">set_security_analyzer</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;security_analyzer(SecurityAnalyzer) -- the `SecurityAnalyzer` which does the filtering&quot;</span><span class="p">)</span>
+    
+<div class="viewcode-block" id="AsmAnalyzerBase.filtering_enabled"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.asmanalyzer.html#vizasm.analysis.asm.asmanalyzer.AsmAnalyzerBase.AsmAnalyzerBase.filtering_enabled">[docs]</a>    <span class="k">def</span> <span class="nf">filtering_enabled</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Check if filtering is enabled &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">filtering_enabled</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="AsmAnalyzerBase.analyze"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.asmanalyzer.html#vizasm.analysis.asm.asmanalyzer.AsmAnalyzerBase.AsmAnalyzerBase.analyze">[docs]</a>    <span class="k">def</span> <span class="nf">analyze</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Analyze the asm file &#39;&#39;&#39;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    </div>
+    <span class="k">def</span> <span class="nf">_analyze</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">methods_it</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        Analyze the assembler file.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        methods_it: iterator&lt;dict&lt;int, string&gt;&gt;</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">AsmAnalyzerBase</span><span class="o">.</span><span class="n">__check_dont_skip_exception</span><span class="p">(</span><span class="n">setting_for_key</span><span class="p">(</span><span class="n">SETTINGS_DONT_SKIP_EXCEPTION</span><span class="p">))</span>
+        
+        <span class="n">output_filepath</span> <span class="o">=</span> <span class="n">setting_for_key</span><span class="p">(</span><span class="n">SETTINGS_OUTPUT_FILEPATH</span><span class="p">)</span>
+        <span class="n">graph_filepath</span> <span class="o">=</span> <span class="n">setting_for_key</span><span class="p">(</span><span class="n">SETTINGS_GRAPH_FILEPATH</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">output_filepath</span><span class="p">:</span>
+            <span class="n">clilog</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;writing messages to </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">abspath</span><span class="p">(</span><span class="n">output_filepath</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">graph_filepath</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">clilog</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;writing graph to </span><span class="si">%s</span><span class="se">\n</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">abspath</span><span class="p">(</span><span class="n">graph_filepath</span><span class="p">))</span>
+            
+        <span class="n">cnt_filtered_messages</span> <span class="o">=</span> <span class="n">cnt_total_messages</span> <span class="o">=</span> <span class="mi">0</span>
+        
+        <span class="c"># base classes cannot be resolved </span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">superclass_dict</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s">&#39;No information about superclasses given/read!</span><span class="se">\n</span><span class="s"> Messages to super cannot be resolved! </span><span class="si">%s</span><span class="s"> will be assumed as superclass!&#39;</span> <span class="o">%</span> <span class="n">ObjcClass</span><span class="o">.</span><span class="n">nsobject</span><span class="p">)</span>
+        
+        <span class="c"># create cpu</span>
+        <span class="n">cpu</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="n">is_x86</span><span class="p">():</span>
+            <span class="n">cpu</span> <span class="o">=</span> <span class="n">Cpu_x86</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">superclass_dict</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">is_x86_64</span><span class="p">():</span>
+            <span class="n">cpu</span> <span class="o">=</span> <span class="n">Cpu_x86_64</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">superclass_dict</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">is_arm</span><span class="p">():</span>
+            <span class="n">cpu</span> <span class="o">=</span> <span class="n">Cpu_arm</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">superclass_dict</span><span class="p">)</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">method_dict</span> <span class="ow">in</span> <span class="n">methods_it</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>  
+                    <span class="p">(</span><span class="n">cnt1</span><span class="p">,</span> <span class="n">cnt2</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__analyze_inner</span><span class="p">(</span><span class="n">cpu</span><span class="p">,</span> <span class="n">method_dict</span><span class="p">)</span>
+                    <span class="n">cnt_total_messages</span> <span class="o">+=</span> <span class="n">cnt1</span>
+                    <span class="n">cnt_filtered_messages</span> <span class="o">+=</span> <span class="n">cnt2</span>
+                <span class="k">except</span> <span class="p">(</span><span class="n">CpuException</span><span class="p">,</span> <span class="ne">RuntimeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+                <span class="k">finally</span><span class="p">:</span>
+                    <span class="c"># reset cpu to read next method implementation</span>
+                    <span class="n">cpu</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">raise</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">filtering_enabled</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__write_filter_results</span><span class="p">()</span>
+            <span class="c"># close file            </span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_file</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">output_file</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>  
+                <span class="bp">self</span><span class="o">.</span><span class="n">output_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="n">GraphUtil</span><span class="o">.</span><span class="n">write_gexf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">,</span> <span class="n">graph_filepath</span><span class="p">)</span>
+            
+            <span class="c"># print infos</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_print_info</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">cnt_filtered_messages</span><span class="p">,</span> <span class="n">cnt_total_messages</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_print_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">cnt_filtered_messages</span><span class="p">,</span> <span class="n">cnt_total_messages</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Print some statistics after the file has been analyzed &#39;&#39;&#39;</span>
+        <span class="n">duration</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+        <span class="n">clilog</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">filtered function calls: </span><span class="si">%d</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">cnt_filtered_messages</span><span class="p">)</span> 
+        <span class="n">clilog</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;total number of function calls read: </span><span class="si">%d</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">cnt_total_messages</span><span class="p">)</span> 
+         
+        <span class="n">clilog</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;took: </span><span class="si">%d</span><span class="s">m, </span><span class="si">%f</span><span class="s">s&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">duration</span> <span class="o">/</span> <span class="mi">60</span><span class="p">,</span> <span class="n">duration</span> <span class="o">%</span> <span class="mi">60</span><span class="p">))</span>
+        <span class="n">clilog</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;done&#39;</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">__analyze_inner</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cpu</span><span class="p">,</span> <span class="n">method_dict</span><span class="p">):</span>
+        <span class="n">cnt_filtered_messages</span> <span class="o">=</span> <span class="n">cnt_total_messages</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">dont_skip_exception</span> <span class="o">=</span> <span class="n">setting_for_key</span><span class="p">(</span><span class="n">SETTINGS_DONT_SKIP_EXCEPTION</span><span class="p">)</span>
+        <span class="n">hopper_annotater</span> <span class="o">=</span> <span class="n">hopanno</span>
+        <span class="n">hopanno</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">linenr</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">method_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">cpu</span><span class="o">.</span><span class="n">read_line</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">linenr</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">hopper_annotater</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">hopper_annotater</span><span class="o">.</span><span class="n">cur_meth_impl_start</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">cpu</span><span class="o">.</span><span class="n">address</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="n">hopper_annotater</span><span class="o">.</span><span class="n">cur_meth_impl_start</span> <span class="o">=</span> <span class="n">cpu</span><span class="o">.</span><span class="n">address</span>
+            <span class="k">except</span> <span class="p">(</span><span class="n">CpuException</span><span class="p">,</span> <span class="ne">RuntimeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="c"># annotate exception</span>
+                <span class="n">hopanno</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">cpu</span><span class="o">.</span><span class="n">address</span><span class="p">,</span> <span class="p">(</span><span class="n">HOPANNO_EXCEPTION_STR</span> <span class="o">+</span> <span class="p">(</span><span class="s">&#39; &lt;- </span><span class="si">%s</span><span class="s">: </span><span class="si">%s</span><span class="s"> ...&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))))[:</span><span class="n">HOPPER_EXCEPTION_LENGTH</span><span class="p">])</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">dont_skip_exception</span><span class="p">:</span>
+                    <span class="k">raise</span>
+        <span class="n">methodcall</span> <span class="o">=</span> <span class="n">cpu</span><span class="o">.</span><span class="n">get_method_call</span><span class="p">()</span>
+        <span class="n">cnt_total_messages</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">methodcall</span><span class="o">.</span><span class="n">calls</span><span class="p">)</span>
+        
+        <span class="n">sa</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">security_analyzer</span>
+        <span class="n">sa</span><span class="o">.</span><span class="n">set_methodcall</span><span class="p">(</span><span class="n">methodcall</span><span class="p">)</span>
+        
+        <span class="n">filtered_methodcall</span> <span class="o">=</span> <span class="n">methodcall</span>
+        
+        <span class="c"># build a list of method lines</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">filtering_enabled</span><span class="p">():</span>
+            <span class="c"># apply filters</span>
+            <span class="c"># do this after building the list of method lines, </span>
+            <span class="c"># because the lines before and after refer to the unfiltered lines</span>
+            <span class="n">filtered_methodcall</span> <span class="o">=</span> <span class="n">sa</span><span class="o">.</span><span class="n">apply_filters</span><span class="p">()</span>
+            
+        <span class="c"># method as assembler code (string)</span>
+        <span class="n">lines_str_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">Util</span><span class="o">.</span><span class="n">sorted_dict_values_it</span><span class="p">(</span><span class="n">method_dict</span><span class="p">))</span>
+        <span class="n">asm_lines</span> <span class="o">=</span> <span class="n">Util</span><span class="o">.</span><span class="n">strlist_to_str</span><span class="p">(</span><span class="n">lines_str_list</span><span class="p">)</span>
+        
+        <span class="c"># create attribute dictionaries</span>
+        <span class="n">methodcall_sender_attr_dict</span><span class="p">,</span> <span class="n">methodcall_calls_attr_list_dict</span> <span class="o">=</span> <span class="n">methodcall</span><span class="o">.</span><span class="n">create_gephi_attr_dicts</span><span class="p">(</span><span class="n">asm_lines</span><span class="p">,</span> <span class="n">filtered_methodcall</span><span class="p">)</span>
+        
+        <span class="c"># add to graph</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">filtering_enabled</span><span class="p">():</span>
+            <span class="n">sa</span><span class="o">.</span><span class="n">add_to_graph</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">,</span> <span class="n">methodcall_sender_attr_dict</span><span class="p">,</span> <span class="n">methodcall_calls_attr_list_dict</span><span class="p">,</span> <span class="n">sender_methodcall_edge_attr_dict</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">methodcall_sender_attr_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">GraphUtil</span><span class="o">.</span><span class="n">viz_dict</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="mf">50.0</span><span class="p">))</span>
+            <span class="n">methodcall</span><span class="o">.</span><span class="n">add_to_graph</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">,</span> <span class="n">methodcall_sender_attr_dict</span><span class="p">,</span> <span class="n">methodcall_calls_attr_list_dict</span><span class="p">,</span> <span class="n">sender_methodcall_edge_attr_dict</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
+        
+        <span class="n">cnt_filtered_messages</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">filtered_methodcall</span><span class="o">.</span><span class="n">calls</span><span class="p">)</span>
+        
+        <span class="c"># write `MethodCall` to file</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">filtering_enabled</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__write_methodcall</span><span class="p">(</span><span class="n">filtered_methodcall</span><span class="p">)</span>
+        
+        <span class="c"># annotate hopper</span>
+        <span class="k">if</span> <span class="n">hopper_annotater</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">hopper_annotater</span><span class="o">.</span><span class="n">annotate_from_methodcall</span><span class="p">(</span><span class="n">filtered_methodcall</span><span class="p">)</span>
+            <span class="n">hopper_annotater</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+            
+        <span class="k">return</span> <span class="p">(</span><span class="n">cnt_total_messages</span><span class="p">,</span> <span class="n">cnt_filtered_messages</span><span class="p">)</span>
+    
+<div class="viewcode-block" id="AsmAnalyzerBase.log_n_read_superclasses"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.asmanalyzer.html#vizasm.analysis.asm.asmanalyzer.AsmAnalyzerBase.AsmAnalyzerBase.log_n_read_superclasses">[docs]</a>    <span class="k">def</span> <span class="nf">log_n_read_superclasses</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Read and log the superclass information &#39;&#39;&#39;</span> 
+        <span class="c"># reading superclasses is only supported for x86_64</span>
+        <span class="k">if</span> <span class="n">is_x86_64</span><span class="p">():</span>
+            <span class="n">clilog</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;reading superclasses&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">superclass_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_superclasses</span><span class="p">()</span>
+            <span class="n">log_info</span><span class="p">(</span><span class="n">Util</span><span class="o">.</span><span class="n">format_dict_as_table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">superclass_dict</span><span class="p">,</span> <span class="s">&#39;subclass&#39;</span><span class="p">,</span> <span class="s">&#39;base class&#39;</span><span class="p">))</span>
+            <span class="n">clilog</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="AsmAnalyzerBase.read_superclasses"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.asmanalyzer.html#vizasm.analysis.asm.asmanalyzer.AsmAnalyzerBase.AsmAnalyzerBase.read_superclasses">[docs]</a>    <span class="k">def</span> <span class="nf">read_superclasses</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        Read the super classes from the sections `Segments.SEGMENTS_SUPERCLASS_INFOS`.</span>
+<span class="sd">        Use `_read_superclasses` for implementation!</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict&lt;ObjcClass, ObjcClass&gt;</span>
+<span class="sd">            dict with object as key and the superclass as item</span>
+<span class="sd">        &#39;&#39;&#39;</span> 
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    </div>
+    <span class="k">def</span> <span class="nf">_read_superclasses</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_it</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Helper method for `read_superclasses`.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        section_it: iterator&lt;tuple&lt;int, string&gt;&gt;</span>
+<span class="sd">            iterator over the sections where the superclass infos are stored</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">segments</span> <span class="o">=</span> <span class="n">Segments</span><span class="o">.</span><span class="n">SEGMENTS_SUPERCLASS_INFOS</span>
+        <span class="n">clilog</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;reading from segments </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">segments</span><span class="p">)</span>
+        <span class="n">superclazz_dict</span> <span class="o">=</span> <span class="n">AsmAnalyzerBase</span><span class="o">.</span><span class="n">__read_superclasses_from_sections</span><span class="p">(</span><span class="n">section_it</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">superclazz_dict</span>
+        
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">__read_superclasses_from_sections</span><span class="p">(</span><span class="n">section_it</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Read the superclasses from the specified section name </span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        section_it: iterator&lt;tuple&lt;int, string&gt;&gt;</span>
+<span class="sd">            iterator over the sections where the superclass infos are stored</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict&lt;ObjcClass, ObjcClass&gt;</span>
+<span class="sd">            dict with object as key and the superclass as item</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">superclasses_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="ow">in</span> <span class="n">section_it</span><span class="p">:</span>
+            <span class="n">CLASS_PARENT_MATCH</span> <span class="o">=</span> <span class="n">AsmRegEx</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">AsmRegEx</span><span class="o">.</span><span class="n">RE_CLASS_PARENT</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">CLASS_PARENT_MATCH</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">clazzname</span> <span class="o">=</span> <span class="n">CLASS_PARENT_MATCH</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">AsmRegEx</span><span class="o">.</span><span class="n">RE_CLASS_PARENT_GR_CLASS</span><span class="p">)</span>
+                <span class="n">superclazz_name</span> <span class="o">=</span> <span class="n">CLASS_PARENT_MATCH</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">AsmRegEx</span><span class="o">.</span><span class="n">RE_CLASS_PARENT_GR_PARENT</span><span class="p">)</span>
+                <span class="n">superclasses_dict</span><span class="p">[</span><span class="n">ObjcClass</span><span class="p">(</span><span class="n">clazzname</span><span class="p">)]</span> <span class="o">=</span> <span class="n">ObjcClass</span><span class="p">(</span><span class="n">superclazz_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">superclasses_dict</span>
+        
+    <span class="k">def</span> <span class="nf">__write_methodcall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">methodcall</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Write the complete (unfiltered) `MethodCall` to file.</span>
+<span class="sd">        Use if filtering is not enabled. &#39;&#39;&#39;</span>
+        <span class="n">outputfile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_file</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">methodcall</span><span class="o">.</span><span class="n">is_empty</span><span class="p">()</span> <span class="ow">and</span> <span class="n">outputfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">outputfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">methodcall</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__write_filter_results</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Use if filtering is enabled. Writes the result of the `SecurityFilter`s</span>
+<span class="sd">        to file &#39;&#39;&#39;</span> 
+        <span class="n">outputfile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_file</span>
+        <span class="k">if</span> <span class="n">outputfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">outputfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_security_analyzer</span><span class="p">()</span><span class="o">.</span><span class="n">format_filter_results</span><span class="p">())</span>
+        
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">__check_dont_skip_exception</span><span class="p">(</span><span class="n">dont_skip_exception</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Check if option is turned on and warn user &#39;&#39;&#39;</span> 
+        <span class="k">if</span> <span class="n">dont_skip_exception</span><span class="p">:</span>
+            <span class="n">clilog</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+<span class="sd">&#39;&#39;&#39;&quot;dont_skip_exception&quot; is turned on.</span>
+<span class="sd">This might lead to wrong results!</span>
+<span class="sd">If any exception occurs while analyzing a method, the process will be continued!&#39;&#39;&#39;</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

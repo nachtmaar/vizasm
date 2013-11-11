@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>780C9A75-62FB-48AA-AF3C-FC60F48B8CB3</string>
+	<key>IDESourceControlProjectName</key>
+	<string>SecureObjectiveC</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>EB51C1F2-83D9-4513-81A3-E5BBB01C484C</key>
+		<string>https://bitbucket.org/vizasm/vizasm.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>examples/SecureObjectiveC/SecureObjectiveC.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>EB51C1F2-83D9-4513-81A3-E5BBB01C484C</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://bitbucket.org/vizasm/vizasm.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>EB51C1F2-83D9-4513-81A3-E5BBB01C484C</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>EB51C1F2-83D9-4513-81A3-E5BBB01C484C</string>
+			<key>IDESourceControlWCCName</key>
+			<string>vizasm_aifg</string>
+		</dict>
+	</array>
+</dict>
+</plist>

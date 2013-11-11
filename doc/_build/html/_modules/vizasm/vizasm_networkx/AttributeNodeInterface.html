@@ -1,0 +1,210 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm.vizasm_networkx.AttributeNodeInterface &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vizasm.vizasm_networkx.AttributeNodeInterface</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 09.06.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">vizasm.vizasm_networkx.GraphUtil</span> <span class="kn">import</span> <span class="n">GraphUtil</span>
+
+
+<div class="viewcode-block" id="AttributeNodeInterface"><a class="viewcode-back" href="../../../vizasm.vizasm_networkx.html#vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface">[docs]</a><span class="k">class</span> <span class="nc">AttributeNodeInterface</span><span class="p">:</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Interface for customizing a node in the gexf file format </span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    __gexf_viz_attr_dict: dict</span>
+<span class="sd">        dictionary holding the specified attributes of the viz extension </span>
+<span class="sd">    </span>
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    http://gexf.net/format/viz.html</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__gexf_viz_attr_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__create_gexf_viz_attr_dict</span><span class="p">()</span>
+
+<div class="viewcode-block" id="AttributeNodeInterface.get_gexf_viz_attr_dict"><a class="viewcode-back" href="../../../vizasm.vizasm_networkx.html#vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.get_gexf_viz_attr_dict">[docs]</a>    <span class="k">def</span> <span class="nf">get_gexf_viz_attr_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__gexf_viz_attr_dict</span>
+</div>
+<div class="viewcode-block" id="AttributeNodeInterface.set_gexf_viz_attr_dict"><a class="viewcode-back" href="../../../vizasm.vizasm_networkx.html#vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.set_gexf_viz_attr_dict">[docs]</a>    <span class="k">def</span> <span class="nf">set_gexf_viz_attr_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__gexf_viz_attr_dict</span> <span class="o">=</span> <span class="n">value</span>
+</div>
+    <span class="n">gexf_viz_attr_dict</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_gexf_viz_attr_dict</span><span class="p">,</span> <span class="n">set_gexf_viz_attr_dict</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;__gexf_viz_attr_dict: dict -- dictionary holding the specified attributes of the viz extension&quot;</span><span class="p">)</span>
+        
+<div class="viewcode-block" id="AttributeNodeInterface.node_color_transparency"><a class="viewcode-back" href="../../../vizasm.vizasm_networkx.html#vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.node_color_transparency">[docs]</a>    <span class="k">def</span> <span class="nf">node_color_transparency</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Transparency of the node </span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        transparancy: double</span>
+<span class="sd">            t in [0, 1]</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="mf">1.0</span>
+    </div>
+<div class="viewcode-block" id="AttributeNodeInterface.node_color_red"><a class="viewcode-back" href="../../../vizasm.vizasm_networkx.html#vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.node_color_red">[docs]</a>    <span class="k">def</span> <span class="nf">node_color_red</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Red part of rgb color </span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        red: int</span>
+<span class="sd">            r in {0, 1, ..., 255}</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    </div>
+<div class="viewcode-block" id="AttributeNodeInterface.node_color_green"><a class="viewcode-back" href="../../../vizasm.vizasm_networkx.html#vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.node_color_green">[docs]</a>    <span class="k">def</span> <span class="nf">node_color_green</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Green part of rgb color </span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        green: int</span>
+<span class="sd">            g in {0, 1, ..., 255}</span>
+<span class="sd">        &#39;&#39;&#39;</span> 
+        <span class="k">return</span> <span class="mi">0</span>
+    </div>
+<div class="viewcode-block" id="AttributeNodeInterface.node_color_blue"><a class="viewcode-back" href="../../../vizasm.vizasm_networkx.html#vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.node_color_blue">[docs]</a>    <span class="k">def</span> <span class="nf">node_color_blue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Blue part of rgb color </span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        blue: int</span>
+<span class="sd">            b in {0, 1, ..., 255}</span>
+<span class="sd">        </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    </div>
+<div class="viewcode-block" id="AttributeNodeInterface.node_size"><a class="viewcode-back" href="../../../vizasm.vizasm_networkx.html#vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.node_size">[docs]</a>    <span class="k">def</span> <span class="nf">node_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Node Size</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        size: double</span>
+<span class="sd">            default is 1.0</span>
+<span class="sd">         &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="mf">1.0</span>
+</div>
+<div class="viewcode-block" id="AttributeNodeInterface.get_viz_color_dict"><a class="viewcode-back" href="../../../vizasm.vizasm_networkx.html#vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.get_viz_color_dict">[docs]</a>    <span class="k">def</span> <span class="nf">get_viz_color_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>    
+        <span class="sd">&#39;&#39;&#39; Returns the subdictionary with the color key keeping structure of the dictionary &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">GraphUtil</span><span class="o">.</span><span class="n">get_viz_color_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_gexf_viz_attr_dict</span><span class="p">())</span>
+    </div>
+<div class="viewcode-block" id="AttributeNodeInterface.get_size"><a class="viewcode-back" href="../../../vizasm.vizasm_networkx.html#vizasm.vizasm_networkx.AttributeNodeInterface.AttributeNodeInterface.get_size">[docs]</a>    <span class="k">def</span> <span class="nf">get_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Returns the subdictionary with the size key keeping structure of the dictionary &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">GraphUtil</span><span class="o">.</span><span class="n">get_size</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_gexf_viz_attr_dict</span><span class="p">())</span>
+    </div>
+    <span class="k">def</span> <span class="nf">__create_gexf_viz_attr_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns an attribute dictionary that can be directly used for a node in networkx.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict: dict</span>
+<span class="sd">            dictionary of attributes according to the gexf extension Visualization </span>
+<span class="sd">            Example: {&#39;viz&#39;: {&#39;color&#39;: {&#39;a&#39;: 1.0, &#39;r&#39;: 0, &#39;b&#39;: 0, &#39;g&#39;: 0}, &#39;size&#39;: 1.0}}</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">GraphUtil</span><span class="o">.</span><span class="n">viz_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">node_color_transparency</span><span class="p">(),</span>
+                                  <span class="bp">self</span><span class="o">.</span><span class="n">node_color_red</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_color_green</span><span class="p">(),</span>
+                                  <span class="bp">self</span><span class="o">.</span><span class="n">node_color_blue</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_size</span><span class="p">())</span>
+    
+    </div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

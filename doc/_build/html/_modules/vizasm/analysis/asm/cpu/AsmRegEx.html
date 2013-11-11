@@ -1,0 +1,337 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm.analysis.asm.cpu.AsmRegEx &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vizasm.analysis.asm.cpu.AsmRegEx</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 20.03.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">vizasm.RegEx</span> <span class="kn">import</span> <span class="n">RegEx</span>
+<span class="kn">from</span> <span class="nn">vizasm.util</span> <span class="kn">import</span> <span class="n">Util</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">imap</span>
+
+<div class="viewcode-block" id="AsmRegEx"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx">[docs]</a><span class="k">class</span> <span class="nc">AsmRegEx</span><span class="p">(</span><span class="n">RegEx</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    Contains regular expressions (mostly in verbose mode) used for analyzing the assembler file </span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    RE_SELECTOR</span>
+<span class="sd">        match e.g. &quot;@selector(objectForKey:)&quot;</span>
+<span class="sd">         </span>
+<span class="sd">    RE_BASIC_BLOCK</span>
+<span class="sd">        match e.g. &quot;; Basic Block Input Regs: rax rdx rsi rdi -  Killed Regs: rax rcx rdx rsp rbp rsi rdi r8&quot;</span>
+<span class="sd">         </span>
+<span class="sd">    RE_METH_IMPL</span>
+<span class="sd">        match e.g. &quot;methImpl_AppDelegate_applicationDidFinishLaunching_&quot;</span>
+<span class="sd">        or &quot;methImpl_static_Segment_demangleNoSuffix&quot;</span>
+<span class="sd">        </span>
+<span class="sd">    RE_CATEGORY</span>
+<span class="sd">        match category method like e.g. &quot;+[NSURLRequest(AnyHttpsCert) allowsAnyHTTPSCertificateForHost:]_100002120:&quot; (static category method) or &quot;-[NSURLRequest(AnyHttpsCert) initWithURL:cachePolicy:timeoutInterval:]_100002060:&quot; (class category method)</span>
+
+<span class="sd">    RE_HEX_VALUE</span>
+<span class="sd">        match e.g. &quot;OxFF or 0xff&quot; or &quot;#0xFF&quot; (arm)</span>
+<span class="sd">    </span>
+<span class="sd">    SEARCH_NOP</span>
+<span class="sd">        use to search for nop command</span>
+<span class="sd">    </span>
+<span class="sd">    RE_MATCH_ENTRYPOINT</span>
+<span class="sd">        use to identify entry point in asm file</span>
+<span class="sd">        </span>
+<span class="sd">    RE_OWN_C_METHOD_DEF</span>
+<span class="sd">        match .e.g &quot;// cFunction(int, int, int)&quot;</span>
+<span class="sd">        </span>
+<span class="sd">    RE_OWN_C_METHOD_CALLED</span>
+<span class="sd">        match e.g. &quot;cFunction(int, int, int)&quot;</span>
+<span class="sd">        </span>
+<span class="sd">    RE_SUB</span>
+<span class="sd">        match e.g. &quot;sub_1001bc366:&quot;</span>
+<span class="sd">        </span>
+<span class="sd">    RE_CALLED_SUB</span>
+<span class="sd">        match e.g. &quot;sub_1001bc366&quot;</span>
+<span class="sd">        </span>
+<span class="sd">    RE_C_METHOD</span>
+<span class="sd">        match e.g. &quot;_CGPointMake_10002c4e0_1:&quot;</span>
+<span class="sd">        </span>
+<span class="sd">    RE_CALLED_C_METHOD</span>
+<span class="sd">        match e.g. &quot;_CGPointMake_10002c4e0_1&quot;</span>
+<span class="sd">        </span>
+<span class="sd">    RE_CLASS_PARENT</span>
+<span class="sd">        match e.g. &quot;Class Object1 (parent class: SuperObject)&quot;</span>
+<span class="sd">        </span>
+<span class="sd">    RE_FORMAT_STRING</span>
+<span class="sd">        match e.g. @&quot;&quot;%s%d&#39; but not &#39;@&quot;%%&quot;&#39; and not &#39;@&quot;Defaults&quot;&#39;. The string must contain a format argument like e.g. %@ </span>
+<span class="sd">        </span>
+<span class="sd">    RE_STRING</span>
+<span class="sd">        match e.g. &#39;@&quot;defaults&quot;&#39;         </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="c"># use to match only if string begins with whitespace</span>
+    <span class="n">__ONLY_WS_AT_BEGINNING</span> <span class="o">=</span> <span class="s">&#39;^\s+&#39;</span>
+    
+    <span class="n">RE_SELECTOR_GR_SELECTOR</span> <span class="o">=</span> <span class="s">&#39;selector&#39;</span>
+    <span class="n">RE_SELECTOR</span> <span class="o">=</span> <span class="s">r&#39;&#39;&#39;</span>
+<span class="s"> @selector\(            # @selector(</span>
+<span class="s"> (?P&lt;</span><span class="si">%s</span><span class="s">&gt;[\w:]+)         # objectForKey:</span>
+<span class="s"> \)                     # )</span>
+<span class="s"> &#39;&#39;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">RE_SELECTOR_GR_SELECTOR</span><span class="p">)</span>
+
+    <span class="n">RE_BASIC_BLOCK_INPUT_REGS</span> <span class="o">=</span> <span class="s">&#39;input_regs&#39;</span>
+    <span class="n">RE_BASIC_BLOCK_KILLED_REGS</span> <span class="o">=</span> <span class="s">&#39;killed_regs&#39;</span>
+    <span class="n">RE_BASIC_BLOCK</span> <span class="o">=</span> <span class="s">r&#39;&#39;&#39;</span>
+<span class="s"> Basic\ Block\ Input\ Regs\:\s*   # ; Basic Block Input Regs: </span>
+<span class="s"> (?P&lt;</span><span class="si">%s</span><span class="s">&gt;[\w &lt;&gt;]+)                 # rax rdx rsi rdi</span>
+<span class="s"> \s+-\s+                          #  -  </span>
+<span class="s"> Killed\ Regs\:\s*                # Killed Regs: </span>
+<span class="s"> (?P&lt;</span><span class="si">%s</span><span class="s">&gt;[\w ]+)                   # rax rcx rdx rsp rbp rsi rdi r8</span>
+<span class="s"> \s*</span>
+<span class="s">&#39;&#39;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">RE_BASIC_BLOCK_INPUT_REGS</span><span class="p">,</span> <span class="n">RE_BASIC_BLOCK_KILLED_REGS</span><span class="p">)</span>  <span class="c"># rax rcx rdx rsp rbp rsi rdi r8</span>
+
+    <span class="n">RE_METH_IMPL_GR_CLASS</span> <span class="o">=</span> <span class="s">&#39;class&#39;</span>
+    <span class="n">RE_METH_IMPL_GR_SELECTOR</span> <span class="o">=</span> <span class="s">&#39;selector&#39;</span>
+    <span class="n">RE_METH_IMPL_GR_STATIC</span> <span class="o">=</span> <span class="s">&#39;static&#39;</span>
+    <span class="n">RE_METH_IMPL</span> <span class="o">=</span> <span class="s">r&#39;&#39;&#39;</span>
+<span class="s">    ^\s+                                   # only whitespace at the beginning </span>
+<span class="s">    (methImpl|method|meth)[_]              # methImpl_ or method_ or meth_</span>
+<span class="s">    (?P&lt;</span><span class="si">%s</span><span class="s">&gt;static)?_?                      # static_</span>
+<span class="s">    (?P&lt;</span><span class="si">%s</span><span class="s">&gt;([A-Za-z0-9]+[_]*))             # AppDelegate</span>
+<span class="s">    [_]                                    # _</span>
+<span class="s">    (?P&lt;</span><span class="si">%s</span><span class="s">&gt;([A-Za-z0-9]+[_]*)+)            # applicationDidFinishLaunching_</span>
+<span class="s">    &#39;&#39;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">RE_METH_IMPL_GR_STATIC</span><span class="p">,</span> <span class="n">RE_METH_IMPL_GR_CLASS</span><span class="p">,</span> <span class="n">RE_METH_IMPL_GR_SELECTOR</span><span class="p">)</span>
+
+    
+    <span class="n">RE_CATEGORY_ON_CLASS</span> <span class="o">=</span> <span class="s">&#39;on_class&#39;</span>
+    <span class="n">RE_CATEGORY_CLASS</span> <span class="o">=</span> <span class="s">&#39;class&#39;</span>
+    <span class="n">RE_CATEGORY_SELECTOR</span> <span class="o">=</span> <span class="s">&#39;selector&#39;</span>
+    <span class="n">RE_CATEGORY_STATIC_SYMBOL</span> <span class="o">=</span> <span class="s">&#39;selector_type&#39;</span>
+    <span class="n">RE_CATEGORY</span> <span class="o">=</span> <span class="s">r&#39;&#39;&#39;</span>
+<span class="s"> (?P&lt;</span><span class="si">%s</span><span class="s">&gt;[+]|-)+      # starts with + or -</span>
+<span class="s"> \[                  # [ </span>
+<span class="s"> (?P&lt;</span><span class="si">%s</span><span class="s">&gt;\w+)         # NSURLRequest</span>
+<span class="s"> \((?P&lt;</span><span class="si">%s</span><span class="s">&gt;\w+)\)     # AnyHttpsCert</span>
+<span class="s"> \s+                 # whitespace</span>
+<span class="s"> (?P&lt;</span><span class="si">%s</span><span class="s">&gt;[\w:]+)      # initWithURL:cachePolicy:timeoutInterval:</span>
+<span class="s"> \]                  # ]</span>
+<span class="s"> _\S+:               # _100002060: </span>
+<span class="s">&#39;&#39;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">RE_CATEGORY_STATIC_SYMBOL</span><span class="p">,</span> <span class="n">RE_CATEGORY_ON_CLASS</span><span class="p">,</span> <span class="n">RE_CATEGORY_CLASS</span><span class="p">,</span> <span class="n">RE_CATEGORY_SELECTOR</span><span class="p">)</span>
+    <span class="n">RE_CATEGORY_SYMBOL_STATIC</span> <span class="o">=</span> <span class="s">&#39;+&#39;</span>
+    <span class="n">RE_CATEGORY_SYMBOL_NON_STATIC</span> <span class="o">=</span> <span class="s">&#39;-&#39;</span>
+    
+    <span class="n">RE_HEX_VALUE_GR_HEX_VALUE</span> <span class="o">=</span> <span class="s">&#39;hex_value&#39;</span>
+    <span class="n">RE_HEX_VALUE</span> <span class="o">=</span> <span class="s">r&#39;&#39;&#39;</span>
+<span class="s"> \#?               # optional with leading &quot;#&quot; (arm)</span>
+<span class="s"> (?P&lt;</span><span class="si">%s</span><span class="s">&gt;</span>
+<span class="s"> 0x[0-9a-zA-Z]+    # 0xFF</span>
+<span class="s"> )     </span>
+<span class="s"> &#39;&#39;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">RE_HEX_VALUE_GR_HEX_VALUE</span><span class="p">)</span>
+
+    <span class="c"># cFunction(int, int, int)</span>
+    <span class="n">RE_OWN_C_METHOD_BASE_GR_NAME</span> <span class="o">=</span> <span class="s">&#39;name&#39;</span>
+    <span class="n">RE_OWN_C_METHOD_BASE_GR_ARGS</span> <span class="o">=</span> <span class="s">&#39;args&#39;</span>
+    <span class="n">RE_OWN_C_METHOD_BASE</span> <span class="o">=</span> <span class="s">&#39;&#39;&#39;</span>
+<span class="s">    \s*</span>
+<span class="s">    (?P&lt;</span><span class="si">%s</span><span class="s">&gt;[^@]*) # match all but @selector(...) - cFunction</span>
+<span class="s">    [(]           # (</span>
+<span class="s">    (?P&lt;</span><span class="si">%s</span><span class="s">&gt;.*)    # int, int, int</span>
+<span class="s">    [)]           # )</span>
+<span class="s">    &#39;&#39;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">RE_OWN_C_METHOD_BASE_GR_NAME</span><span class="p">,</span> <span class="n">RE_OWN_C_METHOD_BASE_GR_ARGS</span><span class="p">)</span>
+    
+    <span class="c"># // cFunction(int, int, int)</span>
+    <span class="n">RE_OWN_C_METHOD_DEF</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s">&#39;[/]{2}&#39;</span><span class="p">,</span> <span class="n">RE_OWN_C_METHOD_BASE</span><span class="p">)</span>
+    
+    <span class="c"># ; cFunction(int, int, int)</span>
+    <span class="n">RE_OWN_C_METHOD_CALLED</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s">&#39;[;]&#39;</span><span class="p">,</span> <span class="n">RE_OWN_C_METHOD_BASE</span><span class="p">)</span>
+    
+    <span class="c">#    [/]{2}</span>
+    <span class="c"># base re for RE_SUB and RE_CALLED_SUB</span>
+    <span class="n">_RE_CALLED_SUB_BASE</span> <span class="o">=</span> <span class="s">&#39;&#39;&#39;</span>
+<span class="s">    (?P&lt;</span><span class="si">%s</span><span class="s">&gt;</span>
+<span class="s">    sub[_]         # sub_</span>
+<span class="s">    \S+)           # 1001bc366</span>
+<span class="s">    &#39;&#39;&#39;</span>
+    <span class="n">RE_CALLED_SUB_GR_SUBNAME</span> <span class="o">=</span> <span class="s">&#39;subname&#39;</span>
+    <span class="c"># match only add end of line</span>
+    <span class="n">RE_CALLED_SUB</span> <span class="o">=</span> <span class="p">(</span><span class="n">_RE_CALLED_SUB_BASE</span> <span class="o">+</span> <span class="s">&#39;$&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="n">RE_CALLED_SUB_GR_SUBNAME</span>  
+    
+    <span class="n">RE_SUB_GR_SUBNAME</span> <span class="o">=</span> <span class="s">&#39;subname&#39;</span>
+    <span class="c"># match only add end of line</span>
+    <span class="n">RE_SUB</span> <span class="o">=</span> <span class="p">(</span><span class="n">__ONLY_WS_AT_BEGINNING</span> <span class="o">+</span> <span class="n">_RE_CALLED_SUB_BASE</span> <span class="o">+</span> <span class="s">&#39;[:]$&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="n">RE_SUB_GR_SUBNAME</span>
+    
+    <span class="c"># base re for RE_C_METHOD and RE_CALLED_C_METHOD</span>
+    <span class="n">_RE_C_METHOD_BASE</span> <span class="o">=</span> <span class="s">&#39;&#39;&#39;</span>
+<span class="s">    _+              # _ </span>
+<span class="s">    (?P&lt;</span><span class="si">%s</span><span class="s">&gt;\S+)     # CGPointMake_10002c4e0_1</span>
+<span class="s">    &#39;&#39;&#39;</span>
+    
+    <span class="n">RE_C_METHOD_GR_NAME</span> <span class="o">=</span> <span class="s">&#39;c_method_name&#39;</span>
+    <span class="c"># match only add end of line</span>
+    <span class="n">RE_C_METHOD</span> <span class="o">=</span> <span class="p">(</span><span class="n">__ONLY_WS_AT_BEGINNING</span> <span class="o">+</span> <span class="n">_RE_C_METHOD_BASE</span> <span class="o">+</span> <span class="s">&#39;[:]$&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="n">RE_C_METHOD_GR_NAME</span>  
+    
+    <span class="n">RE_CALLED_C_METHOD_GR_NAME</span> <span class="o">=</span> <span class="s">&#39;c_method_name&#39;</span>
+    <span class="c"># match only add end of line</span>
+    <span class="n">RE_CALLED_C_METHOD</span> <span class="o">=</span> <span class="p">(</span><span class="n">_RE_C_METHOD_BASE</span> <span class="o">+</span> <span class="s">&#39;$&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="n">RE_CALLED_C_METHOD_GR_NAME</span>  
+    
+    <span class="n">SEARCH_NOP</span> <span class="o">=</span> <span class="s">&#39;nop&#39;</span>
+    
+    <span class="n">RE_MATCH_ENTRYPOINT</span> <span class="o">=</span> <span class="s">&#39;\s*EntryPoint:\s*&#39;</span>
+    
+    <span class="n">RE_CLASS_PARENT_GR_CLASS</span> <span class="o">=</span> <span class="s">&#39;class&#39;</span>
+    <span class="n">RE_CLASS_PARENT_GR_PARENT</span> <span class="o">=</span> <span class="s">&#39;parent&#39;</span>
+    <span class="n">RE_CLASS_PARENT</span> <span class="o">=</span> <span class="s">r&#39;&#39;&#39;</span>
+<span class="s"> Class\s+             # Class</span>
+<span class="s"> (?P&lt;</span><span class="si">%s</span><span class="s">&gt;\w+)\s+       # Object1</span>
+<span class="s"> \(parent\s+class[:]\s+ # (parent class:  </span>
+<span class="s"> (?P&lt;</span><span class="si">%s</span><span class="s">&gt;\w+)          # SuperObject)</span>
+<span class="s"> \)</span>
+<span class="s"> &#39;&#39;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">RE_CLASS_PARENT_GR_CLASS</span><span class="p">,</span> <span class="n">RE_CLASS_PARENT_GR_PARENT</span><span class="p">)</span> 
+
+    <span class="n">RE_FORMAT_STRING_GR_STRING</span> <span class="o">=</span> <span class="s">&#39;format_string&#39;</span>
+    <span class="n">RE_FORMAT_STRING_GR_OBJC_STRING</span> <span class="o">=</span> <span class="s">&#39;objc_string&#39;</span>
+    <span class="c"># WARNING TODO: INSERT GR ARGUMENT!!</span>
+    
+    <span class="c"># @&quot;error: %s, code: %d&quot;</span>
+    <span class="n">RE_FORMAT_STRING</span> <span class="o">=</span> <span class="s">r&#39;&#39;&#39;</span>
+<span class="s"> (?P&lt;objc_string&gt;@?)&quot;                         # @&quot; or &quot;</span>
+<span class="s"> (?P&lt;format_string&gt;</span>
+<span class="s">  (?:</span>
+<span class="s">  [^%]                       # match all but %</span>
+<span class="s">  |                          # or</span>
+<span class="s">  </span><span class="si">%%</span><span class="s">)                        # </span><span class="si">%%</span><span class="s"> (escaped %)</span>
+<span class="s">  *(?:%.*)                   # at least one (or more) </span><span class="si">% f</span><span class="s">ollowed by alphanumeric or @ is needed </span>
+<span class="s">  )</span>
+<span class="s"> &quot;                          # &quot;</span>
+<span class="s">&#39;&#39;&#39;</span>
+    <span class="n">RE_STRING_GR_STRING</span> <span class="o">=</span> <span class="s">&#39;string&#39;</span>
+    <span class="n">RE_STRING</span> <span class="o">=</span> <span class="s">r&#39;&#39;&#39;</span>
+<span class="s"> @&quot;                         # @&quot;</span>
+<span class="s"> (?P&lt;</span><span class="si">%s</span><span class="s">&gt;.*)                 # defaults</span>
+<span class="s"> &quot;                          # &quot;</span>
+<span class="s">&#39;&#39;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">RE_STRING_GR_STRING</span><span class="p">)</span>
+
+    <span class="n">RE_C_STRING_GR_NAME</span> <span class="o">=</span> <span class="s">&#39;c_string&#39;</span>
+    <span class="n">RE_C_STRING</span> <span class="o">=</span> <span class="s">&#39;&#39;&#39;</span>
+<span class="s">    &quot;(?P&lt;</span><span class="si">%s</span><span class="s">&gt;.*)&quot;</span>
+<span class="s">    &#39;&#39;&#39;</span> <span class="o">%</span> <span class="n">RE_C_STRING_GR_NAME</span>
+    
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="AsmRegEx.method_implementation_is_static"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.method_implementation_is_static">[docs]</a>    <span class="k">def</span> <span class="nf">method_implementation_is_static</span><span class="p">(</span><span class="n">re_meth_impl_gr_static_val</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Returns if the method is static &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">re_meth_impl_gr_static_val</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span>
+    </div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="AsmRegEx.is_method_implementation"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.is_method_implementation">[docs]</a>    <span class="k">def</span> <span class="nf">is_method_implementation</span><span class="p">(</span><span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Indicates if a line is a `CategoryClass` or method implementation.</span>
+<span class="sd">        See `AsmRegEx.RE_CATEGORY` and `AsmRegEx.RE_METH_IMPL`.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">funcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">AsmRegEx</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">AsmRegEx</span><span class="o">.</span><span class="n">RE_CATEGORY</span><span class="p">),</span> <span class="n">AsmRegEx</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">AsmRegEx</span><span class="o">.</span><span class="n">RE_METH_IMPL</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="n">Util</span><span class="o">.</span><span class="n">get_fst_not_none</span><span class="p">(</span><span class="n">imap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">f</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s">&#39;search&#39;</span><span class="p">)(</span><span class="n">asmline</span><span class="p">),</span> <span class="n">funcs</span><span class="p">))</span>
+    </div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="AsmRegEx.is_entrypoint"><a class="viewcode-back" href="../../../../../vizasm.analysis.asm.cpu.html#vizasm.analysis.asm.cpu.AsmRegEx.AsmRegEx.is_entrypoint">[docs]</a>    <span class="k">def</span> <span class="nf">is_entrypoint</span><span class="p">(</span><span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Check if line is entry point in asm file (See `AsmRegEx.RE_MATCH_ENTRYPOINT`) &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">AsmRegEx</span><span class="o">.</span><span class="n">compiled_re</span><span class="p">(</span><span class="n">AsmRegEx</span><span class="o">.</span><span class="n">RE_MATCH_ENTRYPOINT</span><span class="p">)</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span>
+    
+    </div></div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">AsmRegEx</span><span class="o">.</span><span class="n">c_method_name</span><span class="p">(</span><span class="s">&#39;sub_1000045f0:&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">AsmRegEx</span><span class="o">.</span><span class="n">c_method_name</span><span class="p">(</span><span class="s">&#39;_argTest_2df0&#39;</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,428 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm.model.objc.arguments.Selector &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vizasm.model.objc.arguments.Selector</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 27.03.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.AsmRegEx</span> <span class="kn">import</span> <span class="n">AsmRegEx</span>
+<span class="kn">from</span> <span class="nn">vizasm.hopper.HopperAnnotationInterface</span> <span class="kn">import</span> <span class="n">HopperAnnotationInterface</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.AsmParserInterface</span> <span class="kn">import</span> <span class="n">AsmParserInterface</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.arguments.Arguments</span> <span class="kn">import</span> <span class="n">Arguments</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.arguments.ArgumentsOverloadedException</span> <span class="kn">import</span> \
+    <span class="n">ArgumentsOverloadedException</span>
+<span class="kn">from</span> <span class="nn">vizasm.model.objc.arguments.ArgumentsUnderloadedException</span> <span class="kn">import</span> \
+    <span class="n">ArgumentsUnderloadedException</span>
+
+
+<div class="viewcode-block" id="SelectorOverloadedException"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Selector.SelectorOverloadedException">[docs]</a><span class="k">class</span> <span class="nc">SelectorOverloadedException</span><span class="p">(</span><span class="n">ArgumentsOverloadedException</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Indicates that the selector has more arguments than it needs! &#39;&#39;&#39;</span>
+    
+    </div>
+<div class="viewcode-block" id="SelectorUnderloadedException"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Selector.SelectorUnderloadedException">[docs]</a><span class="k">class</span> <span class="nc">SelectorUnderloadedException</span><span class="p">(</span><span class="n">ArgumentsUnderloadedException</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Indicates that the selector has less arguments than it needs! &#39;&#39;&#39;</span>
+    </div>
+<div class="viewcode-block" id="Selector"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Selector.Selector">[docs]</a><span class="k">class</span> <span class="nc">Selector</span><span class="p">(</span><span class="n">Arguments</span><span class="p">,</span> <span class="n">AsmParserInterface</span><span class="p">,</span> <span class="n">HopperAnnotationInterface</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    Represents an objective-c selector</span>
+<span class="sd">     </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    selector_name: string</span>
+<span class="sd">        the name of the selector (mapped to objc_name)</span>
+<span class="sd">     &#39;&#39;&#39;</span>
+    
+    <span class="n">SELECTOR_DELIMITER</span> <span class="o">=</span> <span class="s">&#39;:&#39;</span>
+    <span class="n">SELECTOR_INIT</span> <span class="o">=</span> <span class="s">&#39;init&#39;</span>
+    <span class="n">SELECTOR_ALLOC</span> <span class="o">=</span> <span class="s">&#39;alloc&#39;</span>
+    <span class="n">SELECTOR_NEW</span> <span class="o">=</span> <span class="s">&#39;new&#39;</span>
+    <span class="n">SELECTOR_RETAIN</span> <span class="o">=</span> <span class="s">&#39;retain&#39;</span>
+    <span class="n">SELECTOR_RELEASE</span> <span class="o">=</span> <span class="s">&#39;release&#39;</span>
+    <span class="n">SELECTOR_AUTORELEASE</span> <span class="o">=</span> <span class="s">&#39;autorelease&#39;</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">arguments</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">is_static</span> <span class="o">=</span> <span class="bp">False</span><span class="p">):</span>   
+        <span class="k">if</span> <span class="n">arguments</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">arguments</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">Arguments</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">arguments</span><span class="p">,</span> <span class="n">is_static</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Arguments</span><span class="o">.</span><span class="n">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Arguments</span><span class="o">.</span><span class="n">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Selector.get_selector_name"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Selector.Selector.get_selector_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_selector_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_objc_name</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="Selector.set_selector_name"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Selector.Selector.set_selector_name">[docs]</a>    <span class="k">def</span> <span class="nf">set_selector_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selname</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_objc_name</span><span class="p">(</span><span class="n">selname</span><span class="p">)</span>
+        </div>
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__selector_filled_with_arguments_description</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_obj_name</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">(</span><span class="si">%s</span><span class="s">, max. args: </span><span class="si">%d</span><span class="s">, arguments: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_objc_name</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">cnt_needs_arguments</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_arguments</span><span class="p">())</span>
+    
+
+    <span class="k">def</span> <span class="nf">__selector_filled_with_arguments_description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        Return the selector if no arguments are available. </span>
+<span class="sd">        Otherwise return the selector filled with the arguments after each delimiter.</span>
+<span class="sd">        If no argument is available n/a is used </span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        RuntimeError</span>
+<span class="sd">            </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        string </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">selname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selector_name</span><span class="p">()</span>
+        <span class="c"># no argument available</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cnt_needs_arguments</span><span class="p">()</span> <span class="ow">is</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">selname</span>
+        <span class="c"># fill selector with arguments</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+        <span class="n">sel_split</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub_selectors</span><span class="p">()</span>
+        <span class="c"># remove stuff after last split</span>
+        <span class="n">sel_split</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">sel</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sel_split</span><span class="p">):</span>
+            <span class="n">argument</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_argument_at_idx</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+            <span class="c"># add whitespace between splitted selectors, but not at end</span>
+            <span class="n">space</span> <span class="o">=</span> <span class="s">&#39;&#39;</span> <span class="k">if</span> <span class="n">idx</span> <span class="ow">is</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cnt_needs_arguments</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">else</span> <span class="s">&#39; &#39;</span>
+            <span class="k">if</span> <span class="n">argument</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">argument</span> <span class="o">=</span> <span class="s">&#39;n/a&#39;</span>
+            <span class="n">arg_str</span> <span class="o">=</span> <span class="n">argument</span><span class="o">.</span><span class="n">__str__</span><span class="p">()</span>
+            <span class="n">res</span> <span class="o">+=</span> <span class="n">sel</span> <span class="o">+</span> <span class="n">Selector</span><span class="o">.</span><span class="n">SELECTOR_DELIMITER</span> <span class="o">+</span> <span class="n">arg_str</span> <span class="o">+</span> <span class="n">space</span>
+        <span class="k">return</span> <span class="n">res</span>
+    
+<div class="viewcode-block" id="Selector.add_argument"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Selector.Selector.add_argument">[docs]</a>    <span class="k">def</span> <span class="nf">add_argument</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argument</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        Add an argument to the selector</span>
+<span class="sd">         </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        SelectorOverloadedException</span>
+<span class="sd">            if selector has more arguments than it needs</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">Arguments</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argument</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">ArgumentsOverloadedException</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">SelectorOverloadedException</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argument</span><span class="p">),</span> <span class="bp">None</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">]</span>
+    </div>
+<div class="viewcode-block" id="Selector.get_argument_at_idx"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Selector.Selector.get_argument_at_idx">[docs]</a>    <span class="k">def</span> <span class="nf">get_argument_at_idx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return the argument at specified idx. If not found None will be returned &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">cnt_has_arguments</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_arguments</span><span class="p">()[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">None</span>
+   </div>
+<div class="viewcode-block" id="Selector.sub_selectors"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Selector.Selector.sub_selectors">[docs]</a>    <span class="k">def</span> <span class="nf">sub_selectors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Get a list of sub selector names &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selector_name</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">Selector</span><span class="o">.</span><span class="n">SELECTOR_DELIMITER</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="Selector.is_alloc"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Selector.Selector.is_alloc">[docs]</a>    <span class="k">def</span> <span class="nf">is_alloc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return if the selectorname is alloc &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selector_name</span><span class="p">()</span> <span class="o">==</span> <span class="n">Selector</span><span class="o">.</span><span class="n">SELECTOR_ALLOC</span>
+   </div>
+<div class="viewcode-block" id="Selector.is_kind_of_init"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Selector.Selector.is_kind_of_init">[docs]</a>    <span class="k">def</span> <span class="nf">is_kind_of_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return if the selectorname begins with init &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selector_name</span><span class="p">()</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">Selector</span><span class="o">.</span><span class="n">SELECTOR_INIT</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span>
+    </div>
+<div class="viewcode-block" id="Selector.is_init"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Selector.Selector.is_init">[docs]</a>    <span class="k">def</span> <span class="nf">is_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return if the selectorname is init &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selector_name</span><span class="p">()</span> <span class="o">==</span> <span class="n">Selector</span><span class="o">.</span><span class="n">SELECTOR_INIT</span>
+    </div>
+<div class="viewcode-block" id="Selector.is_new"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Selector.Selector.is_new">[docs]</a>    <span class="k">def</span> <span class="nf">is_new</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return if the selectorname is new &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selector_name</span><span class="p">()</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">Selector</span><span class="o">.</span><span class="n">SELECTOR_NEW</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span>
+    </div>
+<div class="viewcode-block" id="Selector.is_retain"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Selector.Selector.is_retain">[docs]</a>    <span class="k">def</span> <span class="nf">is_retain</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return if the selectorname is retain &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selector_name</span><span class="p">()</span> <span class="o">==</span> <span class="n">Selector</span><span class="o">.</span><span class="n">SELECTOR_RETAIN</span>
+    </div>
+<div class="viewcode-block" id="Selector.is_release"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Selector.Selector.is_release">[docs]</a>    <span class="k">def</span> <span class="nf">is_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return if the selectorname is release &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selector_name</span><span class="p">()</span> <span class="o">==</span> <span class="n">Selector</span><span class="o">.</span><span class="n">SELECTOR_RELEASE</span>
+    </div>
+<div class="viewcode-block" id="Selector.is_autorelease"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Selector.Selector.is_autorelease">[docs]</a>    <span class="k">def</span> <span class="nf">is_autorelease</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return if the selectorname is autorelease &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selector_name</span><span class="p">()</span> <span class="o">==</span> <span class="n">Selector</span><span class="o">.</span><span class="n">SELECTOR_AUTORELEASE</span>
+    </div>
+<div class="viewcode-block" id="Selector.does_retain"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Selector.Selector.does_retain">[docs]</a>    <span class="k">def</span> <span class="nf">does_retain</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return if the selector increments the retain count &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_alloc</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_new</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_retain</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="Selector.does_release"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Selector.Selector.does_release">[docs]</a>    <span class="k">def</span> <span class="nf">does_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return if the selector decrements the retain count &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_release</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_autorelease</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="Selector.is_retain_count_important"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Selector.Selector.is_retain_count_important">[docs]</a>    <span class="k">def</span> <span class="nf">is_retain_count_important</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return if the selector has an impact on the retain count &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">does_retain</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">does_release</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="Selector.fill_from_cpu"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Selector.Selector.fill_from_cpu">[docs]</a>    <span class="k">def</span> <span class="nf">fill_from_cpu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cpu</span><span class="p">,</span> <span class="n">register_list</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        Fill the arguments of the selector from cpu (registers and stack)</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        register_list</span>
+<span class="sd">            the list of register from which to fill (if None is passed, the default register list is used `Cpu.selector_arg_registers()`) </span>
+<span class="sd">    </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        SelectorUnderloadedException</span>
+<span class="sd">            raised if more arguments than needed came from the cpu</span>
+<span class="sd">        SelectorOverloadedException</span>
+<span class="sd">            raised if not enough arguments came from the cpu</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">register_list</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">register_list</span> <span class="o">=</span> <span class="n">cpu</span><span class="o">.</span><span class="n">selector_arg_registers</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">Arguments</span><span class="o">.</span><span class="n">fill_from_cpu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cpu</span><span class="p">,</span> <span class="n">register_list</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">ArgumentsOverloadedException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">SelectorOverloadedException</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">_new_argument</span><span class="p">),</span> <span class="bp">None</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">except</span> <span class="n">ArgumentsUnderloadedException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">SelectorUnderloadedException</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cpu</span><span class="p">),</span> <span class="bp">None</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">]</span>
+        
+               </div>
+    <span class="k">def</span> <span class="nf">_fill_remaining_args_from_stack</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cpu</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        Fill the arguments of the selector from cpu stack</span>
+<span class="sd">    </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        SelectorOverloadedException</span>
+<span class="sd">            raised if more arguments than needed came from the stack of the cpu </span>
+<span class="sd">        SelectorUnderloadedException</span>
+<span class="sd">            raised if not enough arguments came from the stack of the cpu</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">Arguments</span><span class="o">.</span><span class="n">_fill_remaining_args_from_stack</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cpu</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">ArgumentsOverloadedException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">SelectorOverloadedException</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">_new_argument</span><span class="p">),</span> <span class="bp">None</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">except</span> <span class="n">ArgumentsUnderloadedException</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">SelectorUnderloadedException</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cpu</span><span class="p">),</span> <span class="bp">None</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">]</span>
+    
+<div class="viewcode-block" id="Selector.set_argument_for_sub_selector"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Selector.Selector.set_argument_for_sub_selector">[docs]</a>    <span class="k">def</span> <span class="nf">set_argument_for_sub_selector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subsel_name</span><span class="p">,</span> <span class="n">argument</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Set the argument for the sub selector.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        subsel_name: string</span>
+<span class="sd">            name of the sub selector</span>
+<span class="sd">        argument: object</span>
+<span class="sd">            the argument to set for the sub selector</span>
+<span class="sd">       &#39;&#39;&#39;</span>
+        <span class="n">sub_sels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub_selectors</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">sub_sel</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sub_sels</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">sub_sel</span> <span class="o">==</span> <span class="n">subsel_name</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">get_arguments</span><span class="p">()[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">argument</span>
+            </div>
+<div class="viewcode-block" id="Selector.get_argument_for_sub_selector"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Selector.Selector.get_argument_for_sub_selector">[docs]</a>    <span class="k">def</span> <span class="nf">get_argument_for_sub_selector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subsel_name</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Get the argument for the sub selector.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        subsel_name: string</span>
+<span class="sd">            name of the sub selector</span>
+<span class="sd">       &#39;&#39;&#39;</span>
+        <span class="n">sub_sels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub_selectors</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">sub_sel</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sub_sels</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">sub_sel</span> <span class="o">==</span> <span class="n">subsel_name</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_arguments</span><span class="p">()[</span><span class="n">idx</span><span class="p">]</span>
+                <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">None</span>
+            </div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="Selector.selector_from_delimiter"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Selector.Selector.selector_from_delimiter">[docs]</a>    <span class="k">def</span> <span class="nf">selector_from_delimiter</span><span class="p">(</span><span class="n">selectorname</span><span class="p">,</span> <span class="n">delimiter</span> <span class="o">=</span> <span class="s">&#39;_&#39;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        Return a Selector from a string like e.g. get_arg1_arg2_ where &quot;_&quot; is the delimiter </span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        selectorname: string</span>
+<span class="sd">            selectorname like get_arg1_arg2_ </span>
+<span class="sd">        delimiter: string, optional</span>
+<span class="sd">            delimits the selector (default is &quot;_&quot;)</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">selectorname</span> <span class="o">=</span> <span class="n">selectorname</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">delimiter</span><span class="p">,</span> <span class="n">Selector</span><span class="o">.</span><span class="n">SELECTOR_DELIMITER</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Selector</span><span class="p">(</span><span class="n">selectorname</span><span class="p">)</span>
+    </div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="Selector.selector_from_underscore_delimiter"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Selector.Selector.selector_from_underscore_delimiter">[docs]</a>    <span class="k">def</span> <span class="nf">selector_from_underscore_delimiter</span><span class="p">(</span><span class="n">selectorname</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Return a Selector from a string like e.g. get_arg1_arg2_ where &quot;_&quot; is the delimiter &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">Selector</span><span class="o">.</span><span class="n">selector_from_delimiter</span><span class="p">(</span><span class="n">selectorname</span><span class="p">,</span> <span class="n">delimiter</span> <span class="o">=</span> <span class="s">&#39;_&#39;</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="Selector.cnt_needs_arguments"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Selector.Selector.cnt_needs_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">cnt_needs_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; return the number of arguments the selector takes indicated by the number of &quot;:&quot; in the selector name &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_objc_name</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">Selector</span><span class="o">.</span><span class="n">SELECTOR_DELIMITER</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="Selector.cnt_has_arguments"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Selector.Selector.cnt_has_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">cnt_has_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        Return the number of arguments the selector has. </span>
+<span class="sd">            This is not the number of arguments the selector really (see cnt_needs_arguments()) needs! &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_arguments</span><span class="p">())</span>
+    </div>
+    <span class="n">selector_name</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_selector_name</span><span class="p">,</span> <span class="n">set_selector_name</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&#39;selector_name -- the name of the selector (mapped to objc_name)&#39;</span><span class="p">)</span>
+
+<span class="c">#####################################################################################</span>
+<span class="c"># AsmParserInterface                                                                #</span>
+<span class="c">#####################################################################################    </span>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="Selector.create_from_asm_line"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Selector.Selector.create_from_asm_line">[docs]</a>    <span class="k">def</span> <span class="nf">create_from_asm_line</span><span class="p">(</span><span class="n">asmline</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Create Selector from asm line like e.g. @selector(objectForKey:) &#39;&#39;&#39;</span>
+        <span class="n">selector_match</span> <span class="o">=</span> <span class="n">AsmRegEx</span><span class="o">.</span><span class="n">compiled_vre</span><span class="p">(</span><span class="n">AsmRegEx</span><span class="o">.</span><span class="n">RE_SELECTOR</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asmline</span><span class="p">)</span> 
+        <span class="k">if</span> <span class="n">selector_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">selector</span> <span class="o">=</span> <span class="n">Selector</span><span class="p">(</span><span class="n">selector_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">AsmRegEx</span><span class="o">.</span><span class="n">RE_SELECTOR_GR_SELECTOR</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">selector</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    
+<span class="c">#####################################################################################</span>
+<span class="c"># HopperAnnotationInterface                                                         #</span>
+<span class="c">#####################################################################################    </span>
+</div>
+<div class="viewcode-block" id="Selector.hopper_str"><a class="viewcode-back" href="../../../../../vizasm.model.objc.arguments.html#vizasm.model.objc.arguments.Selector.Selector.hopper_str">[docs]</a>    <span class="k">def</span> <span class="nf">hopper_str</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">(</span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_objc_name</span><span class="p">())</span>
+    </div></div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">sel</span> <span class="o">=</span> <span class="n">Selector</span><span class="p">(</span><span class="s">&#39;objectForKey:&#39;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">sel</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;default1&#39;</span><span class="p">)</span>
+        <span class="n">sel</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;default2&#39;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">SelectorOverloadedException</span> <span class="k">as</span> <span class="n">soe</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">soe</span>
+    
+    <span class="k">print</span> <span class="n">sel</span>
+
+    <span class="n">selissel</span> <span class="o">=</span> <span class="n">Selector</span><span class="p">(</span><span class="s">&#39;objectForKey:&#39;</span><span class="p">)</span>
+    <span class="n">seldnargs</span> <span class="o">=</span> <span class="n">Selector</span><span class="p">(</span><span class="s">&#39;objectForKey::&#39;</span><span class="p">)</span>
+    <span class="n">seldname</span> <span class="o">=</span> <span class="n">Selector</span><span class="p">(</span><span class="s">&#39;standardUserDefaults:&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&#39;same address should be equal: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sel</span> <span class="o">==</span> <span class="n">sel</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&#39;equal sels should be equal: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sel</span> <span class="o">==</span> <span class="n">selissel</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&#39;unequal sel number of arguments should not be equal: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sel</span> <span class="o">==</span> <span class="n">seldnargs</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&#39;unequal sel name should not be equal: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sel</span> <span class="o">==</span> <span class="n">seldname</span><span class="p">)</span>
+
+    <span class="n">sel2</span> <span class="o">=</span> <span class="n">Selector</span><span class="o">.</span><span class="n">create_from_asm_line</span><span class="p">(</span><span class="s">&#39;qword [ds:objc_sel_selfMethod] ; @selector(selfMethod)&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">sel2</span>
+    <span class="k">print</span>
+    <span class="n">sel3</span> <span class="o">=</span> <span class="n">Selector</span><span class="p">(</span><span class="s">&#39;obj1:obj2:obj3:obj4:&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;1&#39;</span><span class="p">,</span> <span class="s">&#39;2&#39;</span><span class="p">,</span> <span class="s">&#39;3&#39;</span><span class="p">])</span>
+    <span class="k">print</span> <span class="n">sel3</span>
+    
+    <span class="n">underscore_sel</span> <span class="o">=</span> <span class="n">Selector</span><span class="o">.</span><span class="n">selector_from_underscore_delimiter</span><span class="p">(</span><span class="s">&#39;applicationDidFinishLaunching_&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">underscore_sel</span>
+    
+    <span class="k">print</span> <span class="n">selissel</span> <span class="o">==</span> <span class="n">Selector</span><span class="p">(</span><span class="s">&#39;objectForKey:&#39;</span><span class="p">)</span>
+    
+    <span class="n">alloc</span> <span class="o">=</span> <span class="n">Selector</span><span class="p">(</span><span class="s">&#39;alloc&#39;</span><span class="p">)</span>
+    <span class="n">init</span> <span class="o">=</span> <span class="n">Selector</span><span class="p">(</span><span class="s">&#39;init&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&#39;is_alloc: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">alloc</span><span class="o">.</span><span class="n">is_alloc</span><span class="p">())</span>
+    <span class="k">print</span> <span class="s">&#39;is_init: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">init</span><span class="o">.</span><span class="n">is_kind_of_init</span><span class="p">())</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,165 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vizasm.analysis.asm.cpu.x86.Cpu_x86 &mdash; VizAsm 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="VizAsm 1 documentation" href="../../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vizasm.analysis.asm.cpu.x86.Cpu_x86</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">VizAsm</span>
+
+<span class="sd">Created on 23.08.2013</span>
+
+<span class="sd">@author: Nils Schmidt</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.Cpu</span> <span class="kn">import</span> <span class="n">Cpu</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.x86.ASM_x86</span> <span class="kn">import</span> <span class="n">ASM_x86</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.x86.ParseUtil_x86</span> <span class="kn">import</span> <span class="n">ParseUtil_x86</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.x86.Register_x86</span> <span class="kn">import</span> <span class="n">Register_x86</span> <span class="k">as</span> <span class="n">reg</span>
+<span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.x86.ObjcRuntime_x86</span> <span class="kn">import</span> <span class="n">ObjcRuntime_x86</span>
+
+<div class="viewcode-block" id="Cpu_x86"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.x86.html#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86">[docs]</a><span class="k">class</span>  <span class="nc">Cpu_x86</span><span class="p">(</span><span class="n">Cpu</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Cpu subclass for the x86_64 architecture. &#39;&#39;&#39;</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">superclasses_dict</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="n">parse_util</span> <span class="o">=</span> <span class="n">ParseUtil_x86</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reg</span><span class="p">)</span>
+        <span class="n">objc_runtime</span> <span class="o">=</span> <span class="n">ObjcRuntime_x86</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">superclasses_dict</span><span class="p">)</span>
+        <span class="n">Cpu</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ASM_x86</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parse_util</span><span class="p">),</span> <span class="n">parse_util</span><span class="p">,</span> <span class="n">reg</span><span class="p">,</span> <span class="n">superclasses_dict</span><span class="p">,</span> <span class="n">objc_runtime</span><span class="p">)</span>
+    
+<span class="c">#####################################################################################</span>
+<span class="c"># CallingConventionsInterface                                                       #</span>
+<span class="c">#####################################################################################    </span>
+     
+<div class="viewcode-block" id="Cpu_x86.destination_register"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.x86.html#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.destination_register">[docs]</a>    <span class="k">def</span> <span class="nf">destination_register</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    </div>
+<div class="viewcode-block" id="Cpu_x86.selector_register"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.x86.html#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.selector_register">[docs]</a>    <span class="k">def</span> <span class="nf">selector_register</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    </div>
+<div class="viewcode-block" id="Cpu_x86.fetches_all_arguments_from_stack"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.x86.html#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.fetches_all_arguments_from_stack">[docs]</a>    <span class="k">def</span> <span class="nf">fetches_all_arguments_from_stack</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    </div>
+<div class="viewcode-block" id="Cpu_x86.selector_arg_registers"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.x86.html#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.selector_arg_registers">[docs]</a>    <span class="k">def</span> <span class="nf">selector_arg_registers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    </div>
+<div class="viewcode-block" id="Cpu_x86.return_register"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.x86.html#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.return_register">[docs]</a>    <span class="k">def</span> <span class="nf">return_register</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">reg</span><span class="p">(</span><span class="s">&#39;eax&#39;</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="Cpu_x86.nslog_arg_registers"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.x86.html#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.nslog_arg_registers">[docs]</a>    <span class="k">def</span> <span class="nf">nslog_arg_registers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    </div>
+<div class="viewcode-block" id="Cpu_x86.stack_pointer_register"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.x86.html#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.stack_pointer_register">[docs]</a>    <span class="k">def</span> <span class="nf">stack_pointer_register</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">reg</span><span class="p">(</span><span class="s">&#39;esp&#39;</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="Cpu_x86.frame_pointer_register"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.x86.html#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.frame_pointer_register">[docs]</a>    <span class="k">def</span> <span class="nf">frame_pointer_register</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">reg</span><span class="p">(</span><span class="s">&#39;ebp&#39;</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="Cpu_x86.floating_arg_registers"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.x86.html#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.floating_arg_registers">[docs]</a>    <span class="k">def</span> <span class="nf">floating_arg_registers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    
+<span class="c">#####################################################################################</span>
+<span class="c"># Overwritten Cpu Behavior                                                          #</span>
+<span class="c">#####################################################################################</span></div>
+<div class="viewcode-block" id="Cpu_x86.pointer_size"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.x86.html#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.pointer_size">[docs]</a>    <span class="k">def</span> <span class="nf">pointer_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">4</span>
+    </div>
+<div class="viewcode-block" id="Cpu_x86.ignore_hex_addr_call"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.x86.html#vizasm.analysis.asm.cpu.x86.Cpu_x86.Cpu_x86.ignore_hex_addr_call">[docs]</a>    <span class="k">def</span> <span class="nf">ignore_hex_addr_call</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; x86 disassemblies often call the next line -&gt; ignore it</span>
+<span class="sd">        Example: </span>
+<span class="sd">        00002d09 E800000000                      call       0x2d0e</span>
+<span class="sd">        00002d0e 58                              pop        eax                                   ; XREF=0x2d09&quot;&quot; &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">True</span>
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../../index.html">VizAsm 1 documentation</a> &raquo;</li>
+          <li><a href="../../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nils Schmidt.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
