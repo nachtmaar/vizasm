@@ -9,11 +9,7 @@ Git
 
 .. code-block:: sh
 
-	git clone https://nachtmaar@bitbucket.org/nachtmaar/vizasm.git
-
-Direct Download
-^^^^^^^^^^^^^^^^
-Download file directly: `https://bitbucket.org/nachtmaar/vizasm/downloads <https://bitbucket.org/nachtmaar/vizasm/downloads>`_ 
+	git clone http://ds.mathematik.uni-marburg.de/gitlab/education/vizasm.git
 
 
 General steps
@@ -75,5 +71,4 @@ Mac
 
 	 # from the vizasm src folder, where VizAsm.py is located
 	 cp -r vizasm/hopper/scripts/*.py ~/Library/Application\ Support/Hopper/Scripts/vizasm
-	- ~/Library/Application\ Support/Hopper/Scripts/
 
