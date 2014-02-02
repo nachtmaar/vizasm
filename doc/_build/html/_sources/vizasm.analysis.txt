@@ -1,5 +1,5 @@
-analysis Package
-================
+vizasm.analysis package
+=======================
 
 Subpackages
 -----------
@@ -9,3 +9,10 @@ Subpackages
     vizasm.analysis.asm
     vizasm.analysis.security
 
+Module contents
+---------------
+
+.. automodule:: vizasm.analysis
+    :members:
+    :undoc-members:
+    :show-inheritance:

@@ -45,19 +45,6 @@ class ParseUtil_x86(ParseUtil_x86_64):
             return ObjcClass(name, is_static = True)       
         return None 
 
-    def parse_imp_stub(self, asmline):
-        imp_stub_match = regexp.compiled_vre(regexp.RE_IMP_STUB).search(asmline)
-        if imp_stub_match is not None:
-            imp_stub = imp_stub_match.group(regexp.RE_IMP_STUB_GR_IMP_STUB)
-            return ImpStub(imp_stub)
-        return None
-    
-    def parse_imp_got(self, asmline):
-        imp_nl_symbol_ptr_match = regexp.compiled_vre(regexp.RE_IMP_NL_SYMBOL_PTR).search(asmline)
-        if imp_nl_symbol_ptr_match:
-            return ImpGot(imp_nl_symbol_ptr_match.group(regexp.RE_IMP_NL_SYMBOL_PTR_GR_NAME))
-        return None
-        
     def parse_var_assignment_without_ivar_ref_from_asmline(self, asmline):
         ''' Create a VarAssignment from asmline like e.g. "mov dword [ds:ecx+0x8]".
         

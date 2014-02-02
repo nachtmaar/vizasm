@@ -1,5 +1,5 @@
-reader Package
-==============
+vizasm.reader package
+=====================
 
 Subpackages
 -----------
@@ -8,3 +8,10 @@ Subpackages
 
     vizasm.reader.asm
 
+Module contents
+---------------
+
+.. automodule:: vizasm.reader
+    :members:
+    :undoc-members:
+    :show-inheritance:

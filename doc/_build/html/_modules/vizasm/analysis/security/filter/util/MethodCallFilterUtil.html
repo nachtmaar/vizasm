@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -76,7 +74,25 @@
 <span class="sd">Created on 07.08.2013</span>
 
 <span class="sd">@author: Nils Schmidt</span>
+
+<span class="sd">Copyright 2013 Nils Schmidt</span>
+
+<span class="sd">This file is part of VizAsm.</span>
+
+<span class="sd">VizAsm is free software: you can redistribute it and/or modify</span>
+<span class="sd">it under the terms of the GNU General Public License as published by</span>
+<span class="sd">the Free Software Foundation, either version 3 of the License, or</span>
+<span class="sd">(at your option) any later version.</span>
+
+<span class="sd">VizAsm is distributed in the hope that it will be useful,</span>
+<span class="sd">but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="sd">MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="sd">GNU General Public License for more details.</span>
+
+<span class="sd">You should have received a copy of the GNU General Public License</span>
+<span class="sd">along with VizAsm.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 <span class="sd">&#39;&#39;&#39;</span>
+
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">imap</span>
 
 <span class="kn">from</span> <span class="nn">vizasm.analysis.security.filter.FormatStringFilter</span> <span class="kn">import</span> \
@@ -286,7 +302,6 @@
     <span class="n">one_func_matches</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">arg</span><span class="p">:</span> <span class="nb">any</span><span class="p">(</span><span class="n">imap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">f</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">arg</span><span class="p">),</span> <span class="n">func_list</span><span class="p">))</span>
     
     <span class="k">def</span> <span class="nf">_check</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">steps</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">cur_steps</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
-        <span class="c"># TODO: CORRECT ?</span>
         <span class="k">if</span> <span class="n">one_func_matches</span><span class="p">(</span><span class="n">iterable</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">True</span> 
         <span class="k">if</span> <span class="n">Util</span><span class="o">.</span><span class="n">is_iterable_no_string</span><span class="p">(</span><span class="n">iterable</span><span class="p">):</span>
@@ -393,7 +408,7 @@
             <span class="k">return</span> <span class="bp">False</span>
         
         <span class="c"># check if the format string of the log function is set</span>
-        <span class="n">format_string_set</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">format_string_set</span> <span class="o">=</span> <span class="bp">False</span>
         <span class="n">func_name</span> <span class="o">=</span> <span class="n">mc_get_c_function_name</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
         <span class="c"># check if log function is known</span>
         <span class="k">if</span> <span class="n">FormatStringFilter</span><span class="o">.</span><span class="n">FORMAT_STRING_ARG_IDX</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">func_name</span><span class="p">):</span>
@@ -436,7 +451,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2013, Nils Schmidt.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

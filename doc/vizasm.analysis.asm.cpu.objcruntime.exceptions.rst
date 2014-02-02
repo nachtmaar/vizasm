@@ -1,27 +1,38 @@
-exceptions Package
-==================
+vizasm.analysis.asm.cpu.objcruntime.exceptions package
+======================================================
 
-:mod:`ObjcRuntimeCouldNotGetSelector` Module
---------------------------------------------
+Submodules
+----------
+
+vizasm.analysis.asm.cpu.objcruntime.exceptions.ObjcRuntimeCouldNotGetSelector module
+------------------------------------------------------------------------------------
 
 .. automodule:: vizasm.analysis.asm.cpu.objcruntime.exceptions.ObjcRuntimeCouldNotGetSelector
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`ObjcRuntimeCouldNotReadMsgSendException` Module
------------------------------------------------------
+vizasm.analysis.asm.cpu.objcruntime.exceptions.ObjcRuntimeCouldNotReadMsgSendException module
+---------------------------------------------------------------------------------------------
 
 .. automodule:: vizasm.analysis.asm.cpu.objcruntime.exceptions.ObjcRuntimeCouldNotReadMsgSendException
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`ObjcRuntimeSelectorWrongTypeException` Module
----------------------------------------------------
+vizasm.analysis.asm.cpu.objcruntime.exceptions.ObjcRuntimeSelectorWrongTypeException module
+-------------------------------------------------------------------------------------------
 
 .. automodule:: vizasm.analysis.asm.cpu.objcruntime.exceptions.ObjcRuntimeSelectorWrongTypeException
     :members:
     :undoc-members:
     :show-inheritance:
 
+
+Module contents
+---------------
+
+.. automodule:: vizasm.analysis.asm.cpu.objcruntime.exceptions
+    :members:
+    :undoc-members:
+    :show-inheritance:

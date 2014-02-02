@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,14 +6,14 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>x86 Package &mdash; VizAsm 1 documentation</title>
+    <title>vizasm.analysis.asm.cpu.x86 package &mdash; VizAsm 1 documentation</title>
     
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -48,25 +46,15 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">x86 Package</a><ul>
-<li><a class="reference internal" href="#module-vizasm.analysis.asm.cpu.x86.ASM_x86"><tt class="docutils literal"><span class="pre">ASM_x86</span></tt> Module</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-vizasm.analysis.asm.cpu.x86.AsmRegEx_x86"><tt class="docutils literal"><span class="pre">AsmRegEx_x86</span></tt> Module</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-vizasm.analysis.asm.cpu.x86.Cpu_x86"><tt class="docutils literal"><span class="pre">Cpu_x86</span></tt> Module</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-vizasm.analysis.asm.cpu.x86.ObjcRuntime_x86"><tt class="docutils literal"><span class="pre">ObjcRuntime_x86</span></tt> Module</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-vizasm.analysis.asm.cpu.x86.ParseUtil_x86"><tt class="docutils literal"><span class="pre">ParseUtil_x86</span></tt> Module</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-vizasm.analysis.asm.cpu.x86.Register_x86"><tt class="docutils literal"><span class="pre">Register_x86</span></tt> Module</a><ul>
-</ul>
-</li>
+<li><a class="reference internal" href="#">vizasm.analysis.asm.cpu.x86 package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-vizasm.analysis.asm.cpu.x86.ASM_x86">vizasm.analysis.asm.cpu.x86.ASM_x86 module</a></li>
+<li><a class="reference internal" href="#module-vizasm.analysis.asm.cpu.x86.AsmRegEx_x86">vizasm.analysis.asm.cpu.x86.AsmRegEx_x86 module</a></li>
+<li><a class="reference internal" href="#module-vizasm.analysis.asm.cpu.x86.Cpu_x86">vizasm.analysis.asm.cpu.x86.Cpu_x86 module</a></li>
+<li><a class="reference internal" href="#module-vizasm.analysis.asm.cpu.x86.ObjcRuntime_x86">vizasm.analysis.asm.cpu.x86.ObjcRuntime_x86 module</a></li>
+<li><a class="reference internal" href="#module-vizasm.analysis.asm.cpu.x86.ParseUtil_x86">vizasm.analysis.asm.cpu.x86.ParseUtil_x86 module</a></li>
+<li><a class="reference internal" href="#module-vizasm.analysis.asm.cpu.x86.Register_x86">vizasm.analysis.asm.cpu.x86.Register_x86 module</a></li>
+<li><a class="reference internal" href="#module-vizasm.analysis.asm.cpu.x86">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -97,10 +85,13 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="x86-package">
-<h1>x86 Package<a class="headerlink" href="#x86-package" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="vizasm-analysis-asm-cpu-x86-package">
+<h1>vizasm.analysis.asm.cpu.x86 package<a class="headerlink" href="#vizasm-analysis-asm-cpu-x86-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
 <div class="section" id="module-vizasm.analysis.asm.cpu.x86.ASM_x86">
-<span id="asm-x86-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">ASM_x86</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.asm.cpu.x86.ASM_x86" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-analysis-asm-cpu-x86-asm-x86-module"></span><h2>vizasm.analysis.asm.cpu.x86.ASM_x86 module<a class="headerlink" href="#module-vizasm.analysis.asm.cpu.x86.ASM_x86" title="Permalink to this headline">¶</a></h2>
 <p>Created on 28.08.2013</p>
 <p>&#64;author: nils</p>
 <p>Copyright 2013 Nils Schmidt</p>
@@ -127,7 +118,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">add_reg_arg_since_last_call</span></tt>(reg,&nbsp;robject)</td>
-<td>Add a <cite>Register</cite> to <cite>reg_usage_since_last_call</cite> if the</td>
+<td>Add a <cite>Register</cite> to <cite>reg_usage_since_last_call</cite> if the  register is specified as an register holding method arguments.</td>
 </tr>
 <tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">clear_usage_since_last_call</span></tt>()</td>
 <td>The <cite>Cpu</cite> uses this after a new call has been read</td>
@@ -219,7 +210,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 
 </div>
 <div class="section" id="module-vizasm.analysis.asm.cpu.x86.AsmRegEx_x86">
-<span id="asmregex-x86-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">AsmRegEx_x86</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.asm.cpu.x86.AsmRegEx_x86" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-analysis-asm-cpu-x86-asmregex-x86-module"></span><h2>vizasm.analysis.asm.cpu.x86.AsmRegEx_x86 module<a class="headerlink" href="#module-vizasm.analysis.asm.cpu.x86.AsmRegEx_x86" title="Permalink to this headline">¶</a></h2>
 <p>Created on 23.08.2013</p>
 <p>&#64;author: nils</p>
 <p>Copyright 2013 Nils Schmidt</p>
@@ -243,25 +234,13 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>RE_CLASSREF</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>RE_CLASSREF</strong> :</p>
 <blockquote>
 <div><p>match e.g. &#8220;[ds:cls_NSAssertionHandler]&#8221; or &#8220;dword [ds:eax-0x25e1+cls_Object1]&#8221;</p>
 </div></blockquote>
-<p><strong>__RE_IMP</strong> :</p>
-<blockquote>
-<div><p>Used for RE_IMP_STUBS and RE_IMP_GOT. DO NOT USE DIRECTLY !</p>
-</div></blockquote>
-<p><strong>RE_IMP_STUBS</strong> :</p>
-<blockquote>
-<div><p>match e.g &#8220;imp___stubs__NSApplicationMain&#8221;, &#8220;imp___stubs__objc_retain&#8221;, &#8220;imp___stubs__objc_msgSend&#8221; ...</p>
-</div></blockquote>
 <p><strong>RE_VAR_ASSIGNMENT</strong> :</p>
-<blockquote>
-<div><p>match e.g. &#8220;dword [ds:ecx+0x8]&#8221;</p>
-</div></blockquote>
-<p><strong>RE_IMP_NL_SYMBOL_PTR</strong> :</p>
 <blockquote class="last">
-<div><p>match e.g &#8220;[ds:eax-0x221e+imp___nl_symbol_ptr__NSStreamSocketSecurityLevelKey]&#8221;</p>
+<div><p>match e.g. &#8220;dword [ds:ecx+0x8]&#8221;</p>
 </div></blockquote>
 </td>
 </tr>
@@ -275,7 +254,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">compiled_re</span></tt>(regex[,&nbsp;flags])</td>
-<td>Returns a compiled regex pattern object</td>
+<td>Returns a compiled regex pattern object Flags will only be passed if not None.</td>
 </tr>
 <tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">compiled_re_stack</span></tt>(stack_pointer_name)</td>
 <td>Return a compiled regular expression that matches  e.g.</td>
@@ -305,26 +284,6 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="vizasm.analysis.asm.cpu.x86.AsmRegEx_x86.AsmRegEx_x86.RE_IMP_NL_SYMBOL_PTR">
-<tt class="descname">RE_IMP_NL_SYMBOL_PTR</tt><em class="property"> = '\n imp[_]{3}nl[_]symbol[_]ptr[_]{2}       # imp___nl_symbol_ptr__ \n (?P&lt;name&gt;\\w+)                            # NSStreamSocketSecurityLevelKey \n    '</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.AsmRegEx_x86.AsmRegEx_x86.RE_IMP_NL_SYMBOL_PTR" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="vizasm.analysis.asm.cpu.x86.AsmRegEx_x86.AsmRegEx_x86.RE_IMP_NL_SYMBOL_PTR_GR_NAME">
-<tt class="descname">RE_IMP_NL_SYMBOL_PTR_GR_NAME</tt><em class="property"> = 'name'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.AsmRegEx_x86.AsmRegEx_x86.RE_IMP_NL_SYMBOL_PTR_GR_NAME" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="vizasm.analysis.asm.cpu.x86.AsmRegEx_x86.AsmRegEx_x86.RE_IMP_STUB">
-<tt class="descname">RE_IMP_STUB</tt><em class="property"> = '\n (\\[(ds|ss)[:])?                 # [ds: &lt;- optional    \n (?:imp[_]{3}symbol[_]stub[_]{2,}) # imp___symbol_stub__          &lt;- this seems to be the 32 bit version\n (?P&lt;imp_stub&gt;\\w+)                     # NSLog\n (\\])?                           # ] &lt;- optional\n '</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.AsmRegEx_x86.AsmRegEx_x86.RE_IMP_STUB" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="vizasm.analysis.asm.cpu.x86.AsmRegEx_x86.AsmRegEx_x86.RE_IMP_STUB_GR_IMP_STUB">
-<tt class="descname">RE_IMP_STUB_GR_IMP_STUB</tt><em class="property"> = 'imp_stub'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.AsmRegEx_x86.AsmRegEx_x86.RE_IMP_STUB_GR_IMP_STUB" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
 <dt id="vizasm.analysis.asm.cpu.x86.AsmRegEx_x86.AsmRegEx_x86.RE_VAR_ASSIGNMENT">
 <tt class="descname">RE_VAR_ASSIGNMENT</tt><em class="property"> = '\n \\[ds\\:                 # [ds:\n (?P&lt;class&gt;\\w+)            # ecx\n \\+                     # +\n (?P&lt;var&gt;0x\\w+)          # 0x8\n \\]                     # ]\n'</em><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.AsmRegEx_x86.AsmRegEx_x86.RE_VAR_ASSIGNMENT" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -343,7 +302,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 
 </div>
 <div class="section" id="module-vizasm.analysis.asm.cpu.x86.Cpu_x86">
-<span id="cpu-x86-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">Cpu_x86</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.asm.cpu.x86.Cpu_x86" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-analysis-asm-cpu-x86-cpu-x86-module"></span><h2>vizasm.analysis.asm.cpu.x86.Cpu_x86 module<a class="headerlink" href="#module-vizasm.analysis.asm.cpu.x86.Cpu_x86" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 23.08.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -375,7 +334,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <td>List of <cite>Register</cite> which specifies where the arguments are being stored.</td>
 </tr>
 <tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">arguments_registers_in_sequence</span></tt>()</td>
-<td>Return True if the <cite>destination_register</cite>, <cite>selector_register</cite>,</td>
+<td>Return True if the <cite>destination_register</cite>, <cite>selector_register</cite>, and the <cite>selector_arg_registers</cite> are specified one behind the other in <cite>arguments_registers</cite>.</td>
 </tr>
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">create_and_store_c_func_arguments</span></tt>(method)</td>
 <td>Create and store the arguments for the function.</td>
@@ -444,7 +403,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <td>Check if is 64 bit <cite>Cpu</cite></td>
 </tr>
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">next_reg_for_spret</span></tt>(register)</td>
-<td>If an objc_msgSend_stret is detected, the specified <cite>Register</cite> for the destination and selector do not match anymore</td>
+<td>If an objc_msgSend_stret is detected, the specified <cite>Register</cite> for the destination and selector do not match anymore due to the fact that the first argument register is needed for the return address of the structure.</td>
 </tr>
 <tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">next_regs_for_spret</span></tt>(reg_list)</td>
 <td>Same as <cite>next_reg_for_spret</cite>, but do it for the whole list of <cite>Register</cite></td>
@@ -583,7 +542,7 @@ Example:
 
 </div>
 <div class="section" id="module-vizasm.analysis.asm.cpu.x86.ObjcRuntime_x86">
-<span id="objcruntime-x86-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">ObjcRuntime_x86</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.asm.cpu.x86.ObjcRuntime_x86" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-analysis-asm-cpu-x86-objcruntime-x86-module"></span><h2>vizasm.analysis.asm.cpu.x86.ObjcRuntime_x86 module<a class="headerlink" href="#module-vizasm.analysis.asm.cpu.x86.ObjcRuntime_x86" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 18.09.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -674,13 +633,13 @@ and stored as <cite>StackVar</cite>.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>method_selector: Selector</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>method_selector: Selector</strong> :</p>
 <blockquote>
 <div><p>the <cite>Selector</cite> describing the method that is currently being read by the <cite>Cpu</cite></p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><strong>SelectorOverloadedException</strong> :</p>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>SelectorOverloadedException</strong> :</p>
 <blockquote class="last">
 <div><p>if selector has more arguments than it needs</p>
 </div></blockquote>
@@ -700,7 +659,7 @@ and stored as <cite>StackVar</cite>.</p>
 
 </div>
 <div class="section" id="module-vizasm.analysis.asm.cpu.x86.ParseUtil_x86">
-<span id="parseutil-x86-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">ParseUtil_x86</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.asm.cpu.x86.ParseUtil_x86" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-analysis-asm-cpu-x86-parseutil-x86-module"></span><h2>vizasm.analysis.asm.cpu.x86.ParseUtil_x86 module<a class="headerlink" href="#module-vizasm.analysis.asm.cpu.x86.ParseUtil_x86" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 24.08.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -753,7 +712,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <td>Check if is <cite>RE_SUB</cite> or <cite>RE_C_METHOD</cite> and return the appropriate name if available.</td>
 </tr>
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_c_string</span></tt>(asmline)</td>
-<td>Create a <cite>CString</cite> from a c string like e.g. &#8220;defaults&#8221;</td>
+<td>Create a <cite>CString</cite> from a c string like e.g.</td>
 </tr>
 <tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_call_instruction</span></tt>(asmline)</td>
 <td></td>
@@ -765,7 +724,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <td>Parse a category method implementation.</td>
 </tr>
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_format_string</span></tt>(asmline)</td>
-<td>Create a <cite>FormatString</cite> from e.g. &#64;&#8221;%s%d&#8221;</td>
+<td>Create a <cite>FormatString</cite> from e.g.</td>
 </tr>
 <tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_hex</span></tt>(asmline)</td>
 <td>Parse a line containing a hex value and convert it to an int.</td>
@@ -773,29 +732,29 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_imp</span></tt>(asmline)</td>
 <td>Create a subclass of <cite>Imp</cite> like <cite>ImpStub</cite> or <cite>ImpGot</cite> from the asm line.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_imp_got" title="vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_imp_got"><tt class="xref py py-obj docutils literal"><span class="pre">parse_imp_got</span></tt></a>(asmline)</td>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_imp_got</span></tt>(asmline)</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_imp_stub" title="vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_imp_stub"><tt class="xref py py-obj docutils literal"><span class="pre">parse_imp_stub</span></tt></a>(asmline)</td>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_imp_stub</span></tt>(asmline)</td>
 <td></td>
 </tr>
 <tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_ivar</span></tt>(asmline)</td>
-<td>Create a ObjcClass from e.g. [ds:_OBJC_IVAR_$_AppDelegate.obj3]</td>
+<td>Create a ObjcClass from e.g.</td>
 </tr>
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_meth_impl</span></tt>(asmline)</td>
 <td>Parse a method implementation like e.g.</td>
 </tr>
 <tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_nsstring</span></tt>(asmline)</td>
-<td>Create a <cite>NSString</cite> from e.g. &#64;&#8221;defaults&#8221;</td>
+<td>Create a <cite>NSString</cite> from e.g.</td>
 </tr>
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_objc_class</span></tt>(asmline)</td>
-<td>Create ObjcClass from classref ([ds:objc_classref_Object1])</td>
+<td>Create ObjcClass from classref ([ds:objc_classref_Object1])  or from frameworkclass e.g.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_objc_class_from_classref" title="vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_objc_class_from_classref"><tt class="xref py py-obj docutils literal"><span class="pre">parse_objc_class_from_classref</span></tt></a>(asmline)</td>
 <td>Create ObjcClass from classref ([ds:cls_NSAssertionHandler])</td>
 </tr>
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_objc_class_from_framework_class</span></tt>(asmline)</td>
-<td>Create ObjcClass from frameworkclass e.g. ([ds:bind__OBJC_CLASS_$_NSUserDefaults])</td>
+<td>Create ObjcClass from frameworkclass e.g.</td>
 </tr>
 <tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_own_c_method_called</span></tt>(asmline)</td>
 <td></td>
@@ -813,7 +772,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <td>Parse a stack access like e.g.</td>
 </tr>
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_stackvar</span></tt>(asmline)</td>
-<td>Create an StackVar from asmline, match e.g. [ss:rbp-0x30+var_40]</td>
+<td>Create an StackVar from asmline, match e.g.</td>
 </tr>
 <tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">parse_string</span></tt>(asmline)</td>
 <td>Parse a string and return the appropriate string class.</td>
@@ -822,10 +781,10 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <td>Wrapper for <cite>parse_var_assignment_with_ivar_ref_from_asmline</cite>.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_var_assignment_with_ivar_ref_from_asmline" title="vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_var_assignment_with_ivar_ref_from_asmline"><tt class="xref py py-obj docutils literal"><span class="pre">parse_var_assignment_with_ivar_ref_from_asmline</span></tt></a>(asmline)</td>
-<td>Create a VarAssignment from asmline like e.g. &#8220;mov dword [ds:ecx+0x8], eax&#8221;.</td>
+<td>Create a VarAssignment from asmline like e.g.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_var_assignment_without_ivar_ref_from_asmline" title="vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_var_assignment_without_ivar_ref_from_asmline"><tt class="xref py py-obj docutils literal"><span class="pre">parse_var_assignment_without_ivar_ref_from_asmline</span></tt></a>(asmline)</td>
-<td>Create a VarAssignment from asmline like e.g. &#8220;mov dword [ds:ecx+0x8]&#8221;.</td>
+<td>Create a VarAssignment from asmline like e.g.</td>
 </tr>
 <tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">set_cpu</span></tt>(value)</td>
 <td></td>
@@ -835,16 +794,6 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 </tr>
 </tbody>
 </table>
-<dl class="method">
-<dt id="vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_imp_got">
-<tt class="descname">parse_imp_got</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/x86/ParseUtil_x86.html#ParseUtil_x86.parse_imp_got"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_imp_got" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_imp_stub">
-<tt class="descname">parse_imp_stub</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/x86/ParseUtil_x86.html#ParseUtil_x86.parse_imp_stub"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_imp_stub" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 <dl class="method">
 <dt id="vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_objc_class_from_classref">
 <tt class="descname">parse_objc_class_from_classref</tt><big>(</big><em>asmline</em><big>)</big><a class="reference internal" href="_modules/vizasm/analysis/asm/cpu/x86/ParseUtil_x86.html#ParseUtil_x86.parse_objc_class_from_classref"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.analysis.asm.cpu.x86.ParseUtil_x86.ParseUtil_x86.parse_objc_class_from_classref" title="Permalink to this definition">¶</a></dt>
@@ -861,7 +810,7 @@ Try to resolve the ivar_ref of the IVar from the register of the right side of t
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>asmline: String</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>asmline: String</strong> :</p>
 <blockquote>
 <div><p>the <cite>asmline</cite> should have the form of &#8220;[ds:rdx+rsi], rax&#8221; where the part after the comma is optional. 
 If left out, the ivar_ref cannot be resolved.</p>
@@ -872,13 +821,13 @@ If left out, the ivar_ref cannot be resolved.</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>VarAssignment</strong> :</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>VarAssignment</strong> :</p>
 <blockquote>
 <div><p>the VarAssignment with ivar_ref set (None if no VarAssignment)</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body"><p class="first last"><strong>VarAssignmentResolveSelfrefRegisterException</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>VarAssignmentResolveSelfrefRegisterException</strong> :</p>
 </td>
 </tr>
 </tbody>
@@ -894,16 +843,16 @@ If left out, the ivar_ref cannot be resolved.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>asmline: String</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>asmline: String</strong> :</p>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>VarAssignment</strong> :</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>VarAssignment</strong> :</p>
 <blockquote>
 <div><p>the VarAssignment without ivar_ref set (None if no VarAssignment)</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body"><p class="first last"><strong>VarAssignmentResolveSelfrefRegisterException</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>VarAssignmentResolveSelfrefRegisterException</strong> :</p>
 </td>
 </tr>
 </tbody>
@@ -914,7 +863,7 @@ If left out, the ivar_ref cannot be resolved.</p>
 
 </div>
 <div class="section" id="module-vizasm.analysis.asm.cpu.x86.Register_x86">
-<span id="register-x86-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">Register_x86</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.asm.cpu.x86.Register_x86" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-analysis-asm-cpu-x86-register-x86-module"></span><h2>vizasm.analysis.asm.cpu.x86.Register_x86 module<a class="headerlink" href="#module-vizasm.analysis.asm.cpu.x86.Register_x86" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 23.08.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -970,6 +919,9 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 </dd></dl>
 
 </div>
+<div class="section" id="module-vizasm.analysis.asm.cpu.x86">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-vizasm.analysis.asm.cpu.x86" title="Permalink to this headline">¶</a></h2>
+</div>
 </div>
 
 
@@ -995,7 +947,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
     </div>
     <div class="footer">
         &copy; Copyright 2013, Nils Schmidt.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

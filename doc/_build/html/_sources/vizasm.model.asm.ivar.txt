@@ -1,35 +1,46 @@
-ivar Package
-============
+vizasm.model.asm.ivar package
+=============================
 
-:mod:`IVar` Module
-------------------
+Submodules
+----------
+
+vizasm.model.asm.ivar.IVar module
+---------------------------------
 
 .. automodule:: vizasm.model.asm.ivar.IVar
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`IvarRefCouldNotBeResolved` Module
----------------------------------------
+vizasm.model.asm.ivar.IvarRefCouldNotBeResolved module
+------------------------------------------------------
 
 .. automodule:: vizasm.model.asm.ivar.IvarRefCouldNotBeResolved
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`IvarRefException` Module
-------------------------------
+vizasm.model.asm.ivar.IvarRefException module
+---------------------------------------------
 
 .. automodule:: vizasm.model.asm.ivar.IvarRefException
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`IvarRefWrongTypeException` Module
----------------------------------------
+vizasm.model.asm.ivar.IvarRefWrongTypeException module
+------------------------------------------------------
 
 .. automodule:: vizasm.model.asm.ivar.IvarRefWrongTypeException
     :members:
     :undoc-members:
     :show-inheritance:
 
+
+Module contents
+---------------
+
+.. automodule:: vizasm.model.asm.ivar
+    :members:
+    :undoc-members:
+    :show-inheritance:

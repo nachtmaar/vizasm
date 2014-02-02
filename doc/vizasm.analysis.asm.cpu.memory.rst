@@ -1,35 +1,46 @@
-memory Package
-==============
+vizasm.analysis.asm.cpu.memory package
+======================================
 
-:mod:`Memory` Module
---------------------
+Submodules
+----------
+
+vizasm.analysis.asm.cpu.memory.Memory module
+--------------------------------------------
 
 .. automodule:: vizasm.analysis.asm.cpu.memory.Memory
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`MemoryLookupException` Module
------------------------------------
+vizasm.analysis.asm.cpu.memory.MemoryLookupException module
+-----------------------------------------------------------
 
 .. automodule:: vizasm.analysis.asm.cpu.memory.MemoryLookupException
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`Registers` Module
------------------------
+vizasm.analysis.asm.cpu.memory.Registers module
+-----------------------------------------------
 
 .. automodule:: vizasm.analysis.asm.cpu.memory.Registers
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`StackFrame` Module
-------------------------
+vizasm.analysis.asm.cpu.memory.StackFrame module
+------------------------------------------------
 
 .. automodule:: vizasm.analysis.asm.cpu.memory.StackFrame
     :members:
     :undoc-members:
     :show-inheritance:
 
+
+Module contents
+---------------
+
+.. automodule:: vizasm.analysis.asm.cpu.memory
+    :members:
+    :undoc-members:
+    :show-inheritance:

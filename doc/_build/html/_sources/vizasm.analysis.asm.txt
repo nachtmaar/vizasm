@@ -1,5 +1,5 @@
-asm Package
-===========
+vizasm.analysis.asm package
+===========================
 
 Subpackages
 -----------
@@ -9,3 +9,10 @@ Subpackages
     vizasm.analysis.asm.asmanalyzer
     vizasm.analysis.asm.cpu
 
+Module contents
+---------------
+
+.. automodule:: vizasm.analysis.asm
+    :members:
+    :undoc-members:
+    :show-inheritance:

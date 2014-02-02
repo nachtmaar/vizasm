@@ -9,8 +9,7 @@ Git
 
 .. code-block:: sh
 
-	git clone http://ds.mathematik.uni-marburg.de/gitlab/education/vizasm.git
-
+	git clone https://bitbucket.org/nachtmaar/vizasm.git
 
 General steps
 --------------

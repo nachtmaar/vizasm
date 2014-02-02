@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,14 +6,14 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>vizasm_networkx Package &mdash; VizAsm 1 documentation</title>
+    <title>vizasm.vizasm_networkx package &mdash; VizAsm 1 documentation</title>
     
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -48,27 +46,19 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">vizasm_networkx Package</a><ul>
-<li><a class="reference internal" href="#module-vizasm.vizasm_networkx.AddMethodCallToGraphInterface"><tt class="docutils literal"><span class="pre">AddMethodCallToGraphInterface</span></tt> Module</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-vizasm.vizasm_networkx.AttributeDictInterface"><tt class="docutils literal"><span class="pre">AttributeDictInterface</span></tt> Module</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-vizasm.vizasm_networkx.AttributeNodeInterface"><tt class="docutils literal"><span class="pre">AttributeNodeInterface</span></tt> Module</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-vizasm.vizasm_networkx.GexfConstants"><tt class="docutils literal"><span class="pre">GexfConstants</span></tt> Module</a><ul>
+<li><a class="reference internal" href="#">vizasm.vizasm_networkx package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-vizasm.vizasm_networkx.AddMethodCallToGraphInterface">vizasm.vizasm_networkx.AddMethodCallToGraphInterface module</a></li>
+<li><a class="reference internal" href="#module-vizasm.vizasm_networkx.AttributeDictInterface">vizasm.vizasm_networkx.AttributeDictInterface module</a></li>
+<li><a class="reference internal" href="#module-vizasm.vizasm_networkx.AttributeNodeInterface">vizasm.vizasm_networkx.AttributeNodeInterface module</a></li>
+<li><a class="reference internal" href="#module-vizasm.vizasm_networkx.GexfConstants">vizasm.vizasm_networkx.GexfConstants module</a><ul>
 <li><a class="reference internal" href="#see-also">See Also</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-vizasm.vizasm_networkx.Graph"><tt class="docutils literal"><span class="pre">Graph</span></tt> Module</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-vizasm.vizasm_networkx.GraphUtil"><tt class="docutils literal"><span class="pre">GraphUtil</span></tt> Module</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-vizasm.vizasm_networkx.NodeAttributes"><tt class="docutils literal"><span class="pre">NodeAttributes</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vizasm.vizasm_networkx.Graph">vizasm.vizasm_networkx.Graph module</a></li>
+<li><a class="reference internal" href="#module-vizasm.vizasm_networkx.GraphUtil">vizasm.vizasm_networkx.GraphUtil module</a></li>
+<li><a class="reference internal" href="#module-vizasm.vizasm_networkx.NodeAttributes">vizasm.vizasm_networkx.NodeAttributes module</a></li>
+<li><a class="reference internal" href="#module-vizasm.vizasm_networkx">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -99,10 +89,13 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="vizasm-networkx-package">
-<h1>vizasm_networkx Package<a class="headerlink" href="#vizasm-networkx-package" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="vizasm-vizasm-networkx-package">
+<h1>vizasm.vizasm_networkx package<a class="headerlink" href="#vizasm-vizasm-networkx-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
 <div class="section" id="module-vizasm.vizasm_networkx.AddMethodCallToGraphInterface">
-<span id="addmethodcalltographinterface-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">AddMethodCallToGraphInterface</span></tt> Module<a class="headerlink" href="#module-vizasm.vizasm_networkx.AddMethodCallToGraphInterface" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-vizasm-networkx-addmethodcalltographinterface-module"></span><h2>vizasm.vizasm_networkx.AddMethodCallToGraphInterface module<a class="headerlink" href="#module-vizasm.vizasm_networkx.AddMethodCallToGraphInterface" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 19.04.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -142,7 +135,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>graph</strong> : Graph</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>graph</strong> : Graph</p>
 <p><strong>methodcall_sender_attr_dict: dict&lt;object&gt;, optional</strong> :</p>
 <blockquote>
 <div><p>dictionary of attributes for the sender of a <a href="#id1"><span class="problematic" id="id2">`</span></a>MethodCall</p>
@@ -166,7 +159,7 @@ each dict in the list is supposed for the corresponding call of the `MethodCall<
 
 </div>
 <div class="section" id="module-vizasm.vizasm_networkx.AttributeDictInterface">
-<span id="attributedictinterface-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">AttributeDictInterface</span></tt> Module<a class="headerlink" href="#module-vizasm.vizasm_networkx.AttributeDictInterface" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-vizasm-networkx-attributedictinterface-module"></span><h2>vizasm.vizasm_networkx.AttributeDictInterface module<a class="headerlink" href="#module-vizasm.vizasm_networkx.AttributeDictInterface" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 30.07.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -208,7 +201,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 
 </div>
 <div class="section" id="module-vizasm.vizasm_networkx.AttributeNodeInterface">
-<span id="attributenodeinterface-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">AttributeNodeInterface</span></tt> Module<a class="headerlink" href="#module-vizasm.vizasm_networkx.AttributeNodeInterface" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-vizasm-networkx-attributenodeinterface-module"></span><h2>vizasm.vizasm_networkx.AttributeNodeInterface module<a class="headerlink" href="#module-vizasm.vizasm_networkx.AttributeNodeInterface" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 09.06.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -232,7 +225,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>__gexf_viz_attr_dict: dict</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>__gexf_viz_attr_dict: dict</strong> :</p>
 <blockquote class="last">
 <div><p>dictionary holding the specified attributes of the viz extension</p>
 </div></blockquote>
@@ -240,7 +233,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 </tr>
 </tbody>
 </table>
-<div class="admonition-see-also admonition seealso">
+<div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <dl class="last docutils">
 <dt><tt class="xref py py-obj docutils literal"><span class="pre">http</span></tt></dt>
@@ -314,7 +307,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>blue: int</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>blue: int</strong> :</p>
 <blockquote class="last">
 <div><p>b in {0, 1, ..., 255}</p>
 </div></blockquote>
@@ -332,7 +325,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>green: int</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>green: int</strong> :</p>
 <blockquote class="last">
 <div><p>g in {0, 1, ..., 255}</p>
 </div></blockquote>
@@ -350,7 +343,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>red: int</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>red: int</strong> :</p>
 <blockquote class="last">
 <div><p>r in {0, 1, ..., 255}</p>
 </div></blockquote>
@@ -368,7 +361,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>transparancy: double</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>transparancy: double</strong> :</p>
 <blockquote class="last">
 <div><p>t in [0, 1]</p>
 </div></blockquote>
@@ -386,7 +379,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>size: double</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>size: double</strong> :</p>
 <blockquote class="last">
 <div><p>default is 1.0</p>
 </div></blockquote>
@@ -405,7 +398,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 
 </div>
 <div class="section" id="module-vizasm.vizasm_networkx.GexfConstants">
-<span id="gexfconstants-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">GexfConstants</span></tt> Module<a class="headerlink" href="#module-vizasm.vizasm_networkx.GexfConstants" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-vizasm-networkx-gexfconstants-module"></span><h2>vizasm.vizasm_networkx.GexfConstants module<a class="headerlink" href="#module-vizasm.vizasm_networkx.GexfConstants" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 28.07.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -428,7 +421,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 </div>
 </div>
 <div class="section" id="module-vizasm.vizasm_networkx.Graph">
-<span id="graph-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">Graph</span></tt> Module<a class="headerlink" href="#module-vizasm.vizasm_networkx.Graph" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-vizasm-networkx-graph-module"></span><h2>vizasm.vizasm_networkx.Graph module<a class="headerlink" href="#module-vizasm.vizasm_networkx.Graph" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 19.10.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -633,7 +626,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>n: Node</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n: Node</strong> :</p>
 <p class="last"><strong>attribs: dict</strong> :</p>
 </td>
 </tr>
@@ -650,7 +643,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 
 </div>
 <div class="section" id="module-vizasm.vizasm_networkx.GraphUtil">
-<span id="graphutil-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">GraphUtil</span></tt> Module<a class="headerlink" href="#module-vizasm.vizasm_networkx.GraphUtil" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-vizasm-networkx-graphutil-module"></span><h2>vizasm.vizasm_networkx.GraphUtil module<a class="headerlink" href="#module-vizasm.vizasm_networkx.GraphUtil" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 28.07.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -711,13 +704,13 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>weight: float</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>weight: float</strong> :</p>
 <blockquote>
 <div><p>weight of the edge</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first last"><strong>edge_attr_dict: dict</strong> :</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>edge_attr_dict: dict</strong> :</p>
 </td>
 </tr>
 </tbody>
@@ -746,7 +739,7 @@ Meaning that structure above the key will be still present in the returned subdi
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>attr_dict: dict</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>attr_dict: dict</strong> :</p>
 <p class="last"><strong>key: hashable</strong> :</p>
 </td>
 </tr>
@@ -765,7 +758,7 @@ Meaning that structure above the keys will be still present in the returned subd
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>attr_dict: dict</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>attr_dict: dict</strong> :</p>
 <p class="last"><strong>key_list: list</strong> :</p>
 </td>
 </tr>
@@ -787,7 +780,7 @@ Meaning that structure above the keys will be still present in the returned subd
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>transparency: double</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>transparency: double</strong> :</p>
 <blockquote>
 <div><p>value in [0, 1]</p>
 </div></blockquote>
@@ -797,7 +790,7 @@ Meaning that structure above the keys will be still present in the returned subd
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>dict: dict</strong> :</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>dict: dict</strong> :</p>
 <blockquote class="last">
 <div><p>dictionary of attributes according to the gexf extension Visualization 
 Example: {&#8216;viz&#8217;: {&#8216;color&#8217;: {&#8216;a&#8217;: 1.0, &#8216;r&#8217;: 0, &#8216;b&#8217;: 0, &#8216;g&#8217;: 0}, &#8216;size&#8217;: 1.0}}</p>
@@ -818,7 +811,7 @@ Example: {&#8216;viz&#8217;: {&#8216;color&#8217;: {&#8216;a&#8217;: 1.0, &#8216
 
 </div>
 <div class="section" id="module-vizasm.vizasm_networkx.NodeAttributes">
-<span id="nodeattributes-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">NodeAttributes</span></tt> Module<a class="headerlink" href="#module-vizasm.vizasm_networkx.NodeAttributes" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-vizasm-networkx-nodeattributes-module"></span><h2>vizasm.vizasm_networkx.NodeAttributes module<a class="headerlink" href="#module-vizasm.vizasm_networkx.NodeAttributes" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 27.07.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -836,6 +829,9 @@ GNU General Public License for more details.</p>
 along with VizAsm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
 <p>This module describes the attributes a node has in the graph (prefixed with NATTR) 
 as well as the values of some attributes (prefixed with NVAL).</p>
+</div>
+<div class="section" id="module-vizasm.vizasm_networkx">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-vizasm.vizasm_networkx" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -862,7 +858,7 @@ as well as the values of some attributes (prefixed with NVAL).</p>
     </div>
     <div class="footer">
         &copy; Copyright 2013, Nils Schmidt.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

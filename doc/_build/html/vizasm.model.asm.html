@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,14 +6,14 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>asm Package &mdash; VizAsm 1 documentation</title>
+    <title>vizasm.model.asm package &mdash; VizAsm 1 documentation</title>
     
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -48,23 +46,15 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">asm Package</a><ul>
-<li><a class="reference internal" href="#module-vizasm.model.asm.CString"><tt class="docutils literal"><span class="pre">CString</span></tt> Module</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-vizasm.model.asm.Register"><tt class="docutils literal"><span class="pre">Register</span></tt> Module</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-vizasm.model.asm.Segments"><tt class="docutils literal"><span class="pre">Segments</span></tt> Module</a></li>
-<li><a class="reference internal" href="#module-vizasm.model.asm.StackVar"><tt class="docutils literal"><span class="pre">StackVar</span></tt> Module</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-vizasm.model.asm.Value"><tt class="docutils literal"><span class="pre">Value</span></tt> Module</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#subpackages">Subpackages</a><ul>
-</ul>
-</li>
+<li><a class="reference internal" href="#">vizasm.model.asm package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.asm.CString">vizasm.model.asm.CString module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.asm.Register">vizasm.model.asm.Register module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.asm.Segments">vizasm.model.asm.Segments module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.asm.StackVar">vizasm.model.asm.StackVar module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.asm.Value">vizasm.model.asm.Value module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.asm">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -95,10 +85,57 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="asm-package">
-<h1>asm Package<a class="headerlink" href="#asm-package" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="vizasm-model-asm-package">
+<h1>vizasm.model.asm package<a class="headerlink" href="#vizasm-model-asm-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="vizasm.model.asm.imp.html">vizasm.model.asm.imp package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.imp.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.imp.html#module-vizasm.model.asm.imp.Imp">vizasm.model.asm.imp.Imp module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.imp.html#module-vizasm.model.asm.imp.ImpGot">vizasm.model.asm.imp.ImpGot module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.imp.html#module-vizasm.model.asm.imp.ImpStub">vizasm.model.asm.imp.ImpStub module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.imp.html#module-vizasm.model.asm.imp">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vizasm.model.asm.ivar.html">vizasm.model.asm.ivar package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.ivar.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.ivar.html#module-vizasm.model.asm.ivar.IVar">vizasm.model.asm.ivar.IVar module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.ivar.html#module-vizasm.model.asm.ivar.IvarRefCouldNotBeResolved">vizasm.model.asm.ivar.IvarRefCouldNotBeResolved module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.ivar.html#module-vizasm.model.asm.ivar.IvarRefException">vizasm.model.asm.ivar.IvarRefException module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.ivar.html#module-vizasm.model.asm.ivar.IvarRefWrongTypeException">vizasm.model.asm.ivar.IvarRefWrongTypeException module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.ivar.html#module-vizasm.model.asm.ivar">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vizasm.model.asm.var_assignment.html">vizasm.model.asm.var_assignment package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.var_assignment.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.var_assignment.html#module-vizasm.model.asm.var_assignment.VarAssignment">vizasm.model.asm.var_assignment.VarAssignment module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.var_assignment.html#module-vizasm.model.asm.var_assignment.VarAssignmentIvarRegisterWrongTypeException">vizasm.model.asm.var_assignment.VarAssignmentIvarRegisterWrongTypeException module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.var_assignment.html#module-vizasm.model.asm.var_assignment.VarAssignmentResolveIvarRegisterException">vizasm.model.asm.var_assignment.VarAssignmentResolveIvarRegisterException module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.var_assignment.html#module-vizasm.model.asm.var_assignment.VarAssignmentResolveRegisterException">vizasm.model.asm.var_assignment.VarAssignmentResolveRegisterException module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.var_assignment.html#module-vizasm.model.asm.var_assignment.VarAssignmentResolveSelfrefRegisterException">vizasm.model.asm.var_assignment.VarAssignmentResolveSelfrefRegisterException module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.var_assignment.html#module-vizasm.model.asm.var_assignment">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
 <div class="section" id="module-vizasm.model.asm.CString">
-<span id="cstring-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">CString</span></tt> Module<a class="headerlink" href="#module-vizasm.model.asm.CString" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-model-asm-cstring-module"></span><h2>vizasm.model.asm.CString module<a class="headerlink" href="#module-vizasm.model.asm.CString" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 12.10.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -144,7 +181,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 
 </div>
 <div class="section" id="module-vizasm.model.asm.Register">
-<span id="register-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">Register</span></tt> Module<a class="headerlink" href="#module-vizasm.model.asm.Register" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-model-asm-register-module"></span><h2>vizasm.model.asm.Register module<a class="headerlink" href="#module-vizasm.model.asm.Register" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 09.06.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -174,7 +211,7 @@ If the fallback list is None, the register is used for equality.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>register: string</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>register: string</strong> :</p>
 <p><strong>fallback_list: list&lt;string&gt;</strong> :</p>
 <blockquote class="last">
 <div><p>list of equivalent registers used for fallback support. E.g. on x86_64 &#8216;rsp&#8217; and &#8216;esp&#8217; are equal.</p>
@@ -228,14 +265,14 @@ E.g. &#8220;eax&#8221; presents the lower 32 bits of &#8220;rax&#8221;.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>register: string</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>register: string</strong> :</p>
 <p><strong>register_dict: dict&lt;string, list&lt;string&gt;&gt;</strong> :</p>
 <blockquote>
 <div><p>dictionary containing a list of fallback registers for each register</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>reg_list: list&lt;string&gt;</strong> :</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>reg_list: list&lt;string&gt;</strong> :</p>
 <blockquote class="last">
 <div><p>a list of fallback registers. The Register <cite>register</cite> is also included in the list.</p>
 </div></blockquote>
@@ -284,7 +321,7 @@ E.g. &#8220;eax&#8221; presents the lower 32 bits of &#8220;rax&#8221;.</p>
 
 </div>
 <div class="section" id="module-vizasm.model.asm.Segments">
-<span id="segments-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">Segments</span></tt> Module<a class="headerlink" href="#module-vizasm.model.asm.Segments" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-model-asm-segments-module"></span><h2>vizasm.model.asm.Segments module<a class="headerlink" href="#module-vizasm.model.asm.Segments" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 02.10.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -314,7 +351,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 
 </div>
 <div class="section" id="module-vizasm.model.asm.StackVar">
-<span id="stackvar-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">StackVar</span></tt> Module<a class="headerlink" href="#module-vizasm.model.asm.StackVar" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-model-asm-stackvar-module"></span><h2>vizasm.model.asm.StackVar module<a class="headerlink" href="#module-vizasm.model.asm.StackVar" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 29.03.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -339,7 +376,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>name: string</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>name: string</strong> :</p>
 <blockquote class="last">
 <div><p>the name of the StackVar</p>
 </div></blockquote>
@@ -372,7 +409,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 
 </div>
 <div class="section" id="module-vizasm.model.asm.Value">
-<span id="value-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">Value</span></tt> Module<a class="headerlink" href="#module-vizasm.model.asm.Value" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-model-asm-value-module"></span><h2>vizasm.model.asm.Value module<a class="headerlink" href="#module-vizasm.model.asm.Value" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 27.03.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -397,7 +434,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>value: object</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>value: object</strong> :</p>
 <blockquote class="last">
 <div><p>value of the variable (maps to objc_name)</p>
 </div></blockquote>
@@ -445,43 +482,8 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 </dd></dl>
 
 </div>
-<div class="section" id="subpackages">
-<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="vizasm.model.asm.imp.html">imp Package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.imp.html#module-vizasm.model.asm.imp.Imp"><tt class="docutils literal"><span class="pre">Imp</span></tt> Module</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.imp.html#module-vizasm.model.asm.imp.ImpGot"><tt class="docutils literal"><span class="pre">ImpGot</span></tt> Module</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.imp.html#module-vizasm.model.asm.imp.ImpStub"><tt class="docutils literal"><span class="pre">ImpStub</span></tt> Module</a><ul class="simple">
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="vizasm.model.asm.ivar.html">ivar Package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.ivar.html#module-vizasm.model.asm.ivar.IVar"><tt class="docutils literal"><span class="pre">IVar</span></tt> Module</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.ivar.html#module-vizasm.model.asm.ivar.IvarRefCouldNotBeResolved"><tt class="docutils literal"><span class="pre">IvarRefCouldNotBeResolved</span></tt> Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.ivar.html#module-vizasm.model.asm.ivar.IvarRefException"><tt class="docutils literal"><span class="pre">IvarRefException</span></tt> Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.ivar.html#module-vizasm.model.asm.ivar.IvarRefWrongTypeException"><tt class="docutils literal"><span class="pre">IvarRefWrongTypeException</span></tt> Module</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="vizasm.model.asm.var_assignment.html">var_assignment Package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.var_assignment.html#module-vizasm.model.asm.var_assignment.VarAssignment"><tt class="docutils literal"><span class="pre">VarAssignment</span></tt> Module</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.var_assignment.html#module-vizasm.model.asm.var_assignment.VarAssignmentIvarRegisterWrongTypeException"><tt class="docutils literal"><span class="pre">VarAssignmentIvarRegisterWrongTypeException</span></tt> Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.var_assignment.html#module-vizasm.model.asm.var_assignment.VarAssignmentResolveIvarRegisterException"><tt class="docutils literal"><span class="pre">VarAssignmentResolveIvarRegisterException</span></tt> Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.var_assignment.html#module-vizasm.model.asm.var_assignment.VarAssignmentResolveRegisterException"><tt class="docutils literal"><span class="pre">VarAssignmentResolveRegisterException</span></tt> Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vizasm.model.asm.var_assignment.html#module-vizasm.model.asm.var_assignment.VarAssignmentResolveSelfrefRegisterException"><tt class="docutils literal"><span class="pre">VarAssignmentResolveSelfrefRegisterException</span></tt> Module</a></li>
-</ul>
-</li>
-</ul>
-</div>
+<div class="section" id="module-vizasm.model.asm">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-vizasm.model.asm" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -508,7 +510,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
     </div>
     <div class="footer">
         &copy; Copyright 2013, Nils Schmidt.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

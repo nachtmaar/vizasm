@@ -1,35 +1,46 @@
-util Package
-============
+vizasm.util package
+===================
 
-:mod:`Log` Module
------------------
+Submodules
+----------
+
+vizasm.util.Log module
+----------------------
 
 .. automodule:: vizasm.util.Log
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`ModuleClassNameException` Module
---------------------------------------
+vizasm.util.ModuleClassNameException module
+-------------------------------------------
 
 .. automodule:: vizasm.util.ModuleClassNameException
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`Util` Module
-------------------
+vizasm.util.Util module
+-----------------------
 
 .. automodule:: vizasm.util.Util
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`WrapperException` Module
-------------------------------
+vizasm.util.WrapperException module
+-----------------------------------
 
 .. automodule:: vizasm.util.WrapperException
     :members:
     :undoc-members:
     :show-inheritance:
 
+
+Module contents
+---------------
+
+.. automodule:: vizasm.util
+    :members:
+    :undoc-members:
+    :show-inheritance:

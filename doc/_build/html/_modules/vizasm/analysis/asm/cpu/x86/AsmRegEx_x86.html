@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -74,10 +72,27 @@
 <span class="sd">Created on 23.08.2013</span>
 
 <span class="sd">@author: nils</span>
+
+<span class="sd">Copyright 2013 Nils Schmidt</span>
+
+<span class="sd">This file is part of VizAsm.</span>
+
+<span class="sd">VizAsm is free software: you can redistribute it and/or modify</span>
+<span class="sd">it under the terms of the GNU General Public License as published by</span>
+<span class="sd">the Free Software Foundation, either version 3 of the License, or</span>
+<span class="sd">(at your option) any later version.</span>
+
+<span class="sd">VizAsm is distributed in the hope that it will be useful,</span>
+<span class="sd">but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="sd">MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="sd">GNU General Public License for more details.</span>
+
+<span class="sd">You should have received a copy of the GNU General Public License</span>
+<span class="sd">along with VizAsm.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 <span class="sd">&#39;&#39;&#39;</span>
+
 <span class="kn">from</span> <span class="nn">vizasm.analysis.asm.cpu.x86_64.AsmRegEx_x86_64</span> <span class="kn">import</span> <span class="n">AsmRegEx_x86_64</span>
 
-<span class="c"># TODO: WHAT IS IMP_NL_SYMBOL_PTR ? SAME AS IMPGOT OR IMPSTUB ???</span>
 <div class="viewcode-block" id="AsmRegEx_x86"><a class="viewcode-back" href="../../../../../../vizasm.analysis.asm.cpu.x86.html#vizasm.analysis.asm.cpu.x86.AsmRegEx_x86.AsmRegEx_x86">[docs]</a><span class="k">class</span> <span class="nc">AsmRegEx_x86</span><span class="p">(</span><span class="n">AsmRegEx_x86_64</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39; </span>
 <span class="sd">    Contains regular expressions (mostly in verbose mode) used for analyzing the assembler file on the x86 architecture. </span>
@@ -87,28 +102,11 @@
 <span class="sd">    RE_CLASSREF</span>
 <span class="sd">        match e.g. &quot;[ds:cls_NSAssertionHandler]&quot; or &quot;dword [ds:eax-0x25e1+cls_Object1]&quot;</span>
 <span class="sd">         </span>
-<span class="sd">    __RE_IMP</span>
-<span class="sd">        Used for RE_IMP_STUBS and RE_IMP_GOT. DO NOT USE DIRECTLY !</span>
-<span class="sd">        </span>
-<span class="sd">    RE_IMP_STUBS</span>
-<span class="sd">        match e.g &quot;imp___stubs__NSApplicationMain&quot;, &quot;imp___stubs__objc_retain&quot;, &quot;imp___stubs__objc_msgSend&quot; ... </span>
 <span class="sd">        </span>
 <span class="sd">    RE_VAR_ASSIGNMENT</span>
 <span class="sd">        match e.g. &quot;dword [ds:ecx+0x8]&quot;</span>
-<span class="sd">        </span>
-<span class="sd">    RE_IMP_NL_SYMBOL_PTR</span>
-<span class="sd">        match e.g &quot;[ds:eax-0x221e+imp___nl_symbol_ptr__NSStreamSocketSecurityLevelKey]&quot;</span>
 <span class="sd">    &#39;&#39;&#39;</span>    
     
-    <span class="n">__RE_IMP</span> <span class="o">=</span> <span class="s">r&#39;&#39;&#39;</span>
-<span class="s"> (\[(ds|ss)[:])?                 # [ds: &lt;- optional    </span>
-<span class="s"> (?:imp[_]{3}symbol[_]</span><span class="si">%s</span><span class="s">[_]{2,}) # imp___symbol_stub__          &lt;- this seems to be the 32 bit version</span>
-<span class="s"> (?P&lt;</span><span class="si">%s</span><span class="s">&gt;\w+)                     # NSLog</span>
-<span class="s"> (\])?                           # ] &lt;- optional</span>
-<span class="s"> &#39;&#39;&#39;</span> 
-    <span class="n">RE_IMP_STUB_GR_IMP_STUB</span> <span class="o">=</span> <span class="s">&#39;imp_stub&#39;</span>
-    <span class="n">RE_IMP_STUB</span> <span class="o">=</span> <span class="n">__RE_IMP</span> <span class="o">%</span> <span class="p">(</span><span class="s">&#39;stub&#39;</span><span class="p">,</span> <span class="n">RE_IMP_STUB_GR_IMP_STUB</span><span class="p">)</span>
-
     <span class="n">RE_CLASSREF_GR_CLASSREF</span> <span class="o">=</span> <span class="s">&#39;classref&#39;</span>
     <span class="n">RE_CLASSREF</span> <span class="o">=</span> <span class="s">r&#39;&#39;&#39;</span>
 <span class="s"> \[ds\:                 # [ds:</span>
@@ -126,13 +124,7 @@
 <span class="s"> \+                     # +</span>
 <span class="s"> (?P&lt;</span><span class="si">%s</span><span class="s">&gt;0x\w+)          # 0x8</span>
 <span class="s"> \]                     # ]</span>
-<span class="s">&#39;&#39;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">RE_VAR_ASSIGNMENT_GR_SELF_REGISTER</span><span class="p">,</span> <span class="n">RE_VAR_ASSIGNMENT_GR_IVAR_ADDR</span><span class="p">)</span>
-
-    <span class="n">RE_IMP_NL_SYMBOL_PTR_GR_NAME</span> <span class="o">=</span> <span class="s">&#39;name&#39;</span>
-    <span class="n">RE_IMP_NL_SYMBOL_PTR</span> <span class="o">=</span> <span class="s">&#39;&#39;&#39;</span>
-<span class="s"> imp[_]{3}nl[_]symbol[_]ptr[_]{2}       # imp___nl_symbol_ptr__ </span>
-<span class="s"> (?P&lt;</span><span class="si">%s</span><span class="s">&gt;\w+)                            # NSStreamSocketSecurityLevelKey </span>
-<span class="s">    &#39;&#39;&#39;</span> <span class="o">%</span> <span class="n">RE_IMP_NL_SYMBOL_PTR_GR_NAME</span></div>
+<span class="s">&#39;&#39;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">RE_VAR_ASSIGNMENT_GR_SELF_REGISTER</span><span class="p">,</span> <span class="n">RE_VAR_ASSIGNMENT_GR_IVAR_ADDR</span><span class="p">)</span></div>
 </pre></div>
 
           </div>
@@ -158,7 +150,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2013, Nils Schmidt.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

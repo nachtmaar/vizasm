@@ -1,19 +1,30 @@
-asm Package
-===========
+vizasm.reader.asm package
+=========================
 
-:mod:`AsmReader` Module
------------------------
+Submodules
+----------
+
+vizasm.reader.asm.AsmReader module
+----------------------------------
 
 .. automodule:: vizasm.reader.asm.AsmReader
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`AsmRegEx` Module
-----------------------
+vizasm.reader.asm.AsmRegEx module
+---------------------------------
 
 .. automodule:: vizasm.reader.asm.AsmRegEx
     :members:
     :undoc-members:
     :show-inheritance:
 
+
+Module contents
+---------------
+
+.. automodule:: vizasm.reader.asm
+    :members:
+    :undoc-members:
+    :show-inheritance:

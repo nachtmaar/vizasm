@@ -1,13 +1,5 @@
-objc Package
-============
-
-:mod:`AsmParserInterface` Module
---------------------------------
-
-.. automodule:: vizasm.model.objc.AsmParserInterface
-    :members:
-    :undoc-members:
-    :show-inheritance:
+vizasm.model.objc package
+=========================
 
 Subpackages
 -----------
@@ -19,3 +11,22 @@ Subpackages
     vizasm.model.objc.methodcall
     vizasm.model.objc.object
 
+Submodules
+----------
+
+vizasm.model.objc.AsmParserInterface module
+-------------------------------------------
+
+.. automodule:: vizasm.model.objc.AsmParserInterface
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: vizasm.model.objc
+    :members:
+    :undoc-members:
+    :show-inheritance:

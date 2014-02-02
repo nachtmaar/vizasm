@@ -1,19 +1,30 @@
-methodcall Package
-==================
+vizasm.model.objc.methodcall package
+====================================
 
-:mod:`MethodCall` Module
-------------------------
+Submodules
+----------
+
+vizasm.model.objc.methodcall.MethodCall module
+----------------------------------------------
 
 .. automodule:: vizasm.model.objc.methodcall.MethodCall
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`MethodCallItem` Module
-----------------------------
+vizasm.model.objc.methodcall.MethodCallItem module
+--------------------------------------------------
 
 .. automodule:: vizasm.model.objc.methodcall.MethodCallItem
     :members:
     :undoc-members:
     :show-inheritance:
 
+
+Module contents
+---------------
+
+.. automodule:: vizasm.model.objc.methodcall
+    :members:
+    :undoc-members:
+    :show-inheritance:

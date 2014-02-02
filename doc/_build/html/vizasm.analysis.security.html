@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,14 +6,14 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>security Package &mdash; VizAsm 1 documentation</title>
+    <title>vizasm.analysis.security package &mdash; VizAsm 1 documentation</title>
     
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -48,14 +46,12 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">security Package</a><ul>
-<li><a class="reference internal" href="#module-vizasm.analysis.security.SecurityAnalyzer"><tt class="docutils literal"><span class="pre">SecurityAnalyzer</span></tt> Module</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-vizasm.analysis.security.SecurityFilters"><tt class="docutils literal"><span class="pre">SecurityFilters</span></tt> Module</a></li>
-<li><a class="reference internal" href="#subpackages">Subpackages</a><ul>
-</ul>
-</li>
+<li><a class="reference internal" href="#">vizasm.analysis.security package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-vizasm.analysis.security.SecurityAnalyzer">vizasm.analysis.security.SecurityAnalyzer module</a></li>
+<li><a class="reference internal" href="#module-vizasm.analysis.security.SecurityFilters">vizasm.analysis.security.SecurityFilters module</a></li>
+<li><a class="reference internal" href="#module-vizasm.analysis.security">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -86,10 +82,90 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="security-package">
-<h1>security Package<a class="headerlink" href="#security-package" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="vizasm-analysis-security-package">
+<h1>vizasm.analysis.security package<a class="headerlink" href="#vizasm-analysis-security-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="vizasm.analysis.security.filter.html">vizasm.analysis.security.filter package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="vizasm.analysis.security.filter.util.html">vizasm.analysis.security.filter.util package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.analysis.security.filter.util.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.analysis.security.filter.util.html#module-vizasm.analysis.security.filter.util.MethodCallFilterUtil">vizasm.analysis.security.filter.util.MethodCallFilterUtil module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.analysis.security.filter.util.html#module-vizasm.analysis.security.filter.util.MethodDefFilterUtil">vizasm.analysis.security.filter.util.MethodDefFilterUtil module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.analysis.security.filter.util.html#module-vizasm.analysis.security.filter.util.Util">vizasm.analysis.security.filter.util.Util module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vizasm.analysis.security.filter.util.html#module-vizasm.analysis.security.filter.util">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.BackgroundTasksFilter">vizasm.analysis.security.filter.BackgroundTasksFilter module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.CFStreamSSLLevelFilter">vizasm.analysis.security.filter.CFStreamSSLLevelFilter module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.CookiePolicyFilter">vizasm.analysis.security.filter.CookiePolicyFilter module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.CustomFilter">vizasm.analysis.security.filter.CustomFilter module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.DataProtectionFilter">vizasm.analysis.security.filter.DataProtectionFilter module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.FormatStringFilter">vizasm.analysis.security.filter.FormatStringFilter module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.FrameworkClassFilter">vizasm.analysis.security.filter.FrameworkClassFilter module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.GeoLocationFilter">vizasm.analysis.security.filter.GeoLocationFilter module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.IPCFilter">vizasm.analysis.security.filter.IPCFilter module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.KeyChainFilter">vizasm.analysis.security.filter.KeyChainFilter module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.NSStreamSSLLevelFilter">vizasm.analysis.security.filter.NSStreamSSLLevelFilter module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.NSUserDefaultsFilter">vizasm.analysis.security.filter.NSUserDefaultsFilter module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.RandomFuncFilter">vizasm.analysis.security.filter.RandomFuncFilter module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.SQLiteFilter">vizasm.analysis.security.filter.SQLiteFilter module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.SeatBeltFilter">vizasm.analysis.security.filter.SeatBeltFilter module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.SecurityFilter">vizasm.analysis.security.filter.SecurityFilter module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.UIPasteBoardFilter">vizasm.analysis.security.filter.UIPasteBoardFilter module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.UntrustedSSLCertsFilter">vizasm.analysis.security.filter.UntrustedSSLCertsFilter module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
 <div class="section" id="module-vizasm.analysis.security.SecurityAnalyzer">
-<span id="securityanalyzer-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">SecurityAnalyzer</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.security.SecurityAnalyzer" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-analysis-security-securityanalyzer-module"></span><h2>vizasm.analysis.security.SecurityAnalyzer module<a class="headerlink" href="#module-vizasm.analysis.security.SecurityAnalyzer" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 19.04.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -114,7 +190,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>_methodcall: MethodCall</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>_methodcall: MethodCall</strong> :</p>
 <blockquote>
 <div><p>the MethodCall that shall be analyzed
 _filters: list&lt;SecurityFilter&gt;, optional</p>
@@ -192,7 +268,7 @@ _filters: list&lt;SecurityFilter&gt;, optional</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>security_filter: SecurityFilter</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>security_filter: SecurityFilter</strong> :</p>
 <blockquote class="last">
 <div><p>the filter to add</p>
 </div></blockquote>
@@ -210,7 +286,7 @@ _filters: list&lt;SecurityFilter&gt;, optional</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>security_filter_list: list&lt;SecurityFilter&gt;</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>security_filter_list: list&lt;SecurityFilter&gt;</strong> :</p>
 <blockquote class="last">
 <div><p>the filters to add</p>
 </div></blockquote>
@@ -234,14 +310,14 @@ _filters: list&lt;SecurityFilter&gt;, optional</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>graph: Graph</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>graph: Graph</strong> :</p>
 <blockquote>
 <div><p>the graph to which the <cite>SecurityFilter</cite> and its filtered content shall be added.
 if None, nothing will be added.</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>methodcall: MethodCall</strong> :</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>methodcall: MethodCall</strong> :</p>
 <blockquote class="last">
 <div><p>The filtered MethodCall after applying all filters.
 A new one will be constructed!</p>
@@ -310,7 +386,7 @@ A new one will be constructed!</p>
 
 </div>
 <div class="section" id="module-vizasm.analysis.security.SecurityFilters">
-<span id="securityfilters-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">SecurityFilters</span></tt> Module<a class="headerlink" href="#module-vizasm.analysis.security.SecurityFilters" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-analysis-security-securityfilters-module"></span><h2>vizasm.analysis.security.SecurityFilters module<a class="headerlink" href="#module-vizasm.analysis.security.SecurityFilters" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 08.10.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -365,80 +441,8 @@ Available filters are currently those which are in the static field <cite>SECURI
 </dd></dl>
 
 </div>
-<div class="section" id="subpackages">
-<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="vizasm.analysis.security.filter.html">filter Package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#id1"><tt class="docutils literal"><span class="pre">filter</span></tt> Package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.BackgroundTasksFilter"><tt class="docutils literal"><span class="pre">BackgroundTasksFilter</span></tt> Module</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.CFStreamSSLLevelFilter"><tt class="docutils literal"><span class="pre">CFStreamSSLLevelFilter</span></tt> Module</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.CookiePolicyFilter"><tt class="docutils literal"><span class="pre">CookiePolicyFilter</span></tt> Module</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.CustomFilter"><tt class="docutils literal"><span class="pre">CustomFilter</span></tt> Module</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.DataProtectionFilter"><tt class="docutils literal"><span class="pre">DataProtectionFilter</span></tt> Module</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.FormatStringFilter"><tt class="docutils literal"><span class="pre">FormatStringFilter</span></tt> Module</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.FrameworkClassFilter"><tt class="docutils literal"><span class="pre">FrameworkClassFilter</span></tt> Module</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.GeoLocationFilter"><tt class="docutils literal"><span class="pre">GeoLocationFilter</span></tt> Module</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.IPCFilter"><tt class="docutils literal"><span class="pre">IPCFilter</span></tt> Module</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.KeyChainFilter"><tt class="docutils literal"><span class="pre">KeyChainFilter</span></tt> Module</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.NSStreamSSLLevelFilter"><tt class="docutils literal"><span class="pre">NSStreamSSLLevelFilter</span></tt> Module</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.NSUserDefaultsFilter"><tt class="docutils literal"><span class="pre">NSUserDefaultsFilter</span></tt> Module</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.RandomFuncFilter"><tt class="docutils literal"><span class="pre">RandomFuncFilter</span></tt> Module</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.SQLiteFilter"><tt class="docutils literal"><span class="pre">SQLiteFilter</span></tt> Module</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.SeatBeltFilter"><tt class="docutils literal"><span class="pre">SeatBeltFilter</span></tt> Module</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.SecurityFilter"><tt class="docutils literal"><span class="pre">SecurityFilter</span></tt> Module</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.UIPasteBoardFilter"><tt class="docutils literal"><span class="pre">UIPasteBoardFilter</span></tt> Module</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#module-vizasm.analysis.security.filter.UntrustedSSLCertsFilter"><tt class="docutils literal"><span class="pre">UntrustedSSLCertsFilter</span></tt> Module</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="vizasm.analysis.security.filter.html#subpackages">Subpackages</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="vizasm.analysis.security.filter.util.html">util Package</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="vizasm.analysis.security.filter.util.html#id1"><tt class="docutils literal"><span class="pre">util</span></tt> Package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="vizasm.analysis.security.filter.util.html#module-vizasm.analysis.security.filter.util.MethodCallFilterUtil"><tt class="docutils literal"><span class="pre">MethodCallFilterUtil</span></tt> Module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="vizasm.analysis.security.filter.util.html#module-vizasm.analysis.security.filter.util.MethodDefFilterUtil"><tt class="docutils literal"><span class="pre">MethodDefFilterUtil</span></tt> Module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="vizasm.analysis.security.filter.util.html#module-vizasm.analysis.security.filter.util.Util"><tt class="docutils literal"><span class="pre">Util</span></tt> Module</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
+<div class="section" id="module-vizasm.analysis.security">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-vizasm.analysis.security" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -465,7 +469,7 @@ Available filters are currently those which are in the static field <cite>SECURI
     </div>
     <div class="footer">
         &copy; Copyright 2013, Nils Schmidt.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

@@ -132,13 +132,17 @@ class AsmRegEx_x86_64(AsmRegEx):
         
     __RE_IMP = r'''
  (\[(ds|ss)[:])?                  # [ds: <- optional    
- (?:imp[_]{3}%s[_]{2,})           # imp___stubs__ or imp___got__ <- this seems to be the 64 bit version
+ (?:imp[_]{3}(
+     %s[_]{2,}                    # imp___stubs__ or imp___got__ or imp___symbol_stub(1)
+     |        
+     nl[_]symbol[_]ptr[_]{2}      # nl_symbol_ptr__
+     ))
  (?P<%s>\w+)                      # NSLog
  (\])?                            # ] <- optional
  ''' 
 
     RE_IMP_STUBS_GR_IMP_STUBS = 'imp_stubs'
-    RE_IMP_STUBS = __RE_IMP % ('stubs', RE_IMP_STUBS_GR_IMP_STUBS)
+    RE_IMP_STUBS = __RE_IMP % ('(stubs|symbol_stub\d?)', RE_IMP_STUBS_GR_IMP_STUBS)
 
     RE_IMP_GOT_GR_IMP_GOT = 'imp_got'
     RE_IMP_GOT = __RE_IMP % ('got', RE_IMP_GOT_GR_IMP_GOT)

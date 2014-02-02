@@ -1,35 +1,46 @@
-exceptions Package
-==================
+vizasm.analysis.asm.cpu.exceptions package
+==========================================
 
-:mod:`CpuCouldNotGetDestination` Module
----------------------------------------
+Submodules
+----------
+
+vizasm.analysis.asm.cpu.exceptions.CpuCouldNotGetDestination module
+-------------------------------------------------------------------
 
 .. automodule:: vizasm.analysis.asm.cpu.exceptions.CpuCouldNotGetDestination
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`CpuCouldNotGetSelfref` Module
------------------------------------
+vizasm.analysis.asm.cpu.exceptions.CpuCouldNotGetSelfref module
+---------------------------------------------------------------
 
 .. automodule:: vizasm.analysis.asm.cpu.exceptions.CpuCouldNotGetSelfref
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`CpuCouldNotReadNSLogException` Module
--------------------------------------------
+vizasm.analysis.asm.cpu.exceptions.CpuCouldNotReadNSLogException module
+-----------------------------------------------------------------------
 
 .. automodule:: vizasm.analysis.asm.cpu.exceptions.CpuCouldNotReadNSLogException
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`CpuException` Module
---------------------------
+vizasm.analysis.asm.cpu.exceptions.CpuException module
+------------------------------------------------------
 
 .. automodule:: vizasm.analysis.asm.cpu.exceptions.CpuException
     :members:
     :undoc-members:
     :show-inheritance:
 
+
+Module contents
+---------------
+
+.. automodule:: vizasm.analysis.asm.cpu.exceptions
+    :members:
+    :undoc-members:
+    :show-inheritance:

@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,14 +6,14 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>asm Package &mdash; VizAsm 1 documentation</title>
+    <title>vizasm.reader.asm package &mdash; VizAsm 1 documentation</title>
     
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -48,13 +46,11 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">asm Package</a><ul>
-<li><a class="reference internal" href="#module-vizasm.reader.asm.AsmReader"><tt class="docutils literal"><span class="pre">AsmReader</span></tt> Module</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-vizasm.reader.asm.AsmRegEx"><tt class="docutils literal"><span class="pre">AsmRegEx</span></tt> Module</a><ul>
-</ul>
-</li>
+<li><a class="reference internal" href="#">vizasm.reader.asm package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-vizasm.reader.asm.AsmReader">vizasm.reader.asm.AsmReader module</a></li>
+<li><a class="reference internal" href="#module-vizasm.reader.asm.AsmRegEx">vizasm.reader.asm.AsmRegEx module</a></li>
+<li><a class="reference internal" href="#module-vizasm.reader.asm">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -85,10 +81,13 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="asm-package">
-<h1>asm Package<a class="headerlink" href="#asm-package" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="vizasm-reader-asm-package">
+<h1>vizasm.reader.asm package<a class="headerlink" href="#vizasm-reader-asm-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
 <div class="section" id="module-vizasm.reader.asm.AsmReader">
-<span id="asmreader-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">AsmReader</span></tt> Module<a class="headerlink" href="#module-vizasm.reader.asm.AsmReader" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-reader-asm-asmreader-module"></span><h2>vizasm.reader.asm.AsmReader module<a class="headerlink" href="#module-vizasm.reader.asm.AsmReader" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 11.04.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -113,7 +112,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>__abs_file_path: string</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>__abs_file_path: string</strong> :</p>
 <blockquote>
 <div><p>absolute file path of the asm file</p>
 </div></blockquote>
@@ -203,13 +202,13 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>it: iterator&lt;str&gt;</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>it: iterator&lt;str&gt;</strong> :</p>
 <blockquote>
 <div><p>the iterator to add line numbers to</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first last"><strong>method_dict: iterator&lt;tuple&lt;int, string&gt;&gt;</strong> :</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>method_dict: iterator&lt;tuple&lt;int, string&gt;&gt;</strong> :</p>
 </td>
 </tr>
 </tbody>
@@ -225,7 +224,7 @@ For each method a dictionary is yield with the line number as key and the method
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>read_all_procedures: boolean, optional (default is False)</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>read_all_procedures: boolean, optional (default is False)</strong> :</p>
 <blockquote>
 <div><p>If True, all procedures will be read.
 If False, only those recognized as a <cite>CategoryClass</cite> or method implementation
@@ -238,7 +237,7 @@ See <cite>AsmRegEx.is_method_implementation</cite> for details.</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first last"><strong>method_dict iterator: iterator&lt;dict&lt;int, string&gt;&gt;</strong> :</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>method_dict iterator: iterator&lt;dict&lt;int, string&gt;&gt;</strong> :</p>
 </td>
 </tr>
 </tbody>
@@ -261,7 +260,7 @@ Returns an iterator over the lines and line numbers.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>file_iterator: iterator&lt;string&gt;</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>file_iterator: iterator&lt;string&gt;</strong> :</p>
 <blockquote>
 <div><p>iterator over the asm file</p>
 </div></blockquote>
@@ -271,7 +270,7 @@ Returns an iterator over the lines and line numbers.</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>iterator&lt;tuple&lt;int, string&gt;&gt;</strong> :</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>iterator&lt;tuple&lt;int, string&gt;&gt;</strong> :</p>
 <blockquote>
 <div><p>the sections</p>
 </div></blockquote>
@@ -304,13 +303,13 @@ Yields a dictionary with the line number as key and the method line as value.</p
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>it: iterator&lt;str&gt;</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>it: iterator&lt;str&gt;</strong> :</p>
 <blockquote>
 <div><p>iterator over the procedure lines</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first last"><strong>method_dict: iterator&lt;dict&lt;int, string&gt;&gt;</strong> :</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>method_dict: iterator&lt;dict&lt;int, string&gt;&gt;</strong> :</p>
 </td>
 </tr>
 </tbody>
@@ -326,7 +325,7 @@ Yields a dictionary with the line number as key and the method line as value.</p
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><strong>method_dict: iterator&lt;dict&lt;int, string&gt;&gt;</strong> :</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>method_dict: iterator&lt;dict&lt;int, string&gt;&gt;</strong> :</td>
 </tr>
 </tbody>
 </table>
@@ -336,7 +335,7 @@ Yields a dictionary with the line number as key and the method line as value.</p
 
 </div>
 <div class="section" id="module-vizasm.reader.asm.AsmRegEx">
-<span id="asmregex-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">AsmRegEx</span></tt> Module<a class="headerlink" href="#module-vizasm.reader.asm.AsmRegEx" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-reader-asm-asmregex-module"></span><h2>vizasm.reader.asm.AsmRegEx module<a class="headerlink" href="#module-vizasm.reader.asm.AsmRegEx" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 12.04.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -361,7 +360,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>RE_SECTION_SPLIT</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>RE_SECTION_SPLIT</strong> :</p>
 <blockquote>
 <div><p>use to split asm file into sections</p>
 </div></blockquote>
@@ -381,7 +380,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">compiled_re</span></tt>(regex[,&nbsp;flags])</td>
-<td>Returns a compiled regex pattern object</td>
+<td>Returns a compiled regex pattern object Flags will only be passed if not None.</td>
 </tr>
 <tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">compiled_vre</span></tt>(regex[,&nbsp;flags])</td>
 <td>Returns a compiled regex pattern object</td>
@@ -411,6 +410,9 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 </dd></dl>
 
 </div>
+<div class="section" id="module-vizasm.reader.asm">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-vizasm.reader.asm" title="Permalink to this headline">¶</a></h2>
+</div>
 </div>
 
 
@@ -436,7 +438,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
     </div>
     <div class="footer">
         &copy; Copyright 2013, Nils Schmidt.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

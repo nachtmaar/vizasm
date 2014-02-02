@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,14 +6,14 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>arguments Package &mdash; VizAsm 1 documentation</title>
+    <title>vizasm.model.objc.arguments package &mdash; VizAsm 1 documentation</title>
     
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -48,25 +46,17 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">arguments Package</a><ul>
-<li><a class="reference internal" href="#module-vizasm.model.objc.arguments.Arguments"><tt class="docutils literal"><span class="pre">Arguments</span></tt> Module</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-vizasm.model.objc.arguments.ArgumentsException"><tt class="docutils literal"><span class="pre">ArgumentsException</span></tt> Module</a></li>
-<li><a class="reference internal" href="#module-vizasm.model.objc.arguments.ArgumentsOverloadedException"><tt class="docutils literal"><span class="pre">ArgumentsOverloadedException</span></tt> Module</a></li>
-<li><a class="reference internal" href="#module-vizasm.model.objc.arguments.ArgumentsUnderloadedException"><tt class="docutils literal"><span class="pre">ArgumentsUnderloadedException</span></tt> Module</a></li>
-<li><a class="reference internal" href="#module-vizasm.model.objc.arguments.CFormatString"><tt class="docutils literal"><span class="pre">CFormatString</span></tt> Module</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-vizasm.model.objc.arguments.FillFromCpuInterface"><tt class="docutils literal"><span class="pre">FillFromCpuInterface</span></tt> Module</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-vizasm.model.objc.arguments.FormatString"><tt class="docutils literal"><span class="pre">FormatString</span></tt> Module</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-vizasm.model.objc.arguments.Selector"><tt class="docutils literal"><span class="pre">Selector</span></tt> Module</a><ul>
-</ul>
-</li>
+<li><a class="reference internal" href="#">vizasm.model.objc.arguments package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.arguments.Arguments">vizasm.model.objc.arguments.Arguments module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.arguments.ArgumentsException">vizasm.model.objc.arguments.ArgumentsException module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.arguments.ArgumentsOverloadedException">vizasm.model.objc.arguments.ArgumentsOverloadedException module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.arguments.ArgumentsUnderloadedException">vizasm.model.objc.arguments.ArgumentsUnderloadedException module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.arguments.CFormatString">vizasm.model.objc.arguments.CFormatString module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.arguments.FillFromCpuInterface">vizasm.model.objc.arguments.FillFromCpuInterface module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.arguments.FormatString">vizasm.model.objc.arguments.FormatString module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.arguments.Selector">vizasm.model.objc.arguments.Selector module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.arguments">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -97,10 +87,13 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="arguments-package">
-<h1>arguments Package<a class="headerlink" href="#arguments-package" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="vizasm-model-objc-arguments-package">
+<h1>vizasm.model.objc.arguments package<a class="headerlink" href="#vizasm-model-objc-arguments-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
 <div class="section" id="module-vizasm.model.objc.arguments.Arguments">
-<span id="arguments-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">Arguments</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.arguments.Arguments" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-model-objc-arguments-arguments-module"></span><h2>vizasm.model.objc.arguments.Arguments module<a class="headerlink" href="#module-vizasm.model.objc.arguments.Arguments" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 04.04.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -125,7 +118,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>arguments: list&lt;object&gt;</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>arguments: list&lt;object&gt;</strong> :</p>
 <blockquote class="last">
 <div><p>queue holding selector arguments</p>
 </div></blockquote>
@@ -220,7 +213,7 @@ Subclasses should raise their own Exception if the arguments are overloaded.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><strong>ArgumentsOverloadedException</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>ArgumentsOverloadedException</strong> :</p>
 <blockquote>
 <div><p>if the class has more arguments than it needs</p>
 </div></blockquote>
@@ -272,13 +265,13 @@ Subclasses should raise their own Exception if the arguments are overloaded.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>register_list: list&lt;Register&gt;</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>register_list: list&lt;Register&gt;</strong> :</p>
 <blockquote>
 <div><p>the list of registers from which to fill</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><strong>ArgumentsUnderloadedException</strong> :</p>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>ArgumentsUnderloadedException</strong> :</p>
 <blockquote>
 <div><p>raised if more arguments than needed came from the cpu</p>
 </div></blockquote>
@@ -324,7 +317,7 @@ Subclasses should raise their own Exception if the arguments are overloaded.</p>
 
 </div>
 <div class="section" id="module-vizasm.model.objc.arguments.ArgumentsException">
-<span id="argumentsexception-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">ArgumentsException</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.arguments.ArgumentsException" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-model-objc-arguments-argumentsexception-module"></span><h2>vizasm.model.objc.arguments.ArgumentsException module<a class="headerlink" href="#module-vizasm.model.objc.arguments.ArgumentsException" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 10.04.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -353,7 +346,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 
 </div>
 <div class="section" id="module-vizasm.model.objc.arguments.ArgumentsOverloadedException">
-<span id="argumentsoverloadedexception-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">ArgumentsOverloadedException</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.arguments.ArgumentsOverloadedException" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-model-objc-arguments-argumentsoverloadedexception-module"></span><h2>vizasm.model.objc.arguments.ArgumentsOverloadedException module<a class="headerlink" href="#module-vizasm.model.objc.arguments.ArgumentsOverloadedException" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 10.04.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -384,7 +377,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 
 </div>
 <div class="section" id="module-vizasm.model.objc.arguments.ArgumentsUnderloadedException">
-<span id="argumentsunderloadedexception-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">ArgumentsUnderloadedException</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.arguments.ArgumentsUnderloadedException" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-model-objc-arguments-argumentsunderloadedexception-module"></span><h2>vizasm.model.objc.arguments.ArgumentsUnderloadedException module<a class="headerlink" href="#module-vizasm.model.objc.arguments.ArgumentsUnderloadedException" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 10.04.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -413,7 +406,7 @@ arguments_interface: object&lt;Arguments&gt;</p>
 
 </div>
 <div class="section" id="module-vizasm.model.objc.arguments.CFormatString">
-<span id="cformatstring-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">CFormatString</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.arguments.CFormatString" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-model-objc-arguments-cformatstring-module"></span><h2>vizasm.model.objc.arguments.CFormatString module<a class="headerlink" href="#module-vizasm.model.objc.arguments.CFormatString" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 10.10.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -438,7 +431,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>format_string: CString</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>format_string: CString</strong> :</p>
 <blockquote class="last">
 <div><p>the format string</p>
 </div></blockquote>
@@ -531,7 +524,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 
 </div>
 <div class="section" id="module-vizasm.model.objc.arguments.FillFromCpuInterface">
-<span id="fillfromcpuinterface-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">FillFromCpuInterface</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.arguments.FillFromCpuInterface" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-model-objc-arguments-fillfromcpuinterface-module"></span><h2>vizasm.model.objc.arguments.FillFromCpuInterface module<a class="headerlink" href="#module-vizasm.model.objc.arguments.FillFromCpuInterface" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 04.04.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -573,7 +566,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 
 </div>
 <div class="section" id="module-vizasm.model.objc.arguments.FormatString">
-<span id="formatstring-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">FormatString</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.arguments.FormatString" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-model-objc-arguments-formatstring-module"></span><h2>vizasm.model.objc.arguments.FormatString module<a class="headerlink" href="#module-vizasm.model.objc.arguments.FormatString" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 04.04.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -598,7 +591,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>format_string: NSString</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>format_string: NSString</strong> :</p>
 <blockquote class="last">
 <div><p>the format string (mapped to objc_name)</p>
 </div></blockquote>
@@ -700,7 +693,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><strong>FormatStringOverLoadedException</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>FormatStringOverLoadedException</strong> :</p>
 <blockquote class="last">
 <div><p>if FormatString has more arguments than it needs</p>
 </div></blockquote>
@@ -730,13 +723,13 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>register_list</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>register_list</strong> :</p>
 <blockquote>
 <div><p>the list of register from which to fill (if None is passed, the default register list is used)</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><strong>FormatStringOverLoadedException</strong> :</p>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>FormatStringOverLoadedException</strong> :</p>
 <blockquote>
 <div><p>raised if more arguments than needed came from the cpu</p>
 </div></blockquote>
@@ -782,7 +775,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 
 </div>
 <div class="section" id="module-vizasm.model.objc.arguments.Selector">
-<span id="selector-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">Selector</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.arguments.Selector" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-model-objc-arguments-selector-module"></span><h2>vizasm.model.objc.arguments.Selector module<a class="headerlink" href="#module-vizasm.model.objc.arguments.Selector" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 27.03.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -807,7 +800,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>selector_name: string</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>selector_name: string</strong> :</p>
 <blockquote class="last">
 <div><p>the name of the selector (mapped to objc_name)</p>
 </div></blockquote>
@@ -838,7 +831,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <td>return the number of arguments the selector takes indicated by the number of &#8221;:&#8221; in the selector name</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Selector.Selector.create_from_asm_line" title="vizasm.model.objc.arguments.Selector.Selector.create_from_asm_line"><tt class="xref py py-obj docutils literal"><span class="pre">create_from_asm_line</span></tt></a>(asmline)</td>
-<td>Create Selector from asm line like e.g. &#64;selector(objectForKey:)</td>
+<td>Create Selector from asm line like e.g.</td>
 </tr>
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">create_msg_send</span></tt>(selector,&nbsp;*args,&nbsp;**kwargs)</td>
 <td>Create a <cite>MsgSend</cite> with the specified <cite>selector</cite>.</td>
@@ -919,10 +912,10 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <td>Retain object &#8211; increment retain count</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Selector.Selector.selector_from_delimiter" title="vizasm.model.objc.arguments.Selector.Selector.selector_from_delimiter"><tt class="xref py py-obj docutils literal"><span class="pre">selector_from_delimiter</span></tt></a>(selectorname[,&nbsp;...])</td>
-<td>Return a Selector from a string like e.g. <a href="#id1"><span class="problematic" id="id2">get_arg1_arg2_</span></a> where &#8220;_&#8221; is the delimiter</td>
+<td>Return a Selector from a string like e.g.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Selector.Selector.selector_from_underscore_delimiter" title="vizasm.model.objc.arguments.Selector.Selector.selector_from_underscore_delimiter"><tt class="xref py py-obj docutils literal"><span class="pre">selector_from_underscore_delimiter</span></tt></a>(selectorname)</td>
-<td>Return a Selector from a string like e.g. <a href="#id3"><span class="problematic" id="id4">get_arg1_arg2_</span></a> where &#8220;_&#8221; is the delimiter</td>
+<td>Return a Selector from a string like e.g.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.arguments.Selector.Selector.set_argument_for_sub_selector" title="vizasm.model.objc.arguments.Selector.Selector.set_argument_for_sub_selector"><tt class="xref py py-obj docutils literal"><span class="pre">set_argument_for_sub_selector</span></tt></a>(subsel_name,&nbsp;...)</td>
 <td>Set the argument for the sub selector.</td>
@@ -996,7 +989,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><strong>SelectorOverloadedException</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>SelectorOverloadedException</strong> :</p>
 <blockquote class="last">
 <div><p>if selector has more arguments than it needs</p>
 </div></blockquote>
@@ -1009,8 +1002,10 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <dl class="method">
 <dt id="vizasm.model.objc.arguments.Selector.Selector.cnt_has_arguments">
 <tt class="descname">cnt_has_arguments</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Selector.html#Selector.cnt_has_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.cnt_has_arguments" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the number of arguments the selector has. 
-This is not the number of arguments the selector really (see cnt_needs_arguments()) needs!</p>
+<dd><dl class="docutils">
+<dt>Return the number of arguments the selector has. </dt>
+<dd>This is not the number of arguments the selector really (see cnt_needs_arguments()) needs!</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1045,13 +1040,13 @@ This is not the number of arguments the selector really (see cnt_needs_arguments
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>register_list</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>register_list</strong> :</p>
 <blockquote>
 <div><p>the list of register from which to fill (if None is passed, the default register list is used <cite>Cpu.selector_arg_registers()</cite>)</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><strong>SelectorUnderloadedException</strong> :</p>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>SelectorUnderloadedException</strong> :</p>
 <blockquote>
 <div><p>raised if more arguments than needed came from the cpu</p>
 </div></blockquote>
@@ -1079,7 +1074,7 @@ This is not the number of arguments the selector really (see cnt_needs_arguments
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>subsel_name: string</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>subsel_name: string</strong> :</p>
 <blockquote class="last">
 <div><p>name of the sub selector</p>
 </div></blockquote>
@@ -1150,14 +1145,14 @@ This is not the number of arguments the selector really (see cnt_needs_arguments
 <dl class="staticmethod">
 <dt id="vizasm.model.objc.arguments.Selector.Selector.selector_from_delimiter">
 <em class="property">static </em><tt class="descname">selector_from_delimiter</tt><big>(</big><em>selectorname</em>, <em>delimiter='_'</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Selector.html#Selector.selector_from_delimiter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.selector_from_delimiter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a Selector from a string like e.g. <a href="#id5"><span class="problematic" id="id6">get_arg1_arg2_</span></a> where &#8220;_&#8221; is the delimiter</p>
+<dd><p>Return a Selector from a string like e.g. <a href="#id1"><span class="problematic" id="id2">get_arg1_arg2_</span></a> where &#8220;_&#8221; is the delimiter</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>selectorname: string</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>selectorname: string</strong> :</p>
 <blockquote>
-<div><p>selectorname like <a href="#id7"><span class="problematic" id="id8">get_arg1_arg2_</span></a></p>
+<div><p>selectorname like <a href="#id3"><span class="problematic" id="id4">get_arg1_arg2_</span></a></p>
 </div></blockquote>
 <p><strong>delimiter: string, optional</strong> :</p>
 <blockquote class="last">
@@ -1172,7 +1167,7 @@ This is not the number of arguments the selector really (see cnt_needs_arguments
 <dl class="staticmethod">
 <dt id="vizasm.model.objc.arguments.Selector.Selector.selector_from_underscore_delimiter">
 <em class="property">static </em><tt class="descname">selector_from_underscore_delimiter</tt><big>(</big><em>selectorname</em><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/arguments/Selector.html#Selector.selector_from_underscore_delimiter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.arguments.Selector.Selector.selector_from_underscore_delimiter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a Selector from a string like e.g. <a href="#id9"><span class="problematic" id="id10">get_arg1_arg2_</span></a> where &#8220;_&#8221; is the delimiter</p>
+<dd><p>Return a Selector from a string like e.g. <a href="#id5"><span class="problematic" id="id6">get_arg1_arg2_</span></a> where &#8220;_&#8221; is the delimiter</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -1189,7 +1184,7 @@ This is not the number of arguments the selector really (see cnt_needs_arguments
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>subsel_name: string</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>subsel_name: string</strong> :</p>
 <blockquote>
 <div><p>name of the sub selector</p>
 </div></blockquote>
@@ -1231,6 +1226,9 @@ This is not the number of arguments the selector really (see cnt_needs_arguments
 </dd></dl>
 
 </div>
+<div class="section" id="module-vizasm.model.objc.arguments">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-vizasm.model.objc.arguments" title="Permalink to this headline">¶</a></h2>
+</div>
 </div>
 
 
@@ -1256,7 +1254,7 @@ This is not the number of arguments the selector really (see cnt_needs_arguments
     </div>
     <div class="footer">
         &copy; Copyright 2013, Nils Schmidt.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

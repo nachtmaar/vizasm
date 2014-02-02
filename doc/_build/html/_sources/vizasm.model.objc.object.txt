@@ -1,13 +1,5 @@
-object Package
-==============
-
-:mod:`Object` Module
---------------------
-
-.. automodule:: vizasm.model.objc.object.Object
-    :members:
-    :undoc-members:
-    :show-inheritance:
+vizasm.model.objc.object package
+================================
 
 Subpackages
 -----------
@@ -16,3 +8,22 @@ Subpackages
 
     vizasm.model.objc.object.nsobject
 
+Submodules
+----------
+
+vizasm.model.objc.object.Object module
+--------------------------------------
+
+.. automodule:: vizasm.model.objc.object.Object
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: vizasm.model.objc.object
+    :members:
+    :undoc-members:
+    :show-inheritance:

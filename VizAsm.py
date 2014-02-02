@@ -49,9 +49,9 @@ from vizasm.util.Log import log, clilog, vizasm_add_file_handler, \
     get_cli_streamhandler, log_set_level, streamhandler
 from vizasm.util.ModuleClassNameException import ModuleNotSameClassNameException
 
-__version__ = 0.1
+__version__ = '0.1.1'
 __date__ = '2013-04-10'
-__updated__ = '2013-11-11'
+__updated__ = '2014-02-02'
 __author__ = 'Nils Schmidt'
 
 DEBUG = 0

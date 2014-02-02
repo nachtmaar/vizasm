@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,14 +6,14 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>var_assignment Package &mdash; VizAsm 1 documentation</title>
+    <title>vizasm.model.asm.var_assignment package &mdash; VizAsm 1 documentation</title>
     
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -48,14 +46,14 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">var_assignment Package</a><ul>
-<li><a class="reference internal" href="#module-vizasm.model.asm.var_assignment.VarAssignment"><tt class="docutils literal"><span class="pre">VarAssignment</span></tt> Module</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-vizasm.model.asm.var_assignment.VarAssignmentIvarRegisterWrongTypeException"><tt class="docutils literal"><span class="pre">VarAssignmentIvarRegisterWrongTypeException</span></tt> Module</a></li>
-<li><a class="reference internal" href="#module-vizasm.model.asm.var_assignment.VarAssignmentResolveIvarRegisterException"><tt class="docutils literal"><span class="pre">VarAssignmentResolveIvarRegisterException</span></tt> Module</a></li>
-<li><a class="reference internal" href="#module-vizasm.model.asm.var_assignment.VarAssignmentResolveRegisterException"><tt class="docutils literal"><span class="pre">VarAssignmentResolveRegisterException</span></tt> Module</a></li>
-<li><a class="reference internal" href="#module-vizasm.model.asm.var_assignment.VarAssignmentResolveSelfrefRegisterException"><tt class="docutils literal"><span class="pre">VarAssignmentResolveSelfrefRegisterException</span></tt> Module</a></li>
+<li><a class="reference internal" href="#">vizasm.model.asm.var_assignment package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.asm.var_assignment.VarAssignment">vizasm.model.asm.var_assignment.VarAssignment module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.asm.var_assignment.VarAssignmentIvarRegisterWrongTypeException">vizasm.model.asm.var_assignment.VarAssignmentIvarRegisterWrongTypeException module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.asm.var_assignment.VarAssignmentResolveIvarRegisterException">vizasm.model.asm.var_assignment.VarAssignmentResolveIvarRegisterException module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.asm.var_assignment.VarAssignmentResolveRegisterException">vizasm.model.asm.var_assignment.VarAssignmentResolveRegisterException module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.asm.var_assignment.VarAssignmentResolveSelfrefRegisterException">vizasm.model.asm.var_assignment.VarAssignmentResolveSelfrefRegisterException module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.asm.var_assignment">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -86,10 +84,13 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="var-assignment-package">
-<h1>var_assignment Package<a class="headerlink" href="#var-assignment-package" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="vizasm-model-asm-var-assignment-package">
+<h1>vizasm.model.asm.var_assignment package<a class="headerlink" href="#vizasm-model-asm-var-assignment-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
 <div class="section" id="module-vizasm.model.asm.var_assignment.VarAssignment">
-<span id="varassignment-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">VarAssignment</span></tt> Module<a class="headerlink" href="#module-vizasm.model.asm.var_assignment.VarAssignment" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-model-asm-var-assignment-varassignment-module"></span><h2>vizasm.model.asm.var_assignment.VarAssignment module<a class="headerlink" href="#module-vizasm.model.asm.var_assignment.VarAssignment" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 31.03.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -115,7 +116,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>__selfref_register: String</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>__selfref_register: String</strong> :</p>
 <blockquote>
 <div><p>this register stores the self reference of the current instance from which the method is acting</p>
 </div></blockquote>
@@ -232,7 +233,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 
 </div>
 <div class="section" id="module-vizasm.model.asm.var_assignment.VarAssignmentIvarRegisterWrongTypeException">
-<span id="varassignmentivarregisterwrongtypeexception-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">VarAssignmentIvarRegisterWrongTypeException</span></tt> Module<a class="headerlink" href="#module-vizasm.model.asm.var_assignment.VarAssignmentIvarRegisterWrongTypeException" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-model-asm-var-assignment-varassignmentivarregisterwrongtypeexception-module"></span><h2>vizasm.model.asm.var_assignment.VarAssignmentIvarRegisterWrongTypeException module<a class="headerlink" href="#module-vizasm.model.asm.var_assignment.VarAssignmentIvarRegisterWrongTypeException" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 31.03.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -264,7 +265,7 @@ Should be: IVar</p>
 
 </div>
 <div class="section" id="module-vizasm.model.asm.var_assignment.VarAssignmentResolveIvarRegisterException">
-<span id="varassignmentresolveivarregisterexception-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">VarAssignmentResolveIvarRegisterException</span></tt> Module<a class="headerlink" href="#module-vizasm.model.asm.var_assignment.VarAssignmentResolveIvarRegisterException" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-model-asm-var-assignment-varassignmentresolveivarregisterexception-module"></span><h2>vizasm.model.asm.var_assignment.VarAssignmentResolveIvarRegisterException module<a class="headerlink" href="#module-vizasm.model.asm.var_assignment.VarAssignmentResolveIvarRegisterException" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 31.03.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -289,7 +290,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 
 </div>
 <div class="section" id="module-vizasm.model.asm.var_assignment.VarAssignmentResolveRegisterException">
-<span id="varassignmentresolveregisterexception-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">VarAssignmentResolveRegisterException</span></tt> Module<a class="headerlink" href="#module-vizasm.model.asm.var_assignment.VarAssignmentResolveRegisterException" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-model-asm-var-assignment-varassignmentresolveregisterexception-module"></span><h2>vizasm.model.asm.var_assignment.VarAssignmentResolveRegisterException module<a class="headerlink" href="#module-vizasm.model.asm.var_assignment.VarAssignmentResolveRegisterException" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 31.03.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -314,7 +315,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>_unresolved_register: string</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>_unresolved_register: string</strong> :</p>
 <blockquote>
 <div><p>the register that couldn&#8217;t be resolved</p>
 </div></blockquote>
@@ -330,7 +331,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 
 </div>
 <div class="section" id="module-vizasm.model.asm.var_assignment.VarAssignmentResolveSelfrefRegisterException">
-<span id="varassignmentresolveselfrefregisterexception-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">VarAssignmentResolveSelfrefRegisterException</span></tt> Module<a class="headerlink" href="#module-vizasm.model.asm.var_assignment.VarAssignmentResolveSelfrefRegisterException" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-model-asm-var-assignment-varassignmentresolveselfrefregisterexception-module"></span><h2>vizasm.model.asm.var_assignment.VarAssignmentResolveSelfrefRegisterException module<a class="headerlink" href="#module-vizasm.model.asm.var_assignment.VarAssignmentResolveSelfrefRegisterException" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 31.03.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -353,6 +354,9 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <p>VarAssignmentResolveRegisterException for resolving the selfref</p>
 </dd></dl>
 
+</div>
+<div class="section" id="module-vizasm.model.asm.var_assignment">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-vizasm.model.asm.var_assignment" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -379,7 +383,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
     </div>
     <div class="footer">
         &copy; Copyright 2013, Nils Schmidt.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

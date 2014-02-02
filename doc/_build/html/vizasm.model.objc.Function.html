@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,14 +6,14 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>function Package &mdash; VizAsm 1 documentation</title>
+    <title>vizasm.model.objc.function package &mdash; VizAsm 1 documentation</title>
     
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -48,31 +46,17 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">function Package</a><ul>
-<li><a class="reference internal" href="#module-vizasm.model.objc.function.ClassFunc"><tt class="docutils literal"><span class="pre">ClassFunc</span></tt> Module</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-vizasm.model.objc.function.Function"><tt class="docutils literal"><span class="pre">Function</span></tt> Module</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-vizasm.model.objc.function.FunctionInterface"><tt class="docutils literal"><span class="pre">FunctionInterface</span></tt> Module</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-vizasm.model.objc.function.MethodImplementation"><tt class="docutils literal"><span class="pre">MethodImplementation</span></tt> Module</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-vizasm.model.objc.function.MethodSelectorArgument"><tt class="docutils literal"><span class="pre">MethodSelectorArgument</span></tt> Module</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-vizasm.model.objc.function.MsgSend"><tt class="docutils literal"><span class="pre">MsgSend</span></tt> Module</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-vizasm.model.objc.function.MsgSendInterface"><tt class="docutils literal"><span class="pre">MsgSendInterface</span></tt> Module</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-vizasm.model.objc.function.Sub"><tt class="docutils literal"><span class="pre">Sub</span></tt> Module</a><ul>
-</ul>
-</li>
+<li><a class="reference internal" href="#">vizasm.model.objc.function package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.function.ClassFunc">vizasm.model.objc.function.ClassFunc module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.function.Function">vizasm.model.objc.function.Function module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.function.FunctionInterface">vizasm.model.objc.function.FunctionInterface module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.function.MethodImplementation">vizasm.model.objc.function.MethodImplementation module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.function.MethodSelectorArgument">vizasm.model.objc.function.MethodSelectorArgument module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.function.MsgSend">vizasm.model.objc.function.MsgSend module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.function.MsgSendInterface">vizasm.model.objc.function.MsgSendInterface module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.function.Sub">vizasm.model.objc.function.Sub module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.function">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -103,10 +87,13 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="function-package">
-<h1>function Package<a class="headerlink" href="#function-package" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="vizasm-model-objc-function-package">
+<h1>vizasm.model.objc.function package<a class="headerlink" href="#vizasm-model-objc-function-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
 <div class="section" id="module-vizasm.model.objc.function.ClassFunc">
-<span id="classfunc-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">ClassFunc</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.function.ClassFunc" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-model-objc-function-classfunc-module"></span><h2>vizasm.model.objc.function.ClassFunc module<a class="headerlink" href="#module-vizasm.model.objc.function.ClassFunc" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 21.04.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -132,7 +119,7 @@ A <cite>ClassFunc</cite> has additionally a class to which it belongs.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>__class_of_func: ObjcClass</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>__class_of_func: ObjcClass</strong> :</p>
 <blockquote class="last">
 <div><p>The class to which the function belongs.</p>
 </div></blockquote>
@@ -225,7 +212,7 @@ A <cite>ClassFunc</cite> has additionally a class to which it belongs.</p>
 
 </div>
 <div class="section" id="module-vizasm.model.objc.function.Function">
-<span id="function-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">Function</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.function.Function" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-model-objc-function-function-module"></span><h2>vizasm.model.objc.function.Function module<a class="headerlink" href="#module-vizasm.model.objc.function.Function" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 21.04.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -250,7 +237,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>__function: string</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>__function: string</strong> :</p>
 <blockquote>
 <div><p>The name of the function.</p>
 </div></blockquote>
@@ -331,13 +318,13 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>selector: Selector</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>selector: Selector</strong> :</p>
 <blockquote>
 <div><p>the <cite>Selector</cite> with which the <cite>MsgSend</cite> shall be created.</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>MsgSend</strong> :</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>MsgSend</strong> :</p>
 <blockquote class="last">
 <div><p>the created <cite>MsgSend</cite></p>
 </div></blockquote>
@@ -403,7 +390,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 
 </div>
 <div class="section" id="module-vizasm.model.objc.function.FunctionInterface">
-<span id="functioninterface-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">FunctionInterface</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.function.FunctionInterface" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-model-objc-function-functioninterface-module"></span><h2>vizasm.model.objc.function.FunctionInterface module<a class="headerlink" href="#module-vizasm.model.objc.function.FunctionInterface" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 07.08.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -428,7 +415,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>_is_static: bool</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>_is_static: bool</strong> :</p>
 <blockquote class="last">
 <div><p>check if the function is static</p>
 </div></blockquote>
@@ -492,7 +479,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><strong>arguments: list&lt;object&gt;</strong> :</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>arguments: list&lt;object&gt;</strong> :</td>
 </tr>
 </tbody>
 </table>
@@ -542,7 +529,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 
 </div>
 <div class="section" id="module-vizasm.model.objc.function.MethodImplementation">
-<span id="methodimplementation-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">MethodImplementation</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.function.MethodImplementation" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-model-objc-function-methodimplementation-module"></span><h2>vizasm.model.objc.function.MethodImplementation module<a class="headerlink" href="#module-vizasm.model.objc.function.MethodImplementation" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 14.09.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -580,7 +567,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <td></td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#vizasm.model.objc.function.MethodImplementation.MethodImplementation.create_from_asm_line" title="vizasm.model.objc.function.MethodImplementation.MethodImplementation.create_from_asm_line"><tt class="xref py py-obj docutils literal"><span class="pre">create_from_asm_line</span></tt></a>(asmline)</td>
-<td>Create a <cite>MethodImplementation</cite> from an assembler line like e.g &#8221; +[NSURLRequest(AnyHttpsCert) allowsAnyHTTPSCertificateForHost:]_100002120:&#8221;</td>
+<td>Create a <cite>MethodImplementation</cite> from an assembler line like e.g &#8221; +[NSURLRequest(AnyHttpsCert) allowsAnyHTTPSCertificateForHost:]_100002120:&#8221;  Returns a <cite>MethodImplementation</cite> where the class is a <cite>CategoryClass</cite>.</td>
 </tr>
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">create_from_msgsend</span></tt>(msg_send,&nbsp;selector)</td>
 <td>Create a MsgSend from existing MsgSend.</td>
@@ -673,7 +660,7 @@ Returns a <cite>MethodImplementation</cite> where the class is a <cite>CategoryC
 
 </div>
 <div class="section" id="module-vizasm.model.objc.function.MethodSelectorArgument">
-<span id="methodselectorargument-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">MethodSelectorArgument</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.function.MethodSelectorArgument" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-model-objc-function-methodselectorargument-module"></span><h2>vizasm.model.objc.function.MethodSelectorArgument module<a class="headerlink" href="#module-vizasm.model.objc.function.MethodSelectorArgument" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 06.09.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -795,7 +782,7 @@ It&#8217;s used for the unknown arguments of a method implementations <cite>Sele
 
 </div>
 <div class="section" id="module-vizasm.model.objc.function.MsgSend">
-<span id="msgsend-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">MsgSend</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.function.MsgSend" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-model-objc-function-msgsend-module"></span><h2>vizasm.model.objc.function.MsgSend module<a class="headerlink" href="#module-vizasm.model.objc.function.MsgSend" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 01.04.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -822,7 +809,7 @@ or [[[NSUserDefaults standardUserDefaults] objectForKey:aKey] setValueForKey:aKe
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>__msg_receiver: FunctionInterface</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>__msg_receiver: FunctionInterface</strong> :</p>
 <blockquote>
 <div><p>the class to which the message(s) will be sent</p>
 </div></blockquote>
@@ -939,10 +926,11 @@ or [[[NSUserDefaults standardUserDefaults] objectForKey:aKey] setValueForKey:aKe
 <dt id="vizasm.model.objc.function.MsgSend.MsgSend.cnt_init_selectors">
 <tt class="descname">cnt_init_selectors</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vizasm/model/objc/function/MsgSend.html#MsgSend.cnt_init_selectors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vizasm.model.objc.function.MsgSend.MsgSend.cnt_init_selectors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the number of init selectors.
-Returns:
-0 &#8211; no init selectors
+Returns:</p>
+<blockquote>
+<div>0 &#8211; no init selectors
 1 &#8211; selector is new
-2 &#8211; selectors are alloc and init</p>
+2 &#8211; selectors are alloc and init</div></blockquote>
 </dd></dl>
 
 <dl class="method">
@@ -959,7 +947,7 @@ This method makes a deep copy of the parameters <cite>msg_send</cite> and <cite>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>msg_send: MsgSend</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>msg_send: MsgSend</strong> :</p>
 <p><strong>selector: Selector</strong> :</p>
 <p><strong>Returns:</strong> :</p>
 <p><strong>MsgSend</strong> :</p>
@@ -980,13 +968,13 @@ This method makes a deep copy of the parameters <cite>msg_send</cite> and <cite>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>selector: Selector</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>selector: Selector</strong> :</p>
 <blockquote>
 <div><p>the <cite>Selector</cite> with which the <cite>MsgSend</cite> shall be created.</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>MsgSend</strong> :</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>MsgSend</strong> :</p>
 <blockquote class="last">
 <div><p>the created <cite>MsgSend</cite></p>
 </div></blockquote>
@@ -1110,7 +1098,7 @@ See  <cite>cnt_init_selectors()</cite>.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><strong>list&lt;Selector&gt;</strong> :</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>list&lt;Selector&gt;</strong> :</td>
 </tr>
 </tbody>
 </table>
@@ -1136,7 +1124,7 @@ See  <cite>cnt_init_selectors()</cite>.</p>
 
 </div>
 <div class="section" id="module-vizasm.model.objc.function.MsgSendInterface">
-<span id="msgsendinterface-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">MsgSendInterface</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.function.MsgSendInterface" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-model-objc-function-msgsendinterface-module"></span><h2>vizasm.model.objc.function.MsgSendInterface module<a class="headerlink" href="#module-vizasm.model.objc.function.MsgSendInterface" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 11.05.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -1163,7 +1151,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="#vizasm.model.objc.function.MsgSendInterface.MsgSendInterface.create_msg_send" title="vizasm.model.objc.function.MsgSendInterface.MsgSendInterface.create_msg_send"><tt class="xref py py-obj docutils literal"><span class="pre">create_msg_send</span></tt></a>(selector,&nbsp;*args,&nbsp;**kwargs)</td>
-<td>All classes that can create a MsgSend with the</td>
+<td>All classes that can create a MsgSend with the  specified Selector should implement this method.</td>
 </tr>
 </tbody>
 </table>
@@ -1176,13 +1164,13 @@ specified Selector should implement this method.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>selector: Selector</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>selector: Selector</strong> :</p>
 <blockquote>
 <div><p>the <cite>Selector</cite> with which the <cite>MsgSend</cite> shall be created.</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>MsgSend</strong> :</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>MsgSend</strong> :</p>
 <blockquote class="last">
 <div><p>the <cite>MsgSend</cite> created</p>
 </div></blockquote>
@@ -1196,7 +1184,7 @@ specified Selector should implement this method.</p>
 
 </div>
 <div class="section" id="module-vizasm.model.objc.function.Sub">
-<span id="sub-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">Sub</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.function.Sub" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-model-objc-function-sub-module"></span><h2>vizasm.model.objc.function.Sub module<a class="headerlink" href="#module-vizasm.model.objc.function.Sub" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 18.10.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -1271,6 +1259,9 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 </dd></dl>
 
 </div>
+<div class="section" id="module-vizasm.model.objc.function">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-vizasm.model.objc.function" title="Permalink to this headline">¶</a></h2>
+</div>
 </div>
 
 
@@ -1296,7 +1287,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
     </div>
     <div class="footer">
         &copy; Copyright 2013, Nils Schmidt.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

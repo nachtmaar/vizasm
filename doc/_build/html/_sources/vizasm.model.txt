@@ -1,13 +1,5 @@
-model Package
-=============
-
-:mod:`ModelUtil` Module
------------------------
-
-.. automodule:: vizasm.model.ModelUtil
-    :members:
-    :undoc-members:
-    :show-inheritance:
+vizasm.model package
+====================
 
 Subpackages
 -----------
@@ -17,3 +9,22 @@ Subpackages
     vizasm.model.asm
     vizasm.model.objc
 
+Submodules
+----------
+
+vizasm.model.ModelUtil module
+-----------------------------
+
+.. automodule:: vizasm.model.ModelUtil
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: vizasm.model
+    :members:
+    :undoc-members:
+    :show-inheritance:

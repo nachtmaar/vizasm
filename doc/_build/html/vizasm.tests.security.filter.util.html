@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,14 +6,14 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>util Package &mdash; VizAsm 1 documentation</title>
+    <title>vizasm.tests.security.filter.util package &mdash; VizAsm 1 documentation</title>
     
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -48,13 +46,11 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">util Package</a><ul>
-<li><a class="reference internal" href="#module-vizasm.tests.security.filter.util.FunctionFilterUtilTests"><tt class="docutils literal"><span class="pre">FunctionFilterUtilTests</span></tt> Module</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-vizasm.tests.security.filter.util.MethodDefFilterUtilTests"><tt class="docutils literal"><span class="pre">MethodDefFilterUtilTests</span></tt> Module</a><ul>
-</ul>
-</li>
+<li><a class="reference internal" href="#">vizasm.tests.security.filter.util package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-vizasm.tests.security.filter.util.FunctionFilterUtilTests">vizasm.tests.security.filter.util.FunctionFilterUtilTests module</a></li>
+<li><a class="reference internal" href="#module-vizasm.tests.security.filter.util.MethodDefFilterUtilTests">vizasm.tests.security.filter.util.MethodDefFilterUtilTests module</a></li>
+<li><a class="reference internal" href="#module-vizasm.tests.security.filter.util">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -85,10 +81,13 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="util-package">
-<h1>util Package<a class="headerlink" href="#util-package" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="vizasm-tests-security-filter-util-package">
+<h1>vizasm.tests.security.filter.util package<a class="headerlink" href="#vizasm-tests-security-filter-util-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
 <div class="section" id="module-vizasm.tests.security.filter.util.FunctionFilterUtilTests">
-<span id="functionfilterutiltests-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">FunctionFilterUtilTests</span></tt> Module<a class="headerlink" href="#module-vizasm.tests.security.filter.util.FunctionFilterUtilTests" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-tests-security-filter-util-functionfilterutiltests-module"></span><h2>vizasm.tests.security.filter.util.FunctionFilterUtilTests module<a class="headerlink" href="#module-vizasm.tests.security.filter.util.FunctionFilterUtilTests" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 04.10.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -135,10 +134,10 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <td></td>
 </tr>
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">assertEqual</span></tt>(first,&nbsp;second[,&nbsp;msg])</td>
-<td>Fail if the two objects are unequal as determined by the &#8216;==&#8217;</td>
+<td>Fail if the two objects are unequal as determined by the &#8216;==&#8217; operator.</td>
 </tr>
 <tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">assertEquals</span></tt>(first,&nbsp;second[,&nbsp;msg])</td>
-<td>Fail if the two objects are unequal as determined by the &#8216;==&#8217;</td>
+<td>Fail if the two objects are unequal as determined by the &#8216;==&#8217; operator.</td>
 </tr>
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">assertFalse</span></tt>(expr[,&nbsp;msg])</td>
 <td>Check that the expression is false.</td>
@@ -156,7 +155,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <td>Just like self.assertTrue(a is b), but with a nicer default message.</td>
 </tr>
 <tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">assertIsInstance</span></tt>(obj,&nbsp;cls[,&nbsp;msg])</td>
-<td>Same as self.assertTrue(isinstance(obj, cls)), with a nicer</td>
+<td>Same as self.assertTrue(isinstance(obj, cls)), with a nicer default message.</td>
 </tr>
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">assertIsNone</span></tt>(obj[,&nbsp;msg])</td>
 <td>Same as self.assertTrue(obj is None), with a nicer default message.</td>
@@ -189,10 +188,10 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <td>Fail if the two objects are equal as determined by their difference rounded to the given number of decimal places (default 7) and comparing to zero, or by comparing that the between the two objects is less than the given delta.</td>
 </tr>
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">assertNotEqual</span></tt>(first,&nbsp;second[,&nbsp;msg])</td>
-<td>Fail if the two objects are equal as determined by the &#8216;!=&#8217;</td>
+<td>Fail if the two objects are equal as determined by the &#8216;!=&#8217; operator.</td>
 </tr>
 <tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">assertNotEquals</span></tt>(first,&nbsp;second[,&nbsp;msg])</td>
-<td>Fail if the two objects are equal as determined by the &#8216;!=&#8217;</td>
+<td>Fail if the two objects are equal as determined by the &#8216;!=&#8217; operator.</td>
 </tr>
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">assertNotIn</span></tt>(member,&nbsp;container[,&nbsp;msg])</td>
 <td>Just like self.assertTrue(a not in b), but with a nicer default message.</td>
@@ -204,7 +203,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <td>Fail the test if the text matches the regular expression.</td>
 </tr>
 <tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">assertRaises</span></tt>(excClass[,&nbsp;callableObj])</td>
-<td>Fail unless an exception of class excClass is raised</td>
+<td>Fail unless an exception of class excClass is raised by callableObj when invoked with arguments args and keyword arguments kwargs.</td>
 </tr>
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">assertRaisesRegexp</span></tt>(expected_exception,&nbsp;...)</td>
 <td>Asserts that the message in a raised exception matches a regexp.</td>
@@ -279,7 +278,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <td>Hook method for setting up class fixture before running tests in the class.</td>
 </tr>
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">shortDescription</span></tt>()</td>
-<td>Returns a one-line description of the test, or None if no</td>
+<td>Returns a one-line description of the test, or None if no description has been provided.</td>
 </tr>
 <tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">skipTest</span></tt>(reason)</td>
 <td>Skip this test.</td>
@@ -341,7 +340,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 
 </div>
 <div class="section" id="module-vizasm.tests.security.filter.util.MethodDefFilterUtilTests">
-<span id="methoddeffilterutiltests-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">MethodDefFilterUtilTests</span></tt> Module<a class="headerlink" href="#module-vizasm.tests.security.filter.util.MethodDefFilterUtilTests" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-tests-security-filter-util-methoddeffilterutiltests-module"></span><h2>vizasm.tests.security.filter.util.MethodDefFilterUtilTests module<a class="headerlink" href="#module-vizasm.tests.security.filter.util.MethodDefFilterUtilTests" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 05.10.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -388,10 +387,10 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <td></td>
 </tr>
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">assertEqual</span></tt>(first,&nbsp;second[,&nbsp;msg])</td>
-<td>Fail if the two objects are unequal as determined by the &#8216;==&#8217;</td>
+<td>Fail if the two objects are unequal as determined by the &#8216;==&#8217; operator.</td>
 </tr>
 <tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">assertEquals</span></tt>(first,&nbsp;second[,&nbsp;msg])</td>
-<td>Fail if the two objects are unequal as determined by the &#8216;==&#8217;</td>
+<td>Fail if the two objects are unequal as determined by the &#8216;==&#8217; operator.</td>
 </tr>
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">assertFalse</span></tt>(expr[,&nbsp;msg])</td>
 <td>Check that the expression is false.</td>
@@ -409,7 +408,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <td>Just like self.assertTrue(a is b), but with a nicer default message.</td>
 </tr>
 <tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">assertIsInstance</span></tt>(obj,&nbsp;cls[,&nbsp;msg])</td>
-<td>Same as self.assertTrue(isinstance(obj, cls)), with a nicer</td>
+<td>Same as self.assertTrue(isinstance(obj, cls)), with a nicer default message.</td>
 </tr>
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">assertIsNone</span></tt>(obj[,&nbsp;msg])</td>
 <td>Same as self.assertTrue(obj is None), with a nicer default message.</td>
@@ -442,10 +441,10 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <td>Fail if the two objects are equal as determined by their difference rounded to the given number of decimal places (default 7) and comparing to zero, or by comparing that the between the two objects is less than the given delta.</td>
 </tr>
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">assertNotEqual</span></tt>(first,&nbsp;second[,&nbsp;msg])</td>
-<td>Fail if the two objects are equal as determined by the &#8216;!=&#8217;</td>
+<td>Fail if the two objects are equal as determined by the &#8216;!=&#8217; operator.</td>
 </tr>
 <tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">assertNotEquals</span></tt>(first,&nbsp;second[,&nbsp;msg])</td>
-<td>Fail if the two objects are equal as determined by the &#8216;!=&#8217;</td>
+<td>Fail if the two objects are equal as determined by the &#8216;!=&#8217; operator.</td>
 </tr>
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">assertNotIn</span></tt>(member,&nbsp;container[,&nbsp;msg])</td>
 <td>Just like self.assertTrue(a not in b), but with a nicer default message.</td>
@@ -457,7 +456,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <td>Fail the test if the text matches the regular expression.</td>
 </tr>
 <tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">assertRaises</span></tt>(excClass[,&nbsp;callableObj])</td>
-<td>Fail unless an exception of class excClass is raised</td>
+<td>Fail unless an exception of class excClass is raised by callableObj when invoked with arguments args and keyword arguments kwargs.</td>
 </tr>
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">assertRaisesRegexp</span></tt>(expected_exception,&nbsp;...)</td>
 <td>Asserts that the message in a raised exception matches a regexp.</td>
@@ -544,7 +543,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <td></td>
 </tr>
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">shortDescription</span></tt>()</td>
-<td>Returns a one-line description of the test, or None if no</td>
+<td>Returns a one-line description of the test, or None if no description has been provided.</td>
 </tr>
 <tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">skipTest</span></tt>(reason)</td>
 <td>Skip this test.</td>
@@ -645,6 +644,9 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 </dd></dl>
 
 </div>
+<div class="section" id="module-vizasm.tests.security.filter.util">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-vizasm.tests.security.filter.util" title="Permalink to this headline">¶</a></h2>
+</div>
 </div>
 
 
@@ -670,7 +672,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
     </div>
     <div class="footer">
         &copy; Copyright 2013, Nils Schmidt.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

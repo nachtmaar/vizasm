@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,14 +6,14 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>methodcall Package &mdash; VizAsm 1 documentation</title>
+    <title>vizasm.model.objc.methodcall package &mdash; VizAsm 1 documentation</title>
     
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -48,13 +46,11 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">methodcall Package</a><ul>
-<li><a class="reference internal" href="#module-vizasm.model.objc.methodcall.MethodCall"><tt class="docutils literal"><span class="pre">MethodCall</span></tt> Module</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-vizasm.model.objc.methodcall.MethodCallItem"><tt class="docutils literal"><span class="pre">MethodCallItem</span></tt> Module</a><ul>
-</ul>
-</li>
+<li><a class="reference internal" href="#">vizasm.model.objc.methodcall package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.methodcall.MethodCall">vizasm.model.objc.methodcall.MethodCall module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.methodcall.MethodCallItem">vizasm.model.objc.methodcall.MethodCallItem module</a></li>
+<li><a class="reference internal" href="#module-vizasm.model.objc.methodcall">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -85,10 +81,13 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="methodcall-package">
-<h1>methodcall Package<a class="headerlink" href="#methodcall-package" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="vizasm-model-objc-methodcall-package">
+<h1>vizasm.model.objc.methodcall package<a class="headerlink" href="#vizasm-model-objc-methodcall-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
 <div class="section" id="module-vizasm.model.objc.methodcall.MethodCall">
-<span id="methodcall-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">MethodCall</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.methodcall.MethodCall" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-model-objc-methodcall-methodcall-module"></span><h2>vizasm.model.objc.methodcall.MethodCall module<a class="headerlink" href="#module-vizasm.model.objc.methodcall.MethodCall" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 02.04.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -116,7 +115,7 @@ You can check if this sender is still present with the method has_no_sender().</
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>__sender: FunctionInterface, optional (default is PSEUDO_NONE_SENDER)</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>__sender: FunctionInterface, optional (default is PSEUDO_NONE_SENDER)</strong> :</p>
 <p class="last"><strong>__calls: list&lt;MethodCallItem&gt;, optional (default is [])</strong> :</p>
 </td>
 </tr>
@@ -197,7 +196,7 @@ You can check if this sender is still present with the method has_no_sender().</
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>methodcall_sender_attr_dict: dict, optional (Default {})</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>methodcall_sender_attr_dict: dict, optional (Default {})</strong> :</p>
 <p><strong>methodcall_calls_attr_list_dict: dict, optional (Default {})</strong> :</p>
 <p class="last"><strong>methodcall_calls_attr_list_dict: dict, optional (Default {})</strong> :</p>
 </td>
@@ -232,7 +231,7 @@ surrounding lines</dd>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>asm_lines: string</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>asm_lines: string</strong> :</p>
 <blockquote>
 <div><p>the assembler method as string</p>
 </div></blockquote>
@@ -242,7 +241,7 @@ surrounding lines</dd>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>methodcall_sender_attr_dict: dict</strong> :</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>methodcall_sender_attr_dict: dict</strong> :</p>
 <p class="last"><strong>methodcall_calls_attr_list_dict: dict</strong> :</p>
 </td>
 </tr>
@@ -305,7 +304,7 @@ If the <cite>MethodCall</cite> is initialized with None as sender, a pseudo none
 
 </div>
 <div class="section" id="module-vizasm.model.objc.methodcall.MethodCallItem">
-<span id="methodcallitem-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">MethodCallItem</span></tt> Module<a class="headerlink" href="#module-vizasm.model.objc.methodcall.MethodCallItem" title="Permalink to this headline">¶</a></h2>
+<span id="vizasm-model-objc-methodcall-methodcallitem-module"></span><h2>vizasm.model.objc.methodcall.MethodCallItem module<a class="headerlink" href="#module-vizasm.model.objc.methodcall.MethodCallItem" title="Permalink to this headline">¶</a></h2>
 <p>VizAsm</p>
 <p>Created on 26.07.2013</p>
 <p>&#64;author: Nils Schmidt</p>
@@ -330,7 +329,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>call: MsgSend or Function</strong> :</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>call: MsgSend or Function</strong> :</p>
 <p><strong>linenr: int, optional (default is -1)</strong> :</p>
 <blockquote>
 <div><p>line number in the asm file where the call has been made</p>
@@ -452,6 +451,9 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
 </dd></dl>
 
 </div>
+<div class="section" id="module-vizasm.model.objc.methodcall">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-vizasm.model.objc.methodcall" title="Permalink to this headline">¶</a></h2>
+</div>
 </div>
 
 
@@ -477,7 +479,7 @@ along with VizAsm.  If not, see &lt;<a class="reference external" href="http://w
     </div>
     <div class="footer">
         &copy; Copyright 2013, Nils Schmidt.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

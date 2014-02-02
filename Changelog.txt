@@ -1,5 +1,8 @@
+0.1.1:
+- added support for imp___symbol_stub(1) on x86(64), imp___nl_symbol_ptr__ on x86_64
 
-0.0.2:
+
+0.1:
 - changed to Hopper 2.8.3 behaviour (additional 0x0 for instance vars possible)
 
 Old changelog:

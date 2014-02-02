@@ -1,19 +1,30 @@
-scripts Package
-===============
+vizasm.hopper.scripts package
+=============================
 
-:mod:`vizasm_arm_helper` Module
--------------------------------
+Submodules
+----------
+
+vizasm.hopper.scripts.vizasm_arm_helper module
+----------------------------------------------
 
 .. automodule:: vizasm.hopper.scripts.vizasm_arm_helper
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`vizasm_hopper` Module
----------------------------
+vizasm.hopper.scripts.vizasm_hopper module
+------------------------------------------
 
 .. automodule:: vizasm.hopper.scripts.vizasm_hopper
     :members:
     :undoc-members:
     :show-inheritance:
 
+
+Module contents
+---------------
+
+.. automodule:: vizasm.hopper.scripts
+    :members:
+    :undoc-members:
+    :show-inheritance:

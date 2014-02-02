@@ -1,43 +1,54 @@
-var_assignment Package
-======================
+vizasm.model.asm.var_assignment package
+=======================================
 
-:mod:`VarAssignment` Module
----------------------------
+Submodules
+----------
+
+vizasm.model.asm.var_assignment.VarAssignment module
+----------------------------------------------------
 
 .. automodule:: vizasm.model.asm.var_assignment.VarAssignment
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`VarAssignmentIvarRegisterWrongTypeException` Module
----------------------------------------------------------
+vizasm.model.asm.var_assignment.VarAssignmentIvarRegisterWrongTypeException module
+----------------------------------------------------------------------------------
 
 .. automodule:: vizasm.model.asm.var_assignment.VarAssignmentIvarRegisterWrongTypeException
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`VarAssignmentResolveIvarRegisterException` Module
--------------------------------------------------------
+vizasm.model.asm.var_assignment.VarAssignmentResolveIvarRegisterException module
+--------------------------------------------------------------------------------
 
 .. automodule:: vizasm.model.asm.var_assignment.VarAssignmentResolveIvarRegisterException
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`VarAssignmentResolveRegisterException` Module
----------------------------------------------------
+vizasm.model.asm.var_assignment.VarAssignmentResolveRegisterException module
+----------------------------------------------------------------------------
 
 .. automodule:: vizasm.model.asm.var_assignment.VarAssignmentResolveRegisterException
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`VarAssignmentResolveSelfrefRegisterException` Module
-----------------------------------------------------------
+vizasm.model.asm.var_assignment.VarAssignmentResolveSelfrefRegisterException module
+-----------------------------------------------------------------------------------
 
 .. automodule:: vizasm.model.asm.var_assignment.VarAssignmentResolveSelfrefRegisterException
     :members:
     :undoc-members:
     :show-inheritance:
 
+
+Module contents
+---------------
+
+.. automodule:: vizasm.model.asm.var_assignment
+    :members:
+    :undoc-members:
+    :show-inheritance:

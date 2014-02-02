@@ -27,7 +27,6 @@ from vizasm.analysis.asm.cpu.x86_64.ObjcRuntime_x86_64 import ObjcRuntime_x86_64
 from vizasm.model.asm.StackVar import StackVar
 from vizasm.util.Log import log
 
-
 class ObjcRuntime_x86(ObjcRuntime_x86_64):
     ''' Objective-C runtime for x86 arch '''
 

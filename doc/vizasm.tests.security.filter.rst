@@ -1,5 +1,5 @@
-filter Package
-==============
+vizasm.tests.security.filter package
+====================================
 
 Subpackages
 -----------
@@ -8,3 +8,10 @@ Subpackages
 
     vizasm.tests.security.filter.util
 
+Module contents
+---------------
+
+.. automodule:: vizasm.tests.security.filter
+    :members:
+    :undoc-members:
+    :show-inheritance:
